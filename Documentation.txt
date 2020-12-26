@@ -1,0 +1,43 @@
+API Documentation of Karim glass aluminium house software
+
+
+Backend API
+
+1: ##### register
+URL: http://127.0.0.1:8000/api/auth/register
+Method: POST
+Prameter:   
+    username, email, password
+    optional:
+        surname, first_name, last_name, type, contact_no, address, delete, deleted_at
+
+return: message, user
+error: fields are required
+
+
+2: ##### login
+URL: http://127.0.0.1:8000/api/auth/login
+Method: POST
+Prameter:   
+    email, password, password_confirmation
+
+return: token, token_type, token_validity
+error: fields are required
+
+
+3: ##### logout
+URL: http://127.0.0.1:8000/api/auth/logout
+Method: POST
+Prameter:   
+    bearer token
+
+return: message
+
+
+4: ##### profile
+URL: http://127.0.0.1:8000/api/auth/profile
+Method: GET
+Prameter:   
+    bearer token
+
+return: user with all fields
