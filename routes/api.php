@@ -45,7 +45,7 @@ Route::group([
 ], function($router) {
     Route::resource('todos', 'TodoController@login');
     Route::get('me', 'MeController@getMe');
-    
+
 });
 
 Route::group([
@@ -60,6 +60,27 @@ Route::group([
 
     // supplier
     Route::resource('suppliers', 'SuppliersController');
+
+    // Recievable Routes
+    Route::get('recievables', 'RecievableController@recievables');
+    Route::post('recievableByCustomerId', 'RecievableController@recievableByCustomerId');
+    Route::post('recievableByDate', 'RecievableController@recievableByDate');
+    Route::post('createRecievable', 'RecievableController@createRecievable');
+    Route::post('updateRecievable', 'RecievableController@updateRecievable');
+    Route::post('debitRecievable', 'RecievableController@debitRecievable');
+    Route::post('creditRecievable', 'RecievableController@creditRecievable');
+    Route::post('deleteRecievable', 'RecievableController@deleteRecievable');
+
+    // payable Routes
+    Route::get('payables', 'PayableController@payables');
+    Route::post('payableByVendorId', 'PayableController@payableByVendorId');
+    Route::post('payableByDate', 'PayableController@payableByDate');
+    Route::post('createPayable', 'PayableController@createPayable');
+    Route::post('updatePayable', 'PayableController@updatePayable');
+    Route::post('debitPayable', 'PayableController@debitPayable');
+    Route::post('creditPayable', 'PayableController@creditPayable');
+    Route::post('deletePayable', 'PayableController@deletePayable');
+
 });
 
 Route::group([
