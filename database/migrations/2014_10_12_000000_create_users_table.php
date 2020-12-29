@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('contact_no')->nullable();
             $table->string('address')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->boolean('deleted')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

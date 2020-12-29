@@ -18,8 +18,8 @@ class SuppliersController extends Controller
     public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
-        $sortBy = $request->sort_by;
-        $orderBy = $request->order_by;
+        $sortBy = $request->sort_by ? $request->sort_by : 'name';
+        $orderBy = $request->order_by ? $request->order_by : 'desc';
         return response()->json([
             'suppliers' => new SupplierCollection(Supplier::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);

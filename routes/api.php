@@ -2,7 +2,7 @@
 
 use App\Http\Controllers;
 use App\Http\Controllers\TodoController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthController; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -61,15 +61,30 @@ Route::group([
     // supplier
     Route::resource('suppliers', 'SuppliersController');
 
+    // products
+    Route::resource('products', 'ProductsController');
+
+    // brand
+    Route::resource('brands', 'BrandController');
+
+    // unit
+    Route::resource('units', 'UnitController');
+
+    // category
+    Route::resource('categories', 'CategoryController');
+    
+    // business
+    Route::resource('business', 'BusinessController');
+
     // Recievable Routes
-    Route::get('recievables', 'RecievableController@recievables');
-    Route::post('recievableByCustomerId', 'RecievableController@recievableByCustomerId');
-    Route::post('recievableByDate', 'RecievableController@recievableByDate');
-    Route::post('createRecievable', 'RecievableController@createRecievable');
-    Route::post('updateRecievable', 'RecievableController@updateRecievable');
-    Route::post('debitRecievable', 'RecievableController@debitRecievable');
-    Route::post('creditRecievable', 'RecievableController@creditRecievable');
-    Route::post('deleteRecievable', 'RecievableController@deleteRecievable');
+    Route::get('recievables', 'RecievablesController@recievables');
+    Route::post('recievableByCustomerId', 'RecievablesController@recievableByCustomerId');
+    Route::post('recievableByDate', 'RecievablesController@recievableByDate');
+    Route::post('createRecievable', 'RecievablesController@createRecievable');
+    Route::post('updateRecievable', 'RecievablesController@updateRecievable');
+    Route::post('debitRecievable', 'RecievablesController@debitRecievable');
+    Route::post('creditRecievable', 'RecievablesController@creditRecievable');
+    Route::post('deleteRecievable', 'RecievablesController@deleteRecievable');
 
     // payable Routes
     Route::get('payables', 'PayableController@payables');
