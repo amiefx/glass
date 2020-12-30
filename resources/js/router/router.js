@@ -116,17 +116,17 @@ const routes = [
           ]
       }
   },
-    //{
-    //     path: '/admin/delivery',
-    //     name: 'delivery',
-    //     component: () => import('../views/admin/Delivery.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/invoice',
+        name: 'delivery',
+        component: () => import('../views/admin/Invoice.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/faqs',
     //     name: 'faqs',
@@ -270,17 +270,17 @@ const routes = [
     //         ]
     //     }
     // },
-    // {
-    //     path: '/admin/users',
-    //     name: 'users',
-    //     component: () => import('../views/admin/Users.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/users',
+        name: 'users',
+        component: () => import('../views/admin/Users.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/products',
     //     name: 'admin-products',
@@ -399,18 +399,18 @@ const routes = [
     //     }
     // },
 
-    // // Accounts pages
-    // {
-    //     path: '/account',
-    //     name: 'account',
-    //     component: () => import('../views/account/Index.vue'),
-    //     meta: {
-    //         layout: 'khod',
-    //         middleware: [
-    //             auth
-    //         ]
-    //     }
-    // },
+    // Accounts pages
+    {
+        path: '/account',
+        name: 'account',
+        component: () => import('../views/account/Index.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
     // {
     //     path: '/account/orders',
     //     name: 'my-orders',

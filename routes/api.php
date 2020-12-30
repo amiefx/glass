@@ -54,6 +54,16 @@ Route::group([
 ], function () {
     // logout
     Route::post('logout', 'Auth\LoginController@logout');
+    Route::put('settings/profile', 'SettingsController@updateProfile');
+     Route::put('settings/password', 'SettingsController@updatePassword');
+
+    // user management
+    Route::post('email/verify', 'UsersController@verifyEmail');
+    Route::post('change-role', 'UsersController@changeRole');
+    Route::post('change-status', 'UsersController@changeStatus');
+    Route::post('change-photo', 'UsersController@changePhoto');
+    Route::post('users/delete', 'UsersController@deleteAll');
+    Route::resource('users', 'UsersController');
 
     // cusotmer
     Route::resource('customers', 'CustomersController');

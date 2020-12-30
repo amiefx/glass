@@ -27,7 +27,8 @@ export default {
         ADD_TO_CART(state, { product, quantity, price, type, size, customSize }) {
 
             let productInCart = state.cart.find(item => {
-                return item.product.id === product.id;
+               return item.product.id === product.id;
+              // return item.product.name === product.name;
             });
 
             if (productInCart) {
@@ -39,10 +40,7 @@ export default {
             state.cart.push({
                 product,
                 quantity,
-                price,
-                type,
-                size,
-                customSize
+                price
             })
 
             window.localStorage.setItem('cart', JSON.stringify(state.cart));
