@@ -21,6 +21,7 @@ class UserResource extends JsonResource
             'type' => $this->type,
             'contact_no' => $this->contact_no,
             'is_active' => $this->is_active,
+            'deleted' => $this->deleted,
             'created_at' => $this->created_at->format('Y-M-D H:i:s')
         ];
     }

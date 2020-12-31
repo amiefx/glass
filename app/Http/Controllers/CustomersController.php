@@ -18,8 +18,8 @@ class CustomersController extends Controller
     public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
-        $sortBy = $request->sort_by;
-        $orderBy = $request->order_by;
+        $sortBy = $request->sort_by ? $request->sort_by : 'name';
+        $orderBy = $request->order_by ? $request->order_by : 'asc';
         return response()->json([
             'customers' => new CustomerCollection(Customer::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);

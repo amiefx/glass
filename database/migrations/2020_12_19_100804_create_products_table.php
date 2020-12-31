@@ -15,20 +15,23 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('type', ['Single', 'Variable']);
+            $table->string('name'); 
             $table->integer('unit_id')->nullable()->default(null);
             $table->integer('brand_id')->nullable()->default(null);
-            $table->integer('category_id')->nullable()->default(null);
-            $table->integer('tax')->nullable()->default(null);
-            $table->enum('tax_type', ['inclusive', 'exclusive']);
+            $table->integer('category_id')->nullable()->default(null); 
             $table->tinyInteger('enable_stock')->default(0);
             $table->integer('alert_quantity');
-            $table->string('sku');
-            $table->enum('barcode_type', ['C39', 'C128', 'EAN13', 'EAN8', 'UPCA', 'UPCE'])->nullable()->default('C128');
-            $table->tinyInteger('enable_serial_no')->default(0);
+            $table->string('sku'); 
+            $table->integer('selling_price')->default(0);
+            $table->string('length')->nullable()->default(null);
+            $table->string('height')->nullable()->default(null);
+            $table->string('width')->nullable()->default(null);
+            $table->string('thickness')->nullable()->default(null);
             $table->string('weight')->nullable()->default(null);
-            $table->Integer('created_by');
+            $table->string('size')->nullable()->default(null);
+            $table->string('color')->nullable()->default(null);
+            $table->tinyInteger('is_active')->default(1);
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
