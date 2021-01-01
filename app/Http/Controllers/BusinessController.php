@@ -14,7 +14,7 @@ class BusinessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'name';
@@ -74,7 +74,6 @@ class BusinessController extends Controller
     public function update(Request $request, $id)
     {
         $business = Business::find($id);
-        $business->name = $request->name;
         $business->name = $request->name;
         $business->email = $request->email;
         $business->phone = $request->phone;

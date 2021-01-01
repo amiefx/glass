@@ -14,13 +14,13 @@ class UnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
-        $sortBy = $request->sort_by ? $request->sort_by : 'short_name';
+        $sortBy = $request->sort_by ? $request->sort_by : 'actual_name';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
         return response()->json([
-            'unit' => new UnitCollection(Unit::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
+            'units' => new UnitCollection(Unit::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
     }
 

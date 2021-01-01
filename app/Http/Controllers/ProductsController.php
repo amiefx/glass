@@ -17,7 +17,7 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'name';
@@ -146,7 +146,7 @@ class ProductsController extends Controller
     public function allProductsWithFilter(Request $request)
     {
         $products = products::where([$request->column_name => $request->column_value])->get();
-        
+
         return response()->json(['products'=>$products]);
     }
 }

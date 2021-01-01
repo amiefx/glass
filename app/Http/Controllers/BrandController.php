@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Http\Resources\BrandCollection;
-use App\Http\Resources\BrandResource; 
+use App\Http\Resources\BrandResource;
 
 class BrandController extends Controller
 {
@@ -14,13 +14,13 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'name';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
         return response()->json([
-            'brand' => new BrandCollection(Brand::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
+            'brands' => new BrandCollection(Brand::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
     }
 
@@ -37,7 +37,7 @@ class BrandController extends Controller
             'description' => $request->description
         ]);
         $brand->save();
-        return response()->json(['brand'=> new BrandResource($brand)], 200);
+        return response()->json(['brands'=> new BrandResource($brand)], 200);
     }
 
     /**

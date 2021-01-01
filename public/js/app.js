@@ -83264,7 +83264,7 @@ var routes = [{
   path: '/admin/dashboard',
   name: 'dashboard',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../views/admin/Dashboard.vue */ "./resources/js/views/admin/Dashboard.vue"));
+    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../views/admin/Dashboard.vue */ "./resources/js/views/admin/Dashboard.vue"));
   },
   meta: {
     layout: 'admin',
@@ -83274,7 +83274,7 @@ var routes = [{
   path: '/admin/customers',
   name: 'customers',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../views/admin/Customers.vue */ "./resources/js/views/admin/Customers.vue"));
+    return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../views/admin/Customers.vue */ "./resources/js/views/admin/Customers.vue"));
   },
   meta: {
     layout: 'admin',
@@ -83284,7 +83284,7 @@ var routes = [{
   path: '/admin/suppliers',
   name: 'customers',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../views/admin/Suppliers.vue */ "./resources/js/views/admin/Suppliers.vue"));
+    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ../views/admin/Suppliers.vue */ "./resources/js/views/admin/Suppliers.vue"));
   },
   meta: {
     layout: 'admin',
@@ -83300,29 +83300,27 @@ var routes = [{
     layout: 'admin',
     middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
   }
+}, {
+  path: '/admin/company',
+  name: 'company',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../views/admin/Company.vue */ "./resources/js/views/admin/Company.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
+  }
+}, {
+  path: '/admin/brands',
+  name: 'brands',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../views/admin/Brands.vue */ "./resources/js/views/admin/Brands.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
+  }
 }, // {
-//     path: '/admin/faqs',
-//     name: 'faqs',
-//     component: () => import('../views/admin/Faqs.vue'),
-//     meta: {
-//         layout: 'admin',
-//         middleware: [
-//             auth, admin
-//         ]
-//     }
-// },
-// {
-//     path: '/admin/privacy',
-//     name: 'privacy',
-//     component: () => import('../views/admin/Privacy.vue'),
-//     meta: {
-//         layout: 'admin',
-//         middleware: [
-//             auth, admin
-//         ]
-//     }
-// },
-// {
 //     path: '/admin/order-return',
 //     name: 'order-return',
 //     component: () => import('../views/admin/Order-return.vue'),
@@ -83388,29 +83386,27 @@ var routes = [{
 //         ]
 //     }
 // },
-// {
-//     path: '/admin/categories',
-//     name: 'categories',
-//     component: () => import('../views/admin/Categories.vue'),
-//     meta: {
-//         layout: 'admin',
-//         middleware: [
-//             auth, admin
-//         ]
-//     }
-// },
-// {
-//     path: '/admin/coupons',
-//     name: 'coupons',
-//     component: () => import('../views/admin/Coupons.vue'),
-//     meta: {
-//         layout: 'admin',
-//         middleware: [
-//             auth, admin
-//         ]
-//     }
-// },
-// {
+{
+  path: '/admin/categories',
+  name: 'categories',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../views/admin/Categories.vue */ "./resources/js/views/admin/Categories.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
+  }
+}, {
+  path: '/admin/units',
+  name: 'units',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../views/admin/Units.vue */ "./resources/js/views/admin/Units.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
+  }
+}, // {
 //     path: '/admin/roles',
 //     name: 'roles',
 //     component: () => import('../views/admin/Roles.vue'),
@@ -83447,7 +83443,7 @@ var routes = [{
   path: '/admin/users',
   name: 'users',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../views/admin/Users.vue */ "./resources/js/views/admin/Users.vue"));
+    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../views/admin/Users.vue */ "./resources/js/views/admin/Users.vue"));
   },
   meta: {
     layout: 'admin',

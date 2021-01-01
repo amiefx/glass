@@ -127,28 +127,28 @@ const routes = [
             ]
         }
     },
-    // {
-    //     path: '/admin/faqs',
-    //     name: 'faqs',
-    //     component: () => import('../views/admin/Faqs.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
-    // {
-    //     path: '/admin/privacy',
-    //     name: 'privacy',
-    //     component: () => import('../views/admin/Privacy.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/company',
+        name: 'company',
+        component: () => import('../views/admin/Company.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
+    {
+        path: '/admin/brands',
+        name: 'brands',
+        component: () => import('../views/admin/Brands.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/order-return',
     //     name: 'order-return',
@@ -215,28 +215,28 @@ const routes = [
     //         ]
     //     }
     // },
-    // {
-    //     path: '/admin/categories',
-    //     name: 'categories',
-    //     component: () => import('../views/admin/Categories.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
-    // {
-    //     path: '/admin/coupons',
-    //     name: 'coupons',
-    //     component: () => import('../views/admin/Coupons.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/categories',
+        name: 'categories',
+        component: () => import('../views/admin/Categories.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
+    {
+        path: '/admin/units',
+        name: 'units',
+        component: () => import('../views/admin/Units.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/roles',
     //     name: 'roles',

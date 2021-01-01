@@ -14,10 +14,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
-        $sortBy = $request->sort_by ? $request->sort_by : 'short_name';
+        $sortBy = $request->sort_by ? $request->sort_by : 'id';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
         return response()->json([
             'categories' => new CategoryCollection(Category::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
