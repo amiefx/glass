@@ -4,6 +4,7 @@
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
+      :right="$vuetify.rtl"
       fixed
       app
     >
@@ -17,7 +18,9 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title>
+                {{ $t(item.title) }}
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -61,6 +64,7 @@
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <login-avatar />
+      <language-switcher />
     </v-app-bar>
     <v-content>
       <v-container>
@@ -94,14 +98,18 @@
 </template>
 
 <script>
-import LoginAvatar from '../components/LoginAvatar'
+import LoginAvatar from '../components/LoginAvatar';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 import { mapGetters, mapActions } from "vuex";
+
 export default {
     components: {
-    LoginAvatar
+    LoginAvatar,
+    LanguageSwitcher
   },
   data () {
     return {
+
       clipped: false,
       drawer: false,
       fixed: false,

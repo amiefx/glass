@@ -1,7 +1,11 @@
 require('./bootstrap');
 window.Vue = require('vue');
 
+const lang = localStorage.getItem('lang') || 'en';
+document.documentElement.lang = lang;
+
 import Vuetify from '../plugins/vuetify'
+import i18n from '../plugins/i18n'
 
 import router from './router/router';
 import store from './store';
@@ -25,6 +29,7 @@ import App from './components/AppComponent';
 store.dispatch('auth/attempt', localStorage.getItem('token')).then(() => {
      new Vue({
       //  el: '#app',
+        i18n,
         router,
         vuetify: Vuetify,
         store,
