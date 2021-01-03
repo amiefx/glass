@@ -72,6 +72,14 @@ Route::group([
     Route::resource('suppliers', 'SuppliersController');
 
     // products
+    Route::get('products/list', 'ProductsController@allProducts');
+    Route::get('products/{id}/brand', 'ProductsController@productBrand');
+    Route::get('products/{id}/category', 'ProductsController@productCategory');
+    Route::get('products/{id}/unit', 'ProductsController@productUnit');
+    Route::get('products/{id}/user', 'ProductsController@productUser');
+    Route::get('products/filter/{column}/{value}', 'ProductsController@allProductsWithFilter');
+    Route::post('products/changeStatus', 'ProductsController@changeStatus');
+    Route::post('products/deleteAll', 'ProductsController@deleteAll');
     Route::resource('products', 'ProductsController');
 
     // brand

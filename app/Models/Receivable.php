@@ -11,6 +11,7 @@ class Receivable extends Model
 
     protected $fillable = [
         'type',
+        'doc_id',
         'customer_id',
         'description',
         'debit',
@@ -19,7 +20,7 @@ class Receivable extends Model
         'status'
     ];
 
-    protected $table = 'receivables';
+    protected $table = 'recievables';
 
     //relationships
     public function customer()

@@ -73,6 +73,7 @@ class ProductsController extends Controller
         $user = auth()->user();
 
         $product = products::find($id);
+
         $product->name = $request->name;
         $product->unit_id = $request->unit_id;
         $product->brand_id = $request->brand_id;
@@ -115,43 +116,32 @@ class ProductsController extends Controller
         return response()->json(['product' => new ProductResource($product)], 200);
     }
 
-
-    public function allProductsWithUserInfo()
+    public function allProductsWithFilter($column, $value)
     {
-        $products = products::all();
-        foreach ($products as $product) {
-            $product = array_merge(['user' => $product->user]);
-        }
-        return response()->json(['products'=>$products]);
-    }
-
-    public function allProductsWithFilter(Request $request)
-    {
-        $products = products::where([$request->column_name => $request->column_value])->get();
-
+        $products = products::where([$column => $value])->get();
         return response()->json(['products'=>$products]);
     }
 
 
     //relationships methods
-    public function productBrand(Request $request)
+    public function productBrand(Request $request, $id)
     {
-        $brand= products::findOrFail($request->id)->brand;
+        $brand= products::findOrFail($id)->brand;
         return response()->json(['brand'=>$brand]);
     }
-    public function productCategory(Request $request)
+    public function productCategory(Request $request, $id)
     {
-        $category= products::findOrFail($request->id)->category;
+        $category= products::findOrFail($id)->category;
         return response()->json(['category'=>$category]);
     }
-    public function productUnit(Request $request)
+    public function productUnit(Request $request, $id)
     {
-        $unit= products::findOrFail($request->id)->unit;
+        $unit= products::findOrFail($id)->unit;
         return response()->json(['unit'=>$unit]);
     }
-    public function productUser(Request $request)
+    public function productUser(Request $request, $id)
     {
-        $user= products::findOrFail($request->id)->user;
+        $user= products::findOrFail($id)->user;
         return response()->json(['user'=>$user]);
     }
 }

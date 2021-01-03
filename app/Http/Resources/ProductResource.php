@@ -23,10 +23,10 @@ class ProductResource extends JsonResource
             'enable_stock' => $this->enable_stock,
             'alert_quantity' => $this->alert_quantity,
             'sku' => $this->sku,
-            'selling_price' => $this.selling_price,
+            'selling_price' => $this->selling_price,
             'is_active' => $this->is_active,
             'size' => $this->size,
-            'user_id' => $this->user_id->format('Y-M-D H:i:s')
+            'user_id' => $this->user_id
         ];
     }
 }

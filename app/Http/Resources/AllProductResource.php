@@ -17,7 +17,7 @@ class AllProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'selling_price' => $this.selling_price,
+            'selling_price' => $this->selling_price,
             'is_active' => $this->is_active
         ];
     }
