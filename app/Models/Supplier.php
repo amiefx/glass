@@ -19,4 +19,13 @@ class Supplier extends Model
         'address',
         'credit_limit',
     ];
+
+    protected $table = 'suppliers';
+
+    //relationships
+    public function payables()
+    {
+        return $this->hasMany(Payable::class);
+    }
+
 }

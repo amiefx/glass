@@ -13,7 +13,7 @@ class CreateReceivablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('receivables', function (Blueprint $table) {
+        Schema::create('recievables', function (Blueprint $table) {
             $table->id();
             $table->string('type');
             $table->integer('doc_id');

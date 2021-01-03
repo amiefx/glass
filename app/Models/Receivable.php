@@ -20,4 +20,11 @@ class Receivable extends Model
     ];
 
     protected $table = 'receivables';
+
+    //relationships
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
 }
