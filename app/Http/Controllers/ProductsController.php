@@ -7,9 +7,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
-use App\Http\Resources\AllProductResource;
+use App\Http\Resources\ProductListResource;
 use Illuminate\Http\Request;
 use App\Models\products;
+
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -25,9 +27,7 @@ class ProductsController extends Controller
 
     public function allProducts()
     {
-        return response()->json([
-            'products' => new AllProductResource(products::all()),
-        ], 200);
+        return response()->json(['products' =>  ProductListResource::collection(products::all())], 200);
     }
 
     public function store(Request $request)

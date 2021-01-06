@@ -82,6 +82,19 @@ Route::group([
     Route::post('products/deleteAll', 'ProductsController@deleteAll');
     Route::resource('products', 'ProductsController');
 
+    // slab
+    Route::resource('slabs', 'SlabController');
+
+    // purchase
+    Route::resource('purchase', 'PurchaseController');
+
+    // orderdetail
+    Route::resource('orderdetail', 'OrderDetailController');
+
+    // order
+    Route::resource('order', 'OrderController');
+    
+
     // brand
     Route::resource('brands', 'BrandController');
 
