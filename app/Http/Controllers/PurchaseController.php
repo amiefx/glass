@@ -9,7 +9,7 @@ use App\Http\Resources\PurchaseResource;
 use App\Models\Perchase;
 use Illuminate\Http\Request;
 
-class PerchaseController extends Controller
+class PurchaseController extends Controller
 {
     /**
      * Display a listing of the resource.

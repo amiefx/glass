@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 // use App\Models\cr;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductListResource;
 use Illuminate\Http\Request;
 use App\Models\products;
 
-use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -143,5 +143,12 @@ class ProductsController extends Controller
     {
         $user= products::findOrFail($id)->user;
         return response()->json(['user'=>$user]);
+    }
+
+
+    public function report()
+    {
+        $report = DB::table('remaining_quantity')->groupBy('product_id')->get();
+        return response()->json(['report'=>$report]);
     }
 }

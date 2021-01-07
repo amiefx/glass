@@ -80,6 +80,7 @@ Route::group([
     Route::get('products/filter/{column}/{value}', 'ProductsController@allProductsWithFilter');
     Route::post('products/changeStatus', 'ProductsController@changeStatus');
     Route::post('products/deleteAll', 'ProductsController@deleteAll');
+    Route::get('products/report', 'ProductsController@report'); //view for remaining quantity
     Route::resource('products', 'ProductsController');
 
     // slab
