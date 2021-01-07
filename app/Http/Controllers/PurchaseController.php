@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PurchaseCollection;
 use App\Http\Resources\PurchaseResource;
 
-use App\Models\Perchase;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
@@ -16,7 +16,7 @@ class PurchaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'created_at';
@@ -52,10 +52,10 @@ class PurchaseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Perchase  $perchase
+     * @param  \App\Models\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function show(Perchase $perchase)
+    public function show(Purchase $purchase)
     {
         //
     }
@@ -63,10 +63,10 @@ class PurchaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Perchase  $perchase
+     * @param  \App\Models\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function edit(Perchase $perchase)
+    public function edit(Purchase $purchase)
     {
         //
     }
@@ -75,7 +75,7 @@ class PurchaseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Perchase  $perchase
+     * @param  \App\Models\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -98,7 +98,7 @@ class PurchaseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Perchase  $perchase
+     * @param  \App\Models\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
