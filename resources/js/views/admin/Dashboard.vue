@@ -1,7 +1,10 @@
 <template>
   <div>
-      <p>this is dashboard</p>
+      <v-row>
+              <p>this is dashboard</p>
+          <br>
       <p>{{ $t('select')}}</p>
+      </v-row>
   </div>
 </template>
 

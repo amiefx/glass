@@ -158,20 +158,15 @@ __webpack_require__.r(__webpack_exports__);
           return /.+@.+\..+/.test(v) || 'Email must be valid';
         }
       },
-      headers: [{
-        text: '#',
-        value: 'id'
-      }, {
-        text: 'Name',
-        value: 'name'
-      }, {
-        text: 'Short Code',
-        value: 'short_code'
-      }, {
-        text: 'Actions',
-        value: 'action',
-        sortable: false
-      }],
+      //   headers: [
+      //     {
+      //       text: '#',
+      //       value: 'id',
+      //     },
+      //     { text: 'Name', value: 'name' },
+      //     { text: 'Short Code', value: 'short_code' },
+      //     { text: 'Actions', value: 'action', sortable: false },
+      //   ],
       status: [{
         text: 'Active',
         value: true
@@ -195,7 +190,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     formTitle: function formTitle() {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+      return this.editedIndex === -1 ? this.$t('new item') : this.$t('edit item');
+    },
+    headers: function headers() {
+      return [{
+        text: '#',
+        value: 'id'
+      }, {
+        text: this.$t('name'),
+        value: 'name'
+      }, {
+        text: this.$t('short code'),
+        value: 'short_code'
+      }, {
+        text: this.$t('action'),
+        value: 'action',
+        sortable: false
+      }];
     }
   },
   watch: {
@@ -438,7 +449,9 @@ var render = function() {
                   "v-toolbar",
                   { attrs: { flat: "", color: "" } },
                   [
-                    _c("v-toolbar-title", [_vm._v("Category Management")]),
+                    _c("v-toolbar-title", [
+                      _vm._v(" " + _vm._s(_vm.$t("category management")))
+                    ]),
                     _vm._v(" "),
                     _c("v-divider", {
                       staticClass: "mx-4",
@@ -466,7 +479,7 @@ var render = function() {
                                     },
                                     on
                                   ),
-                                  [_vm._v("New Category")]
+                                  [_vm._v(_vm._s(_vm.$t("new category")))]
                                 )
                               ]
                             }
@@ -532,7 +545,7 @@ var render = function() {
                                               [
                                                 _c("v-text-field", {
                                                   attrs: {
-                                                    label: "Name",
+                                                    label: _vm.$t("name"),
                                                     rules: [_vm.rules.required]
                                                   },
                                                   model: {
@@ -551,7 +564,7 @@ var render = function() {
                                                 _vm._v(" "),
                                                 _c("v-text-field", {
                                                   attrs: {
-                                                    label: "Short Code"
+                                                    label: _vm.$t("short code")
                                                   },
                                                   model: {
                                                     value:
@@ -591,7 +604,7 @@ var render = function() {
                                         attrs: { color: "primary", text: "" },
                                         on: { click: _vm.close }
                                       },
-                                      [_vm._v("Cancel")]
+                                      [_vm._v(_vm._s(_vm.$t("cancel")))]
                                     ),
                                     _vm._v(" "),
                                     _c(
@@ -609,7 +622,7 @@ var render = function() {
                                           }
                                         }
                                       },
-                                      [_vm._v("Save")]
+                                      [_vm._v(_vm._s(_vm.$t("save")))]
                                     )
                                   ],
                                   1

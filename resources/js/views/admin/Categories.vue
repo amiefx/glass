@@ -20,7 +20,7 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="">
-        <v-toolbar-title>Category Management</v-toolbar-title>
+        <v-toolbar-title> {{ $t('category management') }}</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -29,7 +29,7 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on">New Category</v-btn>
+            <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('new category') }}</v-btn>
             <!-- <v-btn color="error" dark class="mb-2 mr-2"  @click="deleteAll">Delete</v-btn> -->
           </template>
           <v-card>
@@ -42,8 +42,8 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" md="6" lg="6" >
-                    <v-text-field v-model="editedItem.name" label="Name" :rules="[rules.required]"></v-text-field>
-                    <v-text-field v-model="editedItem.short_code" label="Short Code"></v-text-field>
+                    <v-text-field v-model="editedItem.name" :label= "$t('name')"  :rules="[rules.required]"></v-text-field>
+                    <v-text-field v-model="editedItem.short_code" :label= "$t('short code')"></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -51,9 +51,9 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" text @click="close">Cancel</v-btn>
+              <v-btn color="primary" text @click="close">{{ $t('cancel')}}</v-btn>
               <!-- <v-btn color="blue darken-1" type="submit" :disabled="!valid" @click.prevent="save" text @click="save">Save</v-btn> -->
-              <v-btn color="primary" type="submit" :disabled="!valid" @click.prevent="save" >Save</v-btn>
+              <v-btn color="primary" type="submit" :disabled="!valid" @click.prevent="save" >{{ $t('save')}}</v-btn>
             </v-card-actions>
             </v-form>
           </v-card>
@@ -141,15 +141,15 @@
           min: v => v.length >=5 || 'Minimum 5 Chracters Required',
           validEmail: v => /.+@.+\..+/.test(v) || 'Email must be valid',
       },
-      headers: [
-        {
-          text: '#',
-          value: 'id',
-        },
-        { text: 'Name', value: 'name' },
-        { text: 'Short Code', value: 'short_code' },
-        { text: 'Actions', value: 'action', sortable: false },
-      ],
+    //   headers: [
+    //     {
+    //       text: '#',
+    //       value: 'id',
+    //     },
+    //     { text: 'Name', value: 'name' },
+    //     { text: 'Short Code', value: 'short_code' },
+    //     { text: 'Actions', value: 'action', sortable: false },
+    //   ],
       status: [
           {text: 'Active', value: true},
           {text: 'In Active', value: false}
@@ -170,8 +170,20 @@
 
     computed: {
       formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+        return this.editedIndex === -1 ? this.$t('new item') : this.$t('edit item')
       },
+
+      headers(){
+      return [
+        {
+          text: '#',
+          value: 'id',
+        },
+        { text: this.$t('name'), value: 'name' },
+        { text: this.$t('short code'), value: 'short_code' },
+        { text: this.$t('action'), value: 'action', sortable: false },
+      ]
+    }
     },
 
     watch: {

@@ -2294,6 +2294,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -2323,7 +2324,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Karim Glass and Aluminum'
+      title: 'Karim Glass and Aluminum',
+      lang: localStorage.getItem('lang')
     };
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])({
@@ -2338,7 +2340,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       });
     }
-  })
+  }),
+  computed: {
+    lang1: function lang1() {
+      if (this.lang == "ur") {
+        this.$vuetify.rtl = true;
+        document.documentElement.dir = 'rtl';
+      } else {
+        this.$vuetify.rtl = false;
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -26003,7 +26015,8 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("v-footer", { attrs: { absolute: !_vm.fixed, app: "" } }, [
-        _c("span", [_vm._v("© " + _vm._s(new Date().getFullYear()))])
+        _c("span", [_vm._v("© " + _vm._s(new Date().getFullYear()))]),
+        _vm._v("\n    " + _vm._s(_vm.lang1) + "\n  ")
       ])
     ],
     1
@@ -85342,10 +85355,10 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************!*\
   !*** ./resources/js/i18n/en.json ***!
   \***********************************/
-/*! exports provided: select, Customers, default */
+/*! exports provided: id, name, email, password, phone, contact, address, city, country, postal code, zip code, active, category, short code, short name, add, edit, delete, new, management, user management, item, new item, edit item, add item, send, cancel, ok, brand, unit, supplier, action, select, Customers, category management, new category, save, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"select\":\"select\",\"Customers\":\"Customers\"}");
+module.exports = JSON.parse("{\"id\":\"id\",\"name\":\"name\",\"email\":\"email\",\"password\":\"password\",\"phone\":\"phone\",\"contact\":\"contact\",\"address\":\"address\",\"city\":\"city\",\"country\":\"country\",\"postal code\":\"postal code\",\"zip code\":\"zip code\",\"active\":\"active\",\"category\":\"category\",\"short code\":\"short code\",\"short name\":\"short name\",\"add\":\"add\",\"edit\":\"edit\",\"delete\":\"delete\",\"new\":\"new\",\"management\":\"management\",\"user management\":\"user management\",\"item\":\"item\",\"new item\":\"New item\",\"edit item\":\"Edit item\",\"add item\":\"add item\",\"send\":\"send\",\"cancel\":\"cancel\",\"ok\":\"ok\",\"brand\":\"brand\",\"unit\":\"unit\",\"supplier\":\"supplier\",\"action\":\"action\",\"select\":\"select\",\"Customers\":\"Customers\",\"category management\":\"Category Management\",\"new category\":\"New Category\",\"save\":\"Save\"}");
 
 /***/ }),
 
@@ -85353,10 +85366,10 @@ module.exports = JSON.parse("{\"select\":\"select\",\"Customers\":\"Customers\"}
 /*!***********************************!*\
   !*** ./resources/js/i18n/ur.json ***!
   \***********************************/
-/*! exports provided: select, customers, default */
+/*! exports provided: id, name, email, password, phone, contact, address, city, country, postal code, zip code, active, category, short code, short name, add, edit, delete, new, management, user management, item, new item, edit item, add item, send, cancel, ok, brand, unit, supplier, action, select, Customers, category management, new category, save, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"select\":\"انتخاب\",\"customers\":\"کسٹمرز\"}");
+module.exports = JSON.parse("{\"id\":\"نمبر\",\"name\":\"نام\",\"email\":\"ای میل\",\"password\":\"پاس ورڈ\",\"phone\":\"فون\",\"contact\":\"رابطہ\",\"address\":\"ایڈرس\",\"city\":\"شہر\",\"country\":\"ملک\",\"postal code\":\"پوسٹل کوڈ\",\"zip code\":\"پوسٹل کوڈ\",\"active\":\"فعال\",\"category\":\"کیٹگوری\",\"short code\":\"مختصر کوڈ\",\"short name\":\"مختصر نام\",\"add\":\"ا/صافہ\",\"edit\":\"تبدیل\",\"delete\":\"حذف\",\"new\":\"نیا\",\"management\":\"انتظام\",\"user management\":\"یوزر منجمنٹ\",\"item\":\"آیٹم\",\"new item\":\"نیا آیٹم\",\"edit item\":\"ایڈٹ آیٹم\",\"add item\":\"اضافہ\",\"send\":\"ارسال\",\"cancel\":\"منسوخ\",\"ok\":\"ok\",\"brand\":\"برانڈ\",\"unit\":\"اکایی\",\"supplier\":\"سپلائر\",\"action\":\"عمل\",\"select\":\"انتخاب\",\"Customers\":\"کسٹمرز\",\"category management\":\"کٹیگوری منجمنٹ\",\"new category\":\"نیا کٹیگوری\",\"save\":\"ذخیرہ\"}");
 
 /***/ }),
 

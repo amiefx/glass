@@ -93,6 +93,7 @@
       app
     >
       <span>&copy; {{ new Date().getFullYear() }}</span>
+      {{lang1}}
     </v-footer>
   </v-app>
 </template>
@@ -133,7 +134,8 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Karim Glass and Aluminum'
+      title: 'Karim Glass and Aluminum',
+      lang: localStorage.getItem('lang'),
     }
   },
 
@@ -149,6 +151,17 @@ export default {
         });
       });
     }
+  },
+
+  computed: {
+      lang1() {
+          if (this.lang == "ur") {
+              this.$vuetify.rtl = true
+              document.documentElement.dir = 'rtl';
+          } else {
+              this.$vuetify.rtl = false
+          }
+      }
   }
 }
 </script>
