@@ -13,10 +13,10 @@ class CreateReceivablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('receivables', function (Blueprint $table) {
+        Schema::create('recievables', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->integer('doc_id');
+            $table->integer('doc_id')->nullable()->default(null);
             $table->foreignId('customer_id');
             $table->string('description')->nullable()->default(null);
             $table->integer('debit')->default(0);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ReceivablesController;
 use App\Http\Resources\CustomerCollection;
 use App\Http\Resources\CustomerResource;
 use Illuminate\Http\Request;
@@ -10,6 +11,13 @@ use App\Models\Customer;
 
 class CustomersController extends Controller
 {
+
+    protected $receivablesController;
+    public function __construct(ReceivablesController $receivablesController)
+    {
+        $this->receivablesController = $receivablesController;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,6 +53,8 @@ class CustomersController extends Controller
             'is_active' => $request->is_active
         ]);
         $customer->save();
+
+        $this->receivablesController->openningReceivable("openning Balance", $customer->id, $request->balance);
         return response()->json(['customer'=> new CustomerResource($customer)], 200);
     }
 

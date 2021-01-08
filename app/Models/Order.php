@@ -5,27 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Receivable extends Model
+class Order extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'type',
-        'doc_id',
-        'customer_id',
-        'description',
-        'debit',
-        'credit',
-        'balance',
-        'status'
+        'cutomer_id', 
+        'total',
+        'amount_recieved',
+        'note',
+        'status',
+        'user_id'
     ];
 
-    protected $table = 'recievables';
+
+    protected $table = 'orders';
+
 
     //relationships
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
-
 }

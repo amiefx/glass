@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\cr;
+// use App\Models\cr;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductListResource;
 use Illuminate\Http\Request;
 use App\Models\products;
 
+
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
@@ -27,14 +25,15 @@ class ProductsController extends Controller
         ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function allProducts()
+    {
+        return response()->json(['products' =>  ProductListResource::collection(products::all())], 200);
+    }
+
     public function store(Request $request)
     {
+        $user = auth()->user();
+
         $product = new products([
             'name' => $request->name,
             'unit_id' => $request->unit_id,
@@ -51,20 +50,14 @@ class ProductsController extends Controller
             'weight' => $request->weight,
             'size' => $request->size,
             'color' => $request->color,
-            'user_id' => $request->user_id,
+            'user_id' => $user->id,
             'is_active' => $request->is_active
         ]);
         $product->save();
         return response()->json(['product'=> new ProductResource($product)], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    public function show(cr $cr, Request $request, $id)
+    public function show(Request $request, $id)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'name';
@@ -75,16 +68,12 @@ class ProductsController extends Controller
         ], 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+        $user = auth()->user();
+
         $product = products::find($id);
+
         $product->name = $request->name;
         $product->unit_id = $request->unit_id;
         $product->brand_id = $request->brand_id;
@@ -100,18 +89,12 @@ class ProductsController extends Controller
         $product->weight = $request->weight;
         $product->size = $request->size;
         $product->color = $request->color;
-        $product->user_id = $request->user_id;
+        $product->user_id = $user->id;
         $product->is_active = $request->is_active;
         $product->save();
         return response()->json(['product' => new ProductResource($product)], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $product = products::find($id)->delete();
@@ -133,20 +116,39 @@ class ProductsController extends Controller
         return response()->json(['product' => new ProductResource($product)], 200);
     }
 
-
-    public function allProductsWithUserInfo()
+    public function allProductsWithFilter($column, $value)
     {
-        $products = products::all();
-        foreach ($products as $product) {
-            $product = array_merge(['user' => $product->user]);
-        }
+        $products = products::where([$column => $value])->get();
         return response()->json(['products'=>$products]);
     }
 
-    public function allProductsWithFilter(Request $request)
-    {
-        $products = products::where([$request->column_name => $request->column_value])->get();
 
-        return response()->json(['products'=>$products]);
+    //relationships methods
+    public function productBrand(Request $request, $id)
+    {
+        $brand= products::findOrFail($id)->brand;
+        return response()->json(['brand'=>$brand]);
+    }
+    public function productCategory(Request $request, $id)
+    {
+        $category= products::findOrFail($id)->category;
+        return response()->json(['category'=>$category]);
+    }
+    public function productUnit(Request $request, $id)
+    {
+        $unit= products::findOrFail($id)->unit;
+        return response()->json(['unit'=>$unit]);
+    }
+    public function productUser(Request $request, $id)
+    {
+        $user= products::findOrFail($id)->user;
+        return response()->json(['user'=>$user]);
+    }
+
+
+    public function report()
+    {
+        $report = DB::table('remaining_quantity')->groupBy('product_id')->get();
+        return response()->json(['report'=>$report]);
     }
 }

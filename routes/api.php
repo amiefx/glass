@@ -72,7 +72,29 @@ Route::group([
     Route::resource('suppliers', 'SuppliersController');
 
     // products
+    Route::get('products/list', 'ProductsController@allProducts');
+    Route::get('products/{id}/brand', 'ProductsController@productBrand');
+    Route::get('products/{id}/category', 'ProductsController@productCategory');
+    Route::get('products/{id}/unit', 'ProductsController@productUnit');
+    Route::get('products/{id}/user', 'ProductsController@productUser');
+    Route::get('products/filter/{column}/{value}', 'ProductsController@allProductsWithFilter');
+    Route::post('products/changeStatus', 'ProductsController@changeStatus');
+    Route::post('products/deleteAll', 'ProductsController@deleteAll');
+    Route::get('products/report', 'ProductsController@report'); //view for remaining quantity
     Route::resource('products', 'ProductsController');
+
+    // slab
+    Route::resource('slabs', 'SlabController');
+
+    // purchase
+    Route::resource('purchase', 'PurchaseController');
+
+    // orderdetail
+    Route::resource('orderdetail', 'OrderDetailController');
+
+    // order
+    Route::resource('order', 'OrderController');
+    
 
     // brand
     Route::resource('brands', 'BrandController');

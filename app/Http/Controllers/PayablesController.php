@@ -16,10 +16,10 @@ class PayableController extends Controller
         return response()->json(['payables'=>$payables]);
     }
 
-    // payables by vendor id
-    public function payableByVendorId(Request $request)
+    // payables by supplier id
+    public function payableBySupplierId(Request $request)
     {
-        $payables = DB::table("payables")->where("vendor_id", $request->vendor_id)
+        $payables = DB::table("payables")->where("supplier_id", $request->supplier_id)
         ->orderBy("created_at", "desc")->get();
         return response()->json(['payables'=>$payables]);
     }
@@ -37,7 +37,7 @@ class PayableController extends Controller
 
         $validator = Validator::make($request->all(),[
             'type' => 'required|string|between:2,100',
-            'vendor_id' => 'required|integer',
+            'supplier_id' => 'required|integer',
         ]);
         if ($validator->fails()) {
             return response()->json([$validator->errors()], 422);
@@ -62,14 +62,14 @@ class PayableController extends Controller
 
         $validator = Validator::make($request->all(),[
             'type' => 'required|string|between:2,100',
-            'vendor_id' => 'required|integer'
+            'supplier_id' => 'required|integer'
         ]);
         if ($validator->fails()) {
             return response()->json([$validator->errors()], 422);
         }
 
         $payable->type = $request->type;
-        $payable->vendor_id = $request->vendor_id;
+        $payable->supplier_id = $request->supplier_id;
         $payable->description = $request->description;
         $payable->debit = ($request->debit) ? $request->debit : 0;
         $payable->credit = ($request->credit) ? $request->credit : 0;
@@ -89,19 +89,19 @@ class PayableController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'type' => 'required|string|between:2,100',
-            'vendor_id' => 'required|integer'
+            'supplier_id' => 'required|integer'
         ]);
         if ($validator->fails()) {
             return response()->json([$validator->errors()], 422);
         }
 
-        if(Payable::where("vendor_id", $request->vendor_id)->first() != null){
-            $pay = DB::table("payables")->where("vendor_id", $request->vendor_id)->latest()->first();
+        if(Payable::where("supplier_id", $request->supplier_id)->first() != null){
+            $pay = DB::table("payables")->where("supplier_id", $request->supplier_id)->latest()->first();
 
             $newpay = new payable;
 
             $newpay->type = $request->type;
-            $newpay->vendor_id = $request->vendor_id;
+            $newpay->supplier_id = $request->supplier_id;
             $newpay->description = $request->description;
             $newpay->debit = $request->debit;
             $newpay->balance = $pay->balance - $request->debit;
@@ -124,19 +124,19 @@ class PayableController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'type' => 'required|string|between:2,100',
-            'vendor_id' => 'required|integer'
+            'supplier_id' => 'required|integer'
         ]);
         if ($validator->fails()) {
             return response()->json([$validator->errors()], 422);
         }
 
-        if(Payable::where("vendor_id", $request->vendor_id)->first() != null){
-           $pay = DB::table("payables")->where("vendor_id", $request->vendor_id)->latest()->first();
+        if(Payable::where("supplier_id", $request->supplier_id)->first() != null){
+           $pay = DB::table("payables")->where("supplier_id", $request->supplier_id)->latest()->first();
 
             $newpay = new payable;
 
             $newpay->type = $request->type;
-            $newpay->vendor_id = $request->vendor_id;
+            $newpay->supplier_id = $request->supplier_id;
             $newpay->description = $request->description;
             $newpay->credit = $request->credit;
             $newpay->balance = $pay->balance + $request->credit;
@@ -164,6 +164,26 @@ class PayableController extends Controller
             return response()->json(['message' => 'payable deleted successfully']);
         }else{
             return response()->json(['error'=>"something went wrong!"]);
+        }
+    }
+
+
+    // opening payable
+    public function openningPayable($type, $id, $balance)
+    {
+        $newpay = new payable;
+
+        $newpay->type = $type;
+        $newpay->supplier_id = $id; 
+        $newpay->credit = $balance;
+        $newpay->balance = $balance;
+        $newpay->status = 1;
+
+        if($newpay->save())
+        {
+            return true;
+        }else{
+            return false;
         }
     }
 }

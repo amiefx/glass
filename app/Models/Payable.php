@@ -11,7 +11,7 @@ class Payable extends Model
 
     protected $fillable = [
         'type',
-        'vendor_id',
+        'supplier_id',
         'description',
         'debit',
         'credit',
@@ -21,5 +21,11 @@ class Payable extends Model
 
 
     protected $table = 'payables';
+
+    //relationships
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
 
 }

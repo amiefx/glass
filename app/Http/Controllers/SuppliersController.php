@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PayableController;
 use App\Http\Resources\SupplierCollection;
 use App\Http\Resources\SupplierResource;
 use Illuminate\Http\Request;
@@ -10,6 +11,14 @@ use App\Models\Supplier;
 
 class SuppliersController extends Controller
 {
+
+    protected $payableController;
+    public function __construct(PayableController $payableController)
+    {
+        $this->payableController = $payableController;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -45,6 +54,8 @@ class SuppliersController extends Controller
             'is_active' => $request->is_active
         ]);
         $supplier->save();
+
+        $this->payableController->openningPayable("openning Balance", $supplier->id, $request->balance);
         return response()->json(['supplier'=> new SupplierResource($supplier)], 200);
     }
 

@@ -166,4 +166,27 @@ class ReceivablesController extends Controller
         }
     }
 
+
+
+    // openning receivable
+    public function openningReceivable($type, $id, $balance)
+    {
+            $user = auth()->user();
+            $newrec = new Receivable;
+
+            $newrec->type = $type;
+            $newrec->customer_id = $id; 
+            $newrec->debit = $balance;
+            $newrec->balance = $balance;
+            $newrec->status = 1;
+            $newrec->user_id = $user->id;
+
+            if($newrec->save())
+            {
+                return true;
+            }else{
+                return false;
+            } 
+    }
+
 }

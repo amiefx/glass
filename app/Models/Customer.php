@@ -20,4 +20,17 @@ class Customer extends Model
         'credit_limit',
     ];
 
+    protected $table = 'customers';
+
+    //relationships
+    public function recievables()
+    {
+        return $this->hasMany(Receivable::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }

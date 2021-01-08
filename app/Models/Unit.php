@@ -16,4 +16,10 @@ class Unit extends Model
 
 
     protected $table = 'units';
+
+    //relationships
+    public function products()
+    {
+        return $this->hasMany(products::class);
+    }
 }
