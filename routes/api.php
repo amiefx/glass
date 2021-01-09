@@ -97,12 +97,15 @@ Route::group([
     
 
     // brand
+    Route::get('brands/list', 'BrandController@allBrands');
     Route::resource('brands', 'BrandController');
 
     // unit
+    Route::get('units/list', 'UnitController@allUnits');
     Route::resource('units', 'UnitController');
 
     // category
+    Route::resource('category/list', 'CategoryController@allCategories');
     Route::resource('categories', 'CategoryController');
     
     // business

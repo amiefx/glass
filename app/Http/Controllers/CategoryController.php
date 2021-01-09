@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\CategoryListResource;
 
 class CategoryController extends Controller
 {
@@ -22,6 +23,11 @@ class CategoryController extends Controller
         return response()->json([
             'categories' => new CategoryCollection(Category::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
+    }
+    
+    public function allCategories()
+    {
+        return response()->json(['Categories' =>  CategoryListResource::collection(Category::all())], 200);
     }
 
     /**

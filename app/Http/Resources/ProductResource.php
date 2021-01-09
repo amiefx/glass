@@ -3,6 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\Unit;
+use App\Models\Brand;
+use App\Models\Category;
 
 class ProductResource extends JsonResource
 {
@@ -17,16 +20,16 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'unit_id' => $this->unit_id,
-            'brand_id' => $this->brand_id,
-            'category_id' => $this->category_id,
+            'unit' => Unit::find($this->unit_id) ? Unit::find($this->unit_id)->short_name : '',
+            'brand' => Brand::find($this->brand_id) ? Brand::find($this->brand_id)->name : '',
+            'category' => Category::find($this->category_id) ? Category::find($this->category_id)->short_code : '',
             'enable_stock' => $this->enable_stock,
             'alert_quantity' => $this->alert_quantity,
             'sku' => $this->sku,
             'selling_price' => $this->selling_price,
             'is_active' => $this->is_active,
             'size' => $this->size,
-            'user_id' => $this->user_id
+            'user' => $this->user_id
         ];
     }
 }
