@@ -32,11 +32,11 @@ class CategoryController extends Controller
             'categories' => new CategoryCollection(Category::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
     }
-    
-    public function allCategories()
-    {
-        return response()->json(['Categories' =>  CategoryListResource::collection(Category::all())], 200);
-    }
+
+    // public function allCategories()
+    // {
+    //     return response()->json(['Categories' =>  CategoryListResource::collection(Category::all())], 200);
+    // }
 
     /**
      * Store a newly created resource in storage.

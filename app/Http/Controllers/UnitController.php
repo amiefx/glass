@@ -33,10 +33,10 @@ class UnitController extends Controller
         ], 200);
     }
 
-    public function allUnits()
-    {
-        return response()->json(['units' =>  UnitListResource::collection(Units::all())], 200);
-    }
+    // public function allUnits()
+    // {
+    //     return response()->json(['units' =>  UnitListResource::collection(Units::all())], 200);
+    // }
 
     /**
      * Store a newly created resource in storage.

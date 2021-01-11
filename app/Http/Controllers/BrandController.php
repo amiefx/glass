@@ -32,10 +32,10 @@ class BrandController extends Controller
         ], 200);
     }
 
-    public function allBrands()
-    {
-        return response()->json(['brands' =>  BrandListResource::collection(Brand::all())], 200);
-    }
+    // public function allBrands()
+    // {
+    //     return response()->json(['brands' =>  BrandListResource::collection(Brand::all())], 200);
+    // }
 
     /**
      * Store a newly created resource in storage.
