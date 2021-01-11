@@ -6,6 +6,7 @@ use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Http\Resources\BrandCollection;
 use App\Http\Resources\BrandResource;
+use App\Http\Resources\BrandListResource;
 
 class BrandController extends Controller
 {
@@ -29,6 +30,11 @@ class BrandController extends Controller
         return response()->json([
             'brands' => new BrandCollection(Brand::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
+    }
+
+    public function allBrands()
+    {
+        return response()->json(['brands' =>  BrandListResource::collection(Brand::all())], 200);
     }
 
     /**

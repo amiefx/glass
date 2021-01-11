@@ -6,6 +6,8 @@ use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Http\Resources\UnitCollection;
 use App\Http\Resources\UnitResource;
+use App\Http\Resources\UnitListResource;
+
 
 class UnitController extends Controller
 {
@@ -29,6 +31,11 @@ class UnitController extends Controller
         return response()->json([
             'units' => new UnitCollection(Unit::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
+    }
+
+    public function allUnits()
+    {
+        return response()->json(['units' =>  UnitListResource::collection(Units::all())], 200);
     }
 
     /**
