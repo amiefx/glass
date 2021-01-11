@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
-class PayableController extends Controller
+class PayablesController extends Controller
 {
     // all payables over all
     public function payables()
@@ -171,13 +171,17 @@ class PayableController extends Controller
     // opening payable
     public function openningPayable($type, $id, $balance)
     {
-        $newpay = new payable;
+        $user = auth()->user();
+        $newpay = new Payable;
 
         $newpay->type = $type;
-        $newpay->supplier_id = $id; 
+        $newpay->supplier_id = $id;
         $newpay->credit = $balance;
         $newpay->balance = $balance;
+        $newpay->doc_id = $id;
         $newpay->status = 1;
+        $newpay->user_id = $user->id;
+
 
         if($newpay->save())
         {

@@ -9,6 +9,14 @@ use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
 {
+    public function allCategories()
+    {
+        return CategoryResource::collection(
+            Category::get()
+         );
+    }
+
+
     /**
      * Display a listing of the resource.
      *

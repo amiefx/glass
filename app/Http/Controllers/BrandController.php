@@ -9,6 +9,13 @@ use App\Http\Resources\BrandResource;
 
 class BrandController extends Controller
 {
+    public function allBrands()
+    {
+        return BrandResource::collection(
+            Brand::get()
+         );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +44,7 @@ class BrandController extends Controller
             'description' => $request->description
         ]);
         $brand->save();
-        return response()->json(['brands'=> new BrandResource($brand)], 200);
+        return response()->json(['brand'=> new BrandResource($brand)], 200);
     }
 
     /**

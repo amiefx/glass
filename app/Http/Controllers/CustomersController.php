@@ -54,7 +54,7 @@ class CustomersController extends Controller
         ]);
         $customer->save();
 
-        $this->receivablesController->openningReceivable("openning Balance", $customer->id, $request->balance);
+        $this->receivablesController->openningReceivable("openning Balance", $customer->id, $request->opening_balance);
         return response()->json(['customer'=> new CustomerResource($customer)], 200);
     }
 

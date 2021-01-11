@@ -149,6 +149,17 @@ const routes = [
             ]
         }
     },
+    {
+        path: '/admin/slabs',
+        name: 'slabs',
+        component: () => import('../views/admin/Slab.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/order-return',
     //     name: 'order-return',
@@ -281,17 +292,17 @@ const routes = [
             ]
         }
     },
-    // {
-    //     path: '/admin/products',
-    //     name: 'admin-products',
-    //     component: () => import('../views/admin/products/Index.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/products',
+        name: 'products',
+        component: () => import('../views/admin/Products.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/products/:slug',
     //     name: 'admin-products-edit',

@@ -9,6 +9,13 @@ use App\Http\Resources\UnitResource;
 
 class UnitController extends Controller
 {
+    public function allUnits()
+    {
+        return UnitResource::collection(
+            Unit::get()
+         );
+    }
+
     /**
      * Display a listing of the resource.
      *

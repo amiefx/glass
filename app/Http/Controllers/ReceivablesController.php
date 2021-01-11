@@ -175,7 +175,7 @@ class ReceivablesController extends Controller
             $newrec = new Receivable;
 
             $newrec->type = $type;
-            $newrec->customer_id = $id; 
+            $newrec->customer_id = $id;
             $newrec->debit = $balance;
             $newrec->balance = $balance;
             $newrec->status = 1;
@@ -186,7 +186,7 @@ class ReceivablesController extends Controller
                 return true;
             }else{
                 return false;
-            } 
+            }
     }
 
 }

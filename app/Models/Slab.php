@@ -10,10 +10,10 @@ class Slab extends Model
     use HasFactory;
 
     protected $fillable = [
-        'min', 
+        'min',
         'max',
         'actual'
     ];
 
-    protected $table = 'slibs';
+    protected $table = 'slabs';
 }

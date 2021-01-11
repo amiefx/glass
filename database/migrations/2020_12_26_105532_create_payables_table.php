@@ -19,9 +19,9 @@ class CreatePayablesTable extends Migration
             $table->integer('doc_id');
             $table->foreignId('supplier_id');
             $table->string('description')->nullable()->default(null);
-            $table->integer('debit')->default(0);
-            $table->integer('credit')->default(0);
-            $table->integer('balance')->default(0);
+            $table->integer('debit')->nullable()->default(0);
+            $table->integer('credit')->nullable()->default(0);
+            $table->integer('balance')->nullable()->default(0);
             $table->boolean('status')->default(false);
             $table->integer('user_id');
             $table->timestamps();

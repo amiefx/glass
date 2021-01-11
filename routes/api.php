@@ -2,7 +2,7 @@
 
 use App\Http\Controllers;
 use App\Http\Controllers\TodoController;
-use App\Http\Controllers\AuthController; 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -84,6 +84,7 @@ Route::group([
     Route::resource('products', 'ProductsController');
 
     // slab
+    Route::get('slabs/all', 'SlabController@allSlabs');
     Route::resource('slabs', 'SlabController');
 
     // purchase
@@ -94,17 +95,20 @@ Route::group([
 
     // order
     Route::resource('order', 'OrderController');
-    
+
 
     // brand
+    Route::get('brands/all', 'BrandController@allBrands');
     Route::resource('brands', 'BrandController');
 
     // unit
+    Route::get('units/all', 'UnitController@allUnits');
     Route::resource('units', 'UnitController');
 
     // category
+    Route::get('categories/all', 'CategoryController@allCategories');
     Route::resource('categories', 'CategoryController');
-    
+
     // business
     Route::resource('business', 'BusinessController');
 

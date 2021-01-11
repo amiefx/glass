@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\PayableController;
+use App\Http\Controllers\PayablesController;
 use App\Http\Resources\SupplierCollection;
 use App\Http\Resources\SupplierResource;
 use Illuminate\Http\Request;
@@ -12,10 +12,10 @@ use App\Models\Supplier;
 class SuppliersController extends Controller
 {
 
-    protected $payableController;
-    public function __construct(PayableController $payableController)
+    protected $payablesController;
+    public function __construct(PayablesController $payablesController)
     {
-        $this->payableController = $payableController;
+        $this->payablesController = $payablesController;
     }
 
 
@@ -55,7 +55,7 @@ class SuppliersController extends Controller
         ]);
         $supplier->save();
 
-        $this->payableController->openningPayable("openning Balance", $supplier->id, $request->balance);
+        $this->payablesController->openningPayable("openning Balance", $supplier->id, $request->opening_balance);
         return response()->json(['supplier'=> new SupplierResource($supplier)], 200);
     }
 

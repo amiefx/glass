@@ -11,15 +11,22 @@ use Illuminate\Http\Request;
 
 class SlabController extends Controller
 {
+    public function allSlabs()
+    {
+        return SlabResource::collection(
+            Slab::get()
+         );
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
-        $sortBy = $request->sort_by ? $request->sort_by : 'actual';
+        $sortBy = $request->sort_by ? $request->sort_by : 'min';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
         return response()->json([
             'slabs' => new SlabCollection(Slab::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
@@ -50,10 +57,10 @@ class SlabController extends Controller
      * @param  \App\Models\Slab  $slab
      * @return \Illuminate\Http\Response
      */
-    public function show(Slab $slab, $id)
+    public function show(Request $request, $id)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
-        $sortBy = $request->sort_by ? $request->sort_by : 'actual';
+        $sortBy = $request->sort_by ? $request->sort_by : 'min';
         $orderBy = $request->order_by ? $request->order_by : 'asc';
         $slabs = Slab::where('actual', 'LIKE', "%$id%");
         return response()->json([
@@ -75,7 +82,7 @@ class SlabController extends Controller
         $slab->min = $request->min;
         $slab->max = $request->max;
         $slab->actual = $request->actual;
-        
+
         $slab->save();
         return response()->json(['slab' => new SlabResource($slab)], 200);
     }
