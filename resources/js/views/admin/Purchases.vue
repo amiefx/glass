@@ -14,14 +14,14 @@
       hide-selected
       item-text="name"
       item-value="symbol"
-      label="Search for a customer..."
+      label="Search for a supplier..."
       solo
     >
       <template v-slot:no-data>
         <v-list-item>
           <v-list-item-title>
             Search for a
-            <strong>Customer</strong>
+            <strong>Supplier</strong>
           </v-list-item-title>
         </v-list-item>
       </template>
@@ -63,8 +63,8 @@
               <tr>
                 <th></th>
                 <th class="text-left"> Sku </th>
-                <th class="text-left"> Height </th>
-                <th class="text-left"> Width </th>
+                <!-- <th class="text-left"> Height </th>
+                <th class="text-left"> Width </th> -->
                 <th class="text-left"> Price </th>
                 <th class="text-left"> Qty </th>
                 <th class="text-left"> Total </th>
@@ -72,22 +72,22 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in cart" :key="item.id">
+              <tr v-for="item in purchase" :key="item.id">
                   <td>
-                      <v-btn class="red--text" icon @click="removeProductFromCart(item.product)">
+                      <v-btn class="red--text" icon @click="removeProductFromPurchase(item.product)">
                       <v-icon>mdi-delete</v-icon>
                     </v-btn>
                   </td>
                 <td>
                   {{ item.product.sku}}
                 </td>
-                <td></td>
-                <td></td>
+                <!-- <td></td>
+                <td></td> -->
                 <td>
                   {{ item.product.selling_price}}
                 </td>
                 <td>
-                    {{item.quantity}}
+                    <input class="numinput qty" type="number" v-model="item.quantity">
                 </td>
                 <td allign="right">{{ (item.product.selling_price * item.quantity).toFixed(0) }}</td>
                 <td>
@@ -102,14 +102,15 @@
             </tbody>
           </template>
         </v-simple-table>
+        <v-divider></v-divider>
         <v-simple-table dense>
             <tbody>
                 <tr>
                   <td width="50%">
-                      <v-btn class="float-left" color="error" text @click="clearCartItems">Clear all</v-btn>
+                      <v-btn class="float-left" color="error" text @click="clearPurchaseItems">Clear all</v-btn>
                   </td>
                   <td width="25%">Subtotal</td>
-                  <td width="25%">{{(cartTotalPrice).toFixed(0)}}</td>
+                  <td width="25%">{{(purchaseTotalPrice).toFixed(0)}}</td>
                </tr>
                 <tr>
                     <td></td>
@@ -128,7 +129,7 @@
         </v-simple-table>
           </v-col>
           <v-col cols="5" >
-              <product-list />
+              <purchase-list />
           </v-col>
       </v-row>
   </div>
@@ -136,10 +137,10 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex"
-import ProductList from '../../components/ProductList.vue'
+import PurchaseList from '../../components/PurchaseList.vue'
 export default {
    components: {
-      ProductList
+      PurchaseList
   },
 
   data: () => {
@@ -157,43 +158,52 @@ export default {
       model: null,
       search: null,
       tab: null,
+
+      purchaseData: {
+          customer_id: '',
+          subtotal: '',
+          discount: '',
+          total: '',
+          amount_received: '',
+          purchaseItems: []
+      }
     }
   },
 
   methods: {
-    removeProductFromCart(product) {
-      this.$store.dispatch("cart/removeProductFromCart", product);
+    removeProductFromPurchase(product) {
+      this.$store.dispatch("purchase/removeProductFromPurchase", product);
     },
 
-    clearCartItems() {
-      this.$store.dispatch("cart/clearCartItems");
+    clearPurchaseItems() {
+      this.$store.dispatch("purchase/clearPurchaseItems");
     },
 
     decreaseProductQty(product) {
-      this.$store.dispatch("cart/decreaseProductQty", product);
+      this.$store.dispatch("purchase/decreaseProductQty", product);
     },
 
     increaseProductQty(product) {
-      this.$store.dispatch("cart/increaseProductQty", product);
+      this.$store.dispatch("purchase/increaseProductQty", product);
     },
 
   },
 
   computed: {
       ...mapState({
-        cart: state => state.cart.cart,
+        purchase: state => state.purchase.purchase,
     }),
 
-    cartItemCount() {
-      return this.$store.getters['cart/cartItemCount'];
+    purchaseItemCount() {
+      return this.$store.getters['purchase/purchaseItemCount'];
     },
 
-    cartTotalPrice() {
-      return this.$store.getters['cart/cartTotalPrice'];
+    purchaseTotalPrice() {
+      return this.$store.getters['purchase/purchaseTotalPrice'];
     },
 
     total() {
-        return this.cartTotalPrice - this.discount;
+        return this.purchaseTotalPrice - this.discount;
     }
 
   },
@@ -222,7 +232,7 @@ export default {
 
         // axios method
         axios
-          .get('/api/customers/all')
+          .get('/api/suppliers/all')
           .then(res => {
             this.items = res.data.data
             this.isLoading = false
@@ -248,4 +258,7 @@ export default {
 .numinput:focus {
         border: 1px solid lightgray;
     }
+.qty {
+    width: 60px;
+}
 </style>

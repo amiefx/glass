@@ -18,11 +18,12 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->integer('unit_id')->nullable()->default(null);
             $table->integer('brand_id')->nullable()->default(null);
+            $table->json('brand');
             $table->integer('category_id')->nullable()->default(null);
-            $table->tinyInteger('enable_stock')->default(0);
-            $table->integer('alert_quantity');
+            $table->boolean('enable_stock')->default(false);
+            $table->integer('alert_quantity')->nullable();
             $table->string('sku');
-            $table->integer('selling_price')->default(0);
+            $table->integer('selling_price')->nullable()->default(0);
             $table->string('length')->nullable()->default(null);
             $table->string('height')->nullable()->default(null);
             $table->string('width')->nullable()->default(null);
@@ -30,7 +31,7 @@ class CreateProductsTable extends Migration
             $table->string('weight')->nullable()->default(null);
             $table->string('size')->nullable()->default(null);
             $table->string('color')->nullable()->default(null);
-            $table->tinyInteger('is_active')->default(1);
+            $table->boolean('is_active')->default(false);
             $table->foreignId('user_id');
             $table->timestamps();
         });

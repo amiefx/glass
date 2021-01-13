@@ -10,9 +10,10 @@ class products extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 
+        'name',
         'unit_id',
         'brand_id',
+        'brand',
         'category_id',
         'enable_stock',
         'alert_quantity',
@@ -30,7 +31,11 @@ class products extends Model
     ];
 
 
-    protected $table = 'products';
+    // protected $table = 'products';
+
+    protected $casts = [
+        'brand' => 'array'
+    ];
 
 
     //relationships

@@ -233,7 +233,7 @@ __webpack_require__.r(__webpack_exports__);
         value: 'category'
       }, {
         text: 'Brand',
-        value: 'brand'
+        value: 'brand_name'
       }, {
         text: 'Enable Stock',
         value: 'stock'
@@ -265,7 +265,7 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Color',
         value: 'color'
       }, {
-        text: 'Status',
+        text: 'Active',
         value: 'active'
       }, {
         text: 'Actions',
@@ -292,8 +292,8 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         category_id: '',
         brand_id: '',
-        brand: '',
-        enable_stock: '',
+        brand: {},
+        enable_stock: false,
         alert_quantity: '',
         selling_price: '',
         height: '',
@@ -314,7 +314,7 @@ __webpack_require__.r(__webpack_exports__);
         category_id: '',
         brand_id: '',
         brand: '',
-        enable_stock: '',
+        enable_stock: false,
         alert_quantity: '',
         selling_price: '',
         height: '',
@@ -385,7 +385,7 @@ __webpack_require__.r(__webpack_exports__);
     getSku: function getSku(item) {
       var a = this.editedItem.brand.name.slice(0, 2) + " " + this.editedItem.name;
       var color = this.editedItem.color !== '' ? " " + this.editedItem.color.slice(0, 3) : "";
-      var vol = this.editedItem.height !== '' ? " " + this.editedItem.height + "X" + this.editedItem.width + "X" + this.editedItem.thikness : "";
+      var vol = this.editedItem.height !== '' ? " " + this.editedItem.height + "X" + this.editedItem.width + "X" + this.editedItem.thickness : "";
       this.editedItem.brand_id = this.editedItem.brand.id;
       this.editedItem.sku = (a + color + vol).toUpperCase();
     },
@@ -751,17 +751,16 @@ var render = function() {
                                                     "return-object": ""
                                                   },
                                                   model: {
-                                                    value:
-                                                      _vm.editedItem.brand_id,
+                                                    value: _vm.editedItem.brand,
                                                     callback: function($$v) {
                                                       _vm.$set(
                                                         _vm.editedItem,
-                                                        "brand_id",
+                                                        "brand",
                                                         $$v
                                                       )
                                                     },
                                                     expression:
-                                                      "editedItem.brand_id"
+                                                      "editedItem.brand"
                                                   }
                                                 }),
                                                 _vm._v(" "),
@@ -805,6 +804,27 @@ var render = function() {
                                                     expression:
                                                       "editedItem.unit_id"
                                                   }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    type: "number",
+                                                    label: "Selling Price"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editedItem
+                                                        .selling_price,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "selling_price",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.selling_price"
+                                                  }
                                                 })
                                               ],
                                               1
@@ -821,7 +841,10 @@ var render = function() {
                                               },
                                               [
                                                 _c("v-text-field", {
-                                                  attrs: { label: "Height" },
+                                                  attrs: {
+                                                    type: "number",
+                                                    label: "Height"
+                                                  },
                                                   model: {
                                                     value:
                                                       _vm.editedItem.height,
@@ -838,7 +861,10 @@ var render = function() {
                                                 }),
                                                 _vm._v(" "),
                                                 _c("v-text-field", {
-                                                  attrs: { label: "Width" },
+                                                  attrs: {
+                                                    type: "number",
+                                                    label: "Width"
+                                                  },
                                                   model: {
                                                     value: _vm.editedItem.width,
                                                     callback: function($$v) {
@@ -854,7 +880,10 @@ var render = function() {
                                                 }),
                                                 _vm._v(" "),
                                                 _c("v-text-field", {
-                                                  attrs: { label: "Thinkness" },
+                                                  attrs: {
+                                                    type: "number",
+                                                    label: "Thinkness"
+                                                  },
                                                   model: {
                                                     value:
                                                       _vm.editedItem.thickness,
@@ -871,7 +900,10 @@ var render = function() {
                                                 }),
                                                 _vm._v(" "),
                                                 _c("v-text-field", {
-                                                  attrs: { label: "Length" },
+                                                  attrs: {
+                                                    type: "number",
+                                                    label: "Length"
+                                                  },
                                                   model: {
                                                     value:
                                                       _vm.editedItem.length,
@@ -888,7 +920,10 @@ var render = function() {
                                                 }),
                                                 _vm._v(" "),
                                                 _c("v-text-field", {
-                                                  attrs: { label: "Weight" },
+                                                  attrs: {
+                                                    type: "number",
+                                                    label: "Weight"
+                                                  },
                                                   model: {
                                                     value:
                                                       _vm.editedItem.weight,
@@ -975,6 +1010,7 @@ var render = function() {
                                                       [
                                                         _c("v-text-field", {
                                                           attrs: {
+                                                            type: "number",
                                                             label:
                                                               "Alert Quantity"
                                                           },
@@ -999,6 +1035,7 @@ var render = function() {
                                                         _vm.editedIndex === -1
                                                           ? _c("v-text-field", {
                                                               attrs: {
+                                                                type: "number",
                                                                 label:
                                                                   "Quantity on Hand"
                                                               },
@@ -1024,6 +1061,7 @@ var render = function() {
                                                         _vm.editedIndex === -1
                                                           ? _c("v-text-field", {
                                                               attrs: {
+                                                                type: "number",
                                                                 label:
                                                                   "Purchase Price"
                                                               },
@@ -1049,6 +1087,7 @@ var render = function() {
                                                         _vm.editedIndex === -1
                                                           ? _c("v-text-field", {
                                                               attrs: {
+                                                                type: "number",
                                                                 label: "Total"
                                                               },
                                                               model: {
@@ -1068,30 +1107,7 @@ var render = function() {
                                                                   "editedItem.total"
                                                               }
                                                             })
-                                                          : _vm._e(),
-                                                        _vm._v(" "),
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            label:
-                                                              "Selling Price"
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.editedItem
-                                                                .selling_price,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.editedItem,
-                                                                "selling_price",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "editedItem.selling_price"
-                                                          }
-                                                        })
+                                                          : _vm._e()
                                                       ],
                                                       1
                                                     )

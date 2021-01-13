@@ -85938,18 +85938,17 @@ var routes = [{
 //         ]
 //     }
 // },
-// {
-//     path: '/admin/social',
-//     name: 'social',
-//     component: () => import('../views/admin/Social.vue'),
-//     meta: {
-//         layout: 'admin',
-//         middleware: [
-//             auth, admin
-//         ]
-//     }
-// },
 {
+  path: '/admin/purchases',
+  name: 'purchases',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ../views/admin/Purchases.vue */ "./resources/js/views/admin/Purchases.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
+  }
+}, {
   path: '/admin/users',
   name: 'users',
   component: function component() {
@@ -86353,11 +86352,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var cart = window.localStorage.getItem('cart');
+//let cart = window.localStorage.getItem('cart');
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    cart: cart ? JSON.parse(cart) : []
+    //cart: cart ? JSON.parse(cart) : [],
+    cart: []
   },
   getters: {
     cartItemCount: function cartItemCount(state) {
@@ -86366,7 +86366,7 @@ var cart = window.localStorage.getItem('cart');
     cartTotalPrice: function cartTotalPrice(state) {
       var total = 0;
       state.cart.forEach(function (item) {
-        total += item.price * item.quantity;
+        total += item.product.selling_price * item.quantity;
       });
       return total;
     }
@@ -86384,8 +86384,8 @@ var cart = window.localStorage.getItem('cart');
       });
 
       if (productInCart) {
-        productInCart.quantity += quantity;
-        window.localStorage.setItem('cart', JSON.stringify(state.cart));
+        productInCart.quantity += quantity; //    window.localStorage.setItem('cart', JSON.stringify(state.cart));
+
         return;
       }
 
@@ -86393,18 +86393,15 @@ var cart = window.localStorage.getItem('cart');
         product: product,
         quantity: quantity,
         price: price
-      });
-      window.localStorage.setItem('cart', JSON.stringify(state.cart));
+      }); //    window.localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     REMOVE_PRODUCT_FROM_CART: function REMOVE_PRODUCT_FROM_CART(state, product) {
       state.cart = state.cart.filter(function (item) {
         return item.product.id !== product.id;
-      });
-      window.localStorage.setItem('cart', JSON.stringify(state.cart));
+      }); //    window.localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     CLEAR_CART_ITEMS: function CLEAR_CART_ITEMS(state) {
-      state.cart = [];
-      window.localStorage.setItem('cart', JSON.stringify(state.cart));
+      state.cart = []; //    window.localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     DECREASE_QTY: function DECREASE_QTY(state, product) {
       var productInCart = state.cart.find(function (item) {
@@ -86412,8 +86409,8 @@ var cart = window.localStorage.getItem('cart');
       });
 
       if (productInCart) {
-        productInCart.quantity--;
-        window.localStorage.setItem('cart', JSON.stringify(state.cart));
+        productInCart.quantity--; //     window.localStorage.setItem('cart', JSON.stringify(state.cart));
+
         return;
       }
     },
@@ -86423,8 +86420,8 @@ var cart = window.localStorage.getItem('cart');
       });
 
       if (productInCart) {
-        productInCart.quantity++;
-        window.localStorage.setItem('cart', JSON.stringify(state.cart));
+        productInCart.quantity++; //     window.localStorage.setItem('cart', JSON.stringify(state.cart));
+
         return;
       }
     }
@@ -86482,6 +86479,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./resources/js/store/auth.js");
 /* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cart */ "./resources/js/store/cart.js");
+/* harmony import */ var _purchase__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./purchase */ "./resources/js/store/purchase.js");
+
 
 
 
@@ -86498,9 +86497,132 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   },
   modules: {
     auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"],
-    cart: _cart__WEBPACK_IMPORTED_MODULE_3__["default"]
+    cart: _cart__WEBPACK_IMPORTED_MODULE_3__["default"],
+    purchase: _purchase__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/purchase.js":
+/*!****************************************!*\
+  !*** ./resources/js/store/purchase.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//let purchase = window.localStorage.getItem('purchase');
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    // purchase: purchase ? JSON.parse(purchase) : [],
+    purchase: []
+  },
+  getters: {
+    purchaseItemCount: function purchaseItemCount(state) {
+      return state.purchase.length;
+    },
+    purchaseTotalPrice: function purchaseTotalPrice(state) {
+      var total = 0;
+      state.purchase.forEach(function (item) {
+        total += item.product.selling_price * item.quantity;
+      });
+      return total;
+    }
+  },
+  mutations: {
+    ADD_TO_CART: function ADD_TO_CART(state, _ref) {
+      var product = _ref.product,
+          quantity = _ref.quantity,
+          price = _ref.price,
+          type = _ref.type,
+          size = _ref.size,
+          customSize = _ref.customSize;
+      var productInPurchase = state.purchase.find(function (item) {
+        return item.product.id === product.id; // return item.product.name === product.name;
+      });
+
+      if (productInPurchase) {
+        productInPurchase.quantity += quantity; //  window.localStorage.setItem('purchase', JSON.stringify(state.purchase));
+
+        return;
+      }
+
+      state.purchase.push({
+        product: product,
+        quantity: quantity,
+        price: price
+      }); //   window.localStorage.setItem('purchase', JSON.stringify(state.purchase));
+    },
+    REMOVE_PRODUCT_FROM_CART: function REMOVE_PRODUCT_FROM_CART(state, product) {
+      state.purchase = state.purchase.filter(function (item) {
+        return item.product.id !== product.id;
+      }); //   window.localStorage.setItem('purchase', JSON.stringify(state.purchase));
+    },
+    CLEAR_CART_ITEMS: function CLEAR_CART_ITEMS(state) {
+      state.purchase = []; //    window.localStorage.setItem('purchase', JSON.stringify(state.purchase));
+    },
+    DECREASE_QTY: function DECREASE_QTY(state, product) {
+      var productInPurchase = state.purchase.find(function (item) {
+        return item.product.id === product.id;
+      });
+
+      if (productInPurchase) {
+        productInPurchase.quantity--; //     window.localStorage.setItem('purchase', JSON.stringify(state.purchase));
+
+        return;
+      }
+    },
+    INCREASE_QTY: function INCREASE_QTY(state, product) {
+      var productInPurchase = state.purchase.find(function (item) {
+        return item.product.id === product.id;
+      });
+
+      if (productInPurchase) {
+        productInPurchase.quantity++; //     window.localStorage.setItem('purchase', JSON.stringify(state.purchase));
+
+        return;
+      }
+    }
+  },
+  actions: {
+    addProductToPurchase: function addProductToPurchase(_ref2, _ref3) {
+      var commit = _ref2.commit;
+      var product = _ref3.product,
+          quantity = _ref3.quantity,
+          price = _ref3.price,
+          type = _ref3.type,
+          size = _ref3.size,
+          customSize = _ref3.customSize;
+      commit('ADD_TO_CART', {
+        product: product,
+        quantity: quantity,
+        price: price,
+        type: type,
+        size: size,
+        customSize: customSize
+      });
+    },
+    removeProductFromPurchase: function removeProductFromPurchase(_ref4, product) {
+      var commit = _ref4.commit;
+      commit('REMOVE_PRODUCT_FROM_CART', product);
+    },
+    clearPurchaseItems: function clearPurchaseItems(_ref5) {
+      var commit = _ref5.commit;
+      commit('CLEAR_CART_ITEMS');
+    },
+    decreaseProductQty: function decreaseProductQty(_ref6, product) {
+      var commit = _ref6.commit;
+      commit('DECREASE_QTY', product);
+    },
+    increaseProductQty: function increaseProductQty(_ref7, product) {
+      var commit = _ref7.commit;
+      commit('INCREASE_QTY', product);
+    }
+  }
+});
 
 /***/ }),
 

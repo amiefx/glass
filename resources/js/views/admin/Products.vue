@@ -56,7 +56,7 @@
                        item-text="name"
                        item-value="id"
                        label="Brand"
-                       v-model="editedItem.brand_id"
+                       v-model="editedItem.brand"
                        :rules="[rules.required]"
 
                        return-object
@@ -71,16 +71,17 @@
                        v-model="editedItem.unit_id"
                        :rules="[rules.required]"
                      ></v-select>
+                     <v-text-field type="number" v-model="editedItem.selling_price" label="Selling Price" ></v-text-field>
 
                      </v-col>
 
                   <v-col cols="12" md="4" lg="4" >
 
-                     <v-text-field v-model.number="editedItem.height" label="Height" ></v-text-field>
-                     <v-text-field v-model.number="editedItem.width" label="Width" ></v-text-field>
-                     <v-text-field v-model.number="editedItem.thickness" label="Thinkness" ></v-text-field>
-                     <v-text-field v-model.number="editedItem.length" label="Length" ></v-text-field>
-                     <v-text-field v-model="editedItem.weight" label="Weight" ></v-text-field>
+                     <v-text-field type="number" v-model.number="editedItem.height" label="Height" ></v-text-field>
+                     <v-text-field type="number" v-model.number="editedItem.width" label="Width" ></v-text-field>
+                     <v-text-field type="number" v-model.number="editedItem.thickness" label="Thinkness" ></v-text-field>
+                     <v-text-field type="number" v-model.number="editedItem.length" label="Length" ></v-text-field>
+                     <v-text-field type="number" v-model="editedItem.weight" label="Weight" ></v-text-field>
                      <v-text-field v-model="editedItem.size" label="Size" ></v-text-field>
                      <v-text-field v-model="editedItem.color" label="Color" ></v-text-field>
 
@@ -93,11 +94,10 @@
                      ></v-checkbox>
 
                     <div v-if="editedItem.enable_stock">
-                     <v-text-field v-model="editedItem.alert_quantity" label="Alert Quantity" ></v-text-field>
-                     <v-text-field  v-if="editedIndex === -1" v-model="editedItem.qty_on_hand" label="Quantity on Hand" ></v-text-field>
-                     <v-text-field  v-if="editedIndex === -1" v-model="editedItem.purchase_price" label="Purchase Price" ></v-text-field>
-                     <v-text-field  v-if="editedIndex === -1" v-model="editedItem.total" label="Total" ></v-text-field>
-                     <v-text-field v-model="editedItem.selling_price" label="Selling Price" ></v-text-field>
+                     <v-text-field type="number" v-model="editedItem.alert_quantity" label="Alert Quantity" ></v-text-field>
+                     <v-text-field type="number" v-if="editedIndex === -1" v-model="editedItem.qty_on_hand" label="Quantity on Hand" ></v-text-field>
+                     <v-text-field type="number" v-if="editedIndex === -1" v-model="editedItem.purchase_price" label="Purchase Price" ></v-text-field>
+                     <v-text-field type="number" v-if="editedIndex === -1" v-model="editedItem.total" label="Total" ></v-text-field>
                     </div>
 
                      <v-checkbox
@@ -210,7 +210,7 @@
         { text: 'SKU', value: 'sku' },
         { text: 'Name', value: 'name' },
         { text: 'Category', value: 'category' },
-        { text: 'Brand', value: 'brand' },
+        { text: 'Brand', value: 'brand_name' },
         { text: 'Enable Stock', value: 'stock' },
         { text: 'Alert Qty', value: 'alert_quantity' },
         { text: 'Price', value: 'selling_price' },
@@ -221,7 +221,7 @@
         { text: 'Weight', value: 'weight' },
         { text: 'Size', value: 'size' },
         { text: 'Color', value: 'color' },
-        { text: 'Status', value: 'active' },
+        { text: 'Active', value: 'active' },
         { text: 'Actions', value: 'action', sortable: false },
       ],
       status: [
@@ -241,8 +241,8 @@
         name: '',
         category_id: '',
         brand_id: '',
-        brand: '',
-        enable_stock: '',
+        brand: {},
+        enable_stock: false,
         alert_quantity: '',
         selling_price: '',
         height: '',
@@ -263,7 +263,7 @@
         category_id: '',
         brand_id: '',
         brand: '',
-        enable_stock: '',
+        enable_stock: false,
         alert_quantity: '',
         selling_price: '',
         height: '',
@@ -341,7 +341,7 @@
       getSku (item) {
         let a = this.editedItem.brand.name.slice(0, 2) + " " + this.editedItem.name;
         var color = ( this.editedItem.color !== '' ) ? " " + this.editedItem.color.slice(0, 3) : "";
-        var vol = ( this.editedItem.height !== '' ) ? " " + this.editedItem.height + "X" + this.editedItem.width + "X" + this.editedItem.thikness : "";
+        var vol = ( this.editedItem.height !== '' ) ? " " + this.editedItem.height + "X" + this.editedItem.width + "X" + this.editedItem.thickness : "";
         this.editedItem.brand_id = this.editedItem.brand.id
         this.editedItem.sku = (a + color + vol).toUpperCase();
       },

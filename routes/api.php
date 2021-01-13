@@ -66,13 +66,14 @@ Route::group([
     Route::resource('users', 'UsersController');
 
     // cusotmer
+    Route::get('customers/all', 'CustomersController@allCustomers');
     Route::resource('customers', 'CustomersController');
 
     // supplier
     Route::resource('suppliers', 'SuppliersController');
 
     // products
-    Route::get('products/list', 'ProductsController@allProducts');
+    Route::get('products/all', 'ProductsController@allProducts');
     Route::get('products/{id}/brand', 'ProductsController@productBrand');
     Route::get('products/{id}/category', 'ProductsController@productCategory');
     Route::get('products/{id}/unit', 'ProductsController@productUnit');

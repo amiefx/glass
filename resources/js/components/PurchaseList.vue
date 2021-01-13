@@ -17,7 +17,7 @@
 
     <template v-slot:item.sku="{ item }"
     >
-    <span @click="addToCart(item)">
+    <span @click="addToPurchase(item)">
        {{item.sku}}
     </span>
 
@@ -34,7 +34,7 @@
               <th>price</th>
           </thead>
           <tbody>
-              <tr v-for="product in products" :key="product.id" @click="addToCart()">
+              <tr v-for="product in products" :key="product.id" @click="addToPurchase()">
                   <td>{{product.id}}</td>
                   <td>{{product.name}}</td>
                   <td>{{product.price}}</td>
@@ -98,11 +98,11 @@ import { mapGetters, mapActions } from "vuex"
         console.log(item)
     },
 
-    addToCart(item) {
+    addToPurchase(item) {
         //const index = event.currentTarget.id;
         const index = this.products.indexOf(item)
         console.log(index);
-        this.$store.dispatch("cart/addProductToCart", {
+        this.$store.dispatch("purchase/addProductToPurchase", {
             product: this.products[index],
             quantity: 1
         });

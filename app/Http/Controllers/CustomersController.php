@@ -18,6 +18,13 @@ class CustomersController extends Controller
         $this->receivablesController = $receivablesController;
     }
 
+    public function allCustomers()
+    {
+        return CustomerResource::collection(
+            Customer::get()
+         );
+    }
+
     /**
      * Display a listing of the resource.
      *

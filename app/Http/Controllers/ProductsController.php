@@ -15,6 +15,13 @@ use App\Models\products;
 
 class ProductsController extends Controller
 {
+    public function allProducts()
+    {
+        return ProductListResource::collection(
+            products::get()
+         );
+    }
+
     public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
@@ -25,10 +32,10 @@ class ProductsController extends Controller
         ], 200);
     }
 
-    public function allProducts()
-    {
-        return response()->json(['products' =>  ProductListResource::collection(products::all())], 200);
-    }
+    // public function allProducts()
+    // {
+    //     return response()->json(['products' =>  ProductListResource::collection(products::all())], 200);
+    // }
 
     public function store(Request $request)
     {
@@ -38,6 +45,7 @@ class ProductsController extends Controller
             'name' => $request->name,
             'unit_id' => $request->unit_id,
             'brand_id' => $request->brand_id,
+            'brand' => $request->brand,
             'category_id' => $request->category_id,
             'enable_stock' => $request->enable_stock,
             'alert_quantity' => $request->alert_quantity,
@@ -77,6 +85,7 @@ class ProductsController extends Controller
         $product->name = $request->name;
         $product->unit_id = $request->unit_id;
         $product->brand_id = $request->brand_id;
+        $product->brand = $request->brand;
         $product->category_id = $request->category_id;
         $product->enable_stock = $request->enable_stock;
         $product->alert_quantity = $request->alert_quantity;

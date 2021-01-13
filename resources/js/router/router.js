@@ -270,17 +270,17 @@ const routes = [
     //         ]
     //     }
     // },
-    // {
-    //     path: '/admin/social',
-    //     name: 'social',
-    //     component: () => import('../views/admin/Social.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/purchases',
+        name: 'purchases',
+        component: () => import('../views/admin/Purchases.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     {
         path: '/admin/users',
         name: 'users',
