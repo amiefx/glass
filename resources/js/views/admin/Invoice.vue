@@ -57,6 +57,7 @@
     </v-autocomplete>
 
               <v-divider></v-divider>
+
               <v-simple-table height>
           <template v-slot:default>
             <thead>
@@ -81,15 +82,66 @@
                 <td>
                   {{ item.product.sku}}
                 </td>
-                <td></td>
-                <td></td>
                 <td>
-                  {{ item.product.selling_price}}
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <input
+                        v-if="item.product.enable_stock === 0"
+                        class="numinput small1"
+                        type="number"
+                        v-model="item.product.height"
+                        v-bind="attrs"
+                        v-on="on"
+                        @change="changeHeight(item)"
+                        >
+                      </template>
+                      <span>input data in inches</span>
+                    </v-tooltip>
+                </td>
+                <td>
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <input
+                        v-if="item.product.enable_stock === 0"
+                        class="numinput small1"
+                        type="number"
+                        v-model="item.product.width"
+                        v-bind="attrs"
+                        v-on="on"
+                        @change="changeWidth(item)"
+                        >
+                      </template>
+                      <span>input data in inches</span>
+                    </v-tooltip>
+                </td>
+                <td>
+                    <v-tooltip top v-if="item.product.enable_stock === 0">
+                      <template v-slot:activator="{ on, attrs }">
+                        <input
+                        class="numinput small1"
+                        type="number"
+                        v-model="item.product.selling_price"
+                        v-bind="attrs"
+                        v-on="on"
+                        >
+                      </template>
+                      <span>price / foot</span>
+                    </v-tooltip>
+                    <span v-else>
+                        {{ item.product.selling_price}}
+                    </span>
                 </td>
                 <td>
                     {{item.quantity}}
                 </td>
-                <td allign="right">{{ (item.product.selling_price * item.quantity).toFixed(0) }}</td>
+                <td allign="right">
+                    <span v-if="item.product.enable_stock === 0">
+                       {{ (((item.product.height * item.product.width)/12) * item.product.selling_price * item.quantity).toFixed(0) }}
+                    </span>
+                    <span v-else>
+                       {{ (item.product.selling_price * item.quantity).toFixed(0) }}
+                    </span>
+                </td>
                 <td>
                     <v-btn class="green--text" icon  @click="increaseProductQty(item.product)">
                       <v-icon>mdi-plus</v-icon>
@@ -102,30 +154,87 @@
             </tbody>
           </template>
         </v-simple-table>
+        <v-divider></v-divider>
         <v-simple-table dense>
             <tbody>
                 <tr>
                   <td width="50%">
-                      <v-btn class="float-left" color="error" text @click="clearCartItems">Clear all</v-btn>
+
                   </td>
                   <td width="25%">Subtotal</td>
-                  <td width="25%">{{(cartTotalPrice).toFixed(0)}}</td>
+                  <td width="25%">
+
+                      <input class="numinput" v-model="cartTotalPrice">
+                  </td>
                </tr>
                 <tr>
-                    <td></td>
+                    <td>
+
+                    </td>
                     <td>Discount</td>
                     <td class="">
                         <!-- <v-text-field height="1" outlined dense v-model="discount" type="number"></v-text-field> -->
-                        <input class="numinput" type="number" v-model="discount">
+                        <input class="numinput" type="number" v-model="invoiceData.discount">
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Total</td>
-                    <td>{{ total }}</td>
+                    <td>
+                    <input disabled class="numinput" type="number" v-model="total">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- <select name="" id="" class="minimal numinput" v-model="invoiceData.doc_type">
+                            <option value="Invoice">Invoice</option>
+                            <option value="Quotation">Quotation</option>
+                        </select> -->
+
+                    </td>
+                    <td>Amount Paid</td>
+                    <td>
+                        <input class="numinput" type="number" v-model="invoiceData.received_amt">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Amount Due</td>
+                    <td>
+                        <input disabled class="numinput" type="number" v-model="amtDue">
+                    </td>
                 </tr>
             </tbody>
         </v-simple-table>
+         <v-row class="mx-5">
+             <v-col cols="8">
+              <v-radio-group
+                v-model="invoiceData.doc_type"
+                mandatory
+                row
+                class="radio mt-1"
+              >
+                <v-radio
+                  label="Invoice"
+                  value="Invoice"
+                ></v-radio>
+                <v-radio
+                  label="Quotation"
+                  value="Quotation"
+                ></v-radio>
+              </v-radio-group>
+
+               <v-switch
+                v-model="use_slab"
+                :label="`Slab: ${use_slab.toString()}`"
+              ></v-switch>
+
+             </v-col>
+             <v-col cols="4">
+                 <v-btn class="mb-1" block color="primary" :loading="loading" @click="saveOrder">Save</v-btn>
+                 <v-btn block color="error" @click="clearCartItems">Clear all</v-btn>
+             </v-col>
+         </v-row>
           </v-col>
           <v-col cols="5" >
               <product-list />
@@ -149,8 +258,19 @@ export default {
       valid: true,
       dialog: false,
       dialog2: false,
+      loading: false,
+      slabs: [],
+      use_slab: false,
 
-      discount: null,
+      doc_types: ['Invoice', 'Quotation'],
+      invoiceData: {
+          customer_id: '',
+          subtotal: '',
+          discount: '',
+          received_amt: '',
+          receivable_amt: '',
+          doc_type: '',
+      },
 
       isLoading: false,
       items: [],
@@ -177,6 +297,90 @@ export default {
       this.$store.dispatch("cart/increaseProductQty", product);
     },
 
+    saveOrder() {
+        let orderData = {
+            orderDetails: {
+                customer_id: this.invoiceData.customer_id,
+                subtotal: this.cartTotalPrice,
+                discount: this.invoiceData.discount,
+                total: this.total,
+                received_amt: this.invoiceData.received_amt,
+                receivable_amt: this.amtDue,
+                doc_type: this.invoiceData.doc_type,
+            },
+            orderedItems: this.cart,
+        }
+
+        // Add a request interceptor
+        axios.interceptors.request.use((config) => {
+            this.loading = true
+            return config;
+        },  (error) => {
+            this.loading = false
+            return Promise.reject(error);
+        });
+
+        // Add a response interceptor
+        axios.interceptors.response.use((response) => {
+            this.loading = false
+            return response;
+        }, (error) => {
+            this.loading = false
+            return Promise.reject(error);
+        });
+
+        // axios.post('/api/orders', orderData)
+        //     .then(res => {
+        //         this.$router.push(`/checkout/${res.data.id}`)
+        //         this.clearCartItems()
+        //     })
+        console.log(orderData)
+    },
+
+    changeHeight(item) {
+
+        if (this.use_slab) {
+            let height = item.product.height;
+        this.slabs.forEach(slab => {
+
+                if (height >= slab.min &&  height <= slab.max) {
+                   this.$store.dispatch("cart/changeProductHeight", {
+                       product: item.product,
+                       height: slab.actual
+                   });
+                }
+
+            })
+        }
+
+    },
+
+    changeWidth(item) {
+
+        if (this.use_slab) {
+
+        let width = item.product.width;
+        this.slabs.forEach(slab => {
+
+                if (width >= slab.min &&  width <= slab.max) {
+                   this.$store.dispatch("cart/changeProductWidth", {
+                       product: item.product,
+                       width: slab.actual
+                   });
+                }
+
+            })
+
+        }
+    },
+
+
+  },
+
+  created() {
+      axios.get("/api/slabs/all").then(res => {
+        this.slabs = res.data.data;
+        });
   },
 
   computed: {
@@ -193,7 +397,11 @@ export default {
     },
 
     total() {
-        return this.cartTotalPrice - this.discount;
+        return this.cartTotalPrice - this.invoiceData.discount;
+    },
+
+    amtDue() {
+        return this.total - this.invoiceData.received_amt;
     }
 
   },
@@ -248,4 +456,12 @@ export default {
 .numinput:focus {
         border: 1px solid lightgray;
     }
+
+.radio {
+  height: 30px;
+}
+
+.small1 {
+    width: 55px;
+}
 </style>

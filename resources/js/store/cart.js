@@ -17,9 +17,14 @@ export default {
         cartTotalPrice(state) {
             let total = 0;
             state.cart.forEach(item => {
-                total += item.product.selling_price * item.quantity;
+
+                if (item.product.enable_stock === 0) {
+                    total += ((item.product.height * item.product.width)/12) * item.product.selling_price * item.quantity;
+                } else {
+                    total += item.product.selling_price * item.quantity;
+                }
             })
-            return total;
+            return total.toFixed(0);
         }
     },
 
@@ -40,11 +45,46 @@ export default {
 
             state.cart.push({
                 product,
-                quantity,
-                price
+                quantity
             })
 
         //    window.localStorage.setItem('cart', JSON.stringify(state.cart));
+        },
+
+        CHANGE_HEIGHT(state, { product, quantity, height }) {
+
+            let productInCart = state.cart.find(item => {
+               return item.product.id === product.id;
+            });
+
+            if (productInCart) {
+                productInCart.product.height = height;
+                return;
+            }
+
+            state.cart.push({
+                product,
+                quantity
+            })
+
+        },
+
+        CHANGE_WIDTH(state, { product, quantity, width }) {
+
+            let productInCart = state.cart.find(item => {
+               return item.product.id === product.id;
+            });
+
+            if (productInCart) {
+                productInCart.product.width = width;
+                return;
+            }
+
+            state.cart.push({
+                product,
+                quantity
+            })
+
         },
 
         REMOVE_PRODUCT_FROM_CART(state, product) {
@@ -92,6 +132,14 @@ export default {
 
         addProductToCart({ commit }, { product, quantity, price, type, size, customSize }) {
             commit('ADD_TO_CART', { product, quantity, price, type, size, customSize });
+        },
+
+        changeProductHeight({ commit }, { product, quantity, height}) {
+            commit('CHANGE_HEIGHT', { product, quantity, height });
+        },
+
+        changeProductWidth({ commit }, { product, quantity, width}) {
+            commit('CHANGE_WIDTH', { product, quantity, width });
         },
 
         removeProductFromCart({ commit }, product) {

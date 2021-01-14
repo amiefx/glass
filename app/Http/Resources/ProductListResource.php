@@ -19,7 +19,9 @@ class ProductListResource extends JsonResource
             'sku' => $this->sku,
             'name' => $this->name,
             'selling_price' => $this->selling_price,
-            'is_active' => $this->is_active
+            'enable_stock' => $this->enable_stock,
+            'height' => $this->height,
+            'width' => $this->width
         ];
     }
 }

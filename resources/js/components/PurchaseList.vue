@@ -17,7 +17,7 @@
 
     <template v-slot:item.sku="{ item }"
     >
-    <span @click="addToPurchase(item)">
+    <span @click="addToPurchase(item)" class="pointer">
        {{item.sku}}
     </span>
 
@@ -112,4 +112,10 @@ import { mapGetters, mapActions } from "vuex"
 
   }
 </script>
+
+<style lang="scss" scoped>
+.pointer {
+    cursor: pointer;
+}
+</style>
 
