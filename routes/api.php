@@ -67,13 +67,13 @@ Route::group([
 
     // cusotmer
     Route::get('customers/all', 'CustomersController@allCustomers');
-    Route::get('customers/all/active', 'CustomersController@allActiveCustomers');
+    // Route::get('customers/all/active', 'CustomersController@allActiveCustomers');
     Route::get('customer/{id}/recievable', 'CustomersController@customerRecievable');
     Route::resource('customers', 'CustomersController');
 
     // supplier
     Route::get('suppliers/all', 'SuppliersController@allSuppliers');
-    Route::get('suppliers/all/active', 'SuppliersController@allActiveSuppliers');
+    // Route::get('suppliers/all/active', 'SuppliersController@allActiveSuppliers');
     Route::get('supplier/{id}/payable', 'SuppliersController@supplierPayable');
     Route::resource('suppliers', 'SuppliersController');
 

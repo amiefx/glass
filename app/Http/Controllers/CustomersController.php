@@ -24,7 +24,7 @@ class CustomersController extends Controller
     public function allCustomers()
     {
         return CustomerResource::collection(
-            Customer::get()
+            Customer::where('is_active', '=', 1)->get()
          );
     }
 

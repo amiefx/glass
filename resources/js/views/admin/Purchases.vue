@@ -13,7 +13,7 @@
       hide-details
       hide-selected
       item-text="name"
-      item-value="symbol"
+      item-value="id"
       label="Search for a supplier..."
       solo
     >
@@ -84,12 +84,19 @@
                 <!-- <td></td>
                 <td></td> -->
                 <td>
-                  {{ item.product.selling_price}}
+                  <input class="numinput qty" type="number" v-model="item.product.purchase_price">
                 </td>
                 <td>
                     <input class="numinput qty" type="number" v-model="item.quantity">
                 </td>
-                <td allign="right">{{ (item.product.selling_price * item.quantity).toFixed(0) }}</td>
+                <td allign="right">
+                    <span v-if="item.product.purchase_price">
+                        {{ (item.product.purchase_price * item.quantity).toFixed(0) }}
+                    </span>
+                    <span v-else>
+                        {{ ( 0 * item.quantity).toFixed(0) }}
+                    </span>
+                </td>
                 <td>
                     <v-btn class="green--text" icon  @click="increaseProductQty(item.product)">
                       <v-icon>mdi-plus</v-icon>
@@ -213,8 +220,8 @@ export default {
       search: null,
       tab: null,
 
-      pmt_methods: ['Cash', 'Bank', 'Credit'],
-
+      pmt_methods: ['Cash', 'Bank'],
+      supplier_id: '',
       purchaseData: {
           supplier_id: '',
           subtotal: '',
@@ -247,7 +254,7 @@ export default {
     saveOrder() {
         let orderData = {
             orderDetails: {
-                supplier_id: this.purchaseData.supplier_id,
+                supplier_id: this.model,
                 subtotal: this.purchaseTotalPrice,
                 discount: this.purchaseData.discount,
                 total: this.total,
@@ -276,13 +283,13 @@ export default {
             return Promise.reject(error);
         });
 
-        // axios.post('/api/orders', orderData)
-        //     .then(res => {
-        //         this.$router.push(`/checkout/${res.data.id}`)
-        //         this.clearCartItems()
-        //     })
+        axios.post('/api/purchase-order', orderData)
+            .then(res => {
+            //    this.$router.push(`/checkout/${res.data.id}`)
+                this.clearCartItems()
+            })
         console.log(orderData)
-    }
+    },
 
   },
 
@@ -311,9 +318,23 @@ export default {
 
   watch: {
       model (val) {
+
+        axios
+          .get('/api/supplier/'+ val +'/payable')
+          .then(res => {
+           // this.items = res.data.data
+           console.log(res.data)
+            this.isLoading = false
+          })
+          .catch(err => {
+            console.log( err )
+            this.isLoading = false
+          })
+
         if (val != null) this.tab = 0
         else this.tab = null
       },
+
       search (val) {
         // Items have already been loaded
         if (this.items.length > 0) return
@@ -332,6 +353,8 @@ export default {
             this.isLoading = false
           })
       },
+
+
     },
 }
 </script>

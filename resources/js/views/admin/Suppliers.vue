@@ -55,7 +55,7 @@
                      <v-select
                        :items="types"
                        label="Role"
-                       v-model="editedItem.type" 
+                       v-model="editedItem.type"
                        :rules="[rules.required]"
                      ></v-select>
                      <v-checkbox
@@ -224,6 +224,8 @@
 
     created () {
       this.initialize()
+
+
     },
 
     methods: {

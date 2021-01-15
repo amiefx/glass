@@ -262,6 +262,11 @@ export default {
           to: '/admin/slabs'
         },
         {
+          icon: 'mdi-pound-box-outline',
+          title: 'Units',
+          to: '/admin/units'
+        },
+        {
           icon: 'mdi-barcode',
           title: 'Products',
           to: '/admin/products'

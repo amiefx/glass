@@ -17,7 +17,7 @@ export default {
         purchaseTotalPrice(state) {
             let total = 0;
             state.purchase.forEach(item => {
-                total += item.product.selling_price * item.quantity;
+                total += item.product.purchase_price * item.quantity;
             })
             return total;
         }

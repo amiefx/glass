@@ -44,13 +44,6 @@ class SuppliersController extends Controller
          );
     }
 
-    public function allActiveSuppliers()
-    {
-        return SupplierResource::collection(
-            Supplier::where('is_active', '=', 1)->get()
-         );
-    }
-
     public function supplierPayable($id)
     {
         return response()->json([
