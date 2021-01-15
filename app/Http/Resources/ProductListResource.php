@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Resources;
+use Illuminate\Support\Facades\DB;
+use App\Models\products;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +21,8 @@ class ProductListResource extends JsonResource
             'sku' => $this->sku,
             'name' => $this->name,
             'selling_price' => $this->selling_price,
-            'is_active' => $this->is_active
+            'is_active' => $this->is_active,
+            'onhand' => DB::table('remaining_quantity')->where('product_id', '=', $this->id)->get(['remaining_quantity']),
         ];
     }
 }

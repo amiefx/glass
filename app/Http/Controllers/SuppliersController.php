@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PayablesController;
 use App\Http\Resources\SupplierCollection;
 use App\Http\Resources\SupplierResource;
+use App\Http\Resources\PayableResource;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
+use App\Models\Payable;
 
 class SuppliersController extends Controller
 {
@@ -32,6 +35,28 @@ class SuppliersController extends Controller
         return response()->json([
             'suppliers' => new SupplierCollection(Supplier::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
+    }
+
+    public function allSuppliers()
+    {
+        return SupplierResource::collection(
+            Supplier::get()
+         );
+    }
+
+    public function allActiveSuppliers()
+    {
+        return SupplierResource::collection(
+            Supplier::where('is_active', '=', 1)->get()
+         );
+    }
+
+    public function supplierPayable($id)
+    {
+        return response()->json([
+            'payable'=> Payable::where('supplier_id', '=', $id)->orderBy('id','desc')->latest()->first()
+        ], 200);
+
     }
 
     /**

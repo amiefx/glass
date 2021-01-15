@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\payable;
+use App\Models\Payable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
