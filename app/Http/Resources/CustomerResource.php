@@ -24,6 +24,7 @@ class CustomerResource extends JsonResource
             'email' => $this->email,
             'address' => $this->address,
             'credit_limit' => $this->credit_limit,
+            // 'recievables' => DB::table('recievables')->where('customer_id', '=', $this->id)->orderBy('id','desc')->first() ? DB::table('recievables')->where('customer_id', '=', $this->id)->orderBy('id','desc')->first() : [],
             'is_active' => $this->is_active,
             'created_at' => $this->created_at->format('Y-M-D H:i:s')
         ];

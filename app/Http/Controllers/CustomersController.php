@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ReceivablesController;
 use App\Http\Resources\CustomerCollection;
 use App\Http\Resources\CustomerResource;
+use App\Http\Resources\ReceivableResource;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Receivable;
 
 class CustomersController extends Controller
 {
@@ -23,6 +26,16 @@ class CustomersController extends Controller
         return CustomerResource::collection(
             Customer::get()
          );
+    }
+
+    public function customerRecievable($id)
+    {
+        return response()->json([
+            'recievable'=> Receivable::where('customer_id', '=', $id)->orderBy('id','desc')->latest()->first()
+        ], 200);
+        // return response()->json([
+        //     'recievable'=> new RecievableResource(DB::table('recievables')->where('customer_id', '=', $id)->orderBy('id','desc')->first())
+        // ], 200);
     }
 
     /**

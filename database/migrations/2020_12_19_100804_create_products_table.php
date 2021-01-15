@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->integer('unit_id')->nullable()->default(null);
             $table->integer('brand_id')->nullable()->default(null);
-            $table->json('brand');
+            $table->integer('brand')->nullable()->default(null);
             $table->integer('category_id')->nullable()->default(null);
             $table->boolean('enable_stock')->default(false);
             $table->integer('alert_quantity')->nullable();

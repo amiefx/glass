@@ -67,9 +67,14 @@ Route::group([
 
     // cusotmer
     Route::get('customers/all', 'CustomersController@allCustomers');
+    Route::get('customers/all/active', 'CustomersController@allActiveCustomers');
+    Route::get('customer/{id}/recievable', 'CustomersController@customerRecievable');
     Route::resource('customers', 'CustomersController');
 
     // supplier
+    Route::get('suppliers/all', 'SuppliersController@allSuppliers');
+    Route::get('suppliers/all/active', 'SuppliersController@allActiveSuppliers');
+    Route::get('supplier/{id}/payable', 'SuppliersController@supplierPayable');
     Route::resource('suppliers', 'SuppliersController');
 
     // products
@@ -125,14 +130,14 @@ Route::group([
     Route::post('deleteRecievable', 'RecievablesController@deleteRecievable');
 
     // payable Routes
-    Route::get('payables', 'PayableController@payables');
-    Route::post('payableByVendorId', 'PayableController@payableByVendorId');
-    Route::post('payableByDate', 'PayableController@payableByDate');
-    Route::post('createPayable', 'PayableController@createPayable');
-    Route::post('updatePayable', 'PayableController@updatePayable');
-    Route::post('debitPayable', 'PayableController@debitPayable');
-    Route::post('creditPayable', 'PayableController@creditPayable');
-    Route::post('deletePayable', 'PayableController@deletePayable');
+    Route::get('payables', 'PayablesController@payables');
+    Route::post('payableByVendorId', 'PayablesController@payableByVendorId');
+    Route::post('payableByDate', 'PayablesController@payableByDate');
+    Route::post('createPayable', 'PayablesController@createPayable');
+    Route::post('updatePayable', 'PayablesController@updatePayable');
+    Route::post('debitPayable', 'PayablesController@debitPayable');
+    Route::post('creditPayable', 'PayablesController@creditPayable');
+    Route::post('deletePayable', 'PayablesController@deletePayable');
 
 });
 
