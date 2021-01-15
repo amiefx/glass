@@ -40,8 +40,7 @@ export default {
 
             state.purchase.push({
                 product,
-                quantity,
-                price
+                quantity
             })
 
          //   window.localStorage.setItem('purchase', JSON.stringify(state.purchase));

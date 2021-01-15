@@ -21,8 +21,14 @@ class ProductListResource extends JsonResource
             'sku' => $this->sku,
             'name' => $this->name,
             'selling_price' => $this->selling_price,
+<<<<<<< HEAD
             'is_active' => $this->is_active,
             'onhand' => DB::table('remaining_quantity')->where('product_id', '=', $this->id)->get(['remaining_quantity']),
+=======
+            'enable_stock' => $this->enable_stock,
+            'height' => $this->height,
+            'width' => $this->width
+>>>>>>> ae2bfb7725ea3e01324e06a9607141e14ae6a042
         ];
     }
 }

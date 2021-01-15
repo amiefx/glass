@@ -17,7 +17,7 @@
 
     <template v-slot:item.sku="{ item }"
     >
-    <span @click="addToCart(item)">
+    <span @click="addToCart(item)" class="pointer">
        {{item.sku}}
     </span>
 
@@ -101,15 +101,22 @@ import { mapGetters, mapActions } from "vuex"
     addToCart(item) {
         //const index = event.currentTarget.id;
         const index = this.products.indexOf(item)
-        console.log(index);
+       // console.log(index);
         this.$store.dispatch("cart/addProductToCart", {
             product: this.products[index],
             quantity: 1
         });
-        console.log(this.products[index])
+     //   console.log(this.products[index])
     },
   }
 
   }
 </script>
+
+<style lang="scss" scoped>
+.pointer {
+    cursor: pointer;
+}
+</style>
+
 

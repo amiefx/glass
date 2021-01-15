@@ -86366,9 +86366,13 @@ __webpack_require__.r(__webpack_exports__);
     cartTotalPrice: function cartTotalPrice(state) {
       var total = 0;
       state.cart.forEach(function (item) {
-        total += item.product.selling_price * item.quantity;
+        if (item.product.enable_stock === 0) {
+          total += item.product.height * item.product.width / 12 * item.product.selling_price * item.quantity;
+        } else {
+          total += item.product.selling_price * item.quantity;
+        }
       });
-      return total;
+      return total.toFixed(0);
     }
   },
   mutations: {
@@ -86391,9 +86395,44 @@ __webpack_require__.r(__webpack_exports__);
 
       state.cart.push({
         product: product,
-        quantity: quantity,
-        price: price
+        quantity: quantity
       }); //    window.localStorage.setItem('cart', JSON.stringify(state.cart));
+    },
+    CHANGE_HEIGHT: function CHANGE_HEIGHT(state, _ref2) {
+      var product = _ref2.product,
+          quantity = _ref2.quantity,
+          height = _ref2.height;
+      var productInCart = state.cart.find(function (item) {
+        return item.product.id === product.id;
+      });
+
+      if (productInCart) {
+        productInCart.product.height = height;
+        return;
+      }
+
+      state.cart.push({
+        product: product,
+        quantity: quantity
+      });
+    },
+    CHANGE_WIDTH: function CHANGE_WIDTH(state, _ref3) {
+      var product = _ref3.product,
+          quantity = _ref3.quantity,
+          width = _ref3.width;
+      var productInCart = state.cart.find(function (item) {
+        return item.product.id === product.id;
+      });
+
+      if (productInCart) {
+        productInCart.product.width = width;
+        return;
+      }
+
+      state.cart.push({
+        product: product,
+        quantity: quantity
+      });
     },
     REMOVE_PRODUCT_FROM_CART: function REMOVE_PRODUCT_FROM_CART(state, product) {
       state.cart = state.cart.filter(function (item) {
@@ -86427,14 +86466,14 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   actions: {
-    addProductToCart: function addProductToCart(_ref2, _ref3) {
-      var commit = _ref2.commit;
-      var product = _ref3.product,
-          quantity = _ref3.quantity,
-          price = _ref3.price,
-          type = _ref3.type,
-          size = _ref3.size,
-          customSize = _ref3.customSize;
+    addProductToCart: function addProductToCart(_ref4, _ref5) {
+      var commit = _ref4.commit;
+      var product = _ref5.product,
+          quantity = _ref5.quantity,
+          price = _ref5.price,
+          type = _ref5.type,
+          size = _ref5.size,
+          customSize = _ref5.customSize;
       commit('ADD_TO_CART', {
         product: product,
         quantity: quantity,
@@ -86444,20 +86483,42 @@ __webpack_require__.r(__webpack_exports__);
         customSize: customSize
       });
     },
-    removeProductFromCart: function removeProductFromCart(_ref4, product) {
-      var commit = _ref4.commit;
+    changeProductHeight: function changeProductHeight(_ref6, _ref7) {
+      var commit = _ref6.commit;
+      var product = _ref7.product,
+          quantity = _ref7.quantity,
+          height = _ref7.height;
+      commit('CHANGE_HEIGHT', {
+        product: product,
+        quantity: quantity,
+        height: height
+      });
+    },
+    changeProductWidth: function changeProductWidth(_ref8, _ref9) {
+      var commit = _ref8.commit;
+      var product = _ref9.product,
+          quantity = _ref9.quantity,
+          width = _ref9.width;
+      commit('CHANGE_WIDTH', {
+        product: product,
+        quantity: quantity,
+        width: width
+      });
+    },
+    removeProductFromCart: function removeProductFromCart(_ref10, product) {
+      var commit = _ref10.commit;
       commit('REMOVE_PRODUCT_FROM_CART', product);
     },
-    clearCartItems: function clearCartItems(_ref5) {
-      var commit = _ref5.commit;
+    clearCartItems: function clearCartItems(_ref11) {
+      var commit = _ref11.commit;
       commit('CLEAR_CART_ITEMS');
     },
-    decreaseProductQty: function decreaseProductQty(_ref6, product) {
-      var commit = _ref6.commit;
+    decreaseProductQty: function decreaseProductQty(_ref12, product) {
+      var commit = _ref12.commit;
       commit('DECREASE_QTY', product);
     },
-    increaseProductQty: function increaseProductQty(_ref7, product) {
-      var commit = _ref7.commit;
+    increaseProductQty: function increaseProductQty(_ref13, product) {
+      var commit = _ref13.commit;
       commit('INCREASE_QTY', product);
     }
   }
@@ -86552,8 +86613,7 @@ __webpack_require__.r(__webpack_exports__);
 
       state.purchase.push({
         product: product,
-        quantity: quantity,
-        price: price
+        quantity: quantity
       }); //   window.localStorage.setItem('purchase', JSON.stringify(state.purchase));
     },
     REMOVE_PRODUCT_FROM_CART: function REMOVE_PRODUCT_FROM_CART(state, product) {

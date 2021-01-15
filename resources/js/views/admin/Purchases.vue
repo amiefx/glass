@@ -107,26 +107,79 @@
             <tbody>
                 <tr>
                   <td width="50%">
-                      <v-btn class="float-left" color="error" text @click="clearPurchaseItems">Clear all</v-btn>
+
                   </td>
                   <td width="25%">Subtotal</td>
-                  <td width="25%">{{(purchaseTotalPrice).toFixed(0)}}</td>
+                  <td width="25%">
+
+                      <input class="numinput" v-model="purchaseTotalPrice">
+                  </td>
                </tr>
                 <tr>
-                    <td></td>
+                    <td>
+
+                    </td>
                     <td>Discount</td>
                     <td class="">
                         <!-- <v-text-field height="1" outlined dense v-model="discount" type="number"></v-text-field> -->
-                        <input class="numinput" type="number" v-model="discount">
+                        <input class="numinput" type="number" v-model="purchaseData.discount">
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Total</td>
-                    <td>{{ total }}</td>
+                    <td>
+                    <input disabled class="numinput" type="number" v-model="total">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- <v-select
+                         :items="pmt_methods"
+                         dense
+                         class="sel"
+                        >
+                        </v-select> -->
+                        <select name="" id="" class="minimal numinput" v-model="purchaseData.pmt_method">
+                            <option value="Cash">Cash</option>
+                            <option value="Bank">Bank</option>
+                            <option value="Credit">Credit</option>
+                        </select>
+                        <!-- <v-radio-group
+      v-model="row"
+      row
+      class="sel"
+    >
+      <v-radio
+        label="Option 1"
+        value="radio-1"
+      ></v-radio>
+      <v-radio
+        label="Option 2"
+        value="radio-2"
+      ></v-radio>
+    </v-radio-group> -->
+                    </td>
+                    <td>Amount Paid</td>
+                    <td>
+                        <input class="numinput" type="number" v-model="purchaseData.paid_amt">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Amount Due</td>
+                    <td>
+                        <input disabled class="numinput" type="number" v-model="amtDue">
+                    </td>
                 </tr>
             </tbody>
         </v-simple-table>
+         <v-row class="mx-5">
+             <v-col>
+                 <v-btn class="float-left" color="error" @click="clearPurchaseItems">Clear all</v-btn>
+                 <v-btn class="float-right" color="primary" :loading="loading" @click="saveOrder">Save</v-btn>
+             </v-col>
+         </v-row>
           </v-col>
           <v-col cols="5" >
               <purchase-list />
@@ -147,6 +200,7 @@ export default {
     return {
       snackbar: false,
       text:'',
+      loading: false,
       valid: true,
       dialog: false,
       dialog2: false,
@@ -159,13 +213,16 @@ export default {
       search: null,
       tab: null,
 
+      pmt_methods: ['Cash', 'Bank', 'Credit'],
+
       purchaseData: {
-          customer_id: '',
+          supplier_id: '',
           subtotal: '',
           discount: '',
           total: '',
-          amount_received: '',
-          purchaseItems: []
+          paid_amt: '',
+          payable_amt: '',
+          pmt_method: '',
       }
     }
   },
@@ -187,6 +244,46 @@ export default {
       this.$store.dispatch("purchase/increaseProductQty", product);
     },
 
+    saveOrder() {
+        let orderData = {
+            orderDetails: {
+                supplier_id: this.purchaseData.supplier_id,
+                subtotal: this.purchaseTotalPrice,
+                discount: this.purchaseData.discount,
+                total: this.total,
+                paid_amt: this.purchaseData.paid_amt,
+                payable_amt: this.amtDue,
+                pmt_method: this.purchaseData.pmt_method,
+            },
+            orderedItems: this.purchase,
+        }
+
+        // Add a request interceptor
+        axios.interceptors.request.use((config) => {
+            this.loading = true
+            return config;
+        },  (error) => {
+            this.loading = false
+            return Promise.reject(error);
+        });
+
+        // Add a response interceptor
+        axios.interceptors.response.use((response) => {
+            this.loading = false
+            return response;
+        }, (error) => {
+            this.loading = false
+            return Promise.reject(error);
+        });
+
+        // axios.post('/api/orders', orderData)
+        //     .then(res => {
+        //         this.$router.push(`/checkout/${res.data.id}`)
+        //         this.clearCartItems()
+        //     })
+        console.log(orderData)
+    }
+
   },
 
   computed: {
@@ -203,7 +300,11 @@ export default {
     },
 
     total() {
-        return this.purchaseTotalPrice - this.discount;
+        return this.purchaseTotalPrice - this.purchaseData.discount;
+    },
+
+    amtDue() {
+        return this.total - this.purchaseData.paid_amt;
     }
 
   },
@@ -218,17 +319,6 @@ export default {
         if (this.items.length > 0) return
 
         this.isLoading = true
-
-        // Lazily load input items
-        // fetch('https://api.coingecko.com/api/v3/coins/list')
-        //   .then(res => res.clone().json())
-        //   .then(res => {
-        //     this.items = res
-        //   })
-        //   .catch(err => {
-        //     console.log(err)
-        //   })
-        //   .finally(() => (this.isLoading = false))
 
         // axios method
         axios
@@ -261,4 +351,45 @@ export default {
 .qty {
     width: 60px;
 }
+.sel {
+    width: 100px;
+}
+
+select.minimal {
+  background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+
+ width: 100px;
+}
+
+select.minimal:focus {
+  background-image:
+    linear-gradient(45deg, green 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, green 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 15px) 1em,
+    calc(100% - 20px) 1em,
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+  border-color: green;
+  outline: 0;
+
+}
+
 </style>
