@@ -1359,6 +1359,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "numinput",
+                        attrs: { disabled: "" },
                         domProps: { value: _vm.cartTotalPrice },
                         on: {
                           input: function($event) {
@@ -1439,7 +1440,7 @@ var render = function() {
                   _c("tr", [
                     _c("td"),
                     _vm._v(" "),
-                    _c("td", [_vm._v("Amount Paid")]),
+                    _c("td", [_vm._v("Amount Received")]),
                     _vm._v(" "),
                     _c("td", [
                       _c("input", {

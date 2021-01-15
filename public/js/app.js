@@ -2295,6 +2295,101 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2310,7 +2405,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       fixed: false,
       items: [{
         icon: 'mdi-apps',
-        title: 'Welcome',
+        title: 'Dashboard',
         to: '/admin/dashboard'
       }, {
         icon: 'mdi-account-arrow-left',
@@ -2321,11 +2416,75 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         title: 'Suppliers',
         to: '/admin/suppliers'
       }],
+      items1: [{
+        icon: 'mdi-apps',
+        title: 'Dashboard',
+        to: '/admin/dashboard'
+      }, {
+        icon: 'mdi-point-of-sale',
+        title: 'Sales',
+        to: '/admin/invoice'
+      }, {
+        icon: 'mdi-cart-arrow-right',
+        title: 'Purchase',
+        to: '/admin/purchases'
+      }],
+      products: [{
+        icon: 'mdi-collage',
+        title: 'Category',
+        to: '/admin/categories'
+      }, {
+        icon: 'mdi-certificate',
+        title: 'Brand',
+        to: '/admin/brands'
+      }, {
+        icon: 'mdi-pound-box-outline',
+        title: 'Slab',
+        to: '/admin/slabs'
+      }, {
+        icon: 'mdi-barcode',
+        title: 'Products',
+        to: '/admin/products'
+      }],
+      custs: [{
+        icon: 'mdi-account-arrow-left',
+        title: 'Customers',
+        to: '/admin/customers'
+      }, {
+        icon: 'mdi-database-export',
+        title: 'Receivables',
+        to: '/admin/receivables'
+      }],
+      suppliers: [{
+        icon: 'mdi-account-arrow-right',
+        title: 'Suppliers',
+        to: '/admin/suppliers'
+      }, {
+        icon: 'mdi-database-import',
+        title: 'Receivables',
+        to: '/admin/payables'
+      }],
+      users: [{
+        icon: 'mdi-account-multiple-plus',
+        title: 'Users',
+        to: '/admin/users'
+      }, {
+        icon: 'mdi-account-box',
+        title: 'Profile',
+        to: '/account'
+      }],
+      company: [{
+        icon: 'mdi-cogs',
+        title: 'Company',
+        to: '/admin/company'
+      }],
       miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'Karim Glass and Aluminum',
-      lang: localStorage.getItem('lang')
+      lang: localStorage.getItem('lang'),
+      admins: [['Management', 'mdi-account-multiple-outline'], ['Settings', 'mdi-cog-outline']],
+      cruds: [['Create', 'mdi-plus-outline'], ['Read', 'mdi-file-outline'], ['Update', 'mdi-update'], ['Delete', 'mdi-delete']]
     };
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])({
@@ -25827,61 +25986,235 @@ var render = function() {
         [
           _c(
             "v-list",
-            _vm._l(_vm.items, function(item, i) {
-              return _c(
-                "v-list-item",
-                { key: i, attrs: { to: item.to } },
-                [
-                  _c(
-                    "v-list-item-action",
-                    [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-item-content",
-                    [
-                      _c("v-list-item-title", [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(_vm.$t(item.title)) +
-                            "\n          "
-                        )
-                      ])
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            }),
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-list",
-            { attrs: { dense: "" } },
             [
+              _vm._l(_vm.items1, function(item) {
+                return _c(
+                  "v-list-item",
+                  { key: item.title, attrs: { link: "", to: item.to } },
+                  [
+                    _c(
+                      "v-list-item-icon",
+                      [
+                        _c("v-icon", {
+                          domProps: { textContent: _vm._s(item.icon) }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("v-list-item-title", {
+                      domProps: { textContent: _vm._s(item.title) }
+                    })
+                  ],
+                  1
+                )
+              }),
+              _vm._v(" "),
               _c(
-                "v-list-item",
-                { attrs: { link: "" }, on: { click: _vm.logout } },
+                "v-list-group",
+                {
+                  attrs: { value: false, "prepend-icon": "mdi-shopping" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "activator",
+                      fn: function() {
+                        return [
+                          _c("v-list-item-title", [
+                            _vm._v("Product Management")
+                          ])
+                        ]
+                      },
+                      proxy: true
+                    }
+                  ])
+                },
                 [
-                  _c(
-                    "v-list-item-action",
-                    [_c("v-icon", [_vm._v("mdi-logout-variant")])],
-                    1
-                  ),
                   _vm._v(" "),
-                  _c(
-                    "v-list-item-content",
-                    [_c("v-list-item-title", [_vm._v("Log out")])],
-                    1
-                  )
+                  _vm._l(_vm.products, function(item, i) {
+                    return _c(
+                      "v-list-item",
+                      { key: i, attrs: { link: "", dense: "", to: item.to } },
+                      [
+                        _c(
+                          "v-list-item-icon",
+                          [
+                            _c("v-icon", {
+                              domProps: { textContent: _vm._s(item.icon) }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("v-list-item-title", {
+                          domProps: { textContent: _vm._s(item.title) }
+                        })
+                      ],
+                      1
+                    )
+                  })
                 ],
-                1
-              )
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-group",
+                {
+                  attrs: {
+                    value: false,
+                    "prepend-icon": "mdi-account-arrow-left"
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "activator",
+                      fn: function() {
+                        return [_c("v-list-item-title", [_vm._v("Customers")])]
+                      },
+                      proxy: true
+                    }
+                  ])
+                },
+                [
+                  _vm._v(" "),
+                  _vm._l(_vm.custs, function(item, i) {
+                    return _c(
+                      "v-list-item",
+                      { key: i, attrs: { link: "", dense: "", to: item.to } },
+                      [
+                        _c(
+                          "v-list-item-icon",
+                          [
+                            _c("v-icon", {
+                              domProps: { textContent: _vm._s(item.icon) }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("v-list-item-title", {
+                          domProps: { textContent: _vm._s(item.title) }
+                        })
+                      ],
+                      1
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-group",
+                {
+                  attrs: {
+                    value: false,
+                    "prepend-icon": "mdi-account-arrow-left"
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "activator",
+                      fn: function() {
+                        return [_c("v-list-item-title", [_vm._v("Suppliers")])]
+                      },
+                      proxy: true
+                    }
+                  ])
+                },
+                [
+                  _vm._v(" "),
+                  _vm._l(_vm.suppliers, function(item, i) {
+                    return _c(
+                      "v-list-item",
+                      { key: i, attrs: { link: "", dense: "", to: item.to } },
+                      [
+                        _c(
+                          "v-list-item-icon",
+                          [
+                            _c("v-icon", {
+                              domProps: { textContent: _vm._s(item.icon) }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("v-list-item-title", {
+                          domProps: { textContent: _vm._s(item.title) }
+                        })
+                      ],
+                      1
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-group",
+                {
+                  attrs: {
+                    value: false,
+                    "prepend-icon": "mdi-account-multiple-outline"
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "activator",
+                      fn: function() {
+                        return [_c("v-list-item-title", [_vm._v("Users")])]
+                      },
+                      proxy: true
+                    }
+                  ])
+                },
+                [
+                  _vm._v(" "),
+                  _vm._l(_vm.users, function(item, i) {
+                    return _c(
+                      "v-list-item",
+                      { key: i, attrs: { link: "", dense: "", to: item.to } },
+                      [
+                        _c(
+                          "v-list-item-icon",
+                          [
+                            _c("v-icon", {
+                              domProps: { textContent: _vm._s(item.icon) }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("v-list-item-title", {
+                          domProps: { textContent: _vm._s(item.title) }
+                        })
+                      ],
+                      1
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.company, function(item) {
+                return _c(
+                  "v-list-item",
+                  { key: item.title, attrs: { link: "", to: item.to } },
+                  [
+                    _c(
+                      "v-list-item-icon",
+                      [
+                        _c("v-icon", {
+                          domProps: { textContent: _vm._s(item.icon) }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("v-list-item-title", {
+                      domProps: { textContent: _vm._s(item.title) }
+                    })
+                  ],
+                  1
+                )
+              })
             ],
-            1
+            2
           )
         ],
         1
@@ -85433,7 +85766,8 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VApp: vuetify_lib_components_VApp__WEBPACK_IMPORTED_MODULE_4__["VApp"],VAppBar: vuetify_lib_components_VAppBar__WEBPACK_IMPORTED_MODULE_5__["VAppBar"],VAppBarNavIcon: vuetify_lib_components_VAppBar__WEBPACK_IMPORTED_MODULE_5__["VAppBarNavIcon"],VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_6__["VBtn"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VContainer"],VContent: vuetify_lib_components_VContent__WEBPACK_IMPORTED_MODULE_8__["VContent"],VFooter: vuetify_lib_components_VFooter__WEBPACK_IMPORTED_MODULE_9__["VFooter"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_10__["VIcon"],VList: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VList"],VListItem: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItem"],VListItemAction: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemAction"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemContent"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemTitle"],VNavigationDrawer: vuetify_lib_components_VNavigationDrawer__WEBPACK_IMPORTED_MODULE_12__["VNavigationDrawer"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VSpacer"],VToolbarTitle: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_13__["VToolbarTitle"]})
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VApp: vuetify_lib_components_VApp__WEBPACK_IMPORTED_MODULE_4__["VApp"],VAppBar: vuetify_lib_components_VAppBar__WEBPACK_IMPORTED_MODULE_5__["VAppBar"],VAppBarNavIcon: vuetify_lib_components_VAppBar__WEBPACK_IMPORTED_MODULE_5__["VAppBarNavIcon"],VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_6__["VBtn"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VContainer"],VContent: vuetify_lib_components_VContent__WEBPACK_IMPORTED_MODULE_8__["VContent"],VFooter: vuetify_lib_components_VFooter__WEBPACK_IMPORTED_MODULE_9__["VFooter"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_10__["VIcon"],VList: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VList"],VListGroup: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListGroup"],VListItem: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItem"],VListItemAction: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemAction"],VListItemIcon: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemIcon"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemTitle"],VNavigationDrawer: vuetify_lib_components_VNavigationDrawer__WEBPACK_IMPORTED_MODULE_12__["VNavigationDrawer"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VSpacer"],VToolbarTitle: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_13__["VToolbarTitle"]})
 
 
 /* hot reload */

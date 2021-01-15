@@ -24,7 +24,7 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="900px">
           <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on">New Company</v-btn>
+            <v-btn color="primary" dark class="mb-2" v-on="on" v-if=" business.count = 0">New Company </v-btn>
             <!-- <v-btn color="error" dark class="mb-2 mr-2"  @click="deleteAll">Delete</v-btn> -->
           </template>
           <v-card>
@@ -196,6 +196,10 @@
       formTitle () {
         return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
       },
+
+      companyCount () {
+          return this.business.data;
+      }
     },
 
     watch: {

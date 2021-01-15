@@ -111,6 +111,7 @@ Route::group([
     Route::resource('categories', 'CategoryController');
 
     // business
+    Route::get('business/all', 'BusinessController@allBusiness');
     Route::resource('business', 'BusinessController');
 
     // Recievable Routes

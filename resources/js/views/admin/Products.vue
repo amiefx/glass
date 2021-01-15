@@ -316,6 +316,7 @@
       axios.get("/api/slabs/all").then(res => {
         this.slabs = res.data.data;
         });
+
     },
 
     methods: {

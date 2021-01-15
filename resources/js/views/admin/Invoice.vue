@@ -164,7 +164,7 @@
                   <td width="25%">Subtotal</td>
                   <td width="25%">
 
-                      <input class="numinput" v-model="cartTotalPrice">
+                      <input disabled class="numinput" v-model="cartTotalPrice">
                   </td>
                </tr>
                 <tr>
@@ -192,7 +192,7 @@
                         </select> -->
 
                     </td>
-                    <td>Amount Paid</td>
+                    <td>Amount Received</td>
                     <td>
                         <input class="numinput" type="number" v-model="invoiceData.received_amt">
                     </td>

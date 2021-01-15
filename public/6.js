@@ -235,6 +235,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     formTitle: function formTitle() {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+    },
+    companyCount: function companyCount() {
+      return this.business.data;
     }
   },
   watch: {
@@ -491,17 +494,19 @@ var render = function() {
                             fn: function(ref) {
                               var on = ref.on
                               return [
-                                _c(
-                                  "v-btn",
-                                  _vm._g(
-                                    {
-                                      staticClass: "mb-2",
-                                      attrs: { color: "primary", dark: "" }
-                                    },
-                                    on
-                                  ),
-                                  [_vm._v("New Company")]
-                                )
+                                (_vm.business.count = 0)
+                                  ? _c(
+                                      "v-btn",
+                                      _vm._g(
+                                        {
+                                          staticClass: "mb-2",
+                                          attrs: { color: "primary", dark: "" }
+                                        },
+                                        on
+                                      ),
+                                      [_vm._v("New Company ")]
+                                    )
+                                  : _vm._e()
                               ]
                             }
                           }

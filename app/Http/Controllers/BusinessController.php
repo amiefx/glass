@@ -9,6 +9,11 @@ use App\Http\Resources\BusinessResource;
 
 class BusinessController extends Controller
 {
+    public function allBusiness()
+    {
+         return response()->json(['business'=> new BusinessResource( Business::first() )], 200);
+    }
+
     /**
      * Display a listing of the resource.
      *

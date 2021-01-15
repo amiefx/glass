@@ -8,33 +8,128 @@
       fixed
       app
     >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-                {{ $t(item.title) }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
 
-      <v-list dense>
-        <v-list-item link @click="logout">
-          <v-list-item-action>
-            <v-icon>mdi-logout-variant</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Log out</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+    <v-list>
+      <v-list-item
+        v-for="item in items1" :key="item.title"
+        link
+        :to="item.to"
+      >
+        <v-list-item-icon>
+          <v-icon v-text="item.icon"></v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-title v-text="item.title"></v-list-item-title>
+      </v-list-item>
+
+      <!-- procut Management -->
+      <v-list-group
+        :value="false"
+        prepend-icon="mdi-shopping"
+      >
+        <template v-slot:activator>
+          <v-list-item-title>Product Management</v-list-item-title>
+        </template>
+
+        <v-list-item
+            v-for="(item, i) in products"
+            :key="i"
+            link
+            dense
+            :to="item.to"
+          >
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+
+       <!-- Customers -->
+      <v-list-group
+        :value="false"
+        prepend-icon="mdi-account-arrow-left"
+      >
+        <template v-slot:activator>
+          <v-list-item-title>Customers</v-list-item-title>
+        </template>
+
+        <v-list-item
+            v-for="(item, i) in custs"
+            :key="i"
+            link
+            dense
+            :to="item.to"
+          >
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+
+        <!-- suppliers -->
+      <v-list-group
+        :value="false"
+        prepend-icon="mdi-account-arrow-left"
+      >
+        <template v-slot:activator>
+          <v-list-item-title>Suppliers</v-list-item-title>
+        </template>
+
+        <v-list-item
+            v-for="(item, i) in suppliers"
+            :key="i"
+            link
+            dense
+            :to="item.to"
+          >
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+
+        <!-- users -->
+      <v-list-group
+        :value="false"
+        prepend-icon="mdi-account-multiple-outline"
+      >
+        <template v-slot:activator>
+          <v-list-item-title>Users</v-list-item-title>
+        </template>
+
+        <v-list-item
+            v-for="(item, i) in users"
+            :key="i"
+            link
+            dense
+            :to="item.to"
+          >
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+
+        <!-- company info -->
+        <v-list-item
+        v-for="item in company" :key="item.title"
+        link
+        :to="item.to"
+      >
+        <v-list-item-icon>
+          <v-icon v-text="item.icon"></v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-title v-text="item.title"></v-list-item-title>
+      </v-list-item>
+
+
+    </v-list>
+
 
     </v-navigation-drawer>
     <v-app-bar
@@ -117,7 +212,7 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: 'Dashboard',
           to: '/admin/dashboard'
         },
         {
@@ -131,11 +226,113 @@ export default {
           to: '/admin/suppliers'
         }
       ],
+
+      items1: [
+        {
+          icon: 'mdi-apps',
+          title: 'Dashboard',
+          to: '/admin/dashboard'
+        },
+        {
+          icon: 'mdi-point-of-sale',
+          title: 'Sales',
+          to: '/admin/invoice'
+        },
+        {
+          icon: 'mdi-cart-arrow-right',
+          title: 'Purchase',
+          to: '/admin/purchases'
+        }
+      ],
+
+      products: [
+        {
+          icon: 'mdi-collage',
+          title: 'Category',
+          to: '/admin/categories'
+        },
+        {
+          icon: 'mdi-certificate',
+          title: 'Brand',
+          to: '/admin/brands'
+        },
+        {
+          icon: 'mdi-pound-box-outline',
+          title: 'Slab',
+          to: '/admin/slabs'
+        },
+        {
+          icon: 'mdi-barcode',
+          title: 'Products',
+          to: '/admin/products'
+        }
+      ],
+
+      custs: [
+        {
+          icon: 'mdi-account-arrow-left',
+          title: 'Customers',
+          to: '/admin/customers'
+        },
+        {
+          icon: 'mdi-database-export',
+          title: 'Receivables',
+          to: '/admin/receivables'
+        }
+      ],
+
+      suppliers: [
+        {
+          icon: 'mdi-account-arrow-right',
+          title: 'Suppliers',
+          to: '/admin/suppliers'
+        },
+        {
+          icon: 'mdi-database-import',
+          title: 'Receivables',
+          to: '/admin/payables'
+        }
+      ],
+
+      users: [
+        {
+          icon: 'mdi-account-multiple-plus',
+          title: 'Users',
+          to: '/admin/users'
+        },
+        {
+          icon: 'mdi-account-box',
+          title: 'Profile',
+          to: '/account'
+        }
+      ],
+
+      company: [
+        {
+          icon: 'mdi-cogs',
+          title: 'Company',
+          to: '/admin/company'
+        }
+      ],
+
+
+
       miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'Karim Glass and Aluminum',
       lang: localStorage.getItem('lang'),
+
+      admins: [
+        ['Management', 'mdi-account-multiple-outline'],
+        ['Settings', 'mdi-cog-outline'],
+      ],
+      cruds: [
+        ['Create', 'mdi-plus-outline'],
+        ['Read', 'mdi-file-outline'],
+        ['Update', 'mdi-update'],
+        ['Delete', 'mdi-delete'],
+      ],
     }
   },
 
