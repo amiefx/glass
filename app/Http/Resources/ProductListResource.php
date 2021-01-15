@@ -25,7 +25,8 @@ class ProductListResource extends JsonResource
           //  'onhand' => DB::table('remaining_quantity')->where('product_id', '=', $this->id)->get(['remaining_quantity']),
             'enable_stock' => $this->enable_stock,
             'height' => $this->height,
-            'width' => $this->width
+            'width' => $this->width,
+            'onhand' => DB::table('qty_statistics')->where('product_id', '=', $this->id)->get()
         ];
     }
 }

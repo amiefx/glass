@@ -1,0 +1,45 @@
+INSERT INTO `products`(`id`, `name`,  `brand`, `enable_stock`, `sku`, `is_active`, `user_id`, `created_at`, `updated_at`) VALUES 
+(1,'china glass1', '', 1, 'asdf asdf1', 1, 1, '',''),
+(2,'china glass2', '', 1, 'asdf asdf2', 1, 1, '',''),
+(3,'china glass3', '', 1, 'asdf asdf3', 1, 1, '',''),
+(4,'china glass4', '', 1, 'asdf asdf4', 1, 1, '','')
+
+INSERT INTO `purchases`(`id`, `order_id`, `product_id`, `quantity`, `price`, `is_active`, `user_id`, `created_at`, `updated_at`) VALUES 
+(1,1,1,100,1200,1,1,'',''),
+(2,1,1,50,1200,1,1,'',''),
+(3,1,1,200,1200,1,1,'',''),
+(4,1,2,300,1200,1,1,'',''),
+(5,1,2,400,1200,1,1,'','')
+
+INSERT INTO `order_details`(`id`, `order_id`, `product_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES 
+(1,1,1,5,250,'',''),
+(2,1,1,3,250,'',''),
+(3,2,2,5,250,'',''),
+(4,2,2,10,250,'',''),
+(5,3,3,5,250,'','')
+
+INSERT INTO `qty_adjustments`(`id`, `order_id`, `product_id`, `quantity`, `price`, `user_id`, `created_at`, `updated_at`) VALUES 
+(1,1,1,5,300,1,'',''),
+(2,2,1,10,300,1,'',''),
+(3,3,2,15,300,1,'',''),
+(4,4,2,20,300,1,'',''),
+(5,5,3,25,300,1,'','')
+
+INSERT INTO `suppliers`(`id`, `name`, `company_name`, `type`, `work_number`, `whatsapp_number`, `email`, `address`, `credit_limit`, `is_active`, `created_at`, `updated_at`) VALUES 
+(1,'ali khan', 'china glass', 'regular', '+923033848019', '+92303033848019', 'alikhan@gmail.com', 'hazara town quetta', 1000, 1, '',''),
+(2,'ali khan1', 'china glass', 'regular', '+923033848019', '+92303033848019', 'alikhan@gmail.com', 'hazara town quetta', 1000, 1, '',''),
+(3,'ali khan2', 'china glass', 'regular', '+923033848019', '+92303033848019', 'alikhan@gmail.com', 'hazara town quetta', 1000, 1, '','')
+
+INSERT INTO `customers`(`id`, `name`, `company_name`, `type`, `work_number`, `whatsapp_number`, `email`, `address`, `credit_limit`, `is_active`, `created_at`, `updated_at`) VALUES 
+(1,'ali khan', 'china glass', 'regular', '+923033848019', '+92303033848019', 'alikhan@gmail.com', 'hazara town quetta', 1000, 1, '',''),
+(2,'ali khan1', 'china glass', 'regular', '+923033848019', '+92303033848019', 'alikhan@gmail.com', 'hazara town quetta', 1000, 1, '',''),
+(3,'ali khan2', 'china glass', 'regular', '+923033848019', '+92303033848019', 'alikhan@gmail.com', 'hazara town quetta', 1000, 1, '','')
+
+
+
+CREATE VIEW qty_statistics AS
+SELECT p.product_id AS product_id ,p.totalpurchased AS totalpurchased, COALESCE(s.totalsold,0) AS totalsold, 
+COALESCE(a.totaladjusted,0) AS totaladjusted, COALESCE(totalpurchased - (totalsold+totaladjusted),0) AS totalremaining
+FROM total_purchases AS p
+LEFT JOIN total_sold AS s ON s.product_id=p.product_id
+LEFT JOIN total_adjustment AS a ON s.product_id=a.product_id

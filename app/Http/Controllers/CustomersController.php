@@ -28,6 +28,14 @@ class CustomersController extends Controller
          );
     }
 
+    public function allActiveCustomers()
+    {
+        return CustomerResource::collection(
+            Customer::where('is_active', '=', 1)->get()
+         );
+    }
+
+
     public function customerRecievable($id)
     {
         return response()->json([

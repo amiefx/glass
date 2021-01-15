@@ -26,7 +26,6 @@ class SupplierResource extends JsonResource
             'email' => $this->email,
             'address' => $this->address,
             'credit_limit' => $this->credit_limit,
-            // 'payables' => DB::table('payables')->where('supplier_id', '=', $this->id)->orderBy('id','desc')->first() ? DB::table('payables')->where('supplier_id', '=', $this->id)->orderBy('id','desc')->first() : [],
             'is_active' => $this->is_active ? 'active' : 'not active',
             'created_at' => $this->created_at->format('Y-M-D H:i:s')
         ];

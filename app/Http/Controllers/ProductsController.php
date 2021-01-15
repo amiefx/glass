@@ -156,8 +156,8 @@ class ProductsController extends Controller
 
 
     public function report()
-    {
-        $report = DB::table('remaining_quantity')->groupBy('product_id')->get();
+    { 
+        $report = DB::table('qty_statistics')->where('product_id', '=', 1)->get();
         return response()->json(['report'=>$report]);
     }
 }
