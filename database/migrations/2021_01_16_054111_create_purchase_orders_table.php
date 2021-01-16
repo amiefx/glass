@@ -17,7 +17,8 @@ class CreatePurchaseOrdersTable extends Migration
             $table->id();
             $table->integer('supplier_id');
             $table->integer('total')->default(0);
-            $table->integer('amount_recieved')->nullable()->default(null); 
+            $table->integer('sub_total')->default(0);
+            $table->integer('amount_paid')->nullable()->default(null); 
             $table->integer('discount')->nullable()->default(0); 
             $table->integer('note')->nullable()->default(null); 
             $table->string('status')->nullable()->default(null);

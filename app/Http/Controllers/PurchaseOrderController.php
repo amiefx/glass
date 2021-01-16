@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PurchaseOrder;
 use App\Models\Purchase;
+use App\Models\Cash;
+use App\Models\Bank;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\PurchaseOrderCollection;
@@ -65,7 +67,8 @@ class PurchaseOrderController extends Controller
             $purchaseorder = new PurchaseOrder([
                 "supplier_id" => $order['supplier_id'],
                 "total" => $order['total'],
-                "amount_recieved" => $order['paid_amt'],
+                "sub_total" => $order['sub_total'],
+                "amount_paid" => $order['paid_amt'],
                 "discount" => $order['discount'],
                 "note" => $order['note'],
                 "status" => $order['pmt_method'],
@@ -87,18 +90,51 @@ class PurchaseOrderController extends Controller
                 ]);
             }
 
-            if ($order['pmt_method'] == 'Cash') {
-                // store in cash register
-            }else
+            if ($order['pmt_method'] == 'Cash' && $order['paid_amt'] != 0) {
+                
+                Cash::create([
+                    'doc_type' => 'purchase',
+                    'doc_id' => $order['doc_id'],
+                    'supplier_id' => $order['supplier_id'],
+                    'customer_id' => $order['customer_id'],
+                    'employee_id' => $order['employee_id'],
+                    'credit' => $order['total'],
+                    'debit' => $order['debit'],
+                    'balance' => $order['supplier_id'], 
+                    'user_id' => $user->id,
+                ]);
+
+            }else if ($order['pmt_method'] == 'Bank' && $order['paid_amt'] != 0) {
+                
+                Bank::create([
+                    'doc_type' => 'purchase',
+                    'doc_id' => $order['doc_id'],
+                    'supplier_id' => $order['supplier_id'],
+                    'customer_id' => $order['customer_id'],
+                    'employee_id' => $order['employee_id'],
+                    'credit' => $order['total'],
+                    'debit' => $order['debit'],
+                    'balance' => $order['supplier_id'], 
+                    'user_id' => $user->id,
+                ]);
+
+            } else
             {
-                if ($order['payable_amt'] < 0) {
-                    $this->payablescontroller->creditPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
-                } else {
-                    $this->payablescontroller->debitPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
-                }
+                // if ($order['payable_amt'] < 0) {
+                //     $this->payablescontroller->creditPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
+                // } else {
+                //     $this->payablescontroller->debitPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
+                // }
                 
                 
             }
+
+            if ($order['payable_amt'] > 0) {
+                $this->payablescontroller->creditPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
+            } 
+            // else {
+            //     $this->payablescontroller->debitPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
+            // }
 
             DB::commit();
         } catch (\Throwable $th) {
@@ -153,8 +189,9 @@ class PurchaseOrderController extends Controller
         $purchaseorder = PurchaseOrder::find($id);
 
         $purchaseorder->supplier_id = $request->supplier_id;
-        $purchaseorder->total = $request->total; 
-        $purchaseorder->amount_recieved = $request->amount_recieved;
+        $purchaseorder->total = $request->total;
+        $purchaseorder->sub_total = $request->sub_total; 
+        $purchaseorder->amount_paid = $request->amount_paid;
         $purchaseorder->discount = $request->discount; 
         $purchaseorder->status = $request->status;
         $purchaseorder->note = $request->note;
