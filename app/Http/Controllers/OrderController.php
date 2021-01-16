@@ -79,6 +79,16 @@ class OrderController extends Controller
                 ]);
             }
 
+            if ($order['doc_type'] == 'Cash') {
+                // store in cash register
+            }else
+            {
+                if ($order['payable_amt'] < 0) {
+                    $this->payablescontroller->creditPayable($order['doc_type'], $order['customer_id'], '' , $order['payable_amt'], 1, $user->id);
+                } else {
+                    $this->payablescontroller->debitPayable($order['doc_type'], $order['customer_id'], '' , $order['payable_amt'], 1, $user->id);
+                }
+            }
 
 
             DB::commit();

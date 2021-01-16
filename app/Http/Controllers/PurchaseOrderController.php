@@ -8,10 +8,19 @@ use Illuminate\Http\Request;
 
 use App\Http\Resources\PurchaseOrderCollection;
 use App\Http\Resources\PurchaseOrderResource; 
+use App\Http\Controllers\PayablesController;
 use Illuminate\Support\Facades\DB;
 
 class PurchaseOrderController extends Controller
 {
+
+    protected $payablescontroller;
+    public function __construct(PayablesController $payablescontroller)
+    {
+        $this->payablescontroller = $payablescontroller;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -78,7 +87,18 @@ class PurchaseOrderController extends Controller
                 ]);
             }
 
-
+            if ($order['pmt_method'] == 'Cash') {
+                // store in cash register
+            }else
+            {
+                if ($order['payable_amt'] < 0) {
+                    $this->payablescontroller->creditPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
+                } else {
+                    $this->payablescontroller->debitPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
+                }
+                
+                
+            }
 
             DB::commit();
         } catch (\Throwable $th) {
