@@ -7,6 +7,7 @@ use App\Http\Resources\OrderCollection;
 use App\Http\Resources\OrderResource;
 
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -16,7 +17,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'created_at';
@@ -44,18 +45,50 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $user = auth()->user();
 
-        $order = new Order([ 
-            'customer_id' => $request->customer_id,
-            'total' => $request->total,
-            'amount_recieved' => $request->amount_recieved,
-            'status' => $request->status, 
-            'note' => $request->note,
-            'user_id' => $user->id,
-        ]);
-        $order->save();
-        return response()->json(['order'=> new OrderResource($order)], 200);
+        $user = auth()->user();
+        $postData = $request->all();
+
+        try {
+            DB::beginTransaction();
+
+            $order = $postData['orderDetails'];
+
+            $neworder = new Order([ 
+                'customer_id' => $order['customer_id'],
+                'total' => $order['total'],
+                'amount_recieved' => $order['received_amt'],
+                "discount" => $order['discount'],
+                'status' => $order['doc_type'], 
+                // 'note' => $request->note,
+                'user_id' => $user->id,
+            ]);
+            $neworder->save();
+
+            $items = $postData['orderedItems'];
+
+            foreach($items as $item)
+            {
+                OrderDetail::create([
+                    'order_id' => $neworder->id,
+                    'product_id' => $item['product']['id'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['product']['selling_price'],
+                    'is_active' => $item['product']['is_active'],
+                    'user_id' => $user->id,
+                ]);
+            }
+
+
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            return response()->json(['error'=> $th->getMessage()], 500);
+        }
+
+    return response()->json(['order'=> $neworder, 'order_items' => $items], 200);
     }
 
     /**
@@ -101,7 +134,8 @@ class OrderController extends Controller
 
         $order->customer_id = $request->customer_id;
         $order->total = $request->total; 
-        $order->amount_recieved = $request->amount_recieved; 
+        $order->amount_recieved = $request->amount_recieved;
+        $order->discount = $request->discount; 
         $order->status = $request->status;
         $order->note = $request->note;
         $order->user_id = $user->id;

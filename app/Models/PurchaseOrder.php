@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class PurchaseOrder extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'customer_id', 
+        'supplier_id', 
         'total',
         'amount_recieved',
         'discount',
@@ -20,13 +20,14 @@ class Order extends Model
     ];
 
 
-    protected $table = 'orders';
+    protected $table = 'purchase_orders';
 
 
     //relationships
 
-    public function customer()
+    public function supplier()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Supplier::class);
     }
+
 }
