@@ -248,17 +248,17 @@ const routes = [
             ]
         }
     },
-    // {
-    //     path: '/admin/roles',
-    //     name: 'roles',
-    //     component: () => import('../views/admin/Roles.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/receivables',
+        name: 'receivables',
+        component: () => import('../views/admin/Receivables.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/shipping',
     //     name: 'shipping',
