@@ -13,7 +13,7 @@
       hide-details
       hide-selected
       item-text="name"
-      item-value="symbol"
+      item-value="id"
       label="Search for a customer..."
       solo
     >
@@ -50,9 +50,20 @@
           <v-list-item-title v-text="item.name"></v-list-item-title>
           <v-list-item-subtitle > {{ item.company_name }} | {{ item.work_number}} </v-list-item-subtitle>
         </v-list-item-content>
-        <!-- <v-list-item-action>
-          <v-icon>mdi-bitcoin</v-icon>
-        </v-list-item-action> -->
+        <v-list-item-action>
+            <span v-if="item.credit_limit > 0">
+              Credit limit:
+          <strong>
+            {{ item.credit_limit }}
+          </strong>
+          </span>
+          <span>
+              Receivable:
+          <strong>
+            {{ item.receivable }}
+          </strong>
+          </span>
+        </v-list-item-action>
       </template>
     </v-autocomplete>
 
@@ -300,7 +311,7 @@ export default {
     saveOrder() {
         let orderData = {
             orderDetails: {
-                customer_id: this.invoiceData.customer_id,
+                customer_id: this.model,
                 subtotal: this.cartTotalPrice,
                 discount: this.invoiceData.discount,
                 total: this.total,

@@ -40,7 +40,7 @@ class SuppliersController extends Controller
     public function allSuppliers()
     {
         return SupplierResource::collection(
-            Supplier::get()
+            Supplier::where('is_active', '=', 1)->get()
          );
     }
 

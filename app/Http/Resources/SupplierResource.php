@@ -26,6 +26,7 @@ class SupplierResource extends JsonResource
             'email' => $this->email,
             'address' => $this->address,
             'credit_limit' => $this->credit_limit,
+            'payables' => $this->payables->sum('balance'),
             'is_active' => $this->is_active ? 'active' : 'not active',
             'created_at' => $this->created_at->format('Y-M-D H:i:s')
         ];

@@ -332,6 +332,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -352,6 +363,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       model: null,
       search: null,
       tab: null,
+      balance: null,
       pmt_methods: ['Cash', 'Bank'],
       supplier_id: '',
       purchaseData: {
@@ -438,15 +450,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     model: function model(val) {
       var _this2 = this;
 
-      axios.get('/api/supplier/' + val + '/payable').then(function (res) {
-        // this.items = res.data.data
-        console.log(res.data);
-        _this2.isLoading = false;
-      })["catch"](function (err) {
-        console.log(err);
-        _this2.isLoading = false;
-      });
-      if (val != null) this.tab = 0;else this.tab = null;
+      // axios
+      //   .get('/api/supplier/'+ val +'/payable')
+      //   .then(res => {
+      //    // this.items = res.data.data
+      //    console.log(res.data)
+      //     this.isLoading = false
+      //   })
+      //   .catch(err => {
+      //     console.log( err )
+      //     this.isLoading = false
+      //   })
+      this.items.forEach(function (item) {
+        if (val == item.id) {
+          _this2.balance = item.payables;
+        }
+      }); // if (val != null) this.tab = 0
+      // else this.tab = null
     },
     search: function search(val) {
       var _this3 = this;
@@ -789,7 +809,33 @@ var render = function() {
                             ])
                           ],
                           1
-                        )
+                        ),
+                        _vm._v(" "),
+                        _c("v-list-item-action", [
+                          item.credit_limit > 0
+                            ? _c("span", [
+                                _vm._v("\n            Credit limit:\n        "),
+                                _c("strong", [
+                                  _vm._v(
+                                    "\n          " +
+                                      _vm._s(item.credit_limit) +
+                                      "\n        "
+                                  )
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("span", [
+                            _vm._v("\n            Payable:\n        "),
+                            _c("strong", [
+                              _vm._v(
+                                "\n          " +
+                                  _vm._s(item.payables) +
+                                  "\n        "
+                              )
+                            ])
+                          ])
+                        ])
                       ]
                     }
                   }
@@ -1426,7 +1472,8 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_5__["VAutocomplete"],VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_6__["VBtn"],VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_7__["VChip"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VCol"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__["VDivider"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_10__["VIcon"],VListItem: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItem"],VListItemAvatar: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemAvatar"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemContent"],VListItemSubtitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemSubtitle"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemTitle"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VRow"],VSimpleTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_12__["VSimpleTable"]})
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_5__["VAutocomplete"],VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_6__["VBtn"],VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_7__["VChip"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VCol"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__["VDivider"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_10__["VIcon"],VListItem: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItem"],VListItemAction: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemAction"],VListItemAvatar: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemAvatar"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemContent"],VListItemSubtitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemSubtitle"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemTitle"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VRow"],VSimpleTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_12__["VSimpleTable"]})
 
 
 /* hot reload */

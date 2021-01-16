@@ -23,7 +23,7 @@ class Customer extends Model
     protected $table = 'customers';
 
     //relationships
-    public function recievables()
+    public function receivables()
     {
         return $this->hasMany(Receivable::class);
     }

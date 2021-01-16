@@ -50,9 +50,20 @@
           <v-list-item-title v-text="item.name"></v-list-item-title>
           <v-list-item-subtitle > {{ item.company_name }} | {{ item.work_number}} </v-list-item-subtitle>
         </v-list-item-content>
-        <!-- <v-list-item-action>
-          <v-icon>mdi-bitcoin</v-icon>
-        </v-list-item-action> -->
+        <v-list-item-action>
+            <span v-if="item.credit_limit > 0">
+              Credit limit:
+          <strong>
+            {{ item.credit_limit }}
+          </strong>
+          </span>
+          <span>
+              Payable:
+          <strong>
+            {{ item.payables }}
+          </strong>
+          </span>
+        </v-list-item-action>
       </template>
     </v-autocomplete>
 
@@ -219,6 +230,7 @@ export default {
       model: null,
       search: null,
       tab: null,
+      balance: null,
 
       pmt_methods: ['Cash', 'Bank'],
       supplier_id: '',
@@ -319,20 +331,28 @@ export default {
   watch: {
       model (val) {
 
-        axios
-          .get('/api/supplier/'+ val +'/payable')
-          .then(res => {
-           // this.items = res.data.data
-           console.log(res.data)
-            this.isLoading = false
-          })
-          .catch(err => {
-            console.log( err )
-            this.isLoading = false
-          })
+        // axios
+        //   .get('/api/supplier/'+ val +'/payable')
+        //   .then(res => {
+        //    // this.items = res.data.data
+        //    console.log(res.data)
+        //     this.isLoading = false
+        //   })
+        //   .catch(err => {
+        //     console.log( err )
+        //     this.isLoading = false
+        //   })
 
-        if (val != null) this.tab = 0
-        else this.tab = null
+        this.items.forEach(item => {
+
+                if (val == item.id ) {
+                    this.balance = item.payables;
+                }
+
+            })
+
+        // if (val != null) this.tab = 0
+        // else this.tab = null
       },
 
       search (val) {
