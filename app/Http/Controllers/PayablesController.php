@@ -84,75 +84,75 @@ class PayablesController extends Controller
         }
     }
 
-    // debit payable
-    public function debitPayable(Request $request)
-    {
-        $validator = Validator::make($request->all(),[
-            'type' => 'required|string|between:2,100',
-            'supplier_id' => 'required|integer'
-        ]);
-        if ($validator->fails()) {
-            return response()->json([$validator->errors()], 422);
-        }
+    // // debit payable
+    // public function debitPayable(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(),[
+    //         'type' => 'required|string|between:2,100',
+    //         'supplier_id' => 'required|integer'
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return response()->json([$validator->errors()], 422);
+    //     }
 
-        if(Payable::where("supplier_id", $request->supplier_id)->first() != null){
-            $pay = DB::table("payables")->where("supplier_id", $request->supplier_id)->latest()->first();
+    //     if(Payable::where("supplier_id", $request->supplier_id)->first() != null){
+    //         $pay = DB::table("payables")->where("supplier_id", $request->supplier_id)->latest()->first();
 
-            $newpay = new payable;
+    //         $newpay = new payable;
 
-            $newpay->type = $request->type;
-            $newpay->supplier_id = $request->supplier_id;
-            $newpay->description = $request->description;
-            $newpay->debit = $request->debit;
-            $newpay->balance = $pay->balance - $request->debit;
-            $newpay->status = $request->status;
+    //         $newpay->type = $request->type;
+    //         $newpay->supplier_id = $request->supplier_id;
+    //         $newpay->description = $request->description;
+    //         $newpay->debit = $request->debit;
+    //         $newpay->balance = $pay->balance - $request->debit;
+    //         $newpay->status = $request->status;
 
-            if($newpay->save())
-            {
-                return response()->json(['message' => 'payable debited successfully', 'payable'=>$newpay]);
-            }else{
-                return response()->json(['error'=>"something went wrong!"]);
-            }
+    //         if($newpay->save())
+    //         {
+    //             return response()->json(['message' => 'payable debited successfully', 'payable'=>$newpay]);
+    //         }else{
+    //             return response()->json(['error'=>"something went wrong!"]);
+    //         }
 
-        }else{
-            return $this->createPayable($request);
-        }
-    }
+    //     }else{
+    //         return $this->createPayable($request);
+    //     }
+    // }
 
-    // credit payable
-    public function creditPayable(Request $request)
-    {
-        $validator = Validator::make($request->all(),[
-            'type' => 'required|string|between:2,100',
-            'supplier_id' => 'required|integer'
-        ]);
-        if ($validator->fails()) {
-            return response()->json([$validator->errors()], 422);
-        }
+    // // credit payable
+    // public function creditPayable(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(),[
+    //         'type' => 'required|string|between:2,100',
+    //         'supplier_id' => 'required|integer'
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return response()->json([$validator->errors()], 422);
+    //     }
 
-        if(Payable::where("supplier_id", $request->supplier_id)->first() != null){
-           $pay = DB::table("payables")->where("supplier_id", $request->supplier_id)->latest()->first();
+    //     if(Payable::where("supplier_id", $request->supplier_id)->first() != null){
+    //        $pay = DB::table("payables")->where("supplier_id", $request->supplier_id)->latest()->first();
 
-            $newpay = new payable;
+    //         $newpay = new payable;
 
-            $newpay->type = $request->type;
-            $newpay->supplier_id = $request->supplier_id;
-            $newpay->description = $request->description;
-            $newpay->credit = $request->credit;
-            $newpay->balance = $pay->balance + $request->credit;
-            $newpay->status = $request->status;
+    //         $newpay->type = $request->type;
+    //         $newpay->supplier_id = $request->supplier_id;
+    //         $newpay->description = $request->description;
+    //         $newpay->credit = $request->credit;
+    //         $newpay->balance = $pay->balance + $request->credit;
+    //         $newpay->status = $request->status;
 
-            if($newpay->save())
-            {
-                return response()->json(['message' => 'payable credited successfully', 'payable'=>$newpay]);
-            }else{
-                return response()->json(['error'=>"something went wrong!"]);
-            }
+    //         if($newpay->save())
+    //         {
+    //             return response()->json(['message' => 'payable credited successfully', 'payable'=>$newpay]);
+    //         }else{
+    //             return response()->json(['error'=>"something went wrong!"]);
+    //         }
 
-        }else{
-            return $this->createPayable($request);
-        }
-    }
+    //     }else{
+    //         return $this->createPayable($request);
+    //     }
+    // }
 
     // delete payable
     public function deletePayable(Request $request)
@@ -189,5 +189,51 @@ class PayablesController extends Controller
         }else{
             return false;
         }
+    }
+
+    // credit payable
+    public function creditPayable($type, $supplier_id, $description, $credit, $status, $user_id)
+    {
+           $pay = DB::table("payables")->where("supplier_id", "=", $supplier_id)->latest()->first();
+
+            $newpay = new payable;
+
+            $newpay->type = $type;
+            $newpay->supplier_id = $supplier_id;
+            $newpay->description = $description;
+            $newpay->credit = $credit;
+            $newpay->balance = $pay->balance - $credit;
+            $newpay->status = $status;
+            $newpay->user_id = $user_id;
+
+            if($newpay->save())
+            {
+                return true;
+            }else{
+                return false;
+            }
+    }
+
+    // debit payable
+    public function debitPayable($type, $supplier_id, $description, $debit, $status, $user_id)
+    {
+            $pay = DB::table("payables")->where("supplier_id", "=", $supplier_id)->latest()->first();
+
+            $newpay = new payable;
+
+            $newpay->type = $type;
+            $newpay->supplier_id = $supplier_id;
+            $newpay->description = $description;
+            $newpay->debit = $debit;
+            $newpay->balance = $pay->balance - $debit;
+            $newpay->status = $status;
+            $newpay->user_id = $user_id;
+
+            if($newpay->save())
+            {
+                return true;
+            }else{
+                return false;
+            }
     }
 }

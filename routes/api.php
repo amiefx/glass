@@ -93,12 +93,13 @@ Route::group([
     Route::get('slabs/all', 'SlabController@allSlabs');
     Route::resource('slabs', 'SlabController');
 
-    // purchase
+    // purchase detail
     Route::resource('purchase', 'PurchaseController');
+    // purchase order
+    Route::resource('purchaseorder', 'PurchaseOrderController');
 
     // orderdetail
     Route::resource('orderdetail', 'OrderDetailController');
-
     // order
     Route::resource('order', 'OrderController');
 

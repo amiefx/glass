@@ -16,7 +16,7 @@ class CreatePayablesTable extends Migration
         Schema::create('payables', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->integer('doc_id');
+            $table->integer('doc_id')->nullable()->default(null);
             $table->foreignId('supplier_id');
             $table->string('description')->nullable()->default(null);
             $table->integer('debit')->nullable()->default(0);
