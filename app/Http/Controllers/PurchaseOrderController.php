@@ -103,6 +103,7 @@ class PurchaseOrderController extends Controller
                     'balance' => $order['supplier_id'], 
                     'user_id' => $user->id,
                 ]);
+                
 
             }else if ($order['pmt_method'] == 'Bank' && $order['paid_amt'] != 0) {
                 
@@ -118,6 +119,14 @@ class PurchaseOrderController extends Controller
                     'user_id' => $user->id,
                 ]);
 
+                if ($order['payable_amt'] < 0) {
+                    $this->payablescontroller->creditPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
+                } 
+                else {
+                    $this->payablescontroller->debitPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
+                }
+                
+
             } else
             {
                 // if ($order['payable_amt'] < 0) {
@@ -129,12 +138,7 @@ class PurchaseOrderController extends Controller
                 
             }
 
-            if ($order['payable_amt'] > 0) {
-                $this->payablescontroller->creditPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
-            } 
-            // else {
-            //     $this->payablescontroller->debitPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
-            // }
+            
 
             DB::commit();
         } catch (\Throwable $th) {
