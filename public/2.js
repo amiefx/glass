@@ -176,6 +176,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -379,80 +387,108 @@ var render = function() {
             "v-card",
             [
               _c(
-                "v-row",
+                "v-card-text",
                 [
-                  _c("v-col", { attrs: { cols: "6" } }, [
-                    _c("table", [
-                      _c("tbody", [
-                        _c("tr", [
-                          _c("td", { attrs: { width: "150px" } }, [
-                            _vm._v("Company")
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(_vm.customer.company_name))])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("td", [_vm._v("Name")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(_vm.customer.name))])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("td", [_vm._v("Email")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(_vm.customer.email))])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("td", [_vm._v("Address")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(_vm.customer.address))])
-                        ])
+                  !_vm.customer.name
+                    ? _c("h3", { staticClass: "text-center" }, [
+                        _vm._v(
+                          "\n                    Please select a Customer from Customer list\n                "
+                        )
                       ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("v-col", { attrs: { cols: "6" } }, [
-                    _c("table", { staticClass: "float-right" }, [
-                      _c("tbody", [
-                        _c("tr", [
-                          _c("td", { attrs: { width: "150px" } }, [
-                            _vm._v("Phone")
+                    : _c(
+                        "v-row",
+                        [
+                          _c("v-col", { attrs: { cols: "6" } }, [
+                            _c("table", [
+                              _c("tbody", [
+                                _c("tr", [
+                                  _c("td", { attrs: { width: "150px" } }, [
+                                    _vm._v("Company")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(_vm._s(_vm.customer.company_name))
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("td", [_vm._v("Name")]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(_vm.customer.name))])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("td", [_vm._v("Email")]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(_vm.customer.email))])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("td", [_vm._v("Address")]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(_vm._s(_vm.customer.address))
+                                  ])
+                                ])
+                              ])
+                            ])
                           ]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(_vm.customer.work_number))])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("td", [_vm._v("Type")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(_vm.customer.type))])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("td", [_vm._v("Credit Limit")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(_vm.customer.credit_limit))])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("td", [_vm._v("Balance")]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("strong", [
-                              _vm._v(_vm._s(_vm.customer.receivable))
+                          _c("v-col", { attrs: { cols: "6" } }, [
+                            _c("table", { staticClass: "float-right" }, [
+                              _c("tbody", [
+                                _c("tr", [
+                                  _c("td", { attrs: { width: "150px" } }, [
+                                    _vm._v("Phone")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(_vm._s(_vm.customer.work_number))
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("td", [_vm._v("Type")]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(_vm.customer.type))])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("td", [_vm._v("Credit Limit")]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(_vm._s(_vm.customer.credit_limit))
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("td", [_vm._v("Balance")]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("strong", [
+                                      _vm._v(_vm._s(_vm.customer.receivable))
+                                    ])
+                                  ])
+                                ])
+                              ])
                             ])
                           ])
-                        ])
-                      ])
-                    ])
-                  ])
+                        ],
+                        1
+                      )
                 ],
                 1
               ),
               _vm._v(" "),
-              _c("v-row", [_vm._v("\n            transactions\n        ")])
+              _c(
+                "v-card-text",
+                [
+                  _c("v-row", [
+                    _vm._v("\n               transactions\n            ")
+                  ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -610,7 +646,8 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_4__["VCard"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_5__["VCol"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_5__["VRow"]})
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_4__["VCard"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_4__["VCardText"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_5__["VCol"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_5__["VRow"]})
 
 
 /* hot reload */

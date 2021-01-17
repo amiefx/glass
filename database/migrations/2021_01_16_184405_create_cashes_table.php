@@ -18,12 +18,12 @@ class CreateCashesTable extends Migration
             $table->string('doc_type')->nullable()->default(null);
             $table->integer('doc_id')->nullable()->default(0);
             $table->integer('customer_id')->nullable()->default(0);
-            $table->integer('supplier_id')->nullable()->default(0); 
-            $table->integer('employee_id')->nullable()->default(0); 
-            $table->integer('credit')->nullable()->default(0); 
+            $table->integer('supplier_id')->nullable()->default(0);
+            $table->integer('employee_id')->nullable()->default(0);
+            $table->integer('credit')->nullable()->default(0);
             $table->integer('debit')->nullable()->default(0);
             $table->integer('balance')->nullable()->default(0);
-            $table->integer('user_id'); 
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

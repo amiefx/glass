@@ -10,6 +10,13 @@ use App\Http\Resources\CashResource;
 
 class CashController extends Controller
 {
+    public function balance()
+    {
+        return response()->json([
+            'balance' => Cash::get()->sum('balance')
+        ], 200);
+    }
+
     /**
      * Display a listing of the resource.
      *

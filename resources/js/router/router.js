@@ -160,28 +160,28 @@ const routes = [
             ]
         }
     },
-    // {
-    //     path: '/admin/order-return',
-    //     name: 'order-return',
-    //     component: () => import('../views/admin/Order-return.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
-    // {
-    //     path: '/admin/slides',
-    //     name: 'slides',
-    //     component: () => import('../views/admin/Slides.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/test',
+        name: 'transaction',
+        component: () => import('../views/admin/Test.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
+    {
+        path: '/admin/cash',
+        name: 'cash',
+        component: () => import('../views/admin/Cash.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/ratings',
     //     name: 'ratings',
@@ -252,6 +252,17 @@ const routes = [
         path: '/admin/receivables',
         name: 'receivables',
         component: () => import('../views/admin/Receivables.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
+    {
+        path: '/admin/payables',
+        name: 'payables',
+        component: () => import('../views/admin/Payables.vue'),
         meta: {
             layout: 'admin',
             middleware: [

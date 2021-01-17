@@ -1,13 +1,13 @@
 <template>
   <v-row>
       <v-col cols="5" >
-         <customer-list :customers="customers" @getCust="custID($event)" />
+         <supplier-list :suppliers="suppliers" @getCust="custID($event)" />
       </v-col>
       <v-col cols="7" >
           <v-card>
               <v-card-text>
-                  <h3 class="text-center" v-if="!customer.name">
-                      Please select a Customer from Customer list
+                  <h3 class="text-center" v-if="!supplier.name">
+                      Please select a Supplier from Supplier list
                   </h3>
               <v-row v-else>
               <v-col cols="6">
@@ -15,19 +15,19 @@
                   <tbody>
                       <tr>
                           <td width="150px">Company</td>
-                          <td>{{customer.company_name}}</td>
+                          <td>{{supplier.company_name}}</td>
                       </tr>
                       <tr>
                           <td>Name</td>
-                          <td>{{customer.name}}</td>
+                          <td>{{supplier.name}}</td>
                       </tr>
                       <tr>
                           <td>Email</td>
-                          <td>{{customer.email}}</td>
+                          <td>{{supplier.email}}</td>
                       </tr>
                       <tr>
                           <td>Address</td>
-                          <td>{{customer.address}}</td>
+                          <td>{{supplier.address}}</td>
                       </tr>
                   </tbody>
               </table>
@@ -37,26 +37,26 @@
                   <tbody>
                       <tr>
                           <td width="150px">Phone</td>
-                          <td>{{customer.work_number}}</td>
+                          <td>{{supplier.work_number}}</td>
                       </tr>
                       <tr>
                           <td>Type</td>
-                          <td>{{customer.type}}</td>
+                          <td>{{supplier.type}}</td>
                       </tr>
                       <tr>
                           <td>Credit Limit</td>
-                          <td>{{customer.credit_limit}}</td>
+                          <td>{{supplier.credit_limit}}</td>
                       </tr>
                       <tr>
                           <td>Balance</td>
-                          <td><strong>{{customer.receivable}}</strong></td>
+                          <td><strong>{{supplier.payables}}</strong></td>
                       </tr>
                   </tbody>
               </table>
               </v-col>
           </v-row>
-
           </v-card-text>
+          <v-divider></v-divider>
           <v-card-text>
               <v-row>
                  transactions
@@ -68,32 +68,32 @@
 </template>
 
 <script>
-import CustomerList from '../../components/CustomerList.vue'
+import SupplierList from '../../components/SupplierList.vue'
 export default {
     components: {
-      CustomerList
+      SupplierList
    },
    data: () => {
-        CustomerList
+        SupplierList
     return {
       snackbar: false,
       text:'',
       valid: true,
-      customers: [],
-      customer: []
+      suppliers: [],
+      supplier: []
 
     }
   },
 
   created() {
-     axios.get("/api/customers/all").then(res => {
-        this.customers = res.data.data;
+     axios.get("/api/suppliers/all").then(res => {
+        this.suppliers = res.data.data;
         });
   },
 
   methods: {
       custID(item) {
-         this.customer = item;
+         this.supplier = item;
       }
   },
 

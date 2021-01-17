@@ -294,7 +294,7 @@ export default {
         },
         {
           icon: 'mdi-database-import',
-          title: 'Receivables',
+          title: 'Payables',
           to: '/admin/payables'
         }
       ],

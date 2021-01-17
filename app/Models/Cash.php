@@ -10,7 +10,7 @@ class Cash extends Model
     use HasFactory;
 
     protected $fillable = [
-        'doc_type', 
+        'doc_type',
         'doc_id',
         'supplier_id',
         'customer_id',
@@ -22,6 +22,17 @@ class Cash extends Model
     ];
 
     protected $table = 'cashes';
+
+    //relationships
+    public function customers()
+    {
+        return $this->belongsToMany(Customer::class);
+    }
+
+    public function suppliers()
+    {
+        return $this->belongsToMany(Supplier::class);
+    }
 
 
 }

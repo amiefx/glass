@@ -93,6 +93,13 @@ Route::group([
     Route::get('slabs/all', 'SlabController@allSlabs');
     Route::resource('slabs', 'SlabController');
 
+    // Cash
+    Route::get('cashes/balance', 'CashController@balance');
+    Route::resource('cashes', 'CashController');
+
+    // Bank
+    Route::resource('banks', 'BankController');
+
     // purchase detail
     Route::resource('purchase', 'PurchaseController');
     // purchase order
