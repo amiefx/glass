@@ -10,9 +10,10 @@ class PurchaseOrder extends Model
     use HasFactory;
 
     protected $fillable = [
-        'supplier_id', 
+        'supplier_id',
+        'sub_total',
         'total',
-        'amount_recieved',
+        'amount_paid',
         'discount',
         'note',
         'status',

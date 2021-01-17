@@ -273,6 +273,7 @@ export default {
                 paid_amt: this.purchaseData.paid_amt,
                 payable_amt: this.amtDue,
                 pmt_method: this.purchaseData.pmt_method,
+                note: ''
             },
             orderedItems: this.purchase,
         }
@@ -295,10 +296,14 @@ export default {
             return Promise.reject(error);
         });
 
-        axios.post('/api/purchase-order', orderData)
+        axios.post('/api/purchaseorder', orderData)
             .then(res => {
             //    this.$router.push(`/checkout/${res.data.id}`)
-                this.clearCartItems()
+                this.clearPurchaseItems()
+                this.model = null
+                this.purchaseData.discount = null
+                this.purchaseData.paid_amt = null
+                this.purchaseData.pmt_method = null
             })
         console.log(orderData)
     },

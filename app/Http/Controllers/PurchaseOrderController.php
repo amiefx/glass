@@ -7,8 +7,9 @@ use App\Models\Purchase;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\PurchaseOrderCollection;
-use App\Http\Resources\PurchaseOrderResource; 
+use App\Http\Resources\PurchaseOrderResource;
 use App\Http\Controllers\PayablesController;
+use App\Models\Payable;
 use Illuminate\Support\Facades\DB;
 
 class PurchaseOrderController extends Controller
@@ -65,13 +66,16 @@ class PurchaseOrderController extends Controller
             $purchaseorder = new PurchaseOrder([
                 "supplier_id" => $order['supplier_id'],
                 "total" => $order['total'],
-                "amount_recieved" => $order['paid_amt'],
                 "discount" => $order['discount'],
+                "sub_total" => $order['subtotal'],
+                "amount_paid" => $order['paid_amt'],
                 "note" => $order['note'],
                 "status" => $order['pmt_method'],
                 "user_id" => $user->id,
             ]);
             $purchaseorder->save();
+
+          //  dd($purchaseorder->id);
 
             $items = $postData['orderedItems'];
 
@@ -87,17 +91,27 @@ class PurchaseOrderController extends Controller
                 ]);
             }
 
-            if ($order['pmt_method'] == 'Cash') {
-                // store in cash register
-            }else
-            {
-                if ($order['payable_amt'] < 0) {
-                    $this->payablescontroller->creditPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
+            if ( $order['paid_amt'] > 0 ) {
+                if ($order['pmt_method'] == 'Cash') {
+                    // store in cash register
                 } else {
-                    $this->payablescontroller->debitPayable($order['pmt_method'], $order['supplier_id'], $order['note'], $order['payable_amt'], 1, $user->id);
+                    // store in back account
                 }
-                
-                
+            }
+
+            if ($order['payable_amt'] > 0) {
+
+                Payable::create([
+                    'type' => 'purchase order',
+                    'doc_id' => $purchaseorder->id,
+                    'supplier_id' => $order['supplier_id'],
+                    'debit' => 0,
+                    'credit' => $order['payable_amt'],
+                    'balance' => $order['payable_amt'],
+                    'status' => 1,
+                    'user_id' => $user->id
+                ]);
+
             }
 
             DB::commit();
@@ -153,13 +167,13 @@ class PurchaseOrderController extends Controller
         $purchaseorder = PurchaseOrder::find($id);
 
         $purchaseorder->supplier_id = $request->supplier_id;
-        $purchaseorder->total = $request->total; 
+        $purchaseorder->total = $request->total;
         $purchaseorder->amount_recieved = $request->amount_recieved;
-        $purchaseorder->discount = $request->discount; 
+        $purchaseorder->discount = $request->discount;
         $purchaseorder->status = $request->status;
         $purchaseorder->note = $request->note;
         $purchaseorder->user_id = $user->id;
-        
+
         $purchaseorder->save();
         return response()->json(['purchase_order' => new PurchaseOrderResource($purchaseorder)], 200);
     }

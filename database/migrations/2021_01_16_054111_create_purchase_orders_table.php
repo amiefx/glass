@@ -16,12 +16,13 @@ class CreatePurchaseOrdersTable extends Migration
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
             $table->integer('supplier_id');
+            $table->integer('sub_total')->default(0);
+            $table->integer('discount')->nullable()->default(0);
             $table->integer('total')->default(0);
-            $table->integer('amount_recieved')->nullable()->default(null); 
-            $table->integer('discount')->nullable()->default(0); 
-            $table->integer('note')->nullable()->default(null); 
+            $table->integer('amount_paid')->nullable()->default(null);
+            $table->integer('note')->nullable()->default(null);
             $table->string('status')->nullable()->default(null);
-            $table->integer('user_id'); 
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

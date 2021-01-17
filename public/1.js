@@ -401,7 +401,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           total: this.total,
           paid_amt: this.purchaseData.paid_amt,
           payable_amt: this.amtDue,
-          pmt_method: this.purchaseData.pmt_method
+          pmt_method: this.purchaseData.pmt_method,
+          note: ''
         },
         orderedItems: this.purchase
       }; // Add a request interceptor
@@ -421,9 +422,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.loading = false;
         return Promise.reject(error);
       });
-      axios.post('/api/purchase-order', orderData).then(function (res) {
+      axios.post('/api/purchaseorder', orderData).then(function (res) {
         //    this.$router.push(`/checkout/${res.data.id}`)
-        _this.clearCartItems();
+        _this.clearPurchaseItems();
+
+        _this.model = null;
+        _this.purchaseData.discount = null;
+        _this.purchaseData.paid_amt = null;
+        _this.purchaseData.pmt_method = null;
       });
       console.log(orderData);
     }

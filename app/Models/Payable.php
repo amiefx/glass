@@ -11,12 +11,14 @@ class Payable extends Model
 
     protected $fillable = [
         'type',
+        'doc_id',
         'supplier_id',
         'description',
         'debit',
         'credit',
         'balance',
         'status',
+        'user_id'
     ];
 
 
