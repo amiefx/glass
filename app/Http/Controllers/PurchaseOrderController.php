@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PurchaseOrder;
 use App\Models\Purchase;
+use App\Models\Cash;
+use App\Models\Bank;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\PurchaseOrderCollection;
@@ -29,11 +31,14 @@ class PurchaseOrderController extends Controller
      */
     public function index(Request $request)
     {
+        $id = 1;
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'created_at';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
+        $supplier_id = $request->supplier_id;
+        $purchaseorders = PurchaseOrder::where('supplier_id', '=', $supplier_id );
         return response()->json([
-            'purchase_orders' => new PurchaseOrderCollection(PurchaseOrder::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
+            'purchase_orders' => new PurchaseOrderCollection($purchaseorders->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
     }
 
@@ -94,8 +99,26 @@ class PurchaseOrderController extends Controller
             if ( $order['paid_amt'] > 0 ) {
                 if ($order['pmt_method'] == 'Cash') {
                     // store in cash register
+                    Cash::create([
+                        'doc_type' => 'purchase order',
+                        'doc_id' => $purchaseorder->id,
+                        'supplier_id' => $order['supplier_id'],
+                        'debit' => 0,
+                        'credit' => $order['paid_amt'],
+                        'balance' => $order['paid_amt'] * (-1),
+                        'user_id' => $user->id
+                    ]);
                 } else {
                     // store in back account
+                    Bank::create([
+                        'doc_type' => 'purchase order',
+                        'doc_id' => $purchaseorder->id,
+                        'supplier_id' => $order['supplier_id'],
+                        'debit' => 0,
+                        'credit' => $order['paid_amt'],
+                        'balance' => $order['paid_amt'] * (-1),
+                        'user_id' => $user->id
+                    ]);
                 }
             }
 
@@ -114,6 +137,8 @@ class PurchaseOrderController extends Controller
 
             }
 
+
+
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollback();
@@ -131,12 +156,16 @@ class PurchaseOrderController extends Controller
      * @param  \App\Models\PurchaseOrder  $purchaseOrder
      * @return \Illuminate\Http\Response
      */
-    public function show(PurchaseOrder $purchaseOrder, $id)
+    public function show(Request $request, $id)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'created_at';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
-        $purchaseorders = PurchaseOrder::where('supplier_id', '=', "$id");
+        $supplier_id = $request->supplier_id;
+        $purchaseorders = PurchaseOrder::where([
+            ['id', $id],
+
+        ]);
         return response()->json([
             'purchase_orders' => new PurchaseOrderCollection($purchaseorders->orderBy($sortBy, $orderBy)->paginate($per_page)),
         ], 200);
@@ -168,7 +197,8 @@ class PurchaseOrderController extends Controller
 
         $purchaseorder->supplier_id = $request->supplier_id;
         $purchaseorder->total = $request->total;
-        $purchaseorder->amount_recieved = $request->amount_recieved;
+        $purchaseorder->sub_total = $request->sub_total;
+        $purchaseorder->amount_paid = $request->amount_paid;
         $purchaseorder->discount = $request->discount;
         $purchaseorder->status = $request->status;
         $purchaseorder->note = $request->note;
