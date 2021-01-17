@@ -10,13 +10,13 @@ class QtyStatistics extends Migration
     public function up()
     {
         DB::statement('CREATE VIEW qty_statistics AS
-        SELECT p.product_id AS product_id ,p.totalpurchased AS totalpurchased, COALESCE(s.totalsold,0) AS totalsold,
-        COALESCE(a.totaladjusted,0) AS totaladjusted, COALESCE(totalpurchased - (totalsold+totaladjusted),0) AS totalremaining, COALESCE(pro.alert_quantity,0) AS alert_qty,
+        SELECT p.product_id AS product_id ,p.totalpurchased AS totalpurchased, COALESCE(s.totalsold,0) AS totalsold, COALESCE(a.totaladjusted,0) AS totaladjusted, (COALESCE(p.totalpurchased,0) - (COALESCE(s.totalsold,0) + COALESCE(a.totaladjusted,0))) AS totalremaining, COALESCE(pro.alert_quantity,0) AS alert_qty,
         CASE
-         WHEN pro.alert_quantity < COALESCE(totalpurchased - (totalsold+totaladjusted), 0)
-         then 0
-         else 1
-         END
+        WHEN
+        COALESCE(COALESCE(p.totalpurchased,0) - (COALESCE(s.totalsold,0) + COALESCE(a.totaladjusted)), 0) < COALESCE(pro.alert_quantity,0) 
+        THEN 1
+        ELSE 0
+        END
         AS alert_status
         FROM total_purchases AS p
         LEFT JOIN total_sold AS s ON s.product_id=p.product_id
@@ -34,4 +34,3 @@ class QtyStatistics extends Migration
         DB::statement('DROP VIEW IF EXISTS qty_statistics');
     }
 }
-
