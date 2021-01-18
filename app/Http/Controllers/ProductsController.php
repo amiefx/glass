@@ -62,6 +62,21 @@ class ProductsController extends Controller
             'is_active' => $request->is_active
         ]);
         $product->save();
+
+
+        if ($request->quantity_on_hand > 0) {
+
+                $purchase = new Purchase([ 
+                    'order_id' => 0,
+                    'product_id' => $product->id,
+                    'quantity' => $request->quantity_on_hand,
+                    'price' => $request->purchase_price, 
+                    'user_id' => $user->id,
+                    'is_active' => $request->is_active
+                ]);
+                $purchase->save();
+
+        }
         return response()->json(['product'=> new ProductResource($product)], 200);
     }
 
