@@ -77,6 +77,12 @@ Route::group([
     Route::get('supplier/{id}/payable', 'SuppliersController@supplierPayable');
     Route::resource('suppliers', 'SuppliersController');
 
+    // employee
+    Route::get('employees/all', 'EmployeeController@allEmployees');
+    Route::get('employees/all/active', 'EmployeeController@allActiveEmployees');
+    Route::post('employee/changestatus/{id}', 'EmployeeController@changeStatus');
+    Route::resource('employees', 'EmployeeController');
+
     // products
     Route::get('products/all', 'ProductsController@allProducts');
     Route::get('products/{id}/brand', 'ProductsController@productBrand');
@@ -102,11 +108,13 @@ Route::group([
 
     // purchase detail
     Route::resource('purchase', 'PurchaseController');
+
     // purchase order
     Route::resource('purchaseorder', 'PurchaseOrderController');
 
     // orderdetail
     Route::resource('orderdetail', 'OrderDetailController');
+
     // order
     Route::resource('order', 'OrderController');
 
@@ -146,6 +154,13 @@ Route::group([
     Route::post('debitPayable', 'PayablesController@debitPayable');
     Route::post('creditPayable', 'PayablesController@creditPayable');
     Route::post('deletePayable', 'PayablesController@deletePayable');
+
+
+    // expenses
+    Route::resource('expenses', 'ExpenseController');
+
+    // salary
+    Route::resource('salaries', 'SalaryController');
 
 });
 
