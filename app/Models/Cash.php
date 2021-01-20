@@ -18,6 +18,7 @@ class Cash extends Model
         'credit',
         'debit',
         'balance',
+        'status',
         'user_id'
     ];
 

@@ -25,6 +25,7 @@ class CashResource extends JsonResource
             'debit' => $this->debit,
             'balance' => $this->balance,
             'user_id' => $this->user_id,
+            'status' => $this->status,
             'created_at' => $this->created_at->format('d M, Y')
           ];
     }

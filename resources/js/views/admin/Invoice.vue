@@ -276,7 +276,7 @@ export default {
       doc_types: ['Invoice', 'Quotation'],
       invoiceData: {
           customer_id: '',
-          subtotal: '',
+          sub_total: '',
           discount: '',
           received_amt: '',
           receivable_amt: '',
@@ -312,7 +312,7 @@ export default {
         let orderData = {
             orderDetails: {
                 customer_id: this.model,
-                subtotal: this.cartTotalPrice,
+                sub_total: this.cartTotalPrice,
                 discount: this.invoiceData.discount,
                 total: this.total,
                 received_amt: this.invoiceData.received_amt,
@@ -340,12 +340,12 @@ export default {
             return Promise.reject(error);
         });
 
-        // axios.post('/api/orders', orderData)
-        //     .then(res => {
-        //         this.$router.push(`/checkout/${res.data.id}`)
-        //         this.clearCartItems()
-        //     })
-        console.log(orderData)
+        axios.post('/api/order', orderData)
+            .then(res => {
+              //  this.$router.push(`/checkout/${res.data.id}`)
+                this.clearCartItems()
+            })
+     //   console.log(orderData)
     },
 
     changeHeight(item) {

@@ -22,6 +22,29 @@
         <v-list-item-title v-text="item.title"></v-list-item-title>
       </v-list-item>
 
+      <!-- accounts -->
+      <v-list-group
+        :value="false"
+        prepend-icon="mdi-account-cash-outline"
+      >
+        <template v-slot:activator>
+          <v-list-item-title>Accounts</v-list-item-title>
+        </template>
+
+        <v-list-item
+            v-for="(item, i) in accounts"
+            :key="i"
+            link
+            dense
+            :to="item.to"
+          >
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+
       <!-- procut Management -->
       <v-list-group
         :value="false"
@@ -296,6 +319,19 @@ export default {
           icon: 'mdi-database-import',
           title: 'Payables',
           to: '/admin/payables'
+        }
+      ],
+
+      accounts: [
+        {
+          icon: 'mdi-cash',
+          title: 'Cash Register',
+          to: '/admin/cash'
+        },
+        {
+          icon: 'mdi-bank',
+          title: 'Bank',
+          to: '/admin/bank'
         }
       ],
 

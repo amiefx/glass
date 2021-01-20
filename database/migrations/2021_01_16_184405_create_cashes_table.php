@@ -23,6 +23,7 @@ class CreateCashesTable extends Migration
             $table->integer('credit')->nullable()->default(0);
             $table->integer('debit')->nullable()->default(0);
             $table->integer('balance')->nullable()->default(0);
+            $table->boolean('status')->default(true);
             $table->integer('user_id');
             $table->timestamps();
         });

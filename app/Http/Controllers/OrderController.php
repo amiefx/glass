@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderCollection;
 use App\Http\Resources\OrderResource;
-
+use App\Models\Cash;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Receivable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -20,10 +22,12 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
-        $sortBy = $request->sort_by ? $request->sort_by : 'created_at';
+        $sortBy = $request->sort_by ? $request->sort_by : 'id';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
+        $customer_id = $request->customer_id;
+        $orders = Order::where('customer_id', '=', $customer_id );
         return response()->json([
-            'orders' => new OrderCollection(Order::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
+            'orders' => new OrderCollection($orders->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
     }
 
@@ -54,12 +58,14 @@ class OrderController extends Controller
 
             $order = $postData['orderDetails'];
 
-            $neworder = new Order([ 
+            $neworder = new Order([
                 'customer_id' => $order['customer_id'],
+                'sub_total' => $order['sub_total'],
+                'discount' => $order['discount'],
                 'total' => $order['total'],
                 'amount_recieved' => $order['received_amt'],
                 "discount" => $order['discount'],
-                'status' => $order['doc_type'], 
+                'status' => $order['doc_type'],
                 // 'note' => $request->note,
                 'user_id' => $user->id,
             ]);
@@ -79,15 +85,34 @@ class OrderController extends Controller
                 ]);
             }
 
-            if ($order['doc_type'] == 'Cash') {
-                // store in cash register
-            }else
-            {
-                if ($order['payable_amt'] < 0) {
-                    $this->payablescontroller->creditPayable($order['doc_type'], $order['customer_id'], '' , $order['payable_amt'], 1, $user->id);
-                } else {
-                    $this->payablescontroller->debitPayable($order['doc_type'], $order['customer_id'], '' , $order['payable_amt'], 1, $user->id);
-                }
+            if ($order['receivable_amt'] > 0) {
+
+                Receivable::create([
+                    'type' => 'invoice',
+                    'doc_id' => $neworder->id,
+                    'customer_id' => $order['customer_id'],
+                    'debit' => $order['receivable_amt'],
+                    'credit' => 0,
+                    'balance' => $order['receivable_amt'],
+                    'status' => $order['doc_type'] == 'Invoice' ? 1 : 0,
+                    'user_id' => $user->id
+                ]);
+
+            }
+
+            if ($order['received_amt'] > 0) {
+
+                Cash::create([
+                    'doc_type' => 'invoice',
+                    'doc_id' => $neworder->id,
+                    'customer_id' => $order['customer_id'],
+                    'debit' => $order['received_amt'],
+                    'credit' => 0,
+                    'balance' => $order['received_amt'],
+                    'status' => $order['doc_type'] == 'Invoice' ? 1 : 0,
+                    'user_id' => $user->id
+                ]);
+
             }
 
 
@@ -110,9 +135,11 @@ class OrderController extends Controller
     public function show(Request $request, $id)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
-        $sortBy = $request->sort_by ? $request->sort_by : 'created';
+        $sortBy = $request->sort_by ? $request->sort_by : 'id';
         $orderBy = $request->order_by ? $request->order_by : 'asc';
-        $orders = Order::where('status', 'LIKE', "%$id%");
+        $orders = Order::where([
+            ['id', $id],
+        ]);
         return response()->json([
             'orders' => new OrderCollection($orders->orderBy($sortBy, $orderBy)->paginate($per_page)),
         ], 200);
@@ -143,13 +170,13 @@ class OrderController extends Controller
         $order = Order::find($id);
 
         $order->customer_id = $request->customer_id;
-        $order->total = $request->total; 
+        $order->total = $request->total;
         $order->amount_recieved = $request->amount_recieved;
-        $order->discount = $request->discount; 
+        $order->discount = $request->discount;
         $order->status = $request->status;
         $order->note = $request->note;
         $order->user_id = $user->id;
-        
+
         $order->save();
         return response()->json(['order' => new OrderResource($order)], 200);
     }

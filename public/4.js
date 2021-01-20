@@ -151,50 +151,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     submit: function submit() {
       var _this = this;
 
-      if (this.form.robot) {
-        // Add a request interceptor
-        axios.interceptors.request.use(function (config) {
-          _this.loading = true;
-          return config;
-        }, function (error) {
-          _this.loading = false;
-          return Promise.reject(error);
-        }); // Add a response interceptor
+      // Add a request interceptor
+      axios.interceptors.request.use(function (config) {
+        _this.loading = true;
+        return config;
+      }, function (error) {
+        _this.loading = false;
+        return Promise.reject(error);
+      }); // Add a response interceptor
 
-        axios.interceptors.response.use(function (response) {
-          _this.loading = false;
-          return response;
-        }, function (error) {
-          _this.loading = false;
-          return Promise.reject(error);
-        });
-        this.signIn(this.form).then(function (res) {
-          if (_this.user.type == 'Admin') {
-            _this.$router.replace({
-              name: 'dashboard'
-            });
-          } else {
-            _this.$router.replace({
-              name: 'home'
-            });
-          }
-        })["catch"](function (err) {
-          //  this.text = err.response.data.errors.email[0]
-          _this.text = "some errors";
-          _this.snackbar = true;
-        }); // this.$auth.loginWith('local', { data: this.form })
-        //     .then(res => {
-        //         if(this.$auth.user.role == 'Administrator') {
-        //             this.$router.replace({ name: 'admin' })
-        //         }else{
-        //             this.$router.replace({ name: 'account' })
-        //         }
-        //     })
-        //     .catch( err => {
-        //         this.text = err.response.data.errors.email[0]
-        //         this.snackbar = true
-        //     })
-      }
+      axios.interceptors.response.use(function (response) {
+        _this.loading = false;
+        return response;
+      }, function (error) {
+        _this.loading = false;
+        return Promise.reject(error);
+      });
+      this.signIn(this.form).then(function (res) {
+        if (_this.user.type == 'Admin') {
+          _this.$router.replace({
+            name: 'dashboard'
+          });
+        } else {
+          _this.$router.replace({
+            name: 'home'
+          });
+        }
+      })["catch"](function (err) {
+        //  this.text = err.response.data.errors.email[0]
+        _this.text = "some errors";
+        _this.snackbar = true;
+      }); // this.$auth.loginWith('local', { data: this.form })
+      //     .then(res => {
+      //         if(this.$auth.user.role == 'Administrator') {
+      //             this.$router.replace({ name: 'admin' })
+      //         }else{
+      //             this.$router.replace({ name: 'account' })
+      //         }
+      //     })
+      //     .catch( err => {
+      //         this.text = err.response.data.errors.email[0]
+      //         this.snackbar = true
+      //     })
     },
     onVerify: function onVerify(response) {
       if (response) this.form.robot = true;
@@ -329,15 +327,6 @@ var render = function() {
                                   },
                                   expression: "form.password"
                                 }
-                              }),
-                              _vm._v(" "),
-                              _c("vue-recaptcha", {
-                                ref: "recaptcha",
-                                attrs: {
-                                  sitekey:
-                                    "6Lc0fNsZAAAAAJoq33n9PPWeN7nWgNeJDBVaNNZ1"
-                                },
-                                on: { verify: _vm.onVerify }
                               })
                             ],
                             1

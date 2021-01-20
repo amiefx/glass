@@ -51,7 +51,6 @@ import { mapGetters, mapActions } from "vuex"
           { text: 'Phone', value: 'work_number' },
           { text: 'Balance', value: 'payables' }
         ],
-        suppliers: [],
       }
     },
 

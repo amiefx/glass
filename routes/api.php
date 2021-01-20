@@ -106,6 +106,12 @@ Route::group([
     // Bank
     Route::resource('banks', 'BankController');
 
+    // Payment
+    Route::resource('payments', 'PaymentsController');
+
+    // Receipt
+    Route::resource('receipts', 'ReceiptController');
+
     // purchase detail
     Route::resource('purchase', 'PurchaseController');
 

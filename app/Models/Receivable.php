@@ -17,7 +17,8 @@ class Receivable extends Model
         'debit',
         'credit',
         'balance',
-        'status'
+        'status',
+        'user_id'
     ];
 
     protected $table = 'recievables';

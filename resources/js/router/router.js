@@ -163,7 +163,7 @@ const routes = [
     {
         path: '/admin/test',
         name: 'transaction',
-        component: () => import('../views/admin/Test.vue'),
+        component: () => import('../views/admin/PurchaseOrders.vue'),
         meta: {
             layout: 'admin',
             middleware: [
@@ -182,17 +182,17 @@ const routes = [
             ]
         }
     },
-    // {
-    //     path: '/admin/ratings',
-    //     name: 'ratings',
-    //     component: () => import('../views/admin/Ratings.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/bank',
+        name: 'bank',
+        component: () => import('../views/admin/Bank.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/notify',
     //     name: 'notify',

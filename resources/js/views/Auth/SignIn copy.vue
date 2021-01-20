@@ -51,9 +51,9 @@
                     required
                   />
 
-                  <!-- <vue-recaptcha ref="recaptcha"
+                  <vue-recaptcha ref="recaptcha"
                     @verify="onVerify" sitekey="6Lc0fNsZAAAAAJoq33n9PPWeN7nWgNeJDBVaNNZ1">
-                  </vue-recaptcha> -->
+                  </vue-recaptcha>
 
               </v-card-text>
               <v-card-actions>
@@ -126,6 +126,7 @@ import { mapGetters, mapActions } from "vuex";
 
           submit() {
 
+            if (this.form.robot) {
 
               // Add a request interceptor
             axios.interceptors.request.use((config) => {
@@ -172,6 +173,7 @@ import { mapGetters, mapActions } from "vuex";
             //         this.snackbar = true
             //     })
 
+          }
 
           },
 
