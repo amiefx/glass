@@ -11,6 +11,13 @@ use App\Http\Resources\BankResource;
 
 class BankController extends Controller
 {
+    public function balance()
+    {
+        return response()->json([
+            'balance' => Bank::get()->sum('balance')
+        ], 200);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -67,9 +74,15 @@ class BankController extends Controller
      * @param  \App\Models\Bank  $bank
      * @return \Illuminate\Http\Response
      */
-    public function show(Bank $bank)
+    public function show(Request $request, $id)
     {
-        //
+        $per_page = $request->per_page ? $request->per_page : 5;
+        $sortBy = $request->sort_by ? $request->sort_by : 'id';
+        $orderBy = $request->order_by ? $request->order_by : 'asc';
+        $banks = Bank::where('id', 'LIKE', "%$id%");
+        return response()->json([
+            'banks' => new BankCollection($banks->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
+        ], 200);
     }
 
     /**

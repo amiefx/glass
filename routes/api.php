@@ -100,10 +100,14 @@ Route::group([
     Route::resource('slabs', 'SlabController');
 
     // Cash
+    Route::post('cashes/openbl', 'CashController@openbl');
+    Route::post('cashes/withdraw', 'CashController@withdraw');
+    Route::post('cashes/transfer', 'CashController@transfer');
     Route::get('cashes/balance', 'CashController@balance');
     Route::resource('cashes', 'CashController');
 
     // Bank
+    Route::get('banks/balance', 'BankController@balance');
     Route::resource('banks', 'BankController');
 
     // Payment

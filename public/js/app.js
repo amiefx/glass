@@ -2499,6 +2499,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         icon: 'mdi-bank',
         title: 'Bank',
         to: '/admin/bank'
+      }, {
+        icon: 'mdi-bank-transfer',
+        title: 'Transaction',
+        to: '/admin/transaction'
       }],
       users: [{
         icon: 'mdi-account-multiple-plus',
@@ -86275,18 +86279,17 @@ var routes = [{
     layout: 'admin',
     middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
   }
+}, {
+  path: '/admin/transaction',
+  name: 'transaction',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ../views/admin/Transfer.vue */ "./resources/js/views/admin/Transfer.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
+  }
 }, // {
-//     path: '/admin/notify',
-//     name: 'notify',
-//     component: () => import('../views/admin/notify.vue'),
-//     meta: {
-//         layout: 'admin',
-//         middleware: [
-//             auth, admin
-//         ]
-//     }
-// },
-// {
 //     path: '/admin/attribute-sets',
 //     name: 'attribute-sets',
 //     component: () => import('../views/admin/Attribute-sets.vue'),

@@ -27,7 +27,7 @@
           vertical
         ></v-divider>
         <v-spacer></v-spacer>
-        <span>Balance: {{balance}}</span>
+        <v-toolbar-title> Balance: {{ balance }}</v-toolbar-title>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
             <!-- <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('new cash') }}</v-btn> -->
@@ -155,6 +155,7 @@
         { text: 'Employee', value: 'employee_id' },
         { text: 'Debit', value: 'debit' },
         { text: 'Credit', value: 'credit' },
+        { text: 'User', value: 'user_id' }
       ],
       status: [
           {text: 'Active', value: true},
@@ -251,7 +252,7 @@
       //       }
       // },
       searchIt(e){
-          if(e.length > 3){
+          if(e.length > 0){
               axios.get(`/api/cashes/${e}`)
                 .then(res => this.cashes = res.data.cashes)
                 .catch(err => console.dir(err.response))

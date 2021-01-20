@@ -332,6 +332,11 @@ export default {
           icon: 'mdi-bank',
           title: 'Bank',
           to: '/admin/bank'
+        },
+        {
+          icon: 'mdi-bank-transfer',
+          title: 'Transaction',
+          to: '/admin/transaction'
         }
       ],
 

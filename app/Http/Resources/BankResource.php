@@ -18,13 +18,14 @@ class BankResource extends JsonResource
             'id' => $this->id,
             'doc_type' => $this->doc_type,
             'doc_id' => $this->doc_id,
-            'supplier_id' => $this->supplier_id,
-            'customer_id' => $this->customer_id,
-            'employee_id' => $this->employee_id,
+            'supplier_id' => $this->supplier_id ? $this->supplier->name : '' ,
+            'customer_id' => $this->customer_id ? $this->customer->name : '' ,
+            'employee_id' => $this->employee_id ? $this->employee->name : '' ,
             'credit' => $this->credit,
             'debit' => $this->debit,
             'balance' => $this->balance,
-            'user_id' => $this->user_id,
+            'user_id' => $this->user_id ? $this->user->name : '' ,
+            'created_at' => $this->created_at->format('d M, Y')
           ];
     }
 }

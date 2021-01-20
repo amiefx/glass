@@ -10,7 +10,7 @@ class Bank extends Model
     use HasFactory;
 
     protected $fillable = [
-        'doc_type', 
+        'doc_type',
         'doc_id',
         'supplier_id',
         'customer_id',
@@ -22,5 +22,21 @@ class Bank extends Model
     ];
 
     protected $table = 'banks';
+
+     //relationships
+     public function customer()
+     {
+         return $this->belongsTo(Customer::class);
+     }
+
+     public function supplier()
+     {
+         return $this->belongsTo(Supplier::class);
+     }
+
+     public function user()
+     {
+         return $this->belongsTo(User::class);
+     }
 
 }

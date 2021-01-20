@@ -25,15 +25,18 @@ class Cash extends Model
     protected $table = 'cashes';
 
     //relationships
-    public function customers()
+    public function customer()
     {
-        return $this->belongsToMany(Customer::class);
+        return $this->belongsTo(Customer::class);
     }
 
-    public function suppliers()
+    public function supplier()
     {
-        return $this->belongsToMany(Supplier::class);
+        return $this->belongsTo(Supplier::class);
     }
 
-
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

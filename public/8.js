@@ -186,6 +186,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Credit',
         value: 'credit'
+      }, {
+        text: 'User',
+        value: 'user_id'
       }],
       status: [{
         text: 'Active',
@@ -285,7 +288,7 @@ __webpack_require__.r(__webpack_exports__);
     searchIt: function searchIt(e) {
       var _this3 = this;
 
-      if (e.length > 3) {
+      if (e.length > 0) {
         axios.get("/api/cashes/".concat(e)).then(function (res) {
           return _this3.cashes = res.data.cashes;
         })["catch"](function (err) {
@@ -481,7 +484,9 @@ var render = function() {
                     _vm._v(" "),
                     _c("v-spacer"),
                     _vm._v(" "),
-                    _c("span", [_vm._v("Balance: " + _vm._s(_vm.balance))]),
+                    _c("v-toolbar-title", [
+                      _vm._v(" Balance: " + _vm._s(_vm.balance))
+                    ]),
                     _vm._v(" "),
                     _c(
                       "v-dialog",

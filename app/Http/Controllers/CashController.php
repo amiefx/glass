@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\CashCollection;
 use App\Http\Resources\CashResource;
+use App\Models\Bank;
 
 class CashController extends Controller
 {
@@ -15,6 +16,130 @@ class CashController extends Controller
         return response()->json([
             'balance' => Cash::get()->sum('balance')
         ], 200);
+    }
+
+    public function openbl(Request $request)
+    {
+        $user = auth()->user();
+
+        if ( $request->pmt_method == "Cash") {
+            $cash = new Cash([
+                'doc_type' => $request->doc_type,
+                'doc_id' => 0,
+                'credit' => 0,
+                'debit' => $request->amount,
+                'balance' => $request->amount,
+                'user_id' => $user->id,
+                'status' => 1
+            ]);
+            $cash->save();
+        } else {
+            $cash = new Bank([
+                'doc_type' => $request->doc_type,
+                'doc_id' => 0,
+                'details' => $request->details,
+                'notes' => $request->notes,
+                'credit' => 0,
+                'debit' => $request->amount,
+                'balance' => $request->amount,
+                'user_id' => $user->id,
+                'status' => 1
+            ]);
+            $cash->save();
+        }
+
+        return response()->json(['cash'=> new CashResource($cash)], 200);
+    }
+
+    public function withdraw(Request $request)
+    {
+        $user = auth()->user();
+
+        if ( $request->pmt_method == "Cash") {
+            $cash = new Cash([
+                'doc_type' => $request->doc_type,
+                'doc_id' => 0,
+                'credit' => $request->amount,
+                'debit' => 0,
+                'balance' => $request->amount * (-1),
+                'user_id' => $user->id,
+                'status' => 1
+            ]);
+            $cash->save();
+        } else {
+            $cash = new Bank([
+                'doc_type' => $request->doc_type,
+                'doc_id' => 0,
+                'details' => $request->details,
+                'notes' => $request->notes,
+                'credit' => $request->amount,
+                'debit' => 0,
+                'balance' => $request->amount * (-1),
+                'user_id' => $user->id,
+                'status' => 1
+            ]);
+            $cash->save();
+        }
+
+        return response()->json(['cash'=> new CashResource($cash)], 200);
+    }
+
+    public function transfer(Request $request)
+    {
+        $user = auth()->user();
+
+        if ( $request->pmt_method == "Bank") {
+            $cash = new Cash([
+                'doc_type' => $request->doc_type,
+                'doc_id' => 0,
+                'credit' => 0,
+                'debit' => $request->amount,
+                'balance' => $request->amount,
+                'user_id' => $user->id,
+                'status' => 1
+            ]);
+            $cash->save();
+
+            $bank = new Bank([
+                'doc_type' => $request->doc_type,
+                'doc_id' => 0,
+                'details' => $request->details,
+                'notes' => $request->notes,
+                'credit' => $request->amount,
+                'debit' => 0,
+                'balance' => $request->amount * (-1),
+                'user_id' => $user->id,
+                'status' => 1
+            ]);
+            $bank->save();
+
+        } else {
+            $cash = new Cash([
+                'doc_type' => $request->doc_type,
+                'doc_id' => 0,
+                'credit' => $request->amount,
+                'debit' => 0,
+                'balance' => $request->amount * (-1),
+                'user_id' => $user->id,
+                'status' => 1
+            ]);
+            $cash->save();
+
+            $bank = new Bank([
+                'doc_type' => $request->doc_type,
+                'doc_id' => 0,
+                'details' => $request->details,
+                'notes' => $request->notes,
+                'credit' => 0,
+                'debit' => $request->amount,
+                'balance' => $request->amount,
+                'user_id' => $user->id,
+                'status' => 1
+            ]);
+            $bank->save();
+        }
+
+        return response()->json(['cash'=> new CashResource($cash)], 200);
     }
 
     /**
@@ -73,9 +198,15 @@ class CashController extends Controller
      * @param  \App\Models\Cash  $cash
      * @return \Illuminate\Http\Response
      */
-    public function show(Cash $cash)
+    public function show(Request $request, $id)
     {
-        //
+        $per_page = $request->per_page ? $request->per_page : 5;
+        $sortBy = $request->sort_by ? $request->sort_by : 'id';
+        $orderBy = $request->order_by ? $request->order_by : 'asc';
+        $cashes = Cash::where('id', 'LIKE', "%$id%");
+        return response()->json([
+            'cashes' => new CashCollection($cashes->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
+        ], 200);
     }
 
     /**

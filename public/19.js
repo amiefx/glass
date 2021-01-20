@@ -186,13 +186,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Credit',
         value: 'credit'
-      }],
-      status: [{
-        text: 'Active',
-        value: true
       }, {
-        text: 'In Active',
-        value: false
+        text: 'User',
+        value: 'user_id'
       }],
       banks: [],
       balance: '',
@@ -285,7 +281,7 @@ __webpack_require__.r(__webpack_exports__);
     searchIt: function searchIt(e) {
       var _this3 = this;
 
-      if (e.length > 3) {
+      if (e.length > 0) {
         axios.get("/api/banks/".concat(e)).then(function (res) {
           return _this3.banks = res.data.banks;
         })["catch"](function (err) {
@@ -471,7 +467,7 @@ var render = function() {
                   { attrs: { flat: "", color: "" } },
                   [
                     _c("v-toolbar-title", [
-                      _vm._v(" " + _vm._s(_vm.$t("bank Register")))
+                      _vm._v(" " + _vm._s(_vm.$t("bank Account")))
                     ]),
                     _vm._v(" "),
                     _c("v-divider", {
@@ -481,7 +477,9 @@ var render = function() {
                     _vm._v(" "),
                     _c("v-spacer"),
                     _vm._v(" "),
-                    _c("span", [_vm._v("Balance: " + _vm._s(_vm.balance))]),
+                    _c("v-toolbar-title", [
+                      _vm._v(" Balance: " + _vm._s(_vm.balance))
+                    ]),
                     _vm._v(" "),
                     _c(
                       "v-dialog",

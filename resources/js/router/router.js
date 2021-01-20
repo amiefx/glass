@@ -193,17 +193,17 @@ const routes = [
             ]
         }
     },
-    // {
-    //     path: '/admin/notify',
-    //     name: 'notify',
-    //     component: () => import('../views/admin/notify.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/transaction',
+        name: 'transaction',
+        component: () => import('../views/admin/Transfer.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/attribute-sets',
     //     name: 'attribute-sets',

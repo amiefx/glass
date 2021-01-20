@@ -20,14 +20,14 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="">
-        <v-toolbar-title> {{ $t('bank Register') }}</v-toolbar-title>
+        <v-toolbar-title> {{ $t('bank Account') }}</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
           vertical
         ></v-divider>
         <v-spacer></v-spacer>
-        <span>Balance: {{balance}}</span>
+        <v-toolbar-title> Balance: {{ balance }}</v-toolbar-title>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
             <!-- <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('new bank') }}</v-btn> -->
@@ -155,10 +155,7 @@
         { text: 'Employee', value: 'employee_id' },
         { text: 'Debit', value: 'debit' },
         { text: 'Credit', value: 'credit' },
-      ],
-      status: [
-          {text: 'Active', value: true},
-          {text: 'In Active', value: false}
+        { text: 'User', value: 'user_id' },
       ],
       banks: [],
       balance: '',
@@ -251,7 +248,7 @@
       //       }
       // },
       searchIt(e){
-          if(e.length > 3){
+          if(e.length > 0){
               axios.get(`/api/banks/${e}`)
                 .then(res => this.banks = res.data.banks)
                 .catch(err => console.dir(err.response))
