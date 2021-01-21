@@ -179,6 +179,48 @@ Route::group([
     // salary
     Route::resource('salaries', 'SalaryController');
 
+
+    //reports
+    Route::get('report/totalproducts', 'ReportController@totalNumberProducts');
+    Route::get('report/totalusers', 'ReportController@totalNumberUsers');
+    Route::get('report/totalsuppliers', 'ReportController@totalNumberSuppliers');
+    Route::get('report/totalcustomers', 'ReportController@totalNumberCustomers');
+    Route::get('report/totalemployees', 'ReportController@totalNumberEmployees');
+
+    Route::get('report/totalpurchasesorders', 'ReportController@totalNumberPurchaseOrders');
+    Route::get('report/totalpurchasesordersbyid/{id}', 'ReportController@totalNumberPurchaseOrdersById');
+    Route::get('report/totalpurchasesordersbysupplierid/{id}', 'ReportController@totalNumberPurchaseOrdersBySupplierId');
+    Route::get('report/totalpurchasesordersbystatus/{status}', 'ReportController@totalNumberPurchaseOrdersByStatus');
+    Route::get('report/totalpurchasesordersbydate/{date}', 'ReportController@totalNumberPurchaseOrdersByDate');
+    Route::get('report/totalpurchasesitemsbyorderid/{id}', 'ReportController@totalNumberPurchaseItemsByOrderId');
+
+    Route::get('report/totalorders', 'ReportController@totalNumberOrders');
+    Route::get('report/totalordersbyid/{id}', 'ReportController@totalNumberOrdersById');
+    Route::get('report/totalordersbycustomerid/{id}', 'ReportController@totalNumberOrdersByCustomerId');
+    Route::get('report/totalordersbystatus/{status}', 'ReportController@totalNumberOrdersByStatus');
+    Route::get('report/totalordersbydate/{date}', 'ReportController@totalNumberOrdersByDate');
+    Route::get('report/totalorderitemsbyorderid/{id}', 'ReportController@totalNumberOrderItemsByOrderId');
+
+    Route::get('report/totalrecievables', 'ReportController@totalNumberRecievables');
+    Route::get('report/totalrecievablesbyid/{id}', 'ReportController@totalNumberRecievablesById');
+    Route::get('report/totalrecievablesbycustomerid/{id}', 'ReportController@totalNumberRecievablesByCustomerId');
+    Route::get('report/totalrecievablesbystatus/{status}', 'ReportController@totalNumberRecievablesByStatus');
+    Route::get('report/totalrecievablesbytype/{type}', 'ReportController@totalNumberRecievablesByType');
+    Route::get('report/totalrecievablesbydate/{date}', 'ReportController@totalNumberRecievablesByDate');
+    Route::get('report/totalrecievablesbydocid/{id}', 'ReportController@totalNumberRecievablesByDocId');
+
+
+    Route::get('report/totalpayables', 'ReportController@totalNumberPayables');
+    Route::get('report/totalpayablesbyid/{id}', 'ReportController@totalNumberPayablesById');
+    Route::get('report/totalpayablesbysupplierid/{id}', 'ReportController@totalNumberPayablesBySupplierId');
+    Route::get('report/totalpayablesbystatus/{status}', 'ReportController@totalNumberPayablesByStatus');
+    Route::get('report/totalpayablesbytype/{type}', 'ReportController@totalNumberPayablesByType');
+    Route::get('report/totalpayablesbydate/{date}', 'ReportController@totalNumberPayablesByDate');
+    Route::get('report/totalpayablesbydocid/{id}', 'ReportController@totalNumberPayablesByDocId');
+
+
+
+
 });
 
 Route::group([
