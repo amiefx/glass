@@ -58,7 +58,7 @@
 export default {
   layout: "admin",
   middleware: ["auth", "admin"],
-  props: ["supplier_id"],
+  props: ["customer_id"],
   data: () => ({
     valid: true,
     dialog: false,
@@ -109,7 +109,7 @@ export default {
               per_page: e.itemsPerPage,
               sort_by: sortBy,
               order_by: orderBy,
-              supplier_id: this.supplier_id,
+              customer_id: this.customer_id,
             },
           })
           .then((res) => {
@@ -131,7 +131,7 @@ export default {
             per_page: e.itemsPerPage,
             sort_by: sortBy,
             order_by: orderBy,
-            supplier_id: this.supplier_id,
+            customer_id: this.customer_id,
           },
         })
         .then((res) => {
@@ -182,7 +182,7 @@ export default {
   },
 
   watch: {
-    supplier_id() {
+    customer_id() {
       let e = {
         itemsLength: 0,
         itemsPerPage: 5,

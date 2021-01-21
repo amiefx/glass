@@ -604,7 +604,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: "admin",
   middleware: ["auth", "admin"],
-  props: ["supplier_id"],
+  props: ["customer_id"],
   data: function data() {
     return {
       valid: true,
@@ -663,7 +663,7 @@ __webpack_require__.r(__webpack_exports__);
             per_page: e.itemsPerPage,
             sort_by: sortBy,
             order_by: orderBy,
-            supplier_id: this.supplier_id
+            customer_id: this.customer_id
           }
         }).then(function (res) {
           _this.receipts = res.data.receipts;
@@ -682,7 +682,7 @@ __webpack_require__.r(__webpack_exports__);
           per_page: e.itemsPerPage,
           sort_by: sortBy,
           order_by: orderBy,
-          supplier_id: this.supplier_id
+          customer_id: this.customer_id
         }
       }).then(function (res) {
         _this2.receipts = res.data.receipts;
@@ -722,7 +722,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   watch: {
-    supplier_id: function supplier_id() {
+    customer_id: function customer_id() {
       var e = {
         itemsLength: 0,
         itemsPerPage: 5,

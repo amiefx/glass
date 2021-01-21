@@ -39,79 +39,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    products: {
+      required: true,
+      type: Array
+    }
+  },
   data: function data() {
     return {
-      search: '',
+      search: "",
       headers: [{
-        text: 'SKU',
-        align: 'start',
-        sortable: false,
-        value: 'sku'
+        text: "SKU",
+        align: "start",
+        sortable: true,
+        value: "sku"
       }, {
-        text: 'Price',
-        value: 'selling_price'
-      }],
-      products: []
+        text: "Price",
+        value: "selling_price"
+      }, {
+        text: "Quantity",
+        value: "onhand"
+      }]
     };
   },
-  created: function created() {
-    this.initialize();
-  },
   methods: {
-    initialize: function initialize() {
-      var _this = this;
-
-      // Add a request interceptor
-      axios.interceptors.request.use(function (config) {
-        _this.loading = true;
-        return config;
-      }, function (error) {
-        _this.loading = false;
-        return Promise.reject(error);
-      }); // Add a response interceptor
-
-      axios.interceptors.response.use(function (response) {
-        _this.loading = false;
-        return response;
-      }, function (error) {
-        _this.loading = false;
-        return Promise.reject(error);
-      });
-      axios.get("/api/products/all").then(function (res) {
-        _this.products = res.data.data;
-      });
-    },
-    editItem: function editItem(item) {
-      console.log(item);
+    editItem: function editItem(item) {//    console.log(item)
     },
     addToPurchase: function addToPurchase(item) {
       //const index = event.currentTarget.id;
-      var index = this.products.indexOf(item);
-      console.log(index);
+      var index = this.products.indexOf(item); //   console.log(index);
+
       this.$store.dispatch("purchase/addProductToPurchase", {
         product: this.products[index],
         quantity: 1
-      });
-      console.log(this.products[index]);
+      }); //   console.log(this.products[index])
+    },
+    getColor: function getColor(alert) {
+      if (alert) return "red";else return "green";
     }
   }
 });
@@ -358,6 +324,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dialog: false,
       dialog2: false,
       discount: null,
+      products: [],
       isLoading: false,
       items: [],
       model: null,
@@ -376,6 +343,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         pmt_method: ''
       }
     };
+  },
+  created: function created() {
+    this.initialize();
   },
   methods: {
     removeProductFromPurchase: function removeProductFromPurchase(product) {
@@ -430,8 +400,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.purchaseData.discount = null;
         _this.purchaseData.paid_amt = null;
         _this.purchaseData.pmt_method = null;
+
+        _this.initialize();
       });
-      console.log(orderData);
+    },
+    initialize: function initialize() {
+      var _this2 = this;
+
+      // Add a request interceptor
+      axios.interceptors.request.use(function (config) {
+        _this2.loading = true;
+        return config;
+      }, function (error) {
+        _this2.loading = false;
+        return Promise.reject(error);
+      }); // Add a response interceptor
+
+      axios.interceptors.response.use(function (response) {
+        _this2.loading = false;
+        return response;
+      }, function (error) {
+        _this2.loading = false;
+        return Promise.reject(error);
+      });
+      axios.get("/api/products/all").then(function (res) {
+        _this2.products = res.data.data;
+      });
     }
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -454,7 +448,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   watch: {
     model: function model(val) {
-      var _this2 = this;
+      var _this3 = this;
 
       // axios
       //   .get('/api/supplier/'+ val +'/payable')
@@ -469,24 +463,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //   })
       this.items.forEach(function (item) {
         if (val == item.id) {
-          _this2.balance = item.payables;
+          _this3.balance = item.payables;
         }
       }); // if (val != null) this.tab = 0
       // else this.tab = null
     },
     search: function search(val) {
-      var _this3 = this;
+      var _this4 = this;
 
       // Items have already been loaded
       if (this.items.length > 0) return;
       this.isLoading = true; // axios method
 
       axios.get('/api/suppliers/all').then(function (res) {
-        _this3.items = res.data.data;
-        _this3.isLoading = false;
+        _this4.items = res.data.data;
+        _this4.isLoading = false;
       })["catch"](function (err) {
         console.log(err);
-        _this3.isLoading = false;
+        _this4.isLoading = false;
       });
     }
   }
@@ -654,7 +648,45 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n     " + _vm._s(item.sku) + "\n  ")]
+                  [_vm._v("\n        " + _vm._s(item.sku) + "\n      ")]
+                )
+              ]
+            }
+          },
+          {
+            key: "item.onhand",
+            fn: function(ref) {
+              var item = ref.item
+              return [
+                _c(
+                  "v-edit-dialog",
+                  {
+                    attrs: {
+                      block: "",
+                      persistent: "",
+                      "return-value": item.onhand
+                    },
+                    on: {
+                      "update:returnValue": function($event) {
+                        return _vm.$set(item, "onhand", $event)
+                      },
+                      "update:return-value": function($event) {
+                        return _vm.$set(item, "onhand", $event)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "v-chip",
+                      { attrs: { color: _vm.getColor(item.alert), dark: "" } },
+                      [
+                        _vm._v(
+                          "\n          " + _vm._s(item.onhand) + "\n        "
+                        )
+                      ]
+                    )
+                  ],
+                  1
                 )
               ]
             }
@@ -1305,7 +1337,12 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("v-col", { attrs: { cols: "5" } }, [_c("purchase-list")], 1)
+          _c(
+            "v-col",
+            { attrs: { cols: "5" } },
+            [_c("purchase-list", { attrs: { products: _vm.products } })],
+            1
+          )
         ],
         1
       )
@@ -1336,8 +1373,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
-/* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
-/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+/* harmony import */ var vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VChip */ "./node_modules/vuetify/lib/components/VChip/index.js");
+/* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
 
 
 
@@ -1363,7 +1401,9 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default()(component, {VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_6__["VDataTable"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_7__["VTextField"]})
+
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default()(component, {VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_6__["VChip"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_7__["VDataTable"],VEditDialog: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_7__["VEditDialog"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__["VTextField"]})
 
 
 /* hot reload */

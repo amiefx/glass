@@ -280,7 +280,7 @@
         </v-row>
       </v-col>
       <v-col cols="5">
-        <product-list />
+        <product-list :products="products" />
       </v-col>
     </v-row>
   </div>
@@ -304,6 +304,7 @@ export default {
       loading: false,
       slabs: [],
       use_slab: false,
+      products: [],
 
       doc_types: ["Invoice", "Quotation"],
       invoiceData: {
@@ -381,12 +382,41 @@ export default {
       axios.post("/api/order", orderData).then((res) => {
         //  this.$router.push(`/checkout/${res.data.id}`)
         this.clearCartItems();
-        this.model = null,
-        this.invoiceData.discount = null,
-        this.invoiceData.received_amt = null
-
+        this.model = null;
+        this.invoiceData.discount = null;
+        this.invoiceData.received_amt = null;
+        this.initialize();
       });
-      //   console.log(orderData)
+    },
+
+    initialize() {
+      // Add a request interceptor
+      axios.interceptors.request.use(
+        (config) => {
+          this.loading = true;
+          return config;
+        },
+        (error) => {
+          this.loading = false;
+          return Promise.reject(error);
+        }
+      );
+
+      // Add a response interceptor
+      axios.interceptors.response.use(
+        (response) => {
+          this.loading = false;
+          return response;
+        },
+        (error) => {
+          this.loading = false;
+          return Promise.reject(error);
+        }
+      );
+
+      axios.get("/api/products/all").then((res) => {
+        this.products = res.data.data;
+      });
     },
 
     changeHeight(item) {
@@ -419,6 +449,8 @@ export default {
   },
 
   created() {
+    this.initialize();
+
     axios.get("/api/slabs/all").then((res) => {
       this.slabs = res.data.data;
     });

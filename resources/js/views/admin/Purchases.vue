@@ -200,7 +200,7 @@
          </v-row>
           </v-col>
           <v-col cols="5" >
-              <purchase-list />
+              <purchase-list :products="products" />
           </v-col>
       </v-row>
   </div>
@@ -224,8 +224,9 @@ export default {
       dialog2: false,
 
       discount: null,
-
+      products: [],
       isLoading: false,
+
       items: [],
       model: null,
       search: null,
@@ -245,6 +246,10 @@ export default {
       }
     }
   },
+
+  created () {
+      this.initialize()
+    },
 
   methods: {
     removeProductFromPurchase(product) {
@@ -304,9 +309,34 @@ export default {
                 this.purchaseData.discount = null
                 this.purchaseData.paid_amt = null
                 this.purchaseData.pmt_method = null
+                this.initialize();
             })
-        console.log(orderData)
     },
+
+    initialize () {
+          // Add a request interceptor
+            axios.interceptors.request.use((config) => {
+                this.loading = true
+                return config;
+            },  (error) => {
+                this.loading = false
+                return Promise.reject(error);
+            });
+
+            // Add a response interceptor
+            axios.interceptors.response.use((response) => {
+                this.loading = false
+                return response;
+            }, (error) => {
+                this.loading = false
+                return Promise.reject(error);
+            });
+
+            axios.get("/api/products/all").then(res => {
+               this.products = res.data.data;
+               });
+
+      },
 
   },
 

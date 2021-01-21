@@ -9,113 +9,76 @@
         hide-details
       ></v-text-field>
     </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="products"
-      :search="search"
-    >
+    <v-data-table :headers="headers" :items="products" :search="search">
+      <template v-slot:item.sku="{ item }">
+        <span @click="addToPurchase(item)" class="pointer">
+          {{ item.sku }}
+        </span>
+      </template>
 
-    <template v-slot:item.sku="{ item }"
-    >
-    <span @click="addToPurchase(item)" class="pointer">
-       {{item.sku}}
-    </span>
-
-    </template>
-
+      <template v-slot:item.onhand="{ item }">
+        <v-edit-dialog block persistent :return-value.sync="item.onhand">
+          <v-chip :color="getColor(item.alert)" dark>
+            {{ item.onhand }}
+          </v-chip>
+        </v-edit-dialog>
+      </template>
     </v-data-table>
   </v-card>
-
-  <!-- <div>
-      <table>
-          <thead>
-              <th>id</th>
-              <th>name</th>
-              <th>price</th>
-          </thead>
-          <tbody>
-              <tr v-for="product in products" :key="product.id" @click="addToPurchase()">
-                  <td>{{product.id}}</td>
-                  <td>{{product.name}}</td>
-                  <td>{{product.price}}</td>
-              </tr>
-          </tbody>
-      </table>
-  </div> -->
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex"
-  export default {
-    data () {
-      return {
-        search: '',
-        headers: [
-          {
-            text: 'SKU',
-            align: 'start',
-            sortable: false,
-            value: 'sku',
-          },
-          { text: 'Price', value: 'selling_price' },
-        ],
-        products: [],
-      }
+import { mapGetters, mapActions } from "vuex";
+export default {
+  props: {
+    products: {
+      required: true,
+      type: Array,
     },
+  },
+  data() {
+    return {
+      search: "",
+      headers: [
+        {
+          text: "SKU",
+          align: "start",
+          sortable: true,
+          value: "sku",
+        },
+        { text: "Price", value: "selling_price" },
+        { text: "Quantity", value: "onhand" },
+      ],
+    };
+  },
 
-    created () {
-      this.initialize()
-    },
-
-    methods: {
-
-      initialize () {
-          // Add a request interceptor
-            axios.interceptors.request.use((config) => {
-                this.loading = true
-                return config;
-            },  (error) => {
-                this.loading = false
-                return Promise.reject(error);
-            });
-
-            // Add a response interceptor
-            axios.interceptors.response.use((response) => {
-                this.loading = false
-                return response;
-            }, (error) => {
-                this.loading = false
-                return Promise.reject(error);
-            });
-
-            axios.get("/api/products/all").then(res => {
-               this.products = res.data.data;
-               });
-
-      },
-
-        editItem (item) {
-        console.log(item)
+  methods: {
+    editItem(item) {
+      //    console.log(item)
     },
 
     addToPurchase(item) {
-        //const index = event.currentTarget.id;
-        const index = this.products.indexOf(item)
-        console.log(index);
-        this.$store.dispatch("purchase/addProductToPurchase", {
-            product: this.products[index],
-            quantity: 1
-        });
-        console.log(this.products[index])
+      //const index = event.currentTarget.id;
+      const index = this.products.indexOf(item);
+      //   console.log(index);
+      this.$store.dispatch("purchase/addProductToPurchase", {
+        product: this.products[index],
+        quantity: 1,
+      });
+      //   console.log(this.products[index])
     },
-  }
 
-  }
+    getColor(alert) {
+      if (alert) return "red";
+      else return "green";
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 .pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 </style>
 

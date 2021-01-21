@@ -19,14 +19,13 @@ class ReceiptController extends Controller
      */
     public function index(Request $request)
     {
-        $id = 1;
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'created_at';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
         $customer_id = $request->customer_id;
         $receipts = Receipt::where('customer_id', '=', $customer_id );
         return response()->json([
-            'payments' => new ReceiptCollection($receipts->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
+            'receipts' => new ReceiptCollection($receipts->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
     }
 
@@ -46,7 +45,7 @@ class ReceiptController extends Controller
 
         ]);
         return response()->json([
-            'payments' => new ReceiptCollection($receipts->orderBy($sortBy, $orderBy)->paginate($per_page)),
+            'receipts' => new ReceiptCollection($receipts->orderBy($sortBy, $orderBy)->paginate($per_page)),
         ], 200);
     }
 
@@ -66,7 +65,7 @@ class ReceiptController extends Controller
 
             $order = $postData;
 
-            $payments = new Receipt([
+            $receipts = new Receipt([
                 "customer_id" => $order['customer_id'],
                 "amount" => $order['amount'],
                 "pmt_method" => $order['pmt_method'],
@@ -75,14 +74,14 @@ class ReceiptController extends Controller
                 "notes" => $order['notes'],
                 "user_id" => $user->id,
             ]);
-            $payments->save();
+            $receipts->save();
 
             if ( $order['amount'] > 0 ) {
                 if ($order['pmt_method'] == 'Cash') {
                     // store in cash register
                     Cash::create([
                         'doc_type' => 'receipt',
-                        'doc_id' => $payments->id,
+                        'doc_id' => $receipts->id,
                         'customer_id' => $order['customer_id'],
                         'debit' => $order['amount'],
                         'credit' => 0,
@@ -94,7 +93,7 @@ class ReceiptController extends Controller
                     // store in back account
                     Bank::create([
                         'doc_type' => 'receipt',
-                        'doc_id' => $payments->id,
+                        'doc_id' => $receipts->id,
                         'customer_id' => $order['customer_id'],
                         'debit' => $order['amount'],
                         'credit' => 0,
@@ -109,7 +108,7 @@ class ReceiptController extends Controller
 
                 Receivable::create([
                     'type' => 'receipt',
-                    'doc_id' => $payments->id,
+                    'doc_id' => $receipts->id,
                     'customer_id' => $order['customer_id'],
                     'debit' => 0,
                     'credit' => $order['amount'],
@@ -129,7 +128,7 @@ class ReceiptController extends Controller
             return response()->json(['error'=> $th->getMessage()], 500);
         }
 
-    return response()->json(['payments'=> $payments], 200);
+    return response()->json(['receipts'=> $receipts], 200);
 
     }
 }

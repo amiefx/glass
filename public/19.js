@@ -1,14 +1,74 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[19],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Bank.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/Bank.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Products.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/Products.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -145,7 +205,7 @@ __webpack_require__.r(__webpack_exports__);
       success: '',
       error: '',
       options: {
-        sortBy: ['id'],
+        sortBy: ['name'],
         sortDesc: [true]
       },
       rules: {
@@ -163,95 +223,176 @@ __webpack_require__.r(__webpack_exports__);
         text: '#',
         value: 'id'
       }, {
-        text: 'Doc Type',
-        value: 'doc_type'
+        text: 'SKU',
+        value: 'sku'
       }, {
-        text: 'Doc ID',
-        value: 'doc_id'
+        text: 'Name',
+        value: 'name'
       }, {
-        text: 'Date',
-        value: 'created_at'
+        text: 'Category',
+        value: 'category'
       }, {
-        text: 'Customer',
-        value: 'customer_id'
+        text: 'Brand',
+        value: 'brand_name'
       }, {
-        text: 'Supplier',
-        value: 'supplier_id'
+        text: 'Enable Stock',
+        value: 'stock'
       }, {
-        text: 'Employee',
-        value: 'employee_id'
+        text: 'Alert Qty',
+        value: 'alert_quantity'
       }, {
-        text: 'Debit',
-        value: 'debit'
+        text: 'Price',
+        value: 'selling_price'
       }, {
-        text: 'Credit',
-        value: 'credit'
+        text: 'Height',
+        value: 'height'
       }, {
-        text: 'User',
-        value: 'user_id'
+        text: 'Width',
+        value: 'width'
+      }, {
+        text: 'Thickness',
+        value: 'thickness'
+      }, {
+        text: 'Length',
+        value: 'length'
+      }, {
+        text: 'Weight',
+        value: 'weight'
+      }, {
+        text: 'Size',
+        value: 'size'
+      }, {
+        text: 'Color',
+        value: 'color'
+      }, {
+        text: 'Active',
+        value: 'active'
+      }, {
+        text: 'Actions',
+        value: 'action',
+        sortable: false
       }],
-      banks: [],
-      balance: '',
+      status: [{
+        text: 'Active',
+        value: true
+      }, {
+        text: 'In Active',
+        value: false
+      }],
+      types: ['product', 'service provider'],
+      products: [],
+      categories: [],
+      brands: [],
+      units: [],
+      slabs: [],
       editedIndex: -1,
       editedItem: {
         id: '',
+        sku: '',
         name: '',
-        short_code: ''
+        category_id: '',
+        brand_id: '',
+        brand: {},
+        enable_stock: false,
+        alert_quantity: '',
+        selling_price: '',
+        height: '',
+        width: '',
+        thickness: '',
+        length: '',
+        weight: '',
+        size: '',
+        color: '',
+        is_active: '',
+        qty_on_hand: '',
+        purchase_price: ''
       },
       defaultItem: {
         id: '',
+        sku: '',
         name: '',
-        short_code: ''
+        category_id: '',
+        brand_id: '',
+        brand: '',
+        enable_stock: false,
+        alert_quantity: '',
+        selling_price: '',
+        height: '',
+        width: '',
+        thickness: '',
+        length: '',
+        weight: '',
+        size: '',
+        color: '',
+        is_active: '',
+        qty_on_hand: '',
+        purchase_price: ''
       }
     };
   },
   computed: {
     formTitle: function formTitle() {
-      return this.editedIndex === -1 ? this.$t('new item') : this.$t('edit item');
-    } //   headers(){
-    //   return [
-    //     {
-    //       text: '#',
-    //       value: 'id',
-    //     },
-    //     { text: this.$t('name'), value: 'name' },
-    //     { text: this.$t('short code'), value: 'short_code' },
-    //     { text: this.$t('action'), value: 'action', sortable: false },
-    //   ]
-    // }
-
+      return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+    }
   },
   watch: {
     dialog: function dialog(val) {
       val || this.close();
+    },
+    'editedItem': {
+      handler: 'getSku',
+      deep: true
     }
   },
   created: function created() {
     var _this = this;
 
     this.initialize();
-    axios.get("/api/banks/balance").then(function (res) {
-      _this.balance = res.data.balance;
+    axios.get("/api/categories/all").then(function (res) {
+      _this.categories = res.data.data;
+    });
+    axios.get("/api/units/all").then(function (res) {
+      _this.units = res.data.data;
+    });
+    axios.get("/api/brands/all").then(function (res) {
+      _this.brands = res.data.data;
+    });
+    axios.get("/api/slabs/all").then(function (res) {
+      _this.slabs = res.data.data;
     });
   },
   methods: {
     updateStatus: function updateStatus(item) {
       var _this2 = this;
 
-      var index = this.banks.data.indexOf(item);
+      var index = this.products.data.indexOf(item);
       axios.post('/api/change-status', {
         'status': item.is_active,
-        'bank': item.id
+        'product': item.id
       }).then(function (res) {
-        _this2.text = res.data.bank.name + "'s Status Updated to " + res.data.bank.is_active;
+        _this2.text = res.data.product.name + "'s Status Updated to " + res.data.product.is_active;
         _this2.snackbar = true;
       })["catch"](function (error) {
-        // this.text = error.response.bank.name + "'s Status Cannot be Updated" + error.response.bank.status
-        _this2.banks.data[index].is_active = error.response.data.bank.is_active;
+        // this.text = error.response.product.name + "'s Status Cannot be Updated" + error.response.product.status
+        _this2.products.data[index].is_active = error.response.data.product.is_active;
         _this2.snackbar = true;
         console.dir(error.response);
       });
     },
+    getItemText: function getItemText(items) {
+      console.log(items);
+    },
+    getSku: function getSku(item) {
+      var a = this.editedItem.brand.name.slice(0, 2) + " " + this.editedItem.name;
+      var color = this.editedItem.color !== '' ? " " + this.editedItem.color.slice(0, 3) : "";
+      var vol = this.editedItem.height !== '' ? " " + this.editedItem.height + "X" + this.editedItem.width + "X" + this.editedItem.thickness : "";
+      this.editedItem.brand_id = this.editedItem.brand.id;
+      this.editedItem.sku = (a + color + vol).toUpperCase();
+    },
+    //   itemChanged(item) {
+    //     this.editedItem.sku = item.name.slice(0, 2) + " " + this.editedItem.name;
+    //     this.editedItem.brand_id = item.id
+    //   },
     // selectAll(e){
     //     this.selected = [];
     //     if(e.length > 0){
@@ -262,12 +403,12 @@ __webpack_require__.r(__webpack_exports__);
     // deleteAll(){
     //     let decide = confirm('Are you sure you want to delete these items?')
     //       if(decide){
-    //           axios.post('/api/banks/delete', {'banks': this.selected})
+    //           axios.post('/api/products/delete', {'products': this.selected})
     //           .then(res => {
     //               this.text = "Rcords Deleted Successfully!";
     //               this.selected.map(val =>{
-    //                   const index = this.banks.data.indexOf(val)
-    //                   this.banks.data.splice(index, 1)
+    //                   const index = this.products.data.indexOf(val)
+    //                   this.products.data.splice(index, 1)
     //               })
     //               this.snackbar = true
     //           })
@@ -281,29 +422,29 @@ __webpack_require__.r(__webpack_exports__);
     searchIt: function searchIt(e) {
       var _this3 = this;
 
-      if (e.length > 0) {
-        axios.get("/api/banks/".concat(e)).then(function (res) {
-          return _this3.banks = res.data.banks;
+      if (e.length > 3) {
+        axios.get("/api/products/".concat(e)).then(function (res) {
+          return _this3.products = res.data.products;
         })["catch"](function (err) {
           return console.dir(err.response);
         });
       }
 
       if (e.length <= 0) {
-        // axios.get(`/api/banks?page=${e.page}`,{params:{'per_page': e.itemsPerPage}})
-        //   axios.get(`/api/banks`)
-        //     .then(res => this.banks = res.data.data.banks)
+        // axios.get(`/api/products?page=${e.page}`,{params:{'per_page': e.itemsPerPage}})
+        //   axios.get(`/api/products`)
+        //     .then(res => this.products = res.data.data.products)
         //     .catch(err => console.dir(err.response))
-        var sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
+        var sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
         var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
-        axios.get("/api/banks?page=".concat(e.page), {
+        axios.get("/api/products?page=".concat(e.page), {
           params: {
             'per_page': e.itemsPerPage,
             'sort_by': sortBy,
             'order_by': orderBy
           }
         }).then(function (res) {
-          _this3.banks = res.data.banks;
+          _this3.products = res.data.products;
         })["catch"](function (err) {
           return console.dir(err.response);
         });
@@ -312,16 +453,16 @@ __webpack_require__.r(__webpack_exports__);
     paginate: function paginate(e) {
       var _this4 = this;
 
-      var sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
+      var sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
       var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
-      axios.get("/api/banks?page=".concat(e.page), {
+      axios.get("/api/products?page=".concat(e.page), {
         params: {
           'per_page': e.itemsPerPage,
           'sort_by': sortBy,
           'order_by': orderBy
         }
       }).then(function (res) {
-        _this4.banks = res.data.banks;
+        _this4.products = res.data.products;
       })["catch"](function (err) {//----
       });
     },
@@ -346,21 +487,21 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     editItem: function editItem(item) {
-      this.editedIndex = this.banks.data.indexOf(item);
+      this.editedIndex = this.products.data.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
     deleteItem: function deleteItem(item) {
       var _this6 = this;
 
-      var index = this.banks.data.indexOf(item);
+      var index = this.products.data.indexOf(item);
       var decide = confirm('Are you sure you want to delete this item?');
 
       if (decide) {
-        axios["delete"]('/api/banks/' + item.id).then(function (res) {
+        axios["delete"]('/api/products/' + item.id).then(function (res) {
           _this6.snackbar = true;
 
-          _this6.banks.data.splice(index, 1);
+          _this6.products.data.splice(index, 1);
         })["catch"](function (err) {
           console.log(err.response);
           _this6.text = "Error Deleting Record";
@@ -382,23 +523,23 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.editedIndex > -1) {
         var index = this.editedIndex;
-        axios.put('/api/banks/' + this.editedItem.id, this.editedItem) //  .then(res => Object.assign(this.banks[this.editedIndex], this.editedItem))
+        axios.put('/api/products/' + this.editedItem.id, this.editedItem) //  .then(res => Object.assign(this.products[this.editedIndex], this.editedItem))
         .then(function (res) {
           console.log(res);
           _this8.text = "Record Updated Successfully!";
           _this8.snackbar = true;
-          Object.assign(_this8.banks.data[index], res.data.bank);
+          Object.assign(_this8.products.data[index], res.data.product);
         })["catch"](function (err) {
           console.log(err.response);
           _this8.text = "Error Updating Record";
           _this8.snackbar = true;
-        }); //  Object.assign(this.banks.data[this.editedIndex], this.editedItem)
+        }); //  Object.assign(this.products.data[this.editedIndex], this.editedItem)
       } else {
-        axios.post('/api/banks', this.editedItem).then(function (res) {
+        axios.post('/api/products', this.editedItem).then(function (res) {
           _this8.text = "Record Added Successfully!";
           _this8.snackbar = true;
 
-          _this8.banks.data.push(res.data.bank);
+          _this8.products.data.push(res.data.product);
         })["catch"](function (err) {
           console.dir(err);
           _this8.text = "Error Inserting Record";
@@ -416,10 +557,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Bank.vue?vue&type=template&id=3f95855b&":
-/*!***************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/Bank.vue?vue&type=template&id=3f95855b& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Products.vue?vue&type=template&id=49ba3dfa&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/Products.vue?vue&type=template&id=49ba3dfa& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -438,12 +579,12 @@ var render = function() {
         staticClass: "elevation-1",
         attrs: {
           headers: _vm.headers,
-          items: _vm.banks.data,
+          items: _vm.products.data,
           "items-per-page": 5,
           "item-key": "id",
           loading: _vm.loading,
           options: _vm.options,
-          "server-items-length": _vm.banks.total,
+          "server-items-length": _vm.products.total,
           "loading-text": "Loading.. Please Wait!",
           "footer-props": {
             itemsPerPageOptions: [5, 10, 15],
@@ -466,9 +607,7 @@ var render = function() {
                   "v-toolbar",
                   { attrs: { flat: "", color: "" } },
                   [
-                    _c("v-toolbar-title", [
-                      _vm._v(" " + _vm._s(_vm.$t("bank Account")))
-                    ]),
+                    _c("v-toolbar-title", [_vm._v("product Management")]),
                     _vm._v(" "),
                     _c("v-divider", {
                       staticClass: "mx-4",
@@ -477,20 +616,28 @@ var render = function() {
                     _vm._v(" "),
                     _c("v-spacer"),
                     _vm._v(" "),
-                    _c("v-toolbar-title", [
-                      _vm._v(" Balance: " + _vm._s(_vm.balance))
-                    ]),
-                    _vm._v(" "),
                     _c(
                       "v-dialog",
                       {
-                        attrs: { "max-width": "500px" },
+                        attrs: { "max-width": "900px" },
                         scopedSlots: _vm._u([
                           {
                             key: "activator",
                             fn: function(ref) {
                               var on = ref.on
-                              return undefined
+                              return [
+                                _c(
+                                  "v-btn",
+                                  _vm._g(
+                                    {
+                                      staticClass: "mb-2",
+                                      attrs: { color: "primary", dark: "" }
+                                    },
+                                    on
+                                  ),
+                                  [_vm._v("New product")]
+                                )
+                              ]
                             }
                           }
                         ]),
@@ -544,11 +691,82 @@ var render = function() {
                                           [
                                             _c(
                                               "v-col",
-                                              { attrs: { cols: "12" } },
+                                              {
+                                                attrs: {
+                                                  cols: "12",
+                                                  md: "4",
+                                                  lg: "4"
+                                                }
+                                              },
                                               [
                                                 _c("v-text-field", {
                                                   attrs: {
-                                                    label: _vm.$t("name"),
+                                                    label: "SKU",
+                                                    rules: [_vm.rules.required]
+                                                  },
+                                                  model: {
+                                                    value: _vm.editedItem.sku,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "sku",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression: "editedItem.sku"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-select", {
+                                                  attrs: {
+                                                    items: _vm.categories,
+                                                    "item-text": "name",
+                                                    "item-value": "id",
+                                                    label: "Category",
+                                                    rules: [_vm.rules.required]
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editedItem
+                                                        .category_id,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "category_id",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.category_id"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-select", {
+                                                  attrs: {
+                                                    items: _vm.brands,
+                                                    "item-text": "name",
+                                                    "item-value": "id",
+                                                    label: "Brand",
+                                                    rules: [_vm.rules.required],
+                                                    "return-object": ""
+                                                  },
+                                                  model: {
+                                                    value: _vm.editedItem.brand,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "brand",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.brand"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    label: "Name",
                                                     rules: [_vm.rules.required]
                                                   },
                                                   model: {
@@ -565,22 +783,350 @@ var render = function() {
                                                   }
                                                 }),
                                                 _vm._v(" "),
-                                                _c("v-text-field", {
+                                                _c("v-select", {
                                                   attrs: {
-                                                    label: _vm.$t("short code")
+                                                    items: _vm.units,
+                                                    "item-text": "short_name",
+                                                    "item-value": "id",
+                                                    label: "Unit",
+                                                    rules: [_vm.rules.required]
                                                   },
                                                   model: {
                                                     value:
-                                                      _vm.editedItem.short_code,
+                                                      _vm.editedItem.unit_id,
                                                     callback: function($$v) {
                                                       _vm.$set(
                                                         _vm.editedItem,
-                                                        "short_code",
+                                                        "unit_id",
                                                         $$v
                                                       )
                                                     },
                                                     expression:
-                                                      "editedItem.short_code"
+                                                      "editedItem.unit_id"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    type: "number",
+                                                    label: "Selling Price"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editedItem
+                                                        .selling_price,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "selling_price",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.selling_price"
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-col",
+                                              {
+                                                attrs: {
+                                                  cols: "12",
+                                                  md: "4",
+                                                  lg: "4"
+                                                }
+                                              },
+                                              [
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    type: "number",
+                                                    label: "Height"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editedItem.height,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "height",
+                                                        _vm._n($$v)
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.height"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    type: "number",
+                                                    label: "Width"
+                                                  },
+                                                  model: {
+                                                    value: _vm.editedItem.width,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "width",
+                                                        _vm._n($$v)
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.width"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    type: "number",
+                                                    label: "Thinkness"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editedItem.thickness,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "thickness",
+                                                        _vm._n($$v)
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.thickness"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    type: "number",
+                                                    label: "Length"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editedItem.length,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "length",
+                                                        _vm._n($$v)
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.length"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    type: "number",
+                                                    label: "Weight"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editedItem.weight,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "weight",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.weight"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-text-field", {
+                                                  attrs: { label: "Size" },
+                                                  model: {
+                                                    value: _vm.editedItem.size,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "size",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.size"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-text-field", {
+                                                  attrs: { label: "Color" },
+                                                  model: {
+                                                    value: _vm.editedItem.color,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "color",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.color"
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-col",
+                                              {
+                                                attrs: {
+                                                  cols: "12",
+                                                  md: "4",
+                                                  lg: "4"
+                                                }
+                                              },
+                                              [
+                                                _c("v-checkbox", {
+                                                  attrs: {
+                                                    label: "Enable Stock"
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editedItem
+                                                        .enable_stock,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "enable_stock",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.enable_stock"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _vm.editedItem.enable_stock
+                                                  ? _c(
+                                                      "div",
+                                                      [
+                                                        _c("v-text-field", {
+                                                          attrs: {
+                                                            type: "number",
+                                                            label:
+                                                              "Alert Quantity"
+                                                          },
+                                                          model: {
+                                                            value:
+                                                              _vm.editedItem
+                                                                .alert_quantity,
+                                                            callback: function(
+                                                              $$v
+                                                            ) {
+                                                              _vm.$set(
+                                                                _vm.editedItem,
+                                                                "alert_quantity",
+                                                                $$v
+                                                              )
+                                                            },
+                                                            expression:
+                                                              "editedItem.alert_quantity"
+                                                          }
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _vm.editedIndex === -1
+                                                          ? _c("v-text-field", {
+                                                              attrs: {
+                                                                type: "number",
+                                                                label:
+                                                                  "Quantity on Hand"
+                                                              },
+                                                              model: {
+                                                                value:
+                                                                  _vm.editedItem
+                                                                    .qty_on_hand,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.$set(
+                                                                    _vm.editedItem,
+                                                                    "qty_on_hand",
+                                                                    $$v
+                                                                  )
+                                                                },
+                                                                expression:
+                                                                  "editedItem.qty_on_hand"
+                                                              }
+                                                            })
+                                                          : _vm._e(),
+                                                        _vm._v(" "),
+                                                        _vm.editedIndex === -1
+                                                          ? _c("v-text-field", {
+                                                              attrs: {
+                                                                type: "number",
+                                                                label:
+                                                                  "Purchase Price"
+                                                              },
+                                                              model: {
+                                                                value:
+                                                                  _vm.editedItem
+                                                                    .purchase_price,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.$set(
+                                                                    _vm.editedItem,
+                                                                    "purchase_price",
+                                                                    $$v
+                                                                  )
+                                                                },
+                                                                expression:
+                                                                  "editedItem.purchase_price"
+                                                              }
+                                                            })
+                                                          : _vm._e(),
+                                                        _vm._v(" "),
+                                                        _vm.editedIndex === -1
+                                                          ? _c("v-text-field", {
+                                                              attrs: {
+                                                                type: "number",
+                                                                label: "Total"
+                                                              },
+                                                              model: {
+                                                                value:
+                                                                  _vm.editedItem
+                                                                    .total,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.$set(
+                                                                    _vm.editedItem,
+                                                                    "total",
+                                                                    $$v
+                                                                  )
+                                                                },
+                                                                expression:
+                                                                  "editedItem.total"
+                                                              }
+                                                            })
+                                                          : _vm._e()
+                                                      ],
+                                                      1
+                                                    )
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _c("v-checkbox", {
+                                                  attrs: { label: "Active" },
+                                                  model: {
+                                                    value:
+                                                      _vm.editedItem.is_active,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "is_active",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.is_active"
                                                   }
                                                 })
                                               ],
@@ -607,7 +1153,7 @@ var render = function() {
                                         attrs: { color: "primary", text: "" },
                                         on: { click: _vm.close }
                                       },
-                                      [_vm._v(_vm._s(_vm.$t("cancel")))]
+                                      [_vm._v("Cancel")]
                                     ),
                                     _vm._v(" "),
                                     _c(
@@ -625,7 +1171,7 @@ var render = function() {
                                           }
                                         }
                                       },
-                                      [_vm._v(_vm._s(_vm.$t("save")))]
+                                      [_vm._v("Save")]
                                     )
                                   ],
                                   1
@@ -822,33 +1368,34 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/Bank.vue":
-/*!*******************************************!*\
-  !*** ./resources/js/views/admin/Bank.vue ***!
-  \*******************************************/
+/***/ "./resources/js/views/admin/Products.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/views/admin/Products.vue ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Bank_vue_vue_type_template_id_3f95855b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Bank.vue?vue&type=template&id=3f95855b& */ "./resources/js/views/admin/Bank.vue?vue&type=template&id=3f95855b&");
-/* harmony import */ var _Bank_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Bank.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/Bank.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Products_vue_vue_type_template_id_49ba3dfa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Products.vue?vue&type=template&id=49ba3dfa& */ "./resources/js/views/admin/Products.vue?vue&type=template&id=49ba3dfa&");
+/* harmony import */ var _Products_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Products.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/Products.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/index.js");
 /* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
-/* harmony import */ var vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VChip */ "./node_modules/vuetify/lib/components/VChip/index.js");
-/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
-/* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
-/* harmony import */ var vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VDialog */ "./node_modules/vuetify/lib/components/VDialog/index.js");
-/* harmony import */ var vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VDivider */ "./node_modules/vuetify/lib/components/VDivider/index.js");
-/* harmony import */ var vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VForm */ "./node_modules/vuetify/lib/components/VForm/index.js");
-/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
-/* harmony import */ var vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VSelect */ "./node_modules/vuetify/lib/components/VSelect/index.js");
-/* harmony import */ var vuetify_lib_components_VSnackbar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VSnackbar */ "./node_modules/vuetify/lib/components/VSnackbar/index.js");
-/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
-/* harmony import */ var vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vuetify/lib/components/VToolbar */ "./node_modules/vuetify/lib/components/VToolbar/index.js");
+/* harmony import */ var vuetify_lib_components_VCheckbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VCheckbox */ "./node_modules/vuetify/lib/components/VCheckbox/index.js");
+/* harmony import */ var vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VChip */ "./node_modules/vuetify/lib/components/VChip/index.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
+/* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
+/* harmony import */ var vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VDialog */ "./node_modules/vuetify/lib/components/VDialog/index.js");
+/* harmony import */ var vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VDivider */ "./node_modules/vuetify/lib/components/VDivider/index.js");
+/* harmony import */ var vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VForm */ "./node_modules/vuetify/lib/components/VForm/index.js");
+/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
+/* harmony import */ var vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VSelect */ "./node_modules/vuetify/lib/components/VSelect/index.js");
+/* harmony import */ var vuetify_lib_components_VSnackbar__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuetify/lib/components/VSnackbar */ "./node_modules/vuetify/lib/components/VSnackbar/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+/* harmony import */ var vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vuetify/lib/components/VToolbar */ "./node_modules/vuetify/lib/components/VToolbar/index.js");
 
 
 
@@ -857,9 +1404,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Bank_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Bank_vue_vue_type_template_id_3f95855b___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Bank_vue_vue_type_template_id_3f95855b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Products_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Products_vue_vue_type_template_id_49ba3dfa___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Products_vue_vue_type_template_id_49ba3dfa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -890,43 +1437,44 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_6__["VChip"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VCol"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VContainer"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_8__["VDataTable"],VDialog: vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_9__["VDialog"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_10__["VDivider"],VEditDialog: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_8__["VEditDialog"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_11__["VForm"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_12__["VIcon"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VRow"],VSelect: vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_13__["VSelect"],VSnackbar: vuetify_lib_components_VSnackbar__WEBPACK_IMPORTED_MODULE_14__["VSnackbar"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_15__["VTextField"],VToolbar: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_16__["VToolbar"],VToolbarTitle: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_16__["VToolbarTitle"]})
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VCheckbox: vuetify_lib_components_VCheckbox__WEBPACK_IMPORTED_MODULE_6__["VCheckbox"],VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_7__["VChip"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VCol"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VContainer"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_9__["VDataTable"],VDialog: vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_10__["VDialog"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_11__["VDivider"],VEditDialog: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_9__["VEditDialog"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_12__["VForm"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_13__["VIcon"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VRow"],VSelect: vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_14__["VSelect"],VSnackbar: vuetify_lib_components_VSnackbar__WEBPACK_IMPORTED_MODULE_15__["VSnackbar"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_16__["VTextField"],VToolbar: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_17__["VToolbar"],VToolbarTitle: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_17__["VToolbarTitle"]})
 
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/admin/Bank.vue"
+component.options.__file = "resources/js/views/admin/Products.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/Bank.vue?vue&type=script&lang=js&":
-/*!********************************************************************!*\
-  !*** ./resources/js/views/admin/Bank.vue?vue&type=script&lang=js& ***!
-  \********************************************************************/
+/***/ "./resources/js/views/admin/Products.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/views/admin/Products.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bank_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Bank.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Bank.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bank_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Products_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Products.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Products.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Products_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/Bank.vue?vue&type=template&id=3f95855b&":
-/*!**************************************************************************!*\
-  !*** ./resources/js/views/admin/Bank.vue?vue&type=template&id=3f95855b& ***!
-  \**************************************************************************/
+/***/ "./resources/js/views/admin/Products.vue?vue&type=template&id=49ba3dfa&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/views/admin/Products.vue?vue&type=template&id=49ba3dfa& ***!
+  \******************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bank_vue_vue_type_template_id_3f95855b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Bank.vue?vue&type=template&id=3f95855b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Bank.vue?vue&type=template&id=3f95855b&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bank_vue_vue_type_template_id_3f95855b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Products_vue_vue_type_template_id_49ba3dfa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Products.vue?vue&type=template&id=49ba3dfa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Products.vue?vue&type=template&id=49ba3dfa&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Products_vue_vue_type_template_id_49ba3dfa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bank_vue_vue_type_template_id_3f95855b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Products_vue_vue_type_template_id_49ba3dfa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
