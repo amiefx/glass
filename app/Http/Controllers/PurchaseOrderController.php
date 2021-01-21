@@ -106,7 +106,8 @@ class PurchaseOrderController extends Controller
                         'debit' => 0,
                         'credit' => $order['paid_amt'],
                         'balance' => $order['paid_amt'] * (-1),
-                        'user_id' => $user->id
+                        'user_id' => $user->id,
+                        'status' => 1,
                     ]);
                 } else {
                     // store in back account

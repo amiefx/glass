@@ -226,6 +226,7 @@ var render = function() {
     [
       _c(
         "v-container",
+        { attrs: { fluid: "", "fill-height": "" } },
         [
           _c(
             "v-row",

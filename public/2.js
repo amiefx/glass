@@ -390,6 +390,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -399,21 +431,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       snackbar: false,
-      text: '',
+      text: "",
       valid: true,
       dialog: false,
       dialog2: false,
       loading: false,
       slabs: [],
       use_slab: false,
-      doc_types: ['Invoice', 'Quotation'],
+      doc_types: ["Invoice", "Quotation"],
       invoiceData: {
-        customer_id: '',
-        sub_total: '',
-        discount: '',
-        received_amt: '',
-        receivable_amt: '',
-        doc_type: ''
+        customer_id: "",
+        sub_total: "",
+        discount: "",
+        received_amt: "",
+        receivable_amt: "",
+        doc_type: ""
       },
       isLoading: false,
       items: [],
@@ -466,9 +498,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.loading = false;
         return Promise.reject(error);
       });
-      axios.post('/api/order', orderData).then(function (res) {
+      axios.post("/api/order", orderData).then(function (res) {
         //  this.$router.push(`/checkout/${res.data.id}`)
         _this.clearCartItems();
+
+        _this.model = null, _this.invoiceData.discount = null, _this.invoiceData.received_amt = null;
       }); //   console.log(orderData)
     },
     changeHeight: function changeHeight(item) {
@@ -515,10 +549,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })), {}, {
     cartItemCount: function cartItemCount() {
-      return this.$store.getters['cart/cartItemCount'];
+      return this.$store.getters["cart/cartItemCount"];
     },
     cartTotalPrice: function cartTotalPrice() {
-      return this.$store.getters['cart/cartTotalPrice'];
+      return this.$store.getters["cart/cartTotalPrice"];
     },
     total: function total() {
       return this.cartTotalPrice - this.invoiceData.discount;
@@ -548,7 +582,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //   .finally(() => (this.isLoading = false))
       // axios method
 
-      axios.get('/api/customers/all').then(function (res) {
+      axios.get("/api/customers/all").then(function (res) {
         _this5.items = res.data.data;
         _this5.isLoading = false;
       })["catch"](function (err) {
@@ -795,7 +829,9 @@ var render = function() {
                           "v-list-item",
                           [
                             _c("v-list-item-title", [
-                              _vm._v("\n          Search for a\n          "),
+                              _vm._v(
+                                "\n              Search for a\n              "
+                              ),
                               _c("strong", [_vm._v("Customer")])
                             ])
                           ],
@@ -832,7 +868,7 @@ var render = function() {
                           ),
                           [
                             _c("v-icon", { attrs: { left: "" } }, [
-                              _vm._v("\n          mdi-account\n        ")
+                              _vm._v(" mdi-account ")
                             ]),
                             _vm._v(" "),
                             _c("span", {
@@ -873,11 +909,11 @@ var render = function() {
                             _vm._v(" "),
                             _c("v-list-item-subtitle", [
                               _vm._v(
-                                " " +
+                                "\n              " +
                                   _vm._s(item.company_name) +
                                   " | " +
                                   _vm._s(item.work_number) +
-                                  " "
+                                  "\n            "
                               )
                             ])
                           ],
@@ -887,24 +923,28 @@ var render = function() {
                         _c("v-list-item-action", [
                           item.credit_limit > 0
                             ? _c("span", [
-                                _vm._v("\n            Credit limit:\n        "),
+                                _vm._v(
+                                  "\n              Credit limit:\n              "
+                                ),
                                 _c("strong", [
                                   _vm._v(
-                                    "\n          " +
+                                    "\n                " +
                                       _vm._s(item.credit_limit) +
-                                      "\n        "
+                                      "\n              "
                                   )
                                 ])
                               ])
                             : _vm._e(),
                           _vm._v(" "),
                           _c("span", [
-                            _vm._v("\n            Receivable:\n        "),
+                            _vm._v(
+                              "\n              Receivable:\n              "
+                            ),
                             _c("strong", [
                               _vm._v(
-                                "\n          " +
+                                "\n                " +
                                   _vm._s(item.receivable) +
-                                  "\n        "
+                                  "\n              "
                               )
                             ])
                           ])
@@ -936,27 +976,27 @@ var render = function() {
                             _c("th"),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-left" }, [
-                              _vm._v(" Sku ")
+                              _vm._v("Sku")
                             ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-left" }, [
-                              _vm._v(" Height ")
+                              _vm._v("Height")
                             ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-left" }, [
-                              _vm._v(" Width ")
+                              _vm._v("Width")
                             ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-left" }, [
-                              _vm._v(" Price ")
+                              _vm._v("Price")
                             ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-left" }, [
-                              _vm._v(" Qty ")
+                              _vm._v("Qty")
                             ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-left" }, [
-                              _vm._v(" Total ")
+                              _vm._v("Total")
                             ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-left" })
@@ -1274,9 +1314,9 @@ var render = function() {
                                       )
                                     : _c("span", [
                                         _vm._v(
-                                          "\n                      " +
+                                          "\n                  " +
                                             _vm._s(item.product.selling_price) +
-                                            "\n                  "
+                                            "\n                "
                                         )
                                       ])
                                 ],
@@ -1285,7 +1325,7 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [
                                 _vm._v(
-                                  "\n                  " +
+                                  "\n                " +
                                     _vm._s(item.quantity) +
                                     "\n              "
                                 )
@@ -1295,7 +1335,7 @@ var render = function() {
                                 item.product.enable_stock === 0
                                   ? _c("span", [
                                       _vm._v(
-                                        "\n                     " +
+                                        "\n                  " +
                                           _vm._s(
                                             (
                                               ((item.product.height *
@@ -1305,19 +1345,19 @@ var render = function() {
                                               item.quantity
                                             ).toFixed(0)
                                           ) +
-                                          "\n                  "
+                                          "\n                "
                                       )
                                     ])
                                   : _c("span", [
                                       _vm._v(
-                                        "\n                     " +
+                                        "\n                  " +
                                           _vm._s(
                                             (
                                               item.product.selling_price *
                                               item.quantity
                                             ).toFixed(0)
                                           ) +
-                                          "\n                  "
+                                          "\n                "
                                       )
                                     ])
                               ]),

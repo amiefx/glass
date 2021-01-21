@@ -11,7 +11,7 @@ use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductListResource;
 use Illuminate\Http\Request;
 use App\Models\products;
-
+use App\Models\Purchase;
 
 class ProductsController extends Controller
 {
@@ -19,7 +19,7 @@ class ProductsController extends Controller
     {
         return ProductListResource::collection(
             products::get()
-         );
+        );
     }
 
     public function index(Request $request)
@@ -28,7 +28,7 @@ class ProductsController extends Controller
         $sortBy = $request->sort_by ? $request->sort_by : 'name';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
         return response()->json([
-            'products' => new ProductCollection(products::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
+            'products' => new ProductCollection(products::orderBy($sortBy, $orderBy)->paginate($per_page)),
         ], 200);
     }
 
@@ -41,43 +41,53 @@ class ProductsController extends Controller
     {
         $user = auth()->user();
 
-        $product = new products([
-            'name' => $request->name,
-            'unit_id' => $request->unit_id,
-            'brand_id' => $request->brand_id,
-            'brand' => $request->brand,
-            'category_id' => $request->category_id,
-            'enable_stock' => $request->enable_stock,
-            'alert_quantity' => $request->alert_quantity,
-            'sku' => $request->sku,
-            'selling_price' => $request->selling_price,
-            'length' => $request->length,
-            'width' => $request->width,
-            'height' => $request->height,
-            'thickness' => $request->thickness,
-            'weight' => $request->weight,
-            'size' => $request->size,
-            'color' => $request->color,
-            'user_id' => $user->id,
-            'is_active' => $request->is_active
-        ]);
-        $product->save();
+        try {
+            DB::beginTransaction();
+
+            $product = new products([
+                'name' => $request->name,
+                'unit_id' => $request->unit_id,
+                'brand_id' => $request->brand_id,
+                'brand' => $request->brand,
+                'category_id' => $request->category_id,
+                'enable_stock' => $request->enable_stock,
+                'alert_quantity' => $request->alert_quantity,
+                'sku' => $request->sku,
+                'selling_price' => $request->selling_price,
+                'length' => $request->length,
+                'width' => $request->width,
+                'height' => $request->height,
+                'thickness' => $request->thickness,
+                'weight' => $request->weight,
+                'size' => $request->size,
+                'color' => $request->color,
+                'user_id' => $user->id,
+                'is_active' => $request->is_active
+            ]);
+            $product->save();
 
 
-        if ($request->quantity_on_hand > 0) {
+            if ($request->qty_on_hand > 0) {
 
-                $purchase = new Purchase([ 
+                $purchase = new Purchase([
                     'order_id' => 0,
                     'product_id' => $product->id,
-                    'quantity' => $request->quantity_on_hand,
-                    'price' => $request->purchase_price, 
+                    'quantity' => $request->qty_on_hand,
+                    'price' => $request->purchase_price,
                     'user_id' => $user->id,
                     'is_active' => $request->is_active
                 ]);
                 $purchase->save();
+            }
 
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            return response()->json(['error' => $th->getMessage()], 500);
         }
-        return response()->json(['product'=> new ProductResource($product)], 200);
+
+        return response()->json(['product' => new ProductResource($product)], 200);
     }
 
     public function show(Request $request, $id)
@@ -87,7 +97,7 @@ class ProductsController extends Controller
         $orderBy = $request->order_by ? $request->order_by : 'asc';
         $products = products::where('name', 'LIKE', "%$id%");
         return response()->json([
-            'products' => new ProductCollection($products->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
+            'products' => new ProductCollection($products->orderBy($sortBy, $orderBy)->paginate($per_page)),
         ], 200);
     }
 
@@ -143,36 +153,36 @@ class ProductsController extends Controller
     public function allProductsWithFilter($column, $value)
     {
         $products = products::where([$column => $value])->get();
-        return response()->json(['products'=>$products]);
+        return response()->json(['products' => $products]);
     }
 
 
     //relationships methods
     public function productBrand(Request $request, $id)
     {
-        $brand= products::findOrFail($id)->brand;
-        return response()->json(['brand'=>$brand]);
+        $brand = products::findOrFail($id)->brand;
+        return response()->json(['brand' => $brand]);
     }
     public function productCategory(Request $request, $id)
     {
-        $category= products::findOrFail($id)->category;
-        return response()->json(['category'=>$category]);
+        $category = products::findOrFail($id)->category;
+        return response()->json(['category' => $category]);
     }
     public function productUnit(Request $request, $id)
     {
-        $unit= products::findOrFail($id)->unit;
-        return response()->json(['unit'=>$unit]);
+        $unit = products::findOrFail($id)->unit;
+        return response()->json(['unit' => $unit]);
     }
     public function productUser(Request $request, $id)
     {
-        $user= products::findOrFail($id)->user;
-        return response()->json(['user'=>$user]);
+        $user = products::findOrFail($id)->user;
+        return response()->json(['user' => $user]);
     }
 
 
     public function report()
-    { 
+    {
         $report = DB::table('qty_statistics')->where('product_id', '=', 1)->get();
-        return response()->json(['report'=>$report]);
+        return response()->json(['report' => $report]);
     }
 }

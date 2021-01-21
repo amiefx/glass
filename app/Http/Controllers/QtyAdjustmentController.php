@@ -16,7 +16,7 @@ class QtyAdjustmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'created_at';
@@ -46,11 +46,11 @@ class QtyAdjustmentController extends Controller
     {
         $user = auth()->user();
 
-        $qty_adjustment = new QtyAdjustment([ 
-            'order_id' => $request->order_id,
+        $qty_adjustment = new QtyAdjustment([
+            'order_id' => 0,
             'product_id' => $request->product_id,
             'quantity' => $request->quantity,
-            'price' => $request->price, 
+            'price' => $request->price,
             'user_id' => $user->id
         ]);
         $qty_adjustment->save();
@@ -93,8 +93,8 @@ class QtyAdjustmentController extends Controller
         $qty_adjustment = QtyAdjustment::find($id);
 
         $qty_adjustment->order_id = $request->order_id;
-        $qty_adjustment->product_id = $request->product_id; 
-        $qty_adjustment->quantity = $request->quantity; 
+        $qty_adjustment->product_id = $request->product_id;
+        $qty_adjustment->quantity = $request->quantity;
         $qty_adjustment->price = $request->price;
         $qty_adjustment->user_id = $user->id;
         $qty_adjustment->is_active = $request->is_active;

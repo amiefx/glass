@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller; 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\EmployeeCollection;
-use App\Http\Resources\EmployeeResource; 
+use App\Http\Resources\EmployeeResource;
 use Illuminate\Http\Request;
-use App\Models\Employee; 
+use App\Models\Employee;
 
 
 class EmployeeController extends Controller
@@ -26,7 +26,7 @@ class EmployeeController extends Controller
          );
     }
 
-    
+
     public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
@@ -61,7 +61,7 @@ class EmployeeController extends Controller
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'name';
         $orderBy = $request->order_by ? $request->order_by : 'asc';
-        $employees = Employeer::where('name', 'LIKE', "%$id%");
+        $employees = Employee::where('name', 'LIKE', "%$id%");
         return response()->json([
             'employees' => new EmployeeCollection($employees->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);

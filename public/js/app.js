@@ -2413,6 +2413,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -2427,104 +2429,126 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       drawer: false,
       fixed: false,
       items: [{
-        icon: 'mdi-apps',
-        title: 'Dashboard',
-        to: '/admin/dashboard'
+        icon: "mdi-apps",
+        title: "Dashboard",
+        to: "/admin/dashboard"
       }, {
-        icon: 'mdi-account-arrow-left',
-        title: 'Customers',
-        to: '/admin/customers'
+        icon: "mdi-account-arrow-left",
+        title: "Customers",
+        to: "/admin/customers"
       }, {
-        icon: 'mdi-account-arrow-right',
-        title: 'Suppliers',
-        to: '/admin/suppliers'
+        icon: "mdi-account-arrow-right",
+        title: "Suppliers",
+        to: "/admin/suppliers"
       }],
       items1: [{
-        icon: 'mdi-apps',
-        title: 'Dashboard',
-        to: '/admin/dashboard'
+        icon: "mdi-apps",
+        title: "Dashboard",
+        to: "/admin/dashboard"
       }, {
-        icon: 'mdi-point-of-sale',
-        title: 'Sales',
-        to: '/admin/invoice'
+        icon: "mdi-point-of-sale",
+        title: "Sales",
+        to: "/admin/invoice"
       }, {
-        icon: 'mdi-cart-arrow-right',
-        title: 'Purchase',
-        to: '/admin/purchases'
+        icon: "mdi-cart-arrow-right",
+        title: "Purchase",
+        to: "/admin/purchases"
       }],
       products: [{
-        icon: 'mdi-collage',
-        title: 'Category',
-        to: '/admin/categories'
+        icon: "mdi-collage",
+        title: "Category",
+        to: "/admin/categories"
       }, {
-        icon: 'mdi-certificate',
-        title: 'Brand',
-        to: '/admin/brands'
+        icon: "mdi-certificate",
+        title: "Brand",
+        to: "/admin/brands"
       }, {
-        icon: 'mdi-pound-box-outline',
-        title: 'Slab',
-        to: '/admin/slabs'
+        icon: "mdi-pound-box-outline",
+        title: "Slab",
+        to: "/admin/slabs"
       }, {
-        icon: 'mdi-pound-box-outline',
-        title: 'Units',
-        to: '/admin/units'
+        icon: "mdi-pound-box-outline",
+        title: "Units",
+        to: "/admin/units"
       }, {
-        icon: 'mdi-barcode',
-        title: 'Products',
-        to: '/admin/products'
+        icon: "mdi-barcode",
+        title: "Products",
+        to: "/admin/products"
+      }, {
+        icon: "mdi-check-circle-outline",
+        title: "Adjust Qty",
+        to: "/admin/adjustqty"
       }],
       custs: [{
-        icon: 'mdi-account-arrow-left',
-        title: 'Customers',
-        to: '/admin/customers'
+        icon: "mdi-account-arrow-left",
+        title: "Customers",
+        to: "/admin/customers"
       }, {
-        icon: 'mdi-database-export',
-        title: 'Receivables',
-        to: '/admin/receivables'
+        icon: "mdi-database-export",
+        title: "Receivables",
+        to: "/admin/receivables"
       }],
       suppliers: [{
-        icon: 'mdi-account-arrow-right',
-        title: 'Suppliers',
-        to: '/admin/suppliers'
+        icon: "mdi-account-arrow-right",
+        title: "Suppliers",
+        to: "/admin/suppliers"
       }, {
-        icon: 'mdi-database-import',
-        title: 'Payables',
-        to: '/admin/payables'
+        icon: "mdi-database-import",
+        title: "Payables",
+        to: "/admin/payables"
       }],
       accounts: [{
-        icon: 'mdi-cash',
-        title: 'Cash Register',
-        to: '/admin/cash'
+        icon: "mdi-cash",
+        title: "Cash Register",
+        to: "/admin/cash"
       }, {
-        icon: 'mdi-bank',
-        title: 'Bank',
-        to: '/admin/bank'
+        icon: "mdi-bank",
+        title: "Bank",
+        to: "/admin/bank"
       }, {
-        icon: 'mdi-bank-transfer',
-        title: 'Transaction',
-        to: '/admin/transaction'
+        icon: "mdi-bank-transfer",
+        title: "Transaction",
+        to: "/admin/transaction"
       }],
       users: [{
-        icon: 'mdi-account-multiple-plus',
-        title: 'Users',
-        to: '/admin/users'
+        icon: "mdi-account-multiple-plus",
+        title: "Users",
+        to: "/admin/users"
       }, {
-        icon: 'mdi-account-box',
-        title: 'Profile',
-        to: '/account'
+        icon: "mdi-account-box",
+        title: "Profile",
+        to: "/account"
+      }],
+      employees: [{
+        icon: "mdi-account-tie",
+        title: "Employees",
+        to: "/admin/employees"
+      }, {
+        icon: "mdi-cash-usd-outline",
+        title: "Salary",
+        to: "/admin/salaries"
+      }],
+      expenses: [{
+        icon: "mdi-animation",
+        title: "Expense Items",
+        to: "/admin/expenseitems"
+      }, {
+        icon: "mdi-cash-minus",
+        title: "Expense",
+        to: "/admin/expenses"
       }],
       company: [{
-        icon: 'mdi-cogs',
-        title: 'Company',
-        to: '/admin/company'
+        icon: "mdi-cogs",
+        title: "Company",
+        to: "/admin/company"
       }],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Karim Glass and Aluminum',
-      lang: localStorage.getItem('lang'),
-      admins: [['Management', 'mdi-account-multiple-outline'], ['Settings', 'mdi-cog-outline']],
-      cruds: [['Create', 'mdi-plus-outline'], ['Read', 'mdi-file-outline'], ['Update', 'mdi-update'], ['Delete', 'mdi-delete']]
+      title: "Karim Glass and Aluminum",
+      lang: localStorage.getItem("lang"),
+      admins: [["Management", "mdi-account-multiple-outline"], ["Settings", "mdi-cog-outline"]],
+      cruds: [["Create", "mdi-plus-outline"], ["Read", "mdi-file-outline"], ["Update", "mdi-update"], ["Delete", "mdi-delete"]]
     };
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])({
@@ -2544,7 +2568,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     lang1: function lang1() {
       if (this.lang == "ur") {
         this.$vuetify.rtl = true;
-        document.documentElement.dir = 'rtl';
+        document.documentElement.dir = "rtl";
       } else {
         this.$vuetify.rtl = false;
       }
@@ -26236,6 +26260,93 @@ var render = function() {
                 {
                   attrs: {
                     value: false,
+                    "prepend-icon": "mdi-account-group-outline"
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "activator",
+                      fn: function() {
+                        return [_c("v-list-item-title", [_vm._v("Employees")])]
+                      },
+                      proxy: true
+                    }
+                  ])
+                },
+                [
+                  _vm._v(" "),
+                  _vm._l(_vm.employees, function(item, i) {
+                    return _c(
+                      "v-list-item",
+                      { key: i, attrs: { link: "", dense: "", to: item.to } },
+                      [
+                        _c(
+                          "v-list-item-icon",
+                          [
+                            _c("v-icon", {
+                              domProps: { textContent: _vm._s(item.icon) }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("v-list-item-title", {
+                          domProps: { textContent: _vm._s(item.title) }
+                        })
+                      ],
+                      1
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-group",
+                {
+                  attrs: { value: false, "prepend-icon": "mdi-cash-minus" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "activator",
+                      fn: function() {
+                        return [_c("v-list-item-title", [_vm._v("Expenses")])]
+                      },
+                      proxy: true
+                    }
+                  ])
+                },
+                [
+                  _vm._v(" "),
+                  _vm._l(_vm.expenses, function(item, i) {
+                    return _c(
+                      "v-list-item",
+                      { key: i, attrs: { link: "", dense: "", to: item.to } },
+                      [
+                        _c(
+                          "v-list-item-icon",
+                          [
+                            _c("v-icon", {
+                              domProps: { textContent: _vm._s(item.icon) }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("v-list-item-title", {
+                          domProps: { textContent: _vm._s(item.title) }
+                        })
+                      ],
+                      1
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-group",
+                {
+                  attrs: {
+                    value: false,
                     "prepend-icon": "mdi-account-multiple-outline"
                   },
                   scopedSlots: _vm._u([
@@ -26415,7 +26526,7 @@ var render = function() {
                     "v-list-item-action",
                     [
                       _c("v-icon", { attrs: { light: "" } }, [
-                        _vm._v("\n            mdi-repeat\n          ")
+                        _vm._v(" mdi-repeat ")
                       ])
                     ],
                     1
@@ -86289,29 +86400,27 @@ var routes = [{
     layout: 'admin',
     middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
   }
-}, // {
-//     path: '/admin/attribute-sets',
-//     name: 'attribute-sets',
-//     component: () => import('../views/admin/Attribute-sets.vue'),
-//     meta: {
-//         layout: 'admin',
-//         middleware: [
-//             auth, admin
-//         ]
-//     }
-// },
-// {
-//     path: '/admin/attributes',
-//     name: 'attributes',
-//     component: () => import('../views/admin/Attributes.vue'),
-//     meta: {
-//         layout: 'admin',
-//         middleware: [
-//             auth, admin
-//         ]
-//     }
-// },
-{
+}, {
+  path: '/admin/adjustqty',
+  name: 'adjustqty',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ../views/admin/AdjustQty.vue */ "./resources/js/views/admin/AdjustQty.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
+  }
+}, {
+  path: '/admin/employees',
+  name: 'employees',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ../views/admin/Employee.vue */ "./resources/js/views/admin/Employee.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
+  }
+}, {
   path: '/admin/categories',
   name: 'categories',
   component: function component() {
@@ -86351,18 +86460,27 @@ var routes = [{
     layout: 'admin',
     middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
   }
-}, // {
-//     path: '/admin/shipping',
-//     name: 'shipping',
-//     component: () => import('../views/admin/Shipping.vue'),
-//     meta: {
-//         layout: 'admin',
-//         middleware: [
-//             auth, admin
-//         ]
-//     }
-// },
-{
+}, {
+  path: '/admin/expenseitems',
+  name: 'expenseitems',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ../views/admin/ExpenseItem.vue */ "./resources/js/views/admin/ExpenseItem.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
+  }
+}, {
+  path: '/admin/expenses',
+  name: 'expenses',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ../views/admin/Expense.vue */ "./resources/js/views/admin/Expense.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
+  }
+}, {
   path: '/admin/purchases',
   name: 'purchases',
   component: function component() {

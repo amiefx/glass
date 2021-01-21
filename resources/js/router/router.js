@@ -204,28 +204,28 @@ const routes = [
             ]
         }
     },
-    // {
-    //     path: '/admin/attribute-sets',
-    //     name: 'attribute-sets',
-    //     component: () => import('../views/admin/Attribute-sets.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
-    // {
-    //     path: '/admin/attributes',
-    //     name: 'attributes',
-    //     component: () => import('../views/admin/Attributes.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/adjustqty',
+        name: 'adjustqty',
+        component: () => import('../views/admin/AdjustQty.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
+    {
+        path: '/admin/employees',
+        name: 'employees',
+        component: () => import('../views/admin/Employee.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     {
         path: '/admin/categories',
         name: 'categories',
@@ -270,17 +270,28 @@ const routes = [
             ]
         }
     },
-    // {
-    //     path: '/admin/shipping',
-    //     name: 'shipping',
-    //     component: () => import('../views/admin/Shipping.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/expenseitems',
+        name: 'expenseitems',
+        component: () => import('../views/admin/ExpenseItem.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
+    {
+        path: '/admin/expenses',
+        name: 'expenses',
+        component: () => import('../views/admin/Expense.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     {
         path: '/admin/purchases',
         name: 'purchases',

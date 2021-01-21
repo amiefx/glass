@@ -95,6 +95,9 @@ Route::group([
     Route::get('products/report', 'ProductsController@report'); //view for remaining quantity
     Route::resource('products', 'ProductsController');
 
+    // adjust quantity
+    Route::resource('qtyadjustments', 'QtyAdjustmentController');
+
     // slab
     Route::get('slabs/all', 'SlabController@allSlabs');
     Route::resource('slabs', 'SlabController');
@@ -168,6 +171,10 @@ Route::group([
 
     // expenses
     Route::resource('expenses', 'ExpenseController');
+
+    // expenses items
+    Route::get('expenseitems/allitems', 'ExpenseItemsController@allitems');
+    Route::resource('expenseitems', 'ExpenseItemsController');
 
     // salary
     Route::resource('salaries', 'SalaryController');

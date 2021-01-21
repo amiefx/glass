@@ -1,6 +1,6 @@
 <template>
       <v-app>
-          <v-container>
+          <v-container fluid fill-height>
         <v-row
           align="center"
           justify="center"
