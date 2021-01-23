@@ -219,6 +219,28 @@ Route::group([
     Route::get('report/totalpayablesbydocid/{id}', 'ReportController@totalNumberPayablesByDocId');
 
 
+    Route::get('report/totalbank', 'ReportController@totalNumberBank');
+    Route::get('report/totalbankbyid/{id}', 'ReportController@totalNumberBankById');
+    Route::get('report/totalbankbysupplierid/{id}', 'ReportController@totalNumberBankBySupplierId');
+    Route::get('report/totalbankbycustomerrid/{id}', 'ReportController@totalNumberBankByCustomerId');
+    Route::get('report/totalbankbyemployeeid/{id}', 'ReportController@totalNumberBankByEmployeeId');
+    Route::get('report/totalbankbydocid/{id}', 'ReportController@totalNumberBankByDocId');
+    Route::get('report/totalbankbydoctype/{type}', 'ReportController@totalNumberBankByDocType');
+    Route::get('report/totalbankbydate/{date}', 'ReportController@totalNumberBankByDate');
+
+    Route::get('report/totalcash', 'ReportController@totalNumberCash');
+    Route::get('report/totalcashbyid/{id}', 'ReportController@totalNumberCashById');
+    Route::get('report/totalcashbysupplierid/{id}', 'ReportController@totalNumberCashBySupplierId');
+    Route::get('report/totalcashbycustomerrid/{id}', 'ReportController@totalNumberCashByCustomerId');
+    Route::get('report/totalcashbyemployeeid/{id}', 'ReportController@totalNumberCashByEmployeeId');
+    Route::get('report/totalcashbydocid/{id}', 'ReportController@totalNumberCashByDocId');
+    Route::get('report/totalcashbydoctype/{type}', 'ReportController@totalNumberCashByDocType');
+    Route::get('report/totalcashbydate/{date}', 'ReportController@totalNumberCashByDate');
+
+
+    Route::get('report/totalexpensebyid/{id}', 'ReportController@totalNumberExpenseById');
+    Route::get('report/totalexpensebydate/{date}', 'ReportController@totalNumberExpenseByDate');
+    Route::get('report/totalexpenseitemsbyid/{id}', 'ReportController@totalNumberExpenseItemsById');
 
 
 });

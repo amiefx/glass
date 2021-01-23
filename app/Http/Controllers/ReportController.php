@@ -264,5 +264,153 @@ class ReportController extends Controller
         return response()->json(['count' => $count, 'payables' => $payables], 200);
     }
 
-}
 
+
+
+    //bank
+    public function totalNumberBank()
+    {
+        $banks = DB::table('banks')->count();
+        return response()->json(['banks' => $banks], 200);
+    }
+
+    public function totalNumberBankById($id)
+    {
+        $bank = DB::table('banks')->where('id', '=', $id)->get();
+        return response()->json(['bank' => $bank], 200);
+    }
+
+    public function totalNumberBankBySupplierId($id)
+    {
+        $count = DB::table('banks')->where('supplier_id', '=', $id)->count();
+        $banks = DB::table('banks')->where('supplier_id', '=', $id)->get();
+        return response()->json(['count' => $count, 'banks' => $banks], 200);
+    }
+
+    public function totalNumberBankByCustomerId($id)
+    {
+        $count = DB::table('banks')->where('customer_id', '=', $id)->count();
+        $banks = DB::table('banks')->where('customer_id', '=', $id)->get();
+        return response()->json(['count' => $count, 'banks' => $banks], 200);
+    }
+
+    public function totalNumberBankByEmployeeId($id)
+    {
+        $count = DB::table('banks')->where('employee_id', '=', $id)->count();
+        $banks = DB::table('banks')->where('employee_id', '=', $id)->get();
+        return response()->json(['count' => $count, 'banks' => $banks], 200);
+    }
+
+    public function totalNumberBankByDocType($type)
+    {
+        $count = DB::table('banks')->where('doc_type', '=', $type)->count();
+        $banks = DB::table('banks')->where('doc_type', '=', $type)->get();
+
+        return response()->json(['count' => $count, 'ban$banks' => $banks], 200);
+    }
+
+    public function totalNumberBankByDate($date)
+    {
+        $count = DB::table('banks')->where('created_at', 'like', "$date%")->count();
+        $banks = DB::table('banks')->where('created_at', 'like', "$date%")->get();
+
+        return response()->json(['count' => $count, 'banks' => $banks], 200);
+    }
+    
+    public function totalNumberBankByDocId($id)
+    {
+        $count = DB::table('banks')->where('doc_id', '=', $id)->count();
+        $banks = DB::table('banks')->where('doc_id', '=', $id)->get();
+
+        return response()->json(['count' => $count, 'banks' => $banks], 200);
+    }
+
+
+
+    //cash
+    public function totalNumberCash()
+    {
+        $cashes = DB::table('cashes')->count();
+        return response()->json(['cashes' => $cashes], 200);
+    }
+
+    public function totalNumberCashById($id)
+    {
+        $cashe = DB::table('cashes')->where('id', '=', $id)->get();
+        return response()->json(['cashe' => $cashe], 200);
+    }
+
+    public function totalNumberCashBySupplierId($id)
+    {
+        $count = DB::table('cashes')->where('supplier_id', '=', $id)->count();
+        $cashes = DB::table('cashes')->where('supplier_id', '=', $id)->get();
+        return response()->json(['count' => $count, 'cashes' => $cashes], 200);
+    }
+
+    public function totalNumberCashByCustomerId($id)
+    {
+        $count = DB::table('cashes')->where('customer_id', '=', $id)->count();
+        $cashes = DB::table('cashes')->where('customer_id', '=', $id)->get();
+        return response()->json(['count' => $count, 'cashes' => $cashes], 200);
+    }
+
+    public function totalNumberCashByEmployeeId($id)
+    {
+        $count = DB::table('cashes')->where('employee_id', '=', $id)->count();
+        $cash = DB::table('cashes')->where('employee_id', '=', $id)->get();
+        return response()->json(['count' => $count, 'cash' => $cash], 200);
+    }
+
+    public function totalNumberCashByDocType($type)
+    {
+        $count = DB::table('cashes')->where('doc_type', '=', $type)->count();
+        $cashes = DB::table('cashes')->where('doc_type', '=', $type)->get();
+
+        return response()->json(['count' => $count, 'cashes' => $cashes], 200);
+    }
+
+    public function totalNumberCashByDate($date)
+    {
+        $count = DB::table('cashes')->where('created_at', 'like', "$date%")->count();
+        $cashes = DB::table('cashes')->where('created_at', 'like', "$date%")->get();
+
+        return response()->json(['count' => $count, 'cashes' => $cashes], 200);
+    }
+    
+    public function totalNumberCashByDocId($id)
+    {
+        $count = DB::table('cashes')->where('doc_id', '=', $id)->count();
+        $cashes = DB::table('cashes')->where('doc_id', '=', $id)->get();
+
+        return response()->json(['count' => $count, 'cashes' => $cashes], 200);
+    }
+
+
+    //expenses
+    public function totalNumberExpenseById($id)
+    {
+        $count = DB::table('expenses')->where('id', '=', $id)->count();
+        $expense = DB::table('expenses')->where('id', '=', $id)->get();
+
+        return response()->json(['count' => $count, 'expense' => $expense], 200);
+    }
+
+    public function totalNumberExpenseByDate($date)
+    {
+        $count = DB::table('expenses')->where('created_at', 'like', "$date%")->count();
+        $expenses = DB::table('expenses')->where('created_at', 'like', "$date%")->get();
+
+        return response()->json(['count' => $count, 'expenses' => $expenses], 200);
+    }
+    
+    public function totalNumberExpenseItemsById($id)
+    {
+        $count = DB::table('expense_items')->where('id', '=', $id)->count();
+        $expense_items = DB::table('expense_items')->where('id', '=', $id)->get();
+
+        return response()->json(['count' => $count, 'expense_items' => $expense_items], 200);
+    }
+
+
+
+}
