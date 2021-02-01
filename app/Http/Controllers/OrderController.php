@@ -200,4 +200,72 @@ class OrderController extends Controller
         $customer= Order::findOrFail($id)->customer;
         return response()->json(['customer'=>$customer]);
     }
+
+
+    public function ceilling_calculation(Request $request)
+    {
+        $width = $request->width;
+        $length = $request->length;
+        $angle_max_length = 10;
+        $main_t_max_length = 12;
+
+        //number of angles
+        $total_length = ($width * 2) + ($length * 2);
+        $num_of_angles = ceil($total_length / $angle_max_length);
+
+
+        //main-t
+        $maint_lines = ceil($width / 2 ) - 1;
+        $maint_length = $length * $maint_lines;
+        $num_of_main_t = ceil($maint_length / $main_t_max_length);
+
+        //cross-t
+        $num_of_cross_t = ceil(ceil($width / 2 ) * (($length / 2 ) - 1));
+
+        //sheets
+        $num_of_sheets = ceil(($width * $length) / 4);
+
+
+        return response()->json(['num_of_angles' => $num_of_angles, 'num_of_main_t' => $num_of_main_t
+        , 'num_of_cross_t' => $num_of_cross_t, 'num_of_sheets' => $num_of_sheets], 200);
+    }
+
+
+    public function panel_calculation(Request $request)
+    {
+        $number = $request->number;
+        $length = $request->length;
+        $height = $request->height; 
+        $removals = $request->removals;
+        $gola_max_height = 9.5;
+
+        if ($height == "full") {
+            $sheet_height = 9.5;
+        }elseif ($height == "half") {
+            $sheet_height = 4.75;
+        }else {
+            $sheet_height = 3.16;
+        }
+
+        if ($request->sheet_width == 8) {
+            $sheet_width = 6.35;
+        }elseif ($request->sheet_width == 10) {
+            $sheet_width = 7.92;
+        }elseif ($request->sheet_width == 16) {
+            $sheet_width = 12.66;
+        }else {
+            $sheet_width = 19.0;
+        }
+
+        //number of sheets
+        $num_of_sheets = ceil((($length * $number * $sheet_height) - ($removals)) / $sheet_width); 
+
+
+        //gola
+        $num_of_gola = ceil(((($length * $number * 2) + ($sheet_height * $number * 2)) + $removals) / $gola_max_height);
+
+
+        return response()->json(['num_of_sheets' => $num_of_sheets, 'num_of_gola' => $num_of_gola], 200);
+    }
+
 }
