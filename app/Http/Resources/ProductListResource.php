@@ -40,6 +40,7 @@ class ProductListResource extends JsonResource
             'height' => $this->height,
             'width' => $this->width,
             'alert_qty' => $this->alert_quantity,
+            'category' => $this->category->name,
             'onhand' => DB::table('product_qty')->select('qty')->where('product_id', '=', $this->id)->first(),
         ];
 

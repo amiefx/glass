@@ -2,83 +2,30 @@
   <div>
     <v-row>
       <v-col cols="7">
-        <v-row class="cust">
-          <v-col cols="3" class="pt-1 pb-0">
-            <v-autocomplete
-              v-model="model"
-              :items="items"
-              :loading="isLoading"
-              :search-input.sync="search"
-              hide-details
-              hide-selected
-              item-text="name"
-              item-value="id"
-              label="Search..."
-              solo
-              class="autcmp"
-              dense
-              height="1px"
-            >
-              <template v-slot:no-data>
-                <v-list-item>
-                  <v-list-item-title>
-                    Search ...
-                  </v-list-item-title>
-                </v-list-item>
-              </template>
-              <template v-slot:selection="{ attr, on, item, selected }">
-                <!-- <v-chip
-                  v-bind="attr"
-                  :input-value="selected"
-                  color="blue-grey"
-                  class="white--text"
-                  v-on="on"
-                >
-                  <v-icon left> mdi-account </v-icon>
-                  <span v-text="item.name"></span>
-                </v-chip> -->
-                <span v-text="item.name"></span>
-              </template>
-              <template v-slot:item="{ item }">
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.name"></v-list-item-title>
-                  <v-list-item-subtitle>
-                    {{ item.company_name }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </template>
-            </v-autocomplete>
-          </v-col>
-          <v-col cols="3" v-if="cust2"> {{ cust2.work_number }} </v-col>
-          <v-col cols="2" v-if="cust2"> {{ cust2.receivable }} </v-col>
-          <v-col cols="2" v-if="cust2"> {{ 'Feb 3, 2020' }}</v-col>
-          <v-col cols="2"> button </v-col>
-        </v-row>
-
-        <v-row class="prod" >
-           <v-autocomplete
-          v-model="product_item"
-          :items="products"
-          :search-input.sync="searchIt"
+        <v-autocomplete
+          v-model="model"
+          :items="items"
+          :loading="isLoading"
+          :search-input.sync="search"
+          chips
           clearable
           hide-details
           hide-selected
           item-text="name"
           item-value="id"
-          label="Search for a product..."
+          label="Search for a customer..."
           solo
-          dense
         >
           <template v-slot:no-data>
             <v-list-item>
               <v-list-item-title>
                 Search for a
-                <strong>Product</strong>
+                <strong>Customer</strong>
               </v-list-item-title>
             </v-list-item>
           </template>
           <template v-slot:selection="{ attr, on, item, selected }">
-            <!-- <v-chip
+            <v-chip
               v-bind="attr"
               :input-value="selected"
               color="blue-grey"
@@ -87,52 +34,50 @@
             >
               <v-icon left> mdi-account </v-icon>
               <span v-text="item.name"></span>
-            </v-chip> -->
-            <span v-text="item.sku"></span>
+            </v-chip>
           </template>
           <template v-slot:item="{ item }">
-            <!-- <v-list-item-avatar
+            <v-list-item-avatar
               color="indigo"
               class="headline font-weight-light white--text"
             >
-              <v-icon class="white--text">mdi-cart</v-icon>
-            </v-list-item-avatar> -->
+              <v-icon class="white--text">mdi-account</v-icon>
+            </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title v-text="item.sku"></v-list-item-title>
-              <!-- <v-list-item-subtitle>
+              <v-list-item-title v-text="item.name"></v-list-item-title>
+              <v-list-item-subtitle>
                 {{ item.company_name }} | {{ item.work_number }}
-              </v-list-item-subtitle> -->
+              </v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
-              <!-- <span v-if="item.credit_limit > 0">
+              <span v-if="item.credit_limit > 0">
                 Credit limit:
                 <strong>
                   {{ item.credit_limit }}
                 </strong>
-              </span> -->
+              </span>
               <span>
-                Stock:
+                Receivable:
                 <strong>
-                  {{ item.onhand }}
+                  {{ item.receivable }}
                 </strong>
               </span>
             </v-list-item-action>
           </template>
         </v-autocomplete>
-        </v-row>
 
         <v-divider></v-divider>
 
-        <v-simple-table height dense>
+        <v-simple-table height>
           <template v-slot:default>
             <thead>
               <tr>
                 <th></th>
                 <th class="text-left">Sku</th>
-                <!-- <th class="text-left">Height</th>
-                <th class="text-left">Width</th> -->
-                <th class="text-left">Qty</th>
+                <th class="text-left">Height</th>
+                <th class="text-left">Width</th>
                 <th class="text-left">Price</th>
+                <th class="text-left">Qty</th>
                 <th class="text-left">Total</th>
                 <th class="text-left"></th>
               </tr>
@@ -152,24 +97,72 @@
                   {{ item.product.sku }}
                 </td>
                 <td>
-                  <input
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <input
+                        v-if="item.product.enable_stock === 0"
                         class="numinput small1"
                         type="number"
-                        v-model="item.quantity"
+                        v-model="item.product.height"
+                        v-bind="attrs"
+                        v-on="on"
+                        @change="changeHeight(item)"
                       />
+                    </template>
+                    <span>input data in inches</span>
+                  </v-tooltip>
                 </td>
                 <td>
-                  <input
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <input
+                        v-if="item.product.enable_stock === 0"
+                        class="numinput small1"
+                        type="number"
+                        v-model="item.product.width"
+                        v-bind="attrs"
+                        v-on="on"
+                        @change="changeWidth(item)"
+                      />
+                    </template>
+                    <span>input data in inches</span>
+                  </v-tooltip>
+                </td>
+                <td>
+                  <v-tooltip top v-if="item.product.enable_stock === 0">
+                    <template v-slot:activator="{ on, attrs }">
+                      <input
                         class="numinput small1"
                         type="number"
                         v-model="item.product.selling_price"
+                        v-bind="attrs"
+                        v-on="on"
                       />
+                    </template>
+                    <span>price / foot</span>
+                  </v-tooltip>
+                  <span v-else>
+                    {{ item.product.selling_price }}
+                  </span>
                 </td>
-
+                <td>
+                  {{ item.quantity }}
+                </td>
                 <td allign="right">
-                  {{
+                  <span v-if="item.product.enable_stock === 0">
+                    {{
+                      (
+                        ((item.product.height * item.product.width) / 12) *
+                        item.product.selling_price *
+                        item.quantity
+                      ).toFixed(0)
+                    }}
+                  </span>
+                  <span v-else>
+                    {{
                       (item.product.selling_price * item.quantity).toFixed(0)
                     }}
+                  </span>
                 </td>
                 <td>
                   <v-btn
@@ -287,24 +280,12 @@
         </v-row>
       </v-col>
       <v-col cols="5">
-        <v-tabs>
-          <v-tab>
-            <v-icon left> mdi-file-document-outline </v-icon>
-            Ceiling
-          </v-tab>
-          <v-tab>
-            <v-icon left> mdi-note-text-outline </v-icon>
-            Pannels
-          </v-tab>
-          <v-tab>
-            <v-icon left> mdi-cash-multiple </v-icon>
-            Glass
-          </v-tab>
-
-          <v-tab-item> exyz </v-tab-item>
-          <v-tab-item> Panels </v-tab-item>
-          <v-tab-item> Glass </v-tab-item>
-        </v-tabs>
+          <v-text-field
+          v-model="scannedBarcode"
+          label="Item"
+          @change="scan"
+        ></v-text-field>
+        <product-list :products="products" />
       </v-col>
     </v-row>
   </div>
@@ -330,8 +311,6 @@ export default {
       use_slab: false,
       products: [],
       scannedBarcode: null,
-      cust2: {},
-      product_item: null,
 
       doc_types: ["Invoice", "Quotation"],
       invoiceData: {
@@ -417,22 +396,23 @@ export default {
     },
 
     // scanner
-    scan() {
-      //   console.log(this.scannedBarcode);
+      scan() {
+     //   console.log(this.scannedBarcode);
 
-      let item = this.products.filter((item) => item.id == this.scannedBarcode);
+        let item = this.products.filter(item => item.id == this.scannedBarcode)
 
-      // console.log(item)
+       // console.log(item)
 
       this.$store.dispatch("cart/addProductToCart", {
         product: item[0],
         quantity: 1,
-      });
+      })
 
-      this.scannedBarcode = null;
-    },
+        this.scannedBarcode = null;
+      },
 
     // filtered item
+
 
     initialize() {
       // Add a request interceptor
@@ -545,24 +525,9 @@ export default {
           console.log(err);
           this.isLoading = false;
         });
-
     },
 
-    model() {
-      let customer = this.items.filter(item => item.id == this.model)
-      this.cust2 = customer[0];
-    },
 
-    product_item() {
-      let prod = this.products.filter(item => item.id == this.product_item)
-
-      this.$store.dispatch("cart/addProductToCart", {
-        product: prod[0],
-        quantity: 1,
-      });
-
-      this.product_item = null;
-    }
   },
 };
 </script>
@@ -587,19 +552,4 @@ export default {
 .small1 {
   width: 55px;
 }
-
-.autcmp {
-  width: 200px !important;
-  padding: 0;
-  background: transparent;
-}
-
-.cust {
-  background-color: lightsalmon;
-}
-
-.prod {
-    background-color: lightgreen;
-}
-
 </style>

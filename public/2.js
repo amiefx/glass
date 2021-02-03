@@ -96,12 +96,38 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _components_ProductList_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ProductList.vue */ "./resources/js/components/ProductList.vue");
+var _watch;
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -407,6 +433,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       slabs: [],
       use_slab: false,
       products: [],
+      scannedBarcode: null,
+      cust2: {},
+      product_item: null,
       doc_types: ["Invoice", "Quotation"],
       invoiceData: {
         customer_id: "",
@@ -478,37 +507,53 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.initialize();
       });
     },
-    initialize: function initialize() {
+    // scanner
+    scan: function scan() {
       var _this2 = this;
+
+      //   console.log(this.scannedBarcode);
+      var item = this.products.filter(function (item) {
+        return item.id == _this2.scannedBarcode;
+      }); // console.log(item)
+
+      this.$store.dispatch("cart/addProductToCart", {
+        product: item[0],
+        quantity: 1
+      });
+      this.scannedBarcode = null;
+    },
+    // filtered item
+    initialize: function initialize() {
+      var _this3 = this;
 
       // Add a request interceptor
       axios.interceptors.request.use(function (config) {
-        _this2.loading = true;
+        _this3.loading = true;
         return config;
       }, function (error) {
-        _this2.loading = false;
+        _this3.loading = false;
         return Promise.reject(error);
       }); // Add a response interceptor
 
       axios.interceptors.response.use(function (response) {
-        _this2.loading = false;
+        _this3.loading = false;
         return response;
       }, function (error) {
-        _this2.loading = false;
+        _this3.loading = false;
         return Promise.reject(error);
       });
       axios.get("/api/products/all").then(function (res) {
-        _this2.products = res.data.data;
+        _this3.products = res.data.data;
       });
     },
     changeHeight: function changeHeight(item) {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.use_slab) {
         var height = item.product.height;
         this.slabs.forEach(function (slab) {
           if (height >= slab.min && height <= slab.max) {
-            _this3.$store.dispatch("cart/changeProductHeight", {
+            _this4.$store.dispatch("cart/changeProductHeight", {
               product: item.product,
               height: slab.actual
             });
@@ -517,13 +562,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     changeWidth: function changeWidth(item) {
-      var _this4 = this;
+      var _this5 = this;
 
       if (this.use_slab) {
         var width = item.product.width;
         this.slabs.forEach(function (slab) {
           if (width >= slab.min && width <= slab.max) {
-            _this4.$store.dispatch("cart/changeProductWidth", {
+            _this5.$store.dispatch("cart/changeProductWidth", {
               product: item.product,
               width: slab.actual
             });
@@ -533,11 +578,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.initialize();
     axios.get("/api/slabs/all").then(function (res) {
-      _this5.slabs = res.data.data;
+      _this6.slabs = res.data.data;
     });
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -558,36 +603,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.total - this.invoiceData.received_amt;
     }
   }),
-  watch: {
+  watch: (_watch = {
     model: function model(val) {
       if (val != null) this.tab = 0;else this.tab = null;
     },
     search: function search(val) {
-      var _this6 = this;
+      var _this7 = this;
 
       // Items have already been loaded
       if (this.items.length > 0) return;
-      this.isLoading = true; // Lazily load input items
-      // fetch('https://api.coingecko.com/api/v3/coins/list')
-      //   .then(res => res.clone().json())
-      //   .then(res => {
-      //     this.items = res
-      //   })
-      //   .catch(err => {
-      //     console.log(err)
-      //   })
-      //   .finally(() => (this.isLoading = false))
-      // axios method
+      this.isLoading = true; // axios method
 
       axios.get("/api/customers/all").then(function (res) {
-        _this6.items = res.data.data;
-        _this6.isLoading = false;
+        _this7.items = res.data.data;
+        _this7.isLoading = false;
       })["catch"](function (err) {
         console.log(err);
-        _this6.isLoading = false;
+        _this7.isLoading = false;
       });
     }
-  }
+  }, _defineProperty(_watch, "model", function model() {
+    var _this8 = this;
+
+    var customer = this.items.filter(function (item) {
+      return item.id == _this8.model;
+    });
+    this.cust2 = customer[0];
+  }), _defineProperty(_watch, "product_item", function product_item() {
+    var _this9 = this;
+
+    var prod = this.products.filter(function (item) {
+      return item.id == _this9.product_item;
+    });
+    this.$store.dispatch("cart/addProductToCart", {
+      product: prod[0],
+      quantity: 1
+    });
+    this.product_item = null;
+  }), _watch)
 });
 
 /***/ }),
@@ -623,7 +676,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".numinput {\n  border: 1px solid lightgray;\n  border-radius: 5px;\n  padding: 3px;\n  padding-left: 10px;\n  margin-top: 5px;\n  margin-bottom: 5px;\n}\n.numinput:focus {\n  border: 1px solid lightgray;\n}\n.radio {\n  height: 30px;\n}\n.small1 {\n  width: 55px;\n}", ""]);
+exports.push([module.i, ".numinput {\n  border: 1px solid lightgray;\n  border-radius: 5px;\n  padding: 3px;\n  padding-left: 10px;\n  margin-top: 5px;\n  margin-bottom: 5px;\n}\n.numinput:focus {\n  border: 1px solid lightgray;\n}\n.radio {\n  height: 30px;\n}\n.small1 {\n  width: 55px;\n}\n.autcmp {\n  width: 200px !important;\n  padding: 0;\n  background: transparent;\n}\n.cust {\n  background-color: lightsalmon;\n}\n.prod {\n  background-color: lightgreen;\n}", ""]);
 
 // exports
 
@@ -833,174 +886,243 @@ var render = function() {
             "v-col",
             { attrs: { cols: "7" } },
             [
-              _c("v-autocomplete", {
-                attrs: {
-                  items: _vm.items,
-                  loading: _vm.isLoading,
-                  "search-input": _vm.search,
-                  chips: "",
-                  clearable: "",
-                  "hide-details": "",
-                  "hide-selected": "",
-                  "item-text": "name",
-                  "item-value": "id",
-                  label: "Search for a customer...",
-                  solo: ""
-                },
-                on: {
-                  "update:searchInput": function($event) {
-                    _vm.search = $event
-                  },
-                  "update:search-input": function($event) {
-                    _vm.search = $event
-                  }
-                },
-                scopedSlots: _vm._u([
-                  {
-                    key: "no-data",
-                    fn: function() {
-                      return [
-                        _c(
-                          "v-list-item",
-                          [
-                            _c("v-list-item-title", [
-                              _vm._v(
-                                "\n              Search for a\n              "
-                              ),
-                              _c("strong", [_vm._v("Customer")])
-                            ])
-                          ],
-                          1
-                        )
-                      ]
-                    },
-                    proxy: true
-                  },
-                  {
-                    key: "selection",
-                    fn: function(ref) {
-                      var attr = ref.attr
-                      var on = ref.on
-                      var item = ref.item
-                      var selected = ref.selected
-                      return [
-                        _c(
-                          "v-chip",
-                          _vm._g(
-                            _vm._b(
-                              {
-                                staticClass: "white--text",
-                                attrs: {
-                                  "input-value": selected,
-                                  color: "blue-grey"
-                                }
-                              },
-                              "v-chip",
-                              attr,
-                              false
-                            ),
-                            on
-                          ),
-                          [
-                            _c("v-icon", { attrs: { left: "" } }, [
-                              _vm._v(" mdi-account ")
-                            ]),
-                            _vm._v(" "),
-                            _c("span", {
-                              domProps: { textContent: _vm._s(item.name) }
-                            })
-                          ],
-                          1
-                        )
-                      ]
-                    }
-                  },
-                  {
-                    key: "item",
-                    fn: function(ref) {
-                      var item = ref.item
-                      return [
-                        _c(
-                          "v-list-item-avatar",
-                          {
-                            staticClass:
-                              "headline font-weight-light white--text",
-                            attrs: { color: "indigo" }
+              _c(
+                "v-row",
+                { staticClass: "cust" },
+                [
+                  _c(
+                    "v-col",
+                    { staticClass: "pt-1 pb-0", attrs: { cols: "3" } },
+                    [
+                      _c("v-autocomplete", {
+                        staticClass: "autcmp",
+                        attrs: {
+                          items: _vm.items,
+                          loading: _vm.isLoading,
+                          "search-input": _vm.search,
+                          "hide-details": "",
+                          "hide-selected": "",
+                          "item-text": "name",
+                          "item-value": "id",
+                          label: "Search...",
+                          solo: "",
+                          dense: "",
+                          height: "1px"
+                        },
+                        on: {
+                          "update:searchInput": function($event) {
+                            _vm.search = $event
                           },
-                          [
-                            _c("v-icon", { staticClass: "white--text" }, [
-                              _vm._v("mdi-account")
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-list-item-content",
-                          [
-                            _c("v-list-item-title", {
-                              domProps: { textContent: _vm._s(item.name) }
-                            }),
+                          "update:search-input": function($event) {
+                            _vm.search = $event
+                          }
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "no-data",
+                            fn: function() {
+                              return [
+                                _c(
+                                  "v-list-item",
+                                  [
+                                    _c("v-list-item-title", [
+                                      _vm._v(
+                                        "\n                  Search ...\n                "
+                                      )
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "selection",
+                            fn: function(ref) {
+                              var attr = ref.attr
+                              var on = ref.on
+                              var item = ref.item
+                              var selected = ref.selected
+                              return [
+                                _c("span", {
+                                  domProps: { textContent: _vm._s(item.name) }
+                                })
+                              ]
+                            }
+                          },
+                          {
+                            key: "item",
+                            fn: function(ref) {
+                              var item = ref.item
+                              return [
+                                _c(
+                                  "v-list-item-content",
+                                  [
+                                    _c("v-list-item-title", {
+                                      domProps: {
+                                        textContent: _vm._s(item.name)
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("v-list-item-subtitle", [
+                                      _vm._v(
+                                        "\n                  " +
+                                          _vm._s(item.company_name) +
+                                          "\n                "
+                                      )
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          }
+                        ]),
+                        model: {
+                          value: _vm.model,
+                          callback: function($$v) {
+                            _vm.model = $$v
+                          },
+                          expression: "model"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm.cust2
+                    ? _c("v-col", { attrs: { cols: "3" } }, [
+                        _vm._v(" " + _vm._s(_vm.cust2.work_number) + " ")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.cust2
+                    ? _c("v-col", { attrs: { cols: "2" } }, [
+                        _vm._v(" " + _vm._s(_vm.cust2.receivable) + " ")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.cust2
+                    ? _c("v-col", { attrs: { cols: "2" } }, [
+                        _vm._v(" " + _vm._s("Feb 3, 2020"))
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("v-col", { attrs: { cols: "2" } }, [_vm._v(" button ")])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-row",
+                { staticClass: "prod" },
+                [
+                  _c("v-autocomplete", {
+                    attrs: {
+                      items: _vm.products,
+                      "search-input": _vm.searchIt,
+                      clearable: "",
+                      "hide-details": "",
+                      "hide-selected": "",
+                      "item-text": "name",
+                      "item-value": "id",
+                      label: "Search for a product...",
+                      solo: "",
+                      dense: ""
+                    },
+                    on: {
+                      "update:searchInput": function($event) {
+                        _vm.searchIt = $event
+                      },
+                      "update:search-input": function($event) {
+                        _vm.searchIt = $event
+                      }
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "no-data",
+                        fn: function() {
+                          return [
+                            _c(
+                              "v-list-item",
+                              [
+                                _c("v-list-item-title", [
+                                  _vm._v(
+                                    "\n              Search for a\n              "
+                                  ),
+                                  _c("strong", [_vm._v("Product")])
+                                ])
+                              ],
+                              1
+                            )
+                          ]
+                        },
+                        proxy: true
+                      },
+                      {
+                        key: "selection",
+                        fn: function(ref) {
+                          var attr = ref.attr
+                          var on = ref.on
+                          var item = ref.item
+                          var selected = ref.selected
+                          return [
+                            _c("span", {
+                              domProps: { textContent: _vm._s(item.sku) }
+                            })
+                          ]
+                        }
+                      },
+                      {
+                        key: "item",
+                        fn: function(ref) {
+                          var item = ref.item
+                          return [
+                            _c(
+                              "v-list-item-content",
+                              [
+                                _c("v-list-item-title", {
+                                  domProps: { textContent: _vm._s(item.sku) }
+                                })
+                              ],
+                              1
+                            ),
                             _vm._v(" "),
-                            _c("v-list-item-subtitle", [
-                              _vm._v(
-                                "\n              " +
-                                  _vm._s(item.company_name) +
-                                  " | " +
-                                  _vm._s(item.work_number) +
-                                  "\n            "
-                              )
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("v-list-item-action", [
-                          item.credit_limit > 0
-                            ? _c("span", [
+                            _c("v-list-item-action", [
+                              _c("span", [
                                 _vm._v(
-                                  "\n              Credit limit:\n              "
+                                  "\n              Stock:\n              "
                                 ),
                                 _c("strong", [
                                   _vm._v(
                                     "\n                " +
-                                      _vm._s(item.credit_limit) +
+                                      _vm._s(item.onhand) +
                                       "\n              "
                                   )
                                 ])
                               ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v(
-                              "\n              Receivable:\n              "
-                            ),
-                            _c("strong", [
-                              _vm._v(
-                                "\n                " +
-                                  _vm._s(item.receivable) +
-                                  "\n              "
-                              )
                             ])
-                          ])
-                        ])
-                      ]
+                          ]
+                        }
+                      }
+                    ]),
+                    model: {
+                      value: _vm.product_item,
+                      callback: function($$v) {
+                        _vm.product_item = $$v
+                      },
+                      expression: "product_item"
                     }
-                  }
-                ]),
-                model: {
-                  value: _vm.model,
-                  callback: function($$v) {
-                    _vm.model = $$v
-                  },
-                  expression: "model"
-                }
-              }),
+                  })
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("v-divider"),
               _vm._v(" "),
               _c("v-simple-table", {
-                attrs: { height: "" },
+                attrs: { height: "", dense: "" },
                 scopedSlots: _vm._u([
                   {
                     key: "default",
@@ -1015,19 +1137,11 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-left" }, [
-                              _vm._v("Height")
-                            ]),
-                            _vm._v(" "),
-                            _c("th", { staticClass: "text-left" }, [
-                              _vm._v("Width")
+                              _vm._v("Qty")
                             ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-left" }, [
                               _vm._v("Price")
-                            ]),
-                            _vm._v(" "),
-                            _c("th", { staticClass: "text-left" }, [
-                              _vm._v("Qty")
                             ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-left" }, [
@@ -1073,328 +1187,75 @@ var render = function() {
                                 )
                               ]),
                               _vm._v(" "),
-                              _c(
-                                "td",
-                                [
-                                  _c(
-                                    "v-tooltip",
+                              _c("td", [
+                                _c("input", {
+                                  directives: [
                                     {
-                                      attrs: { top: "" },
-                                      scopedSlots: _vm._u(
-                                        [
-                                          {
-                                            key: "activator",
-                                            fn: function(ref) {
-                                              var on = ref.on
-                                              var attrs = ref.attrs
-                                              return [
-                                                item.product.enable_stock === 0
-                                                  ? _c(
-                                                      "input",
-                                                      _vm._g(
-                                                        _vm._b(
-                                                          {
-                                                            directives: [
-                                                              {
-                                                                name: "model",
-                                                                rawName:
-                                                                  "v-model",
-                                                                value:
-                                                                  item.product
-                                                                    .height,
-                                                                expression:
-                                                                  "item.product.height"
-                                                              }
-                                                            ],
-                                                            staticClass:
-                                                              "numinput small1",
-                                                            attrs: {
-                                                              type: "number"
-                                                            },
-                                                            domProps: {
-                                                              value:
-                                                                item.product
-                                                                  .height
-                                                            },
-                                                            on: {
-                                                              change: function(
-                                                                $event
-                                                              ) {
-                                                                return _vm.changeHeight(
-                                                                  item
-                                                                )
-                                                              },
-                                                              input: function(
-                                                                $event
-                                                              ) {
-                                                                if (
-                                                                  $event.target
-                                                                    .composing
-                                                                ) {
-                                                                  return
-                                                                }
-                                                                _vm.$set(
-                                                                  item.product,
-                                                                  "height",
-                                                                  $event.target
-                                                                    .value
-                                                                )
-                                                              }
-                                                            }
-                                                          },
-                                                          "input",
-                                                          attrs,
-                                                          false
-                                                        ),
-                                                        on
-                                                      )
-                                                    )
-                                                  : _vm._e()
-                                              ]
-                                            }
-                                          }
-                                        ],
-                                        null,
-                                        true
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: item.quantity,
+                                      expression: "item.quantity"
+                                    }
+                                  ],
+                                  staticClass: "numinput small1",
+                                  attrs: { type: "number" },
+                                  domProps: { value: item.quantity },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        item,
+                                        "quantity",
+                                        $event.target.value
                                       )
-                                    },
-                                    [
-                                      _vm._v(" "),
-                                      _c("span", [
-                                        _vm._v("input data in inches")
-                                      ])
-                                    ]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                [
-                                  _c(
-                                    "v-tooltip",
-                                    {
-                                      attrs: { top: "" },
-                                      scopedSlots: _vm._u(
-                                        [
-                                          {
-                                            key: "activator",
-                                            fn: function(ref) {
-                                              var on = ref.on
-                                              var attrs = ref.attrs
-                                              return [
-                                                item.product.enable_stock === 0
-                                                  ? _c(
-                                                      "input",
-                                                      _vm._g(
-                                                        _vm._b(
-                                                          {
-                                                            directives: [
-                                                              {
-                                                                name: "model",
-                                                                rawName:
-                                                                  "v-model",
-                                                                value:
-                                                                  item.product
-                                                                    .width,
-                                                                expression:
-                                                                  "item.product.width"
-                                                              }
-                                                            ],
-                                                            staticClass:
-                                                              "numinput small1",
-                                                            attrs: {
-                                                              type: "number"
-                                                            },
-                                                            domProps: {
-                                                              value:
-                                                                item.product
-                                                                  .width
-                                                            },
-                                                            on: {
-                                                              change: function(
-                                                                $event
-                                                              ) {
-                                                                return _vm.changeWidth(
-                                                                  item
-                                                                )
-                                                              },
-                                                              input: function(
-                                                                $event
-                                                              ) {
-                                                                if (
-                                                                  $event.target
-                                                                    .composing
-                                                                ) {
-                                                                  return
-                                                                }
-                                                                _vm.$set(
-                                                                  item.product,
-                                                                  "width",
-                                                                  $event.target
-                                                                    .value
-                                                                )
-                                                              }
-                                                            }
-                                                          },
-                                                          "input",
-                                                          attrs,
-                                                          false
-                                                        ),
-                                                        on
-                                                      )
-                                                    )
-                                                  : _vm._e()
-                                              ]
-                                            }
-                                          }
-                                        ],
-                                        null,
-                                        true
-                                      )
-                                    },
-                                    [
-                                      _vm._v(" "),
-                                      _c("span", [
-                                        _vm._v("input data in inches")
-                                      ])
-                                    ]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                [
-                                  item.product.enable_stock === 0
-                                    ? _c(
-                                        "v-tooltip",
-                                        {
-                                          attrs: { top: "" },
-                                          scopedSlots: _vm._u(
-                                            [
-                                              {
-                                                key: "activator",
-                                                fn: function(ref) {
-                                                  var on = ref.on
-                                                  var attrs = ref.attrs
-                                                  return [
-                                                    _c(
-                                                      "input",
-                                                      _vm._g(
-                                                        _vm._b(
-                                                          {
-                                                            directives: [
-                                                              {
-                                                                name: "model",
-                                                                rawName:
-                                                                  "v-model",
-                                                                value:
-                                                                  item.product
-                                                                    .selling_price,
-                                                                expression:
-                                                                  "item.product.selling_price"
-                                                              }
-                                                            ],
-                                                            staticClass:
-                                                              "numinput small1",
-                                                            attrs: {
-                                                              type: "number"
-                                                            },
-                                                            domProps: {
-                                                              value:
-                                                                item.product
-                                                                  .selling_price
-                                                            },
-                                                            on: {
-                                                              input: function(
-                                                                $event
-                                                              ) {
-                                                                if (
-                                                                  $event.target
-                                                                    .composing
-                                                                ) {
-                                                                  return
-                                                                }
-                                                                _vm.$set(
-                                                                  item.product,
-                                                                  "selling_price",
-                                                                  $event.target
-                                                                    .value
-                                                                )
-                                                              }
-                                                            }
-                                                          },
-                                                          "input",
-                                                          attrs,
-                                                          false
-                                                        ),
-                                                        on
-                                                      )
-                                                    )
-                                                  ]
-                                                }
-                                              }
-                                            ],
-                                            null,
-                                            true
-                                          )
-                                        },
-                                        [
-                                          _vm._v(" "),
-                                          _c("span", [_vm._v("price / foot")])
-                                        ]
-                                      )
-                                    : _c("span", [
-                                        _vm._v(
-                                          "\n                  " +
-                                            _vm._s(item.product.selling_price) +
-                                            "\n                "
-                                        )
-                                      ])
-                                ],
-                                1
-                              ),
+                                    }
+                                  }
+                                })
+                              ]),
                               _vm._v(" "),
                               _c("td", [
-                                _vm._v(
-                                  "\n                " +
-                                    _vm._s(item.quantity) +
-                                    "\n              "
-                                )
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: item.product.selling_price,
+                                      expression: "item.product.selling_price"
+                                    }
+                                  ],
+                                  staticClass: "numinput small1",
+                                  attrs: { type: "number" },
+                                  domProps: {
+                                    value: item.product.selling_price
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        item.product,
+                                        "selling_price",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
                               ]),
                               _vm._v(" "),
                               _c("td", { attrs: { allign: "right" } }, [
-                                item.product.enable_stock === 0
-                                  ? _c("span", [
-                                      _vm._v(
-                                        "\n                  " +
-                                          _vm._s(
-                                            (
-                                              ((item.product.height *
-                                                item.product.width) /
-                                                12) *
-                                              item.product.selling_price *
-                                              item.quantity
-                                            ).toFixed(0)
-                                          ) +
-                                          "\n                "
-                                      )
-                                    ])
-                                  : _c("span", [
-                                      _vm._v(
-                                        "\n                  " +
-                                          _vm._s(
-                                            (
-                                              item.product.selling_price *
-                                              item.quantity
-                                            ).toFixed(0)
-                                          ) +
-                                          "\n                "
-                                      )
-                                    ])
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(
+                                      (
+                                        item.product.selling_price *
+                                        item.quantity
+                                      ).toFixed(0)
+                                    ) +
+                                    "\n              "
+                                )
                               ]),
                               _vm._v(" "),
                               _c(
@@ -1699,7 +1560,52 @@ var render = function() {
           _c(
             "v-col",
             { attrs: { cols: "5" } },
-            [_c("product-list", { attrs: { products: _vm.products } })],
+            [
+              _c(
+                "v-tabs",
+                [
+                  _c(
+                    "v-tab",
+                    [
+                      _c("v-icon", { attrs: { left: "" } }, [
+                        _vm._v(" mdi-file-document-outline ")
+                      ]),
+                      _vm._v("\n          Ceiling\n        ")
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-tab",
+                    [
+                      _c("v-icon", { attrs: { left: "" } }, [
+                        _vm._v(" mdi-note-text-outline ")
+                      ]),
+                      _vm._v("\n          Pannels\n        ")
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-tab",
+                    [
+                      _c("v-icon", { attrs: { left: "" } }, [
+                        _vm._v(" mdi-cash-multiple ")
+                      ]),
+                      _vm._v("\n          Glass\n        ")
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-tab-item", [_vm._v(" exyz ")]),
+                  _vm._v(" "),
+                  _c("v-tab-item", [_vm._v(" Panels ")]),
+                  _vm._v(" "),
+                  _c("v-tab-item", [_vm._v(" Glass ")])
+                ],
+                1
+              )
+            ],
             1
           )
         ],
@@ -1837,15 +1743,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VAutocomplete */ "./node_modules/vuetify/lib/components/VAutocomplete/index.js");
 /* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/index.js");
-/* harmony import */ var vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VChip */ "./node_modules/vuetify/lib/components/VChip/index.js");
-/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
-/* harmony import */ var vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VDivider */ "./node_modules/vuetify/lib/components/VDivider/index.js");
-/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
-/* harmony import */ var vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VList */ "./node_modules/vuetify/lib/components/VList/index.js");
-/* harmony import */ var vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VRadioGroup */ "./node_modules/vuetify/lib/components/VRadioGroup/index.js");
-/* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
-/* harmony import */ var vuetify_lib_components_VSwitch__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VSwitch */ "./node_modules/vuetify/lib/components/VSwitch/index.js");
-/* harmony import */ var vuetify_lib_components_VTooltip__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuetify/lib/components/VTooltip */ "./node_modules/vuetify/lib/components/VTooltip/index.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
+/* harmony import */ var vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VDivider */ "./node_modules/vuetify/lib/components/VDivider/index.js");
+/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
+/* harmony import */ var vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VList */ "./node_modules/vuetify/lib/components/VList/index.js");
+/* harmony import */ var vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VRadioGroup */ "./node_modules/vuetify/lib/components/VRadioGroup/index.js");
+/* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
+/* harmony import */ var vuetify_lib_components_VSwitch__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VSwitch */ "./node_modules/vuetify/lib/components/VSwitch/index.js");
+/* harmony import */ var vuetify_lib_components_VTabs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VTabs */ "./node_modules/vuetify/lib/components/VTabs/index.js");
 
 
 
@@ -1885,7 +1790,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_5__["VAutocomplete"],VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_6__["VBtn"],VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_7__["VChip"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VCol"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__["VDivider"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_10__["VIcon"],VListItem: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItem"],VListItemAction: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemAction"],VListItemAvatar: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemAvatar"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemContent"],VListItemSubtitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemSubtitle"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_11__["VListItemTitle"],VRadio: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_12__["VRadio"],VRadioGroup: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_12__["VRadioGroup"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VRow"],VSimpleTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_13__["VSimpleTable"],VSwitch: vuetify_lib_components_VSwitch__WEBPACK_IMPORTED_MODULE_14__["VSwitch"],VTooltip: vuetify_lib_components_VTooltip__WEBPACK_IMPORTED_MODULE_15__["VTooltip"]})
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_5__["VAutocomplete"],VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_6__["VBtn"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VCol"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_8__["VDivider"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_9__["VIcon"],VListItem: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_10__["VListItem"],VListItemAction: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_10__["VListItemAction"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_10__["VListItemContent"],VListItemSubtitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_10__["VListItemSubtitle"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_10__["VListItemTitle"],VRadio: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_11__["VRadio"],VRadioGroup: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_11__["VRadioGroup"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VRow"],VSimpleTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_12__["VSimpleTable"],VSwitch: vuetify_lib_components_VSwitch__WEBPACK_IMPORTED_MODULE_13__["VSwitch"],VTab: vuetify_lib_components_VTabs__WEBPACK_IMPORTED_MODULE_14__["VTab"],VTabItem: vuetify_lib_components_VTabs__WEBPACK_IMPORTED_MODULE_14__["VTabItem"],VTabs: vuetify_lib_components_VTabs__WEBPACK_IMPORTED_MODULE_14__["VTabs"]})
 
 
 /* hot reload */
