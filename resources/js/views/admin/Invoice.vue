@@ -128,7 +128,6 @@
             <v-btn color="primary" dark class="mb-2" v-on="on" block
               >Calculations</v-btn
             >
-            <!-- <v-btn color="error" dark class="mb-2 mr-2"  @click="deleteAll">Delete</v-btn> -->
           </template>
           <v-card>
             <v-card-text>
@@ -270,7 +269,131 @@
                       </v-tab-item>
 
                       <v-tab-item>
-                        <v-btn @click="getPanel">panel</v-btn>
+                        <v-row>
+                          <v-col cols="4" class="pb-0">
+                            <v-text-field
+                              v-model="panel.length"
+                              label="Length"
+                              type="number"
+                              dense
+                              outlined
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="4" class="pb-0">
+                            <v-text-field
+                              v-model="panel.number"
+                              label="Number"
+                              type="number"
+                              dense
+                              outlined
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="4" class="pb-0">
+                              <v-text-field
+                              v-model="panel.removals"
+                              label="Removal"
+                              type="number"
+                              dense
+                              outlined
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="4" class="py-0">
+                            <v-select
+                               :items="panelSheetHight"
+                               v-model="panel.sheet_height"
+                               dense
+                               outlined
+                            ></v-select>
+                          </v-col>
+                          <v-col cols="4" class="py-0">
+                            <v-select
+                               :items="panelSheetWidth"
+                               v-model="panel.sheet_width"
+                               dense
+                               outlined
+                            ></v-select>
+                          </v-col>
+                          <v-col cols="4" class="py-0">
+                            <v-btn
+                              dark
+                              color="primary"
+                              class="float-right"
+                              @click="getPanel"
+                            >
+                              Calculate
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+
+                        <v-simple-table height dense>
+                          <template v-slot:default>
+                            <thead>
+                              <tr>
+                                <th class="text-left">Item</th>
+                                <th class="text-left">Quantity</th>
+                                <th class="text-left">Unit Price</th>
+                                <th class="text-left"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr
+                                v-for="(item, index) in peneling"
+                                :key="item.index"
+                              >
+                                <td>
+                                  <v-select
+                                    v-if="index == 0"
+                                    v-model="peneling[0].id"
+                                    :items="panelSheets"
+                                    item-text="name"
+                                    item-value="id"
+                                    label="Select Sheet"
+                                  ></v-select>
+
+                                  <v-select
+                                    v-if="index == 1"
+                                    v-model="peneling[1].id"
+                                    :items="golas"
+                                    item-text="name"
+                                    item-value="id"
+                                    label="Select Gola"
+                                  ></v-select>
+                                </td>
+                                <td>
+                                  <v-text-field
+                                    v-model="item.qty"
+                                    label="Quantity"
+                                    type="number"
+                                  ></v-text-field>
+                                </td>
+                                <td>
+                                  <span v-if="item.id">
+                                    {{ getPrice(item.id) }}
+                                  </span>
+                                </td>
+
+                                <td>
+                                  <v-btn
+                                    class="green--text"
+                                    icon
+                                    @click="addProductToInvoice(item)"
+                                  >
+                                    <v-icon>mdi-plus</v-icon>
+                                  </v-btn>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </template>
+                        </v-simple-table>
+
+                        <v-btn
+                          dark
+                          color="primary"
+                          class="float-right"
+                          @click="clearPanelItems"
+                          >Clear</v-btn
+                        >
+
                       </v-tab-item>
                       <v-tab-item> Glass </v-tab-item>
                     </v-tabs>
@@ -541,6 +664,24 @@ export default {
       ceiling_length: null,
       employees: [],
 
+      panel: {
+        number: null,
+        length: null,
+        removals: null,
+        sheet_height: "",
+        sheet_width: null,
+      },
+
+      peneling: [
+        { id: null, qty: 0, price: 0 },
+        { id: null, qty: 0, price: 0 }
+      ],
+
+      panelSheetHight: ["full", "half", "third"],
+      panelSheetWidth: [8, 10, 16, 19],
+      panelWallLength: null,
+      panelWallNumber: null,
+
       perFeet: {
         enable: false,
         totalFeet: null,
@@ -560,7 +701,7 @@ export default {
         driver: null,
         fitter: null,
         walkin_name: "",
-        walkin_phone: ""
+        walkin_phone: "",
       },
 
       isLoading: false,
@@ -602,7 +743,6 @@ export default {
           fitting_charges: this.invoiceData.fitting_charges,
           walkin_name: this.invoiceData.walkin_name,
           walkin_phone: this.invoiceData.walkin_phone,
-
         },
         orderedItems: this.cart,
       };
@@ -761,38 +901,44 @@ export default {
     },
 
     getPanel() {
-        let number = this.panel.number;
-        let length = this.panel.length;
-        let sheet_width = this.panel.sheet_width;
-        let sheet_height = this.panel.sheet_height;
-        let removals = this.panel.removals;
-        let gola_max_height = 9.5;
+      let number = this.panel.number;
+      let length = this.panel.length;
+      let sheet_width = this.panel.sheet_width;
+      let sheet_height = this.panel.sheet_height;
+      let removals = this.panel.removals;
+      let gola_max_height = 9.5;
 
-        if (sheet_height == "full") {
-            sheet_height = 9.5;
-        } else if (sheet_height == "half") {
-            sheet_height = 4.75;
-        } else {
-            sheet_height = 3.16;
-        }
+      if (sheet_height == "full") {
+        sheet_height = 9.5;
+      } else if (sheet_height == "half") {
+        sheet_height = 4.75;
+      } else {
+        sheet_height = 3.16;
+      }
 
-        if ( sheet_width == 8) {
-            sheet_width = 6.35;
-        }else if ( sheet_width == 10) {
-            sheet_width = 7.92;
-        }else if ( sheet_width == 16) {
-            sheet_width = 12.66;
-        }else {
-            sheet_width = 19.0;
-        }
+      if (sheet_width == 8) {
+        sheet_width = 6.35;
+      } else if (sheet_width == 10) {
+        sheet_width = 7.92;
+      } else if (sheet_width == 16) {
+        sheet_width = 12.66;
+      } else {
+        sheet_width = 19.0;
+      }
 
-        //number of sheets
-        num_of_sheets = Math.ceil(((length * number * sheet_height) - (removals)) / sheet_width);
+      //number of sheets
+      let num_of_sheets = Math.ceil(
+        (length * number * sheet_height - removals) / sheet_width
+      );
 
+      //gola
+      let num_of_gola = Math.ceil(
+        (length * number * 2 + sheet_height * number * 2 + removals) /
+          gola_max_height
+      );
 
-        //gola
-        num_of_gola = Math.ceil((((length * number * 2) + (sheet_height * number * 2)) + removals) / gola_max_height);
-
+      this.peneling[0].qty = num_of_sheets;
+      this.peneling[1].qty = num_of_gola;
     },
 
     getPrice(id) {
@@ -823,6 +969,19 @@ export default {
       this.ceiling[1].qty = null;
       this.ceiling[3].qty = null;
     },
+
+    clearPanelItems() {
+      this.panel.number = null,
+      this.panel.length = null,
+      this.panel.removals = null,
+      this.panel.sheet_height = "",
+      this.panel.sheet_width = null,
+
+      this.peneling[0].id = null;
+      this.peneling[1].id = null;
+      this.peneling[0].qty = null;
+      this.peneling[1].qty = null;
+    }
   },
 
   created() {
@@ -885,6 +1044,14 @@ export default {
 
     angle() {
       return this.products.filter((item) => item.category == "Angle");
+    },
+
+    golas() {
+      return this.products.filter((item) => item.category == "Panel Gola");
+    },
+
+    panelSheets() {
+      return this.products.filter((item) => item.category == "Panel Sheet");
     },
 
     drivers() {
