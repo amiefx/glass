@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderCollection;
 use App\Http\Resources\OrderResource;
+use App\Http\Resources\OrderDetailResource;
+use App\Http\Resources\InvoiceDetailResource;
 use App\Models\Cash;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -268,5 +270,21 @@ class OrderController extends Controller
 
         return response()->json(['num_of_sheets' => $num_of_sheets, 'num_of_gola' => $num_of_gola], 200);
     }
+
+
+    public function invoice_detail($id)
+    {
+        $order = Order::find($id);
+
+        for ($i=0; $i < count($order->orderdetails); $i++) { 
+            $order->orderdetails[$i] = new OrderDetailResource($order->orderdetails[$i]);
+        }
+
+        return response()->json([
+            'order' => new InvoiceDetailResource($order),
+            'orderdetails' => $order->orderdetails
+        ], 200);
+    }
+
 
 }

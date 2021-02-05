@@ -129,7 +129,10 @@ Route::group([
     Route::resource('orderdetail', 'OrderDetailController');
 
     // order
+    // Route::post('ceilling', 'OrderController@ceilling_calculation');
     Route::post('ceilling', 'OrderController@ceilling_calculation');
+    Route::post('panelling', 'OrderController@panel_calculation');
+    Route::get('invoicedetail/{id}', 'OrderController@invoice_detail');
     Route::resource('order', 'OrderController');
 
 
@@ -254,6 +257,5 @@ Route::group([
     Route::post('register', 'Auth\RegisterController@register');
     Route::post('login', 'Auth\LoginController@login');
    // Route::get('me', 'MeController@getMe');
-   Route::post('ceilling', 'OrderController@ceilling_calculation');
-   Route::post('panelling', 'OrderController@panel_calculation');
+   
 });
