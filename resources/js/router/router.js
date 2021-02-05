@@ -358,17 +358,17 @@ const routes = [
     //         ]
     //     }
     // },
-    // {
-    //     path: '/admin/orders/print/:id',
-    //     name: 'admin-order',
-    //     component: () => import('../views/admin/orders/print/Id.vue'),
-    //     meta: {
-    //         layout: '',
-    //         middleware: [
-    //             auth, admin
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/invoice/print/:id',
+        name: 'admin-order',
+        component: () => import('../views/admin/orders/print/Id.vue'),
+        meta: {
+            layout: '',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/reports',
     //     name: 'admin-reports',

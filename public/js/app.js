@@ -86543,18 +86543,17 @@ var routes = [{
 //         ]
 //     }
 // },
-// {
-//     path: '/admin/orders/print/:id',
-//     name: 'admin-order',
-//     component: () => import('../views/admin/orders/print/Id.vue'),
-//     meta: {
-//         layout: '',
-//         middleware: [
-//             auth, admin
-//         ]
-//     }
-// },
-// {
+{
+  path: '/admin/invoice/print/:id',
+  name: 'admin-order',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ../views/admin/orders/print/Id.vue */ "./resources/js/views/admin/orders/print/Id.vue"));
+  },
+  meta: {
+    layout: '',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"], _middleware_admin__WEBPACK_IMPORTED_MODULE_3__["default"]]
+  }
+}, // {
 //     path: '/admin/reports',
 //     name: 'admin-reports',
 //     component: () => import('../views/admin/Reports.vue'),

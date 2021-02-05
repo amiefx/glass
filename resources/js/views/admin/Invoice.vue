@@ -24,38 +24,13 @@
               </v-list-item>
             </template>
             <template v-slot:selection="{ attr, on, item, selected }">
-              <!-- <v-chip
-              v-bind="attr"
-              :input-value="selected"
-              color="blue-grey"
-              class="white--text"
-              v-on="on"
-            >
-              <v-icon left> mdi-account </v-icon>
-              <span v-text="item.name"></span>
-            </v-chip> -->
               <span v-text="item.sku"></span>
             </template>
             <template v-slot:item="{ item }">
-              <!-- <v-list-item-avatar
-              color="indigo"
-              class="headline font-weight-light white--text"
-            >
-              <v-icon class="white--text">mdi-cart</v-icon>
-            </v-list-item-avatar> -->
               <v-list-item-content>
                 <v-list-item-title v-text="item.sku"></v-list-item-title>
-                <!-- <v-list-item-subtitle>
-                {{ item.company_name }} | {{ item.work_number }}
-              </v-list-item-subtitle> -->
               </v-list-item-content>
               <v-list-item-action>
-                <!-- <span v-if="item.credit_limit > 0">
-                Credit limit:
-                <strong>
-                  {{ item.credit_limit }}
-                </strong>
-              </span> -->
                 <span>
                   Stock:
                   <strong>
@@ -610,8 +585,8 @@
             </v-radio-group>
 
             <v-row>
-              <v-checkbox label="Print Invoice"></v-checkbox>
-              <v-checkbox label="Print Gate Pass"></v-checkbox>
+              <v-checkbox label="Print Invoice" v-model="printInvoice"></v-checkbox>
+              <v-checkbox label="Print Gate Pass" v-model="printGatePass"></v-checkbox>
             </v-row>
           </v-col>
           <v-col cols="4">
@@ -624,7 +599,6 @@
               >Save</v-btn
             >
             <v-btn block color="error" @click="clearCartItems">Clear all</v-btn>
-            <v-btn @click="clearData">clear data</v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -704,6 +678,9 @@ export default {
         walkin_phone: "",
       },
 
+      printInvoice: false,
+      printGatePass: false,
+
       isLoading: false,
       items: [],
       cust_id: "",
@@ -741,6 +718,8 @@ export default {
           doc_type: this.invoiceData.doc_type,
           suzuki_rent: this.invoiceData.suzuki_rent,
           fitting_charges: this.invoiceData.fitting_charges,
+          driver: this.invoiceData.driver,
+          fitter: this.invoiceData.fitter,
           walkin_name: this.invoiceData.walkin_name,
           walkin_phone: this.invoiceData.walkin_phone,
         },
@@ -772,10 +751,10 @@ export default {
       );
 
       axios.post("/api/order", orderData).then((res) => {
-        //  this.$router.push(`/checkout/${res.data.id}`)
+
         this.clearCartItems();
         this.clearData();
-
+        console.log(orderData)
         this.invoiceData.discount = null;
         this.invoiceData.received_amt = null;
         this.invoiceData.suzuki_rent = null;
@@ -785,6 +764,11 @@ export default {
         this.invoiceData.walkin_phone = "";
 
         this.initialize();
+
+        if (this.printInvoice) {
+            this.$router.push(`/admin/invoice/print/${res.data.id}`)
+        }
+
       });
     },
 
@@ -872,8 +856,8 @@ export default {
     },
 
     getCeiling() {
-      let width = this.ceiling_width;
-      let length = this.ceiling_length;
+      let width = parseInt( this.ceiling_width );
+      let length = parseInt( this.ceiling_length );
       let angle_max_length = 10;
       let main_t_max_length = 12;
 
@@ -901,14 +885,15 @@ export default {
     },
 
     getPanel() {
-      let number = this.panel.number;
-      let length = this.panel.length;
-      let sheet_width = this.panel.sheet_width;
-      let sheet_height = this.panel.sheet_height;
-      let removals = this.panel.removals;
-      let gola_max_height = 9.5;
+      var number = parseInt( this.panel.number );
+      var length = parseInt( this.panel.length );
+      var sheet_width = parseInt( this.panel.sheet_width );
+      var sheet_height = this.panel.sheet_height;
+      var removals = parseInt(  this.panel.removals );
+      var gola_max_height = 9.5;
 
       if (sheet_height == "full") {
+          console.log('full')
         sheet_height = 9.5;
       } else if (sheet_height == "half") {
         sheet_height = 4.75;
@@ -927,15 +912,13 @@ export default {
       }
 
       //number of sheets
-      let num_of_sheets = Math.ceil(
-        (length * number * sheet_height - removals) / sheet_width
-      );
+        var num_of_sheets = Math.ceil(((length * number * sheet_height) - (removals)) / sheet_width);
 
-      //gola
-      let num_of_gola = Math.ceil(
-        (length * number * 2 + sheet_height * number * 2 + removals) /
-          gola_max_height
-      );
+
+        //gola
+        var num_of_gola = Math.ceil((((length * number * 2) + (sheet_height * number * 2)) + removals) / gola_max_height);
+
+
 
       this.peneling[0].qty = num_of_sheets;
       this.peneling[1].qty = num_of_gola;

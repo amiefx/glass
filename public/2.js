@@ -710,32 +710,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -816,6 +790,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         walkin_name: "",
         walkin_phone: ""
       },
+      printInvoice: false,
+      printGatePass: false,
       isLoading: false,
       items: [],
       cust_id: "",
@@ -850,6 +826,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           doc_type: this.invoiceData.doc_type,
           suzuki_rent: this.invoiceData.suzuki_rent,
           fitting_charges: this.invoiceData.fitting_charges,
+          driver: this.invoiceData.driver,
+          fitter: this.invoiceData.fitter,
           walkin_name: this.invoiceData.walkin_name,
           walkin_phone: this.invoiceData.walkin_phone
         },
@@ -872,11 +850,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return Promise.reject(error);
       });
       axios.post("/api/order", orderData).then(function (res) {
-        //  this.$router.push(`/checkout/${res.data.id}`)
         _this.clearCartItems();
 
         _this.clearData();
 
+        console.log(orderData);
         _this.invoiceData.discount = null;
         _this.invoiceData.received_amt = null;
         _this.invoiceData.suzuki_rent = null;
@@ -886,6 +864,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.invoiceData.walkin_phone = "";
 
         _this.initialize();
+
+        if (_this.printInvoice) {
+          _this.$router.push("/admin/invoice/print/".concat(res.data.id));
+        }
       });
     },
     // clear data
@@ -964,8 +946,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     getCeiling: function getCeiling() {
-      var width = this.ceiling_width;
-      var length = this.ceiling_length;
+      var width = parseInt(this.ceiling_width);
+      var length = parseInt(this.ceiling_length);
       var angle_max_length = 10;
       var main_t_max_length = 12; //number of angles
 
@@ -986,14 +968,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.ceiling[3].qty = num_of_sheets;
     },
     getPanel: function getPanel() {
-      var number = this.panel.number;
-      var length = this.panel.length;
-      var sheet_width = this.panel.sheet_width;
+      var number = parseInt(this.panel.number);
+      var length = parseInt(this.panel.length);
+      var sheet_width = parseInt(this.panel.sheet_width);
       var sheet_height = this.panel.sheet_height;
-      var removals = this.panel.removals;
+      var removals = parseInt(this.panel.removals);
       var gola_max_height = 9.5;
 
       if (sheet_height == "full") {
+        console.log('full');
         sheet_height = 9.5;
       } else if (sheet_height == "half") {
         sheet_height = 4.75;
@@ -3412,11 +3395,25 @@ var render = function() {
                         "v-row",
                         [
                           _c("v-checkbox", {
-                            attrs: { label: "Print Invoice" }
+                            attrs: { label: "Print Invoice" },
+                            model: {
+                              value: _vm.printInvoice,
+                              callback: function($$v) {
+                                _vm.printInvoice = $$v
+                              },
+                              expression: "printInvoice"
+                            }
                           }),
                           _vm._v(" "),
                           _c("v-checkbox", {
-                            attrs: { label: "Print Gate Pass" }
+                            attrs: { label: "Print Gate Pass" },
+                            model: {
+                              value: _vm.printGatePass,
+                              callback: function($$v) {
+                                _vm.printGatePass = $$v
+                              },
+                              expression: "printGatePass"
+                            }
                           })
                         ],
                         1
@@ -3450,11 +3447,7 @@ var render = function() {
                           on: { click: _vm.clearCartItems }
                         },
                         [_vm._v("Clear all")]
-                      ),
-                      _vm._v(" "),
-                      _c("v-btn", { on: { click: _vm.clearData } }, [
-                        _vm._v("clear data")
-                      ])
+                      )
                     ],
                     1
                   )
