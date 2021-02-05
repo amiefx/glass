@@ -178,7 +178,7 @@ export default {
       { text: "Active", value: true },
       { text: "In Active", value: false },
     ],
-    types: ["Accountan", "Cashior", "Driver", "Worker"],
+    types: ["Accountan", "Cashior", "Driver", "Fitter", "Worker"],
     employees: [],
     editedIndex: -1,
     editedItem: {

@@ -226,8 +226,9 @@ class OrderController extends Controller
         $num_of_sheets = ceil(($width * $length) / 4);
 
 
-        return response()->json(['num_of_angles' => $num_of_angles, 'num_of_main_t' => $num_of_main_t
-        , 'num_of_cross_t' => $num_of_cross_t, 'num_of_sheets' => $num_of_sheets], 200);
+         return response()->json(['num_of_angles' => $num_of_angles, 'num_of_main_t' => $num_of_main_t
+         , 'num_of_cross_t' => $num_of_cross_t, 'num_of_sheets' => $num_of_sheets], 200);
+        // return response()->json(['ddd' => $width]);
     }
 
 
@@ -235,7 +236,7 @@ class OrderController extends Controller
     {
         $number = $request->number;
         $length = $request->length;
-        $height = $request->height; 
+        $height = $request->height;
         $removals = $request->removals;
         $gola_max_height = 9.5;
 
@@ -258,7 +259,7 @@ class OrderController extends Controller
         }
 
         //number of sheets
-        $num_of_sheets = ceil((($length * $number * $sheet_height) - ($removals)) / $sheet_width); 
+        $num_of_sheets = ceil((($length * $number * $sheet_height) - ($removals)) / $sheet_width);
 
 
         //gola

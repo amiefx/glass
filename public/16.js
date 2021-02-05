@@ -215,7 +215,7 @@ __webpack_require__.r(__webpack_exports__);
         text: "In Active",
         value: false
       }],
-      types: ["Accountan", "Cashior", "Driver", "Worker"],
+      types: ["Accountan", "Cashior", "Driver", "Fitter", "Worker"],
       employees: [],
       editedIndex: -1,
       editedItem: {

@@ -2,83 +2,29 @@
   <div>
     <v-row>
       <v-col cols="7">
-        <v-row class="cust">
-          <v-col cols="3" class="pt-1 pb-0">
-            <v-autocomplete
-              v-model="model"
-              :items="items"
-              :loading="isLoading"
-              :search-input.sync="search"
-              hide-details
-              hide-selected
-              item-text="name"
-              item-value="id"
-              label="Search..."
-              solo
-              class="autcmp"
-              dense
-              height="1px"
-            >
-              <template v-slot:no-data>
-                <v-list-item>
-                  <v-list-item-title>
-                    Search ...
-                  </v-list-item-title>
-                </v-list-item>
-              </template>
-              <template v-slot:selection="{ attr, on, item, selected }">
-                <!-- <v-chip
-                  v-bind="attr"
-                  :input-value="selected"
-                  color="blue-grey"
-                  class="white--text"
-                  v-on="on"
-                >
-                  <v-icon left> mdi-account </v-icon>
-                  <span v-text="item.name"></span>
-                </v-chip> -->
-                <span v-text="item.name"></span>
-              </template>
-              <template v-slot:item="{ item }">
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.name"></v-list-item-title>
-                  <v-list-item-subtitle>
-                    {{ item.company_name }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </template>
-            </v-autocomplete>
-          </v-col>
-          <v-col cols="3" v-if="cust2"> {{ cust2.work_number }} </v-col>
-          <v-col cols="2" v-if="cust2"> {{ cust2.receivable }} </v-col>
-          <v-col cols="2" v-if="cust2"> {{ 'Feb 3, 2020' }}</v-col>
-          <v-col cols="2"> button </v-col>
-        </v-row>
-
-        <v-row class="prod" >
-           <v-autocomplete
-          v-model="product_item"
-          :items="products"
-          :search-input.sync="searchIt"
-          clearable
-          hide-details
-          hide-selected
-          item-text="name"
-          item-value="id"
-          label="Search for a product..."
-          solo
-          dense
-        >
-          <template v-slot:no-data>
-            <v-list-item>
-              <v-list-item-title>
-                Search for a
-                <strong>Product</strong>
-              </v-list-item-title>
-            </v-list-item>
-          </template>
-          <template v-slot:selection="{ attr, on, item, selected }">
-            <!-- <v-chip
+        <v-row class="prod mr-1">
+          <v-autocomplete
+            v-model="product_item"
+            :items="products"
+            clearable
+            hide-details
+            hide-selected
+            item-text="sku"
+            item-value="id"
+            label="Search for a product..."
+            solo
+            dense
+          >
+            <template v-slot:no-data>
+              <v-list-item>
+                <v-list-item-title>
+                  Search for a
+                  <strong>Product</strong>
+                </v-list-item-title>
+              </v-list-item>
+            </template>
+            <template v-slot:selection="{ attr, on, item, selected }">
+              <!-- <v-chip
               v-bind="attr"
               :input-value="selected"
               color="blue-grey"
@@ -88,37 +34,37 @@
               <v-icon left> mdi-account </v-icon>
               <span v-text="item.name"></span>
             </v-chip> -->
-            <span v-text="item.sku"></span>
-          </template>
-          <template v-slot:item="{ item }">
-            <!-- <v-list-item-avatar
+              <span v-text="item.sku"></span>
+            </template>
+            <template v-slot:item="{ item }">
+              <!-- <v-list-item-avatar
               color="indigo"
               class="headline font-weight-light white--text"
             >
               <v-icon class="white--text">mdi-cart</v-icon>
             </v-list-item-avatar> -->
-            <v-list-item-content>
-              <v-list-item-title v-text="item.sku"></v-list-item-title>
-              <!-- <v-list-item-subtitle>
+              <v-list-item-content>
+                <v-list-item-title v-text="item.sku"></v-list-item-title>
+                <!-- <v-list-item-subtitle>
                 {{ item.company_name }} | {{ item.work_number }}
               </v-list-item-subtitle> -->
-            </v-list-item-content>
-            <v-list-item-action>
-              <!-- <span v-if="item.credit_limit > 0">
+              </v-list-item-content>
+              <v-list-item-action>
+                <!-- <span v-if="item.credit_limit > 0">
                 Credit limit:
                 <strong>
                   {{ item.credit_limit }}
                 </strong>
               </span> -->
-              <span>
-                Stock:
-                <strong>
-                  {{ item.onhand }}
-                </strong>
-              </span>
-            </v-list-item-action>
-          </template>
-        </v-autocomplete>
+                <span>
+                  Stock:
+                  <strong>
+                    {{ item.onhand }}
+                  </strong>
+                </span>
+              </v-list-item-action>
+            </template>
+          </v-autocomplete>
         </v-row>
 
         <v-divider></v-divider>
@@ -134,7 +80,7 @@
                 <th class="text-left">Qty</th>
                 <th class="text-left">Price</th>
                 <th class="text-left">Total</th>
-                <th class="text-left"></th>
+                <!-- <th class="text-left"></th> -->
               </tr>
             </thead>
             <tbody>
@@ -153,57 +99,310 @@
                 </td>
                 <td>
                   <input
-                        class="numinput small1"
-                        type="number"
-                        v-model="item.quantity"
-                      />
+                    class="numinput small1"
+                    type="number"
+                    v-model="item.quantity"
+                  />
                 </td>
                 <td>
                   <input
-                        class="numinput small1"
-                        type="number"
-                        v-model="item.product.selling_price"
-                      />
+                    class="numinput small1"
+                    type="number"
+                    v-model="item.product.selling_price"
+                  />
                 </td>
 
                 <td allign="right">
-                  {{
-                      (item.product.selling_price * item.quantity).toFixed(0)
-                    }}
-                </td>
-                <td>
-                  <v-btn
-                    class="green--text"
-                    icon
-                    @click="increaseProductQty(item.product)"
-                  >
-                    <v-icon>mdi-plus</v-icon>
-                  </v-btn>
-                  <v-btn
-                    class="red--text"
-                    icon
-                    v-if="item.quantity > 1"
-                    @click="decreaseProductQty(item.product)"
-                  >
-                    <v-icon>mdi-minus</v-icon>
-                  </v-btn>
+                  {{ (item.product.selling_price * item.quantity).toFixed(0) }}
                 </td>
               </tr>
             </tbody>
           </template>
         </v-simple-table>
         <v-divider></v-divider>
+      </v-col>
+      <v-col cols="5" class="calculate">
+        <!-- calculation part -->
+        <v-dialog v-model="dialog" max-width="600px">
+          <template v-slot:activator="{ on }">
+            <v-btn color="primary" dark class="mb-2" v-on="on" block
+              >Calculations</v-btn
+            >
+            <!-- <v-btn color="error" dark class="mb-2 mr-2"  @click="deleteAll">Delete</v-btn> -->
+          </template>
+          <v-card>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12">
+                    <v-tabs>
+                      <v-tab>
+                        <v-icon left> mdi-file-document-outline </v-icon>
+                        Ceiling
+                      </v-tab>
+                      <v-tab>
+                        <v-icon left> mdi-note-text-outline </v-icon>
+                        Pannels
+                      </v-tab>
+                      <v-tab>
+                        <v-icon left> mdi-cash-multiple </v-icon>
+                        Glass
+                      </v-tab>
+
+                      <v-tab-item>
+                        <v-row>
+                          <v-col cols="4">
+                            <v-text-field
+                              v-model="ceiling_width"
+                              label="Width"
+                              type="number"
+                              dense
+                              outlined
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="4">
+                            <v-text-field
+                              v-model="ceiling_length"
+                              label="Length"
+                              type="number"
+                              dense
+                              outlined
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="4">
+                            <v-btn
+                              dark
+                              color="primary"
+                              class="float-right"
+                              @click="getCeiling"
+                            >
+                              Calculate
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+
+                        <v-simple-table height dense>
+                          <template v-slot:default>
+                            <thead>
+                              <tr>
+                                <th class="text-left">Item</th>
+                                <th class="text-left">Quantity</th>
+                                <th class="text-left">Unit Price</th>
+                                <th class="text-left"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr
+                                v-for="(item, index) in ceiling"
+                                :key="item.index"
+                              >
+                                <td>
+                                  <v-select
+                                    v-if="index == 0"
+                                    v-model="ceiling[0].id"
+                                    :items="angle"
+                                    item-text="name"
+                                    item-value="id"
+                                    label="Select Angle"
+                                  ></v-select>
+
+                                  <v-select
+                                    v-if="index == 1"
+                                    v-model="ceiling[1].id"
+                                    :items="mainT"
+                                    item-text="name"
+                                    item-value="id"
+                                    label="Select Main T"
+                                  ></v-select>
+
+                                  <v-select
+                                    v-if="index == 2"
+                                    v-model="ceiling[2].id"
+                                    :items="crossT"
+                                    item-text="name"
+                                    item-value="id"
+                                    label="Select Cross T"
+                                  ></v-select>
+
+                                  <v-select
+                                    v-if="index == 3"
+                                    v-model="ceiling[3].id"
+                                    :items="sheets"
+                                    item-text="name"
+                                    item-value="id"
+                                    label="Select Sheet"
+                                  ></v-select>
+                                </td>
+                                <td>
+                                  <v-text-field
+                                    v-model="item.qty"
+                                    label="Quantity"
+                                    type="number"
+                                  ></v-text-field>
+                                </td>
+                                <td>
+                                  <span v-if="item.id">
+                                    {{ getPrice(item.id) }}
+                                  </span>
+                                </td>
+
+                                <td>
+                                  <v-btn
+                                    class="green--text"
+                                    icon
+                                    @click="addProductToInvoice(item)"
+                                  >
+                                    <v-icon>mdi-plus</v-icon>
+                                  </v-btn>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </template>
+                        </v-simple-table>
+
+                        <v-btn
+                          dark
+                          color="primary"
+                          class="float-right"
+                          @click="clearCeilingItems"
+                          >Clear</v-btn
+                        >
+                      </v-tab-item>
+
+                      <v-tab-item>
+                        <v-btn @click="getPanel">panel</v-btn>
+                      </v-tab-item>
+                      <v-tab-item> Glass </v-tab-item>
+                    </v-tabs>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+
+        <!-- customers -->
+        <v-row class="cust mr-1">
+          <v-col cols="6" class="pt-1 pb-0">
+            <v-autocomplete
+              v-model="cust_id"
+              :items="items"
+              :loading="isLoading"
+              :search-input.sync="search"
+              hide-details
+              hide-selected
+              item-text="name"
+              item-value="id"
+              label="Search..."
+              solo
+              class="autcmp"
+              dense
+              height="1px"
+            >
+              <template v-slot:no-data>
+                <v-list-item>
+                  <v-list-item-title> Search ... </v-list-item-title>
+                </v-list-item>
+              </template>
+              <template v-slot:selection="{ attr, on, item, selected }">
+                <span v-text="item.name"></span>
+              </template>
+              <template v-slot:item="{ item }">
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.name"></v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ item.company_name }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </template>
+            </v-autocomplete>
+          </v-col>
+          <v-col cols="3" v-if="cust2"> {{ cust2.work_number }} </v-col>
+          <v-col cols="3" v-if="cust2"> Rs: {{ cust2.receivable }} </v-col>
+        </v-row>
+
+        <v-row v-if="cust2.id">
+          <v-col cols="6" class="pb-0" v-if="cust2.id == 1">
+            <input
+              class="numinput"
+              type="text"
+              v-model="invoiceData.walkin_name"
+              placeholder="Customer Name"
+            />
+          </v-col>
+          <v-col cols="6" class="pb-0" v-if="cust2.id == 1">
+            <input
+              class="numinput"
+              type="text"
+              v-model="invoiceData.walkin_phone"
+              placeholder="Phone"
+            />
+          </v-col>
+        </v-row>
+
+        <v-divider class="my-1"></v-divider>
+
+        <!-- per feet total -->
+        <v-row style="background-color: #eeeeee" class="px-1">
+          <v-col cols="4" class="pb-0">
+            <input type="checkbox" id="checkbox" v-model="perFeet.enable" />
+            <label for="checkbox">Per Feet</label>
+          </v-col>
+          <v-col cols="4" class="py-0" v-if="perFeet.enable">
+            <input
+              class="numinput"
+              type="number"
+              v-model="perFeet.totalFeet"
+              placeholder="Total Feet"
+            />
+          </v-col>
+          <v-col cols="4" class="py-0" v-if="perFeet.enable">
+            <input
+              class="numinput"
+              type="number"
+              v-model="perFeet.rate"
+              placeholder="Per Feet"
+            />
+          </v-col>
+        </v-row>
+
+        <v-divider class="my-1"></v-divider>
+
+        <!-- totals -->
         <v-simple-table dense>
           <tbody>
             <tr>
-              <td width="50%"></td>
+              <td width="25%">Suzuki Rent</td>
+              <td width="25%">
+                <input
+                  class="numinput"
+                  type="number"
+                  v-model="invoiceData.suzuki_rent"
+                />
+              </td>
               <td width="25%">Subtotal</td>
               <td width="25%">
-                <input disabled class="numinput" v-model="cartTotalPrice" />
+                <input disabled class="numinput" v-model="invoiceTotal" />
               </td>
             </tr>
             <tr>
-              <td></td>
+              <td>Driver</td>
+              <td>
+                <select
+                  name=""
+                  id=""
+                  class="minimal numinput"
+                  v-model="invoiceData.driver"
+                >
+                  <option
+                    v-for="driver in drivers"
+                    :key="driver.id"
+                    :value="driver.id"
+                  >
+                    {{ driver.name }}
+                  </option>
+                </select>
+              </td>
               <td>Discount</td>
               <td class="">
                 <!-- <v-text-field height="1" outlined dense v-model="discount" type="number"></v-text-field> -->
@@ -215,7 +414,14 @@
               </td>
             </tr>
             <tr>
-              <td></td>
+              <td>Fitting Charges</td>
+              <td>
+                <input
+                  class="numinput"
+                  type="number"
+                  v-model="invoiceData.fitting_charges"
+                />
+              </td>
               <td>Total</td>
               <td>
                 <input
@@ -227,11 +433,22 @@
               </td>
             </tr>
             <tr>
+              <td>Fitter</td>
               <td>
-                <!-- <select name="" id="" class="minimal numinput" v-model="invoiceData.doc_type">
-                            <option value="Invoice">Invoice</option>
-                            <option value="Quotation">Quotation</option>
-                        </select> -->
+                <select
+                  name=""
+                  id=""
+                  class="minimal numinput"
+                  v-model="invoiceData.fitter"
+                >
+                  <option
+                    v-for="fitter in fitters"
+                    :key="fitter.id"
+                    :value="fitter.id"
+                  >
+                    {{ fitter.name }}
+                  </option>
+                </select>
               </td>
               <td>Amount Received</td>
               <td>
@@ -243,6 +460,7 @@
               </td>
             </tr>
             <tr>
+              <td></td>
               <td></td>
               <td>Amount Due</td>
               <td>
@@ -268,10 +486,10 @@
               <v-radio label="Quotation" value="Quotation"></v-radio>
             </v-radio-group>
 
-            <v-switch
-              v-model="use_slab"
-              :label="`Slab: ${use_slab.toString()}`"
-            ></v-switch>
+            <v-row>
+              <v-checkbox label="Print Invoice"></v-checkbox>
+              <v-checkbox label="Print Gate Pass"></v-checkbox>
+            </v-row>
           </v-col>
           <v-col cols="4">
             <v-btn
@@ -283,28 +501,9 @@
               >Save</v-btn
             >
             <v-btn block color="error" @click="clearCartItems">Clear all</v-btn>
+            <v-btn @click="clearData">clear data</v-btn>
           </v-col>
         </v-row>
-      </v-col>
-      <v-col cols="5">
-        <v-tabs>
-          <v-tab>
-            <v-icon left> mdi-file-document-outline </v-icon>
-            Ceiling
-          </v-tab>
-          <v-tab>
-            <v-icon left> mdi-note-text-outline </v-icon>
-            Pannels
-          </v-tab>
-          <v-tab>
-            <v-icon left> mdi-cash-multiple </v-icon>
-            Glass
-          </v-tab>
-
-          <v-tab-item> exyz </v-tab-item>
-          <v-tab-item> Panels </v-tab-item>
-          <v-tab-item> Glass </v-tab-item>
-        </v-tabs>
       </v-col>
     </v-row>
   </div>
@@ -332,20 +531,41 @@ export default {
       scannedBarcode: null,
       cust2: {},
       product_item: null,
+      ceiling: [
+        { id: null, qty: 0, price: 0 },
+        { id: null, qty: 0, price: 0 },
+        { id: null, qty: 0, price: 0 },
+        { id: null, qty: 0, price: 0 },
+      ],
+      ceiling_width: null,
+      ceiling_length: null,
+      employees: [],
+
+      perFeet: {
+        enable: false,
+        totalFeet: null,
+        rate: null,
+      },
 
       doc_types: ["Invoice", "Quotation"],
       invoiceData: {
         customer_id: "",
-        sub_total: "",
-        discount: "",
-        received_amt: "",
-        receivable_amt: "",
+        sub_total: 0,
+        discount: 0,
+        received_amt: 0,
+        receivable_amt: 0,
         doc_type: "",
+        suzuki_rent: 0,
+        fitting_charges: 0,
+        driver: null,
+        fitter: null,
+        walkin_name: "",
+        walkin_phone: ""
       },
 
       isLoading: false,
       items: [],
-      model: null,
+      cust_id: "",
       search: null,
       tab: null,
     };
@@ -371,13 +591,18 @@ export default {
     saveOrder() {
       let orderData = {
         orderDetails: {
-          customer_id: this.model,
+          customer_id: this.cust_id,
           sub_total: this.cartTotalPrice,
           discount: this.invoiceData.discount,
           total: this.total,
           received_amt: this.invoiceData.received_amt,
           receivable_amt: this.amtDue,
           doc_type: this.invoiceData.doc_type,
+          suzuki_rent: this.invoiceData.suzuki_rent,
+          fitting_charges: this.invoiceData.fitting_charges,
+          walkin_name: this.invoiceData.walkin_name,
+          walkin_phone: this.invoiceData.walkin_phone,
+
         },
         orderedItems: this.cart,
       };
@@ -409,11 +634,25 @@ export default {
       axios.post("/api/order", orderData).then((res) => {
         //  this.$router.push(`/checkout/${res.data.id}`)
         this.clearCartItems();
-        this.model = null;
+        this.clearData();
+
         this.invoiceData.discount = null;
         this.invoiceData.received_amt = null;
+        this.invoiceData.suzuki_rent = null;
+        this.invoiceData.driver = null;
+        this.invoiceData.fitter = null;
+        this.invoiceData.walkin_name = "";
+        this.invoiceData.walkin_phone = "";
+
         this.initialize();
       });
+    },
+
+    // clear data
+    clearData() {
+      this.perFeet.enable = false;
+      this.perFeet.rate = null;
+      this.perFeet.totalFeet = null;
     },
 
     // scanner
@@ -491,6 +730,99 @@ export default {
         });
       }
     },
+
+    getCeiling() {
+      let width = this.ceiling_width;
+      let length = this.ceiling_length;
+      let angle_max_length = 10;
+      let main_t_max_length = 12;
+
+      //number of angles
+      let total_length = width * 2 + length * 2;
+      let num_of_angles = Math.ceil(total_length / angle_max_length);
+
+      // //main-t
+      let maint_lines = Math.ceil(width / 2) - 1;
+      let maint_length = length * maint_lines;
+      let num_of_main_t = Math.ceil(maint_length / main_t_max_length);
+
+      console.log(num_of_main_t);
+
+      // //cross-t
+      let num_of_cross_t = Math.ceil(Math.ceil(width / 2) * (length / 2 - 1));
+
+      // //sheets
+      let num_of_sheets = Math.ceil((width * length) / 4);
+
+      this.ceiling[0].qty = num_of_angles;
+      this.ceiling[2].qty = num_of_cross_t;
+      this.ceiling[1].qty = num_of_main_t;
+      this.ceiling[3].qty = num_of_sheets;
+    },
+
+    getPanel() {
+        let number = this.panel.number;
+        let length = this.panel.length;
+        let sheet_width = this.panel.sheet_width;
+        let sheet_height = this.panel.sheet_height;
+        let removals = this.panel.removals;
+        let gola_max_height = 9.5;
+
+        if (sheet_height == "full") {
+            sheet_height = 9.5;
+        } else if (sheet_height == "half") {
+            sheet_height = 4.75;
+        } else {
+            sheet_height = 3.16;
+        }
+
+        if ( sheet_width == 8) {
+            sheet_width = 6.35;
+        }else if ( sheet_width == 10) {
+            sheet_width = 7.92;
+        }else if ( sheet_width == 16) {
+            sheet_width = 12.66;
+        }else {
+            sheet_width = 19.0;
+        }
+
+        //number of sheets
+        num_of_sheets = Math.ceil(((length * number * sheet_height) - (removals)) / sheet_width);
+
+
+        //gola
+        num_of_gola = Math.ceil((((length * number * 2) + (sheet_height * number * 2)) + removals) / gola_max_height);
+
+    },
+
+    getPrice(id) {
+      let item = this.products.filter((p) => p.id == id);
+      return item[0].selling_price;
+    },
+
+    addProductToInvoice(item) {
+      //  console.log(item)
+      let prod = this.products.filter((p) => p.id == item.id);
+
+      this.$store.dispatch("cart/addProductToCart", {
+        product: prod[0],
+        quantity: item.qty,
+      });
+    },
+
+    clearCeilingItems() {
+      (this.ceiling_width = null),
+        (this.ceiling_length = null),
+        (this.ceiling[0].id = null);
+      this.ceiling[2].id = null;
+      this.ceiling[1].id = null;
+      this.ceiling[3].id = null;
+
+      this.ceiling[0].qty = null;
+      this.ceiling[2].qty = null;
+      this.ceiling[1].qty = null;
+      this.ceiling[3].qty = null;
+    },
   },
 
   created() {
@@ -498,6 +830,10 @@ export default {
 
     axios.get("/api/slabs/all").then((res) => {
       this.slabs = res.data.data;
+    });
+
+    axios.get("/api/employees/all").then((res) => {
+      this.employees = res.data.data;
     });
   },
 
@@ -514,12 +850,49 @@ export default {
       return this.$store.getters["cart/cartTotalPrice"];
     },
 
+    invoiceTotal() {
+      if (this.perFeet.enable) {
+        return this.perFeet.totalFeet * this.perFeet.rate;
+      } else {
+        return this.cartTotalPrice;
+      }
+    },
+
     total() {
-      return this.cartTotalPrice - this.invoiceData.discount;
+      let subtotal = this.invoiceTotal;
+      let discount = this.invoiceData.discount;
+      let fitting_charges = parseInt(this.invoiceData.fitting_charges);
+      let suzuki_rent = parseInt(this.invoiceData.suzuki_rent);
+
+      return parseInt(subtotal - discount + fitting_charges + suzuki_rent);
     },
 
     amtDue() {
       return this.total - this.invoiceData.received_amt;
+    },
+
+    sheets() {
+      return this.products.filter((item) => item.category == "Sheet");
+    },
+
+    mainT() {
+      return this.products.filter((item) => item.category == "Main T");
+    },
+
+    crossT() {
+      return this.products.filter((item) => item.category == "Cross T");
+    },
+
+    angle() {
+      return this.products.filter((item) => item.category == "Angle");
+    },
+
+    drivers() {
+      return this.employees.filter((item) => item.type == "Driver");
+    },
+
+    fitters() {
+      return this.employees.filter((item) => item.type == "Fitter");
     },
   },
 
@@ -545,24 +918,23 @@ export default {
           console.log(err);
           this.isLoading = false;
         });
-
     },
 
-    model() {
-      let customer = this.items.filter(item => item.id == this.model)
+    cust_id() {
+      let customer = this.items.filter((item) => item.id == this.cust_id);
       this.cust2 = customer[0];
     },
 
     product_item() {
-      let prod = this.products.filter(item => item.id == this.product_item)
-
+      let prod = this.products.filter((item) => item.id == this.product_item);
+      //    console.log(prod[0])
       this.$store.dispatch("cart/addProductToCart", {
         product: prod[0],
         quantity: 1,
       });
 
-      this.product_item = null;
-    }
+      //  this.product_item = null;
+    },
   },
 };
 </script>
@@ -575,6 +947,7 @@ export default {
   padding-left: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
+  width: 90%;
 }
 .numinput:focus {
   border: 1px solid lightgray;
@@ -585,7 +958,7 @@ export default {
 }
 
 .small1 {
-  width: 55px;
+  width: 70px;
 }
 
 .autcmp {
@@ -594,12 +967,11 @@ export default {
   background: transparent;
 }
 
-.cust {
-  background-color: lightsalmon;
-}
-
 .prod {
-    background-color: lightgreen;
+  background-color: lightgreen;
 }
 
+.calculate {
+  border-left: darkgrey solid 1px;
+}
 </style>

@@ -409,7 +409,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.tb {\r\n  justify-content: left;\n}\r\n", ""]);
+exports.push([module.i, "\n.tb {\n  justify-content: left;\n}\n", ""]);
 
 // exports
 
