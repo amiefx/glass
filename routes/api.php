@@ -132,6 +132,7 @@ Route::group([
     // Route::post('ceilling', 'OrderController@ceilling_calculation');
     Route::post('ceilling', 'OrderController@ceilling_calculation');
     Route::post('panelling', 'OrderController@panel_calculation');
+    Route::post('glass', 'OrderController@glass_calculation');
     Route::get('invoicedetail/{id}', 'OrderController@invoice_detail');
     Route::resource('order', 'OrderController');
 
