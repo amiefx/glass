@@ -18,7 +18,7 @@ class Category extends Model
     protected $table = 'categories';
 
     //relationships
-    public function products()
+    public function product()
     {
         return $this->hasMany(products::class);
     }
