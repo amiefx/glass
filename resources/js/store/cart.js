@@ -125,7 +125,9 @@ export default {
              return;
          }
 
-       }
+       },
+
+       GET_CART_ITEMS (state, products) {}
     },
 
     actions: {
@@ -156,6 +158,10 @@ export default {
 
         increaseProductQty ({ commit }, product) {
         commit('INCREASE_QTY', product)
+        },
+
+        getCartItems({ commit }, products) {
+            commit('GET_CART_ITEMS', products)
         }
 
     }

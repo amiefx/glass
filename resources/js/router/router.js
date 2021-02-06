@@ -369,6 +369,17 @@ const routes = [
             ]
         }
     },
+    {
+        path: '/admin/invoice/edit/:id',
+        name: 'order-edit',
+        component: () => import('../views/admin/InvoiceEdit.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/reports',
     //     name: 'admin-reports',

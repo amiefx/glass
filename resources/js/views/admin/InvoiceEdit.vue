@@ -627,6 +627,7 @@ export default {
       products: [],
       scannedBarcode: null,
       cust2: {},
+      order: [],
       product_item: null,
       ceiling: [
         { id: null, qty: 0, price: 0 },
@@ -977,6 +978,10 @@ export default {
     axios.get("/api/employees/all").then((res) => {
       this.employees = res.data.data;
     });
+
+    axios.get(`/api/invoicedetail/${this.$route.params.id}`).then(res => {
+        this.order = res.data;
+      })
   },
 
   computed: {
