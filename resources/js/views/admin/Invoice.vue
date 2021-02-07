@@ -122,7 +122,7 @@
                         <v-icon left> mdi-cash-multiple </v-icon>
                         Glass
                       </v-tab>
-
+                      <!-- ceiling -->
                       <v-tab-item>
                         <v-row>
                           <v-col cols="4">
@@ -242,7 +242,7 @@
                           >Clear</v-btn
                         >
                       </v-tab-item>
-
+                       <!-- pannels -->
                       <v-tab-item>
                         <v-row>
                           <v-col cols="4" class="pb-0">
@@ -370,7 +370,130 @@
                         >
 
                       </v-tab-item>
-                      <v-tab-item> Glass </v-tab-item>
+                      <!-- glass -->
+                      <v-tab-item>
+                          <v-row>
+                          <v-col cols="4" class="pb-0">
+                            <v-text-field
+                              v-model="glass.height"
+                              label="Height"
+                              type="number"
+                              dense
+                              outlined
+                              @change="getStdHeight"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="4" class="pb-0">
+                            <v-text-field
+                              v-model="glass.width"
+                              label="Width"
+                              type="number"
+                              dense
+                              outlined
+                              @change="getStdWidth"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="4" class="pb-0">
+                              <v-text-field
+                              v-model="glass.number"
+                              label="Number"
+                              type="number"
+                              dense
+                              outlined
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="4" class="py-0">
+                            <v-text-field
+                              v-model="glass.standard_height"
+                              label="Standard Hegith"
+                              type="number"
+                              dense
+                              outlined
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="4" class="py-0">
+                              <v-text-field
+                              v-model="glass.standard_width"
+                              label="Standard Width"
+                              type="number"
+                              dense
+                              outlined
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="4" class="py-0">
+                            <v-btn
+                              dark
+                              color="primary"
+                              class="float-right"
+                              @click="calculateSlab"
+                            >
+                              Calculate
+                            </v-btn>
+                          </v-col>
+                          {{ glass.back_end_sqrFt }} | {{ glass.invoice_sqrFt }}
+                          </v-row>
+
+                          <v-simple-table height dense>
+                          <template v-slot:default>
+                            <thead>
+                              <tr>
+                                <th class="text-left">Item</th>
+                                <th class="text-left">SqrFeet</th>
+                                <th class="text-left">Unit Price</th>
+                                <th class="text-left"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr
+                                v-for="(item, index) in glassItem"
+                                :key="item.index"
+                              >
+                                <td>
+
+                                  <v-select
+                                    v-if="index == 0"
+                                    v-model="glassItem[0].id"
+                                    :items="glassProducts"
+                                    item-text="name"
+                                    item-value="id"
+                                    label="Select Glass"
+                                  ></v-select>
+                                </td>
+                                <td>
+                                  <v-text-field
+                                    v-model="item.qty"
+                                    label="SqrFeet"
+                                    type="number"
+                                  ></v-text-field>
+                                </td>
+                                <td>
+                                  <span v-if="item.id">
+                                    {{ getPrice(item.id) }}
+                                  </span>
+                                </td>
+
+                                <td>
+                                  <v-btn
+                                    class="green--text"
+                                    icon
+                                    @click="addProductToInvoiceSingle(item)"
+                                  >
+                                    <v-icon>mdi-plus</v-icon>
+                                  </v-btn>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </template>
+                        </v-simple-table>
+
+                        <v-btn
+                          dark
+                          color="primary"
+                          class="float-right"
+                          @click="clearGlassItems"
+                          >Clear</v-btn
+                        >
+                      </v-tab-item>
                     </v-tabs>
                   </v-col>
                 </v-row>
@@ -662,6 +785,21 @@ export default {
         rate: null,
       },
 
+      glass: {
+        number: 0,
+        height: 0,
+        width: 0,
+        standard_height: 0,
+        standard_width: 0,
+        back_end_sqrFt: 0,
+        invoice_sqrFt: 0,
+        standar_var: 0
+      },
+
+      glassItem: [
+        { id: null, qty: 0, price: 0, g_height: 0, g_width: 0 }
+      ],
+
       doc_types: ["Invoice", "Quotation"],
       invoiceData: {
         customer_id: "",
@@ -855,6 +993,51 @@ export default {
       }
     },
 
+    standardSize(size) {
+        this.slabs.forEach((slab) => {
+          //  console.log(slab.min)
+          if (size >= slab.min && size <= slab.max) {
+              return slab.actual;
+          }
+        });
+    },
+
+    getStdHeight() {
+       let size = this.glass.height;
+       this.slabs.forEach((slab) => {
+          //  console.log(slab.min)
+          if (size >= slab.min && size <= slab.max) {
+              return this.glass.standard_height = slab.actual;
+          }
+        });
+    },
+
+    getStdWidth() {
+       let size = this.glass.width;
+       this.slabs.forEach((slab) => {
+          //  console.log(slab.min)
+          if (size >= slab.min && size <= slab.max) {
+              return this.glass.standard_width = slab.actual;
+          }
+        });
+    },
+
+    calculateSlab() {
+        let number = this.glass.number;
+        let width = this.glass.width;
+        let height = this.glass.height;
+        let width_s_size = this.glass.standard_width;
+        let height_s_size = this.glass.standard_height;
+
+        this.glass.back_end_sqrFt = ((width * height * number) / 144).toFixed(2);
+
+        this.glass.invoice_sqrFt = ((width_s_size * height_s_size * number) / 144).toFixed(2);
+
+        this.glassItem[0].qty = this.glass.invoice_sqrFt;
+        this.glassItem[0].g_height = this.glass.height;
+        this.glassItem[0].g_width = this.glass.width;
+    },
+
     getCeiling() {
       let width = parseInt( this.ceiling_width );
       let length = parseInt( this.ceiling_length );
@@ -939,6 +1122,18 @@ export default {
       });
     },
 
+    addProductToInvoiceSingle(item) {
+      //  console.log(item)
+      let prod = this.products.filter((p) => p.id == item.id);
+
+      this.$store.dispatch("cart/addProductToCartSingle", {
+        product: prod[0],
+        quantity: item.qty,
+        g_height: item.g_height,
+        g_width: item.g_width
+      });
+    },
+
     clearCeilingItems() {
       (this.ceiling_width = null),
         (this.ceiling_length = null),
@@ -964,6 +1159,19 @@ export default {
       this.peneling[1].id = null;
       this.peneling[0].qty = null;
       this.peneling[1].qty = null;
+    },
+
+    clearGlassItems() {
+        this.glass.number = 0;
+        this.glass.height = 0;
+        this.glass.width = 0;
+        this.glass.standard_height = 0;
+        this.glass.standard_width = 0;
+        this.glass.back_end_sqrFt = 0;
+        this.glass.invoice_sqrFt = 0;
+
+        this.glassItem[0].id = null;
+        this.glassItem[0].qty = null;
     }
   },
 
@@ -1031,6 +1239,10 @@ export default {
 
     golas() {
       return this.products.filter((item) => item.category == "Panel Gola");
+    },
+
+    glassProducts() {
+      return this.products.filter((item) => item.category == "Glass");
     },
 
     panelSheets() {

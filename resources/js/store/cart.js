@@ -51,6 +51,17 @@ export default {
         //    window.localStorage.setItem('cart', JSON.stringify(state.cart));
         },
 
+        ADD_TO_CART_SINGLE(state, { product, quantity, price, g_height, g_width }) {
+
+            state.cart.push({
+                product,
+                quantity,
+                g_height,
+                g_width
+            })
+
+        },
+
         CHANGE_HEIGHT(state, { product, quantity, height }) {
 
             let productInCart = state.cart.find(item => {
@@ -134,6 +145,10 @@ export default {
 
         addProductToCart({ commit }, { product, quantity, price, type, size, customSize }) {
             commit('ADD_TO_CART', { product, quantity, price, type, size, customSize });
+        },
+
+        addProductToCartSingle({ commit }, { product, quantity, price, g_height, g_width }) {
+            commit('ADD_TO_CART_SINGLE', { product, quantity, price, g_height, g_width });
         },
 
         changeProductHeight({ commit }, { product, quantity, height}) {

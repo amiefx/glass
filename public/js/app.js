@@ -86949,10 +86949,23 @@ __webpack_require__.r(__webpack_exports__);
         quantity: quantity
       }); //    window.localStorage.setItem('cart', JSON.stringify(state.cart));
     },
-    CHANGE_HEIGHT: function CHANGE_HEIGHT(state, _ref2) {
+    ADD_TO_CART_SINGLE: function ADD_TO_CART_SINGLE(state, _ref2) {
       var product = _ref2.product,
           quantity = _ref2.quantity,
-          height = _ref2.height;
+          price = _ref2.price,
+          g_height = _ref2.g_height,
+          g_width = _ref2.g_width;
+      state.cart.push({
+        product: product,
+        quantity: quantity,
+        g_height: g_height,
+        g_width: g_width
+      });
+    },
+    CHANGE_HEIGHT: function CHANGE_HEIGHT(state, _ref3) {
+      var product = _ref3.product,
+          quantity = _ref3.quantity,
+          height = _ref3.height;
       var productInCart = state.cart.find(function (item) {
         return item.product.id === product.id;
       });
@@ -86967,10 +86980,10 @@ __webpack_require__.r(__webpack_exports__);
         quantity: quantity
       });
     },
-    CHANGE_WIDTH: function CHANGE_WIDTH(state, _ref3) {
-      var product = _ref3.product,
-          quantity = _ref3.quantity,
-          width = _ref3.width;
+    CHANGE_WIDTH: function CHANGE_WIDTH(state, _ref4) {
+      var product = _ref4.product,
+          quantity = _ref4.quantity,
+          width = _ref4.width;
       var productInCart = state.cart.find(function (item) {
         return item.product.id === product.id;
       });
@@ -87018,14 +87031,14 @@ __webpack_require__.r(__webpack_exports__);
     GET_CART_ITEMS: function GET_CART_ITEMS(state, products) {}
   },
   actions: {
-    addProductToCart: function addProductToCart(_ref4, _ref5) {
-      var commit = _ref4.commit;
-      var product = _ref5.product,
-          quantity = _ref5.quantity,
-          price = _ref5.price,
-          type = _ref5.type,
-          size = _ref5.size,
-          customSize = _ref5.customSize;
+    addProductToCart: function addProductToCart(_ref5, _ref6) {
+      var commit = _ref5.commit;
+      var product = _ref6.product,
+          quantity = _ref6.quantity,
+          price = _ref6.price,
+          type = _ref6.type,
+          size = _ref6.size,
+          customSize = _ref6.customSize;
       commit('ADD_TO_CART', {
         product: product,
         quantity: quantity,
@@ -87035,46 +87048,61 @@ __webpack_require__.r(__webpack_exports__);
         customSize: customSize
       });
     },
-    changeProductHeight: function changeProductHeight(_ref6, _ref7) {
-      var commit = _ref6.commit;
-      var product = _ref7.product,
-          quantity = _ref7.quantity,
-          height = _ref7.height;
+    addProductToCartSingle: function addProductToCartSingle(_ref7, _ref8) {
+      var commit = _ref7.commit;
+      var product = _ref8.product,
+          quantity = _ref8.quantity,
+          price = _ref8.price,
+          g_height = _ref8.g_height,
+          g_width = _ref8.g_width;
+      commit('ADD_TO_CART_SINGLE', {
+        product: product,
+        quantity: quantity,
+        price: price,
+        g_height: g_height,
+        g_width: g_width
+      });
+    },
+    changeProductHeight: function changeProductHeight(_ref9, _ref10) {
+      var commit = _ref9.commit;
+      var product = _ref10.product,
+          quantity = _ref10.quantity,
+          height = _ref10.height;
       commit('CHANGE_HEIGHT', {
         product: product,
         quantity: quantity,
         height: height
       });
     },
-    changeProductWidth: function changeProductWidth(_ref8, _ref9) {
-      var commit = _ref8.commit;
-      var product = _ref9.product,
-          quantity = _ref9.quantity,
-          width = _ref9.width;
+    changeProductWidth: function changeProductWidth(_ref11, _ref12) {
+      var commit = _ref11.commit;
+      var product = _ref12.product,
+          quantity = _ref12.quantity,
+          width = _ref12.width;
       commit('CHANGE_WIDTH', {
         product: product,
         quantity: quantity,
         width: width
       });
     },
-    removeProductFromCart: function removeProductFromCart(_ref10, product) {
-      var commit = _ref10.commit;
+    removeProductFromCart: function removeProductFromCart(_ref13, product) {
+      var commit = _ref13.commit;
       commit('REMOVE_PRODUCT_FROM_CART', product);
     },
-    clearCartItems: function clearCartItems(_ref11) {
-      var commit = _ref11.commit;
+    clearCartItems: function clearCartItems(_ref14) {
+      var commit = _ref14.commit;
       commit('CLEAR_CART_ITEMS');
     },
-    decreaseProductQty: function decreaseProductQty(_ref12, product) {
-      var commit = _ref12.commit;
+    decreaseProductQty: function decreaseProductQty(_ref15, product) {
+      var commit = _ref15.commit;
       commit('DECREASE_QTY', product);
     },
-    increaseProductQty: function increaseProductQty(_ref13, product) {
-      var commit = _ref13.commit;
+    increaseProductQty: function increaseProductQty(_ref16, product) {
+      var commit = _ref16.commit;
       commit('INCREASE_QTY', product);
     },
-    getCartItems: function getCartItems(_ref14, products) {
-      var commit = _ref14.commit;
+    getCartItems: function getCartItems(_ref17, products) {
+      var commit = _ref17.commit;
       commit('GET_CART_ITEMS', products);
     }
   }
