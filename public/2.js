@@ -833,6 +833,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1767,8 +1768,19 @@ var render = function() {
                                 _vm._v(
                                   "\n                " +
                                     _vm._s(item.product.sku) +
-                                    "\n              "
-                                )
+                                    "\n                "
+                                ),
+                                item.g_height
+                                  ? _c("span", [
+                                      _vm._v(
+                                        "(" +
+                                          _vm._s(item.g_height) +
+                                          " X " +
+                                          _vm._s(item.g_width) +
+                                          " )"
+                                      )
+                                    ])
+                                  : _vm._e()
                               ]),
                               _vm._v(" "),
                               _c("td", [

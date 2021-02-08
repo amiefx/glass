@@ -99,10 +99,22 @@ export default {
         },
 
         REMOVE_PRODUCT_FROM_CART(state, product) {
+            // state.cart = state.cart.filter(item => {
+            //     return item.product.id !== product.id;
+            // })
+
+            const index = state.cart.indexOf(product)
+              state.cart.splice(index, 1)
+
+        },
+
+        REMOVE_PRODUCT_FROM_CART_SINGLE(state, product) {
             state.cart = state.cart.filter(item => {
                 return item.product.id !== product.id;
             })
-        //    window.localStorage.setItem('cart', JSON.stringify(state.cart));
+
+            const index = this.categories.data.indexOf(item)
+            this.categories.data.splice(index, 1)
         },
 
         CLEAR_CART_ITEMS(state) {
@@ -162,6 +174,11 @@ export default {
         removeProductFromCart({ commit }, product) {
             commit('REMOVE_PRODUCT_FROM_CART', product);
         },
+
+        REMOVE_PRODUCT_FROM_CART_SINGLE({ commit }, product) {
+            commit('REMOVE_PRODUCT_FROM_CART_SINGLE', product);
+        },
+
 
         clearCartItems({ commit }) {
             commit('CLEAR_CART_ITEMS');

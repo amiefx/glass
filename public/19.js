@@ -1,14 +1,48 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[19],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/ExpenseItem.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/ExpenseItem.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Expense.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/Expense.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -136,73 +170,90 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  layout: 'admin',
-  middleware: ['auth', 'admin'],
+  layout: "admin",
+  middleware: ["auth", "admin"],
   data: function data() {
     return {
       valid: true,
       dialog: false,
       loading: false,
       snackbar: false,
-      text: '',
-      success: '',
-      error: '',
+      text: "",
+      success: "",
+      error: "",
+      expenseitems: [],
       options: {
-        sortBy: ['name'],
+        sortBy: ["id"],
         sortDesc: [true]
       },
+      menu: false,
+      modal: false,
+      menu2: false,
       rules: {
         required: function required(v) {
-          return !!v || 'This Field is Required';
+          return !!v || "This Field is Required";
         },
         min: function min(v) {
-          return v.length >= 5 || 'Minimum 5 Chracters Required';
+          return v.length >= 5 || "Minimum 5 Chracters Required";
         },
         validEmail: function validEmail(v) {
-          return /.+@.+\..+/.test(v) || 'Email must be valid';
+          return /.+@.+\..+/.test(v) || "Email must be valid";
         }
       },
       headers: [{
-        text: '#',
-        value: 'id'
+        text: "#",
+        value: "id"
       }, {
-        text: 'Name',
-        value: 'name'
+        text: "Expense",
+        value: "expense_item_id"
       }, {
-        text: 'Description',
-        value: 'description'
+        text: "Date",
+        value: "date"
       }, {
-        text: 'Actions',
-        value: 'action',
+        text: "Note",
+        value: "note"
+      }, {
+        text: "Payment Method",
+        value: "pmt_method"
+      }, {
+        text: "Actions",
+        value: "action",
         sortable: false
       }],
       status: [{
-        text: 'Active',
+        text: "Active",
         value: true
       }, {
-        text: 'In Active',
+        text: "In Active",
         value: false
       }],
-      types: ['expenseitem', 'service provider'],
-      expenseitems: [],
+      types: ["expense", "service provider"],
+      expenses: [],
       editedIndex: -1,
       editedItem: {
-        id: '',
-        name: '',
-        description: '',
-        is_active: ''
+        id: "",
+        expense_item_id: "",
+        description: "",
+        date: new Date().toISOString().substr(0, 10),
+        pmt_method: "",
+        details: "",
+        is_active: "",
+        doc_type: 'expense payment'
       },
       defaultItem: {
-        id: '',
-        name: '',
-        description: '',
-        is_active: ''
+        id: "",
+        expense_item_id: "",
+        description: "",
+        date: new Date().toISOString().substr(0, 10),
+        pmt_method: "",
+        details: "",
+        is_active: ""
       }
     };
   },
   computed: {
     formTitle: function formTitle() {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+      return this.editedIndex === -1 ? "New Item" : "Edit Item";
     }
   },
   watch: {
@@ -211,194 +262,169 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    var _this = this;
+
     this.initialize();
+    axios.get("/api/expenseitems/allitems").then(function (res) {
+      _this.expenseitems = res.data.data;
+    });
   },
   methods: {
     updateStatus: function updateStatus(item) {
-      var _this = this;
+      var _this2 = this;
 
-      var index = this.expenseitems.data.indexOf(item);
-      axios.post('/api/change-status', {
-        'status': item.is_active,
-        'expenseitem': item.id
+      var index = this.expenses.data.indexOf(item);
+      axios.post("/api/change-status", {
+        status: item.is_active,
+        expense: item.id
       }).then(function (res) {
-        _this.text = res.data.expenseitem.name + "'s Status Updated to " + res.data.expenseitem.is_active;
-        _this.snackbar = true;
+        _this2.text = res.data.expense.id + "'s Status Updated to " + res.data.expense.is_active;
+        _this2.snackbar = true;
       })["catch"](function (error) {
-        // this.text = error.response.expenseitem.name + "'s Status Cannot be Updated" + error.response.expenseitem.status
-        _this.expenseitems.data[index].is_active = error.response.data.expenseitem.is_active;
-        _this.snackbar = true;
+        // this.text = error.response.expense.name + "'s Status Cannot be Updated" + error.response.expense.status
+        _this2.expenses.data[index].is_active = error.response.data.expense.is_active;
+        _this2.snackbar = true;
         console.dir(error.response);
       });
     },
-    // selectAll(e){
-    //     this.selected = [];
-    //     if(e.length > 0){
-    //         this.selected = e.map(val => val.id)
-    //     }
-    //     console.dir(this.selected)
-    // },
-    // deleteAll(){
-    //     let decide = confirm('Are you sure you want to delete these items?')
-    //       if(decide){
-    //           axios.post('/api/expenseitems/delete', {'expenseitems': this.selected})
-    //           .then(res => {
-    //               this.text = "Rcords Deleted Successfully!";
-    //               this.selected.map(val =>{
-    //                   const index = this.expenseitems.data.indexOf(val)
-    //                   this.expenseitems.data.splice(index, 1)
-    //               })
-    //               this.snackbar = true
-    //           })
-    //           .catch(err => {
-    //               console.log(err.response)
-    //               this.text = "Error Deleting Record"
-    //               this.snackbar = true
-    //           })
-    //       }
-    // },
     searchIt: function searchIt(e) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (e.length > 3) {
-        axios.get("/api/expenseitems/".concat(e)).then(function (res) {
-          return _this2.expenseitems = res.data.expenseitems;
+        axios.get("/api/expenses/".concat(e)).then(function (res) {
+          return _this3.expenses = res.data.expenses;
         })["catch"](function (err) {
           return console.dir(err.response);
         });
       }
 
       if (e.length <= 0) {
-        // axios.get(`/api/expenseitems?page=${e.page}`,{params:{'per_page': e.itemsPerPage}})
-        //   axios.get(`/api/expenseitems`)
-        //     .then(res => this.expenseitems = res.data.data.expenseitems)
-        //     .catch(err => console.dir(err.response))
-        var sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
-        var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
-        axios.get("/api/expenseitems?page=".concat(e.page), {
+        var sortBy = this.options.sortBy.length == 0 ? "id" : this.options.sortBy[0];
+        var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? "asc" : "desc";
+        axios.get("/api/expenses?page=".concat(e.page), {
           params: {
-            'per_page': e.itemsPerPage,
-            'sort_by': sortBy,
-            'order_by': orderBy
+            per_page: e.itemsPerPage,
+            sort_by: sortBy,
+            order_by: orderBy
           }
         }).then(function (res) {
-          _this2.expenseitems = res.data.expenseitems;
+          _this3.expenses = res.data.expenses;
         })["catch"](function (err) {
           return console.dir(err.response);
         });
       }
     },
     paginate: function paginate(e) {
-      var _this3 = this;
+      var _this4 = this;
 
-      var sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
-      var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
-      axios.get("/api/expenseitems?page=".concat(e.page), {
+      var sortBy = this.options.sortBy.length == 0 ? "id" : this.options.sortBy[0];
+      var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? "asc" : "desc";
+      axios.get("/api/expenses?page=".concat(e.page), {
         params: {
-          'per_page': e.itemsPerPage,
-          'sort_by': sortBy,
-          'order_by': orderBy
+          per_page: e.itemsPerPage,
+          sort_by: sortBy,
+          order_by: orderBy
         }
       }).then(function (res) {
-        _this3.expenseitems = res.data.expenseitems;
+        _this4.expenses = res.data.expenses;
       })["catch"](function (err) {//----
       });
     },
     initialize: function initialize() {
-      var _this4 = this;
+      var _this5 = this;
 
       // Add a request interceptor
       axios.interceptors.request.use(function (config) {
-        _this4.loading = true;
+        _this5.loading = true;
         return config;
       }, function (error) {
-        _this4.loading = false;
+        _this5.loading = false;
         return Promise.reject(error);
       }); // Add a response interceptor
 
       axios.interceptors.response.use(function (response) {
-        _this4.loading = false;
+        _this5.loading = false;
         return response;
       }, function (error) {
-        _this4.loading = false;
+        _this5.loading = false;
         return Promise.reject(error);
       });
     },
     editItem: function editItem(item) {
-      this.editedIndex = this.expenseitems.data.indexOf(item);
+      this.editedIndex = this.expenses.data.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
     deleteItem: function deleteItem(item) {
-      var _this5 = this;
+      var _this6 = this;
 
-      var index = this.expenseitems.data.indexOf(item);
-      var decide = confirm('Are you sure you want to delete this item?');
+      var index = this.expenses.data.indexOf(item);
+      var decide = confirm("Are you sure you want to delete this item?");
 
       if (decide) {
-        axios["delete"]('/api/expenseitems/' + item.id).then(function (res) {
-          _this5.snackbar = true;
+        axios["delete"]("/api/expenses/" + item.id).then(function (res) {
+          _this6.snackbar = true;
 
-          _this5.expenseitems.data.splice(index, 1);
+          _this6.expenses.data.splice(index, 1);
         })["catch"](function (err) {
           console.log(err.response);
-          _this5.text = "Error Deleting Record";
-          _this5.snackbar = true;
+          _this6.text = "Error Deleting Record";
+          _this6.snackbar = true;
         });
       }
     },
     close: function close() {
-      var _this6 = this;
+      var _this7 = this;
 
       this.dialog = false;
       setTimeout(function () {
-        _this6.editedItem = Object.assign({}, _this6.defaultItem);
-        _this6.editedIndex = -1;
+        _this7.editedItem = Object.assign({}, _this7.defaultItem);
+        _this7.editedIndex = -1;
       }, 300);
     },
     save: function save() {
-      var _this7 = this;
+      var _this8 = this;
 
       if (this.editedIndex > -1) {
         var index = this.editedIndex;
-        axios.put('/api/expenseitems/' + this.editedItem.id, this.editedItem) //  .then(res => Object.assign(this.expenseitems[this.editedIndex], this.editedItem))
+        axios.put("/api/expenses/" + this.editedItem.id, this.editedItem) //  .then(res => Object.assign(this.expenses[this.editedIndex], this.editedItem))
         .then(function (res) {
           console.log(res);
-          _this7.text = "Record Updated Successfully!";
-          _this7.snackbar = true;
-          Object.assign(_this7.expenseitems.data[index], res.data.expenseitem);
+          _this8.text = "Record Updated Successfully!";
+          _this8.snackbar = true;
+          Object.assign(_this8.expenses.data[index], res.data.expense);
         })["catch"](function (err) {
           console.log(err.response);
-          _this7.text = "Error Updating Record";
-          _this7.snackbar = true;
-        }); //  Object.assign(this.expenseitems.data[this.editedIndex], this.editedItem)
+          _this8.text = "Error Updating Record";
+          _this8.snackbar = true;
+        }); //  Object.assign(this.expenses.data[this.editedIndex], this.editedItem)
       } else {
-        axios.post('/api/expenseitems', this.editedItem).then(function (res) {
-          _this7.text = "Record Added Successfully!";
-          _this7.snackbar = true;
+        axios.post("/api/expenses", this.editedItem).then(function (res) {
+          _this8.text = "Record Added Successfully!";
+          _this8.snackbar = true;
 
-          _this7.expenseitems.data.push(res.data.expenseitem);
+          _this8.expenses.data.push(res.data.expense);
         })["catch"](function (err) {
           console.dir(err);
-          _this7.text = "Error Inserting Record";
-          _this7.snackbar = true;
+          _this8.text = "Error Inserting Record";
+          _this8.snackbar = true;
         });
       }
 
       this.close();
     },
     getColor: function getColor(status) {
-      if (status == 0) return 'red';else return 'green';
+      if (status == 0) return "red";else return "green";
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/ExpenseItem.vue?vue&type=template&id=55ace03c&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/ExpenseItem.vue?vue&type=template&id=55ace03c& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Expense.vue?vue&type=template&id=122b39ee&":
+/*!******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/Expense.vue?vue&type=template&id=122b39ee& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -417,12 +443,12 @@ var render = function() {
         staticClass: "elevation-1",
         attrs: {
           headers: _vm.headers,
-          items: _vm.expenseitems.data,
+          items: _vm.expenses.data,
           "items-per-page": 5,
           "item-key": "id",
           loading: _vm.loading,
           options: _vm.options,
-          "server-items-length": _vm.expenseitems.total,
+          "server-items-length": _vm.expenses.total,
           "loading-text": "Loading.. Please Wait!",
           "footer-props": {
             itemsPerPageOptions: [5, 10, 15],
@@ -445,7 +471,7 @@ var render = function() {
                   "v-toolbar",
                   { attrs: { flat: "", color: "" } },
                   [
-                    _c("v-toolbar-title", [_vm._v("Expense Items")]),
+                    _c("v-toolbar-title", [_vm._v("Expenses")]),
                     _vm._v(" "),
                     _c("v-divider", {
                       staticClass: "mx-4",
@@ -473,7 +499,7 @@ var render = function() {
                                     },
                                     on
                                   ),
-                                  [_vm._v("New Expense Item")]
+                                  [_vm._v("New Expense")]
                                 )
                               ]
                             }
@@ -531,59 +557,227 @@ var render = function() {
                                               "v-col",
                                               { attrs: { cols: "12" } },
                                               [
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    label: "Name",
-                                                    rules: [_vm.rules.required]
-                                                  },
-                                                  model: {
-                                                    value: _vm.editedItem.name,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "name",
-                                                        $$v
-                                                      )
+                                                _c(
+                                                  "v-menu",
+                                                  {
+                                                    attrs: {
+                                                      "close-on-content-click": false,
+                                                      "nudge-right": 40,
+                                                      transition:
+                                                        "scale-transition",
+                                                      "offset-y": "",
+                                                      "min-width": "auto"
                                                     },
-                                                    expression:
-                                                      "editedItem.name"
-                                                  }
-                                                }),
+                                                    scopedSlots: _vm._u([
+                                                      {
+                                                        key: "activator",
+                                                        fn: function(ref) {
+                                                          var on = ref.on
+                                                          var attrs = ref.attrs
+                                                          return [
+                                                            _c(
+                                                              "v-text-field",
+                                                              _vm._g(
+                                                                _vm._b(
+                                                                  {
+                                                                    attrs: {
+                                                                      label:
+                                                                        "For the Date/Month of:",
+                                                                      "prepend-icon":
+                                                                        "mdi-calendar",
+                                                                      readonly:
+                                                                        ""
+                                                                    },
+                                                                    model: {
+                                                                      value:
+                                                                        _vm
+                                                                          .editedItem
+                                                                          .date,
+                                                                      callback: function(
+                                                                        $$v
+                                                                      ) {
+                                                                        _vm.$set(
+                                                                          _vm.editedItem,
+                                                                          "date",
+                                                                          $$v
+                                                                        )
+                                                                      },
+                                                                      expression:
+                                                                        "editedItem.date"
+                                                                    }
+                                                                  },
+                                                                  "v-text-field",
+                                                                  attrs,
+                                                                  false
+                                                                ),
+                                                                on
+                                                              )
+                                                            )
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]),
+                                                    model: {
+                                                      value: _vm.menu2,
+                                                      callback: function($$v) {
+                                                        _vm.menu2 = $$v
+                                                      },
+                                                      expression: "menu2"
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(" "),
+                                                    _c("v-date-picker", {
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          _vm.menu2 = false
+                                                        }
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.editedItem.date,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.editedItem,
+                                                            "date",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "editedItem.date"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
                                                 _vm._v(" "),
-                                                _c("v-text-field", {
+                                                _c("v-select", {
                                                   attrs: {
-                                                    label: "Description"
+                                                    items: _vm.expenseitems,
+                                                    "item-text": "name",
+                                                    "item-value": "id",
+                                                    label: "Expenses",
+                                                    rules: [_vm.rules.required]
                                                   },
                                                   model: {
                                                     value:
                                                       _vm.editedItem
-                                                        .description,
+                                                        .expense_item_id,
                                                     callback: function($$v) {
                                                       _vm.$set(
                                                         _vm.editedItem,
-                                                        "description",
+                                                        "expense_item_id",
                                                         $$v
                                                       )
                                                     },
                                                     expression:
-                                                      "editedItem.description"
+                                                      "editedItem.expense_item_id"
                                                   }
                                                 }),
                                                 _vm._v(" "),
-                                                _c("v-checkbox", {
-                                                  attrs: { label: "Active" },
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    label: "Amount",
+                                                    rules: [_vm.rules.required],
+                                                    type: "number"
+                                                  },
                                                   model: {
-                                                    value:
-                                                      _vm.editedItem.is_active,
+                                                    value: _vm.editedItem.total,
                                                     callback: function($$v) {
                                                       _vm.$set(
                                                         _vm.editedItem,
-                                                        "is_active",
+                                                        "total",
                                                         $$v
                                                       )
                                                     },
                                                     expression:
-                                                      "editedItem.is_active"
+                                                      "editedItem.total"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-radio-group",
+                                                  {
+                                                    staticClass: "radio mt-1",
+                                                    attrs: {
+                                                      mandatory: "",
+                                                      row: ""
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.editedItem
+                                                          .pmt_method,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.editedItem,
+                                                          "pmt_method",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "editedItem.pmt_method"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-radio", {
+                                                      attrs: {
+                                                        label: "Cash",
+                                                        value: "Cash"
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c("v-radio", {
+                                                      attrs: {
+                                                        label: "Bank",
+                                                        value: "Bank"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _vm.editedItem.pmt_method ==
+                                                "Bank"
+                                                  ? _c("v-text-field", {
+                                                      attrs: {
+                                                        label: "Detials"
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.editedItem
+                                                            .details,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.editedItem,
+                                                            "details",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "editedItem.details"
+                                                      }
+                                                    })
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _c("v-text-field", {
+                                                  attrs: { label: "Notes" },
+                                                  model: {
+                                                    value: _vm.editedItem.note,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "note",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.note"
                                                   }
                                                 })
                                               ],
@@ -676,7 +870,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n        mdi-pencil\n      ")]
+                  [_vm._v(" mdi-pencil ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -689,7 +883,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n        mdi-delete\n      ")]
+                  [_vm._v(" mdi-delete ")]
                 )
               ]
             }
@@ -725,7 +919,7 @@ var render = function() {
           }
         },
         [
-          _vm._v("\n      " + _vm._s(_vm.text) + "\n      "),
+          _vm._v("\n    " + _vm._s(_vm.text) + "\n    "),
           _c(
             "v-btn",
             {
@@ -736,7 +930,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("\n          Close\n      ")]
+            [_vm._v(" Close ")]
           )
         ],
         1
@@ -752,32 +946,35 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/ExpenseItem.vue":
-/*!**************************************************!*\
-  !*** ./resources/js/views/admin/ExpenseItem.vue ***!
-  \**************************************************/
+/***/ "./resources/js/views/admin/Expense.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/views/admin/Expense.vue ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ExpenseItem_vue_vue_type_template_id_55ace03c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExpenseItem.vue?vue&type=template&id=55ace03c& */ "./resources/js/views/admin/ExpenseItem.vue?vue&type=template&id=55ace03c&");
-/* harmony import */ var _ExpenseItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ExpenseItem.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/ExpenseItem.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Expense_vue_vue_type_template_id_122b39ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Expense.vue?vue&type=template&id=122b39ee& */ "./resources/js/views/admin/Expense.vue?vue&type=template&id=122b39ee&");
+/* harmony import */ var _Expense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Expense.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/Expense.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/index.js");
 /* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
-/* harmony import */ var vuetify_lib_components_VCheckbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VCheckbox */ "./node_modules/vuetify/lib/components/VCheckbox/index.js");
-/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
-/* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
+/* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
+/* harmony import */ var vuetify_lib_components_VDatePicker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VDatePicker */ "./node_modules/vuetify/lib/components/VDatePicker/index.js");
 /* harmony import */ var vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VDialog */ "./node_modules/vuetify/lib/components/VDialog/index.js");
 /* harmony import */ var vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VDivider */ "./node_modules/vuetify/lib/components/VDivider/index.js");
 /* harmony import */ var vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VForm */ "./node_modules/vuetify/lib/components/VForm/index.js");
 /* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
-/* harmony import */ var vuetify_lib_components_VSnackbar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VSnackbar */ "./node_modules/vuetify/lib/components/VSnackbar/index.js");
-/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
-/* harmony import */ var vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuetify/lib/components/VToolbar */ "./node_modules/vuetify/lib/components/VToolbar/index.js");
+/* harmony import */ var vuetify_lib_components_VMenu__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VMenu */ "./node_modules/vuetify/lib/components/VMenu/index.js");
+/* harmony import */ var vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VRadioGroup */ "./node_modules/vuetify/lib/components/VRadioGroup/index.js");
+/* harmony import */ var vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuetify/lib/components/VSelect */ "./node_modules/vuetify/lib/components/VSelect/index.js");
+/* harmony import */ var vuetify_lib_components_VSnackbar__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vuetify/lib/components/VSnackbar */ "./node_modules/vuetify/lib/components/VSnackbar/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+/* harmony import */ var vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! vuetify/lib/components/VToolbar */ "./node_modules/vuetify/lib/components/VToolbar/index.js");
 
 
 
@@ -786,9 +983,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ExpenseItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ExpenseItem_vue_vue_type_template_id_55ace03c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ExpenseItem_vue_vue_type_template_id_55ace03c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Expense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Expense_vue_vue_type_template_id_122b39ee___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Expense_vue_vue_type_template_id_122b39ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -817,43 +1014,47 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VCheckbox: vuetify_lib_components_VCheckbox__WEBPACK_IMPORTED_MODULE_6__["VCheckbox"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VCol"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VContainer"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_8__["VDataTable"],VDialog: vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_9__["VDialog"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_10__["VDivider"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_11__["VForm"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_12__["VIcon"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VRow"],VSnackbar: vuetify_lib_components_VSnackbar__WEBPACK_IMPORTED_MODULE_13__["VSnackbar"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_14__["VTextField"],VToolbar: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_15__["VToolbar"],VToolbarTitle: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_15__["VToolbarTitle"]})
+
+
+
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VCol"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VContainer"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_7__["VDataTable"],VDatePicker: vuetify_lib_components_VDatePicker__WEBPACK_IMPORTED_MODULE_8__["VDatePicker"],VDialog: vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_9__["VDialog"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_10__["VDivider"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_11__["VForm"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_12__["VIcon"],VMenu: vuetify_lib_components_VMenu__WEBPACK_IMPORTED_MODULE_13__["VMenu"],VRadio: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_14__["VRadio"],VRadioGroup: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_14__["VRadioGroup"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VRow"],VSelect: vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_15__["VSelect"],VSnackbar: vuetify_lib_components_VSnackbar__WEBPACK_IMPORTED_MODULE_16__["VSnackbar"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_17__["VTextField"],VToolbar: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_18__["VToolbar"],VToolbarTitle: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_18__["VToolbarTitle"]})
 
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/admin/ExpenseItem.vue"
+component.options.__file = "resources/js/views/admin/Expense.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/ExpenseItem.vue?vue&type=script&lang=js&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/views/admin/ExpenseItem.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************/
+/***/ "./resources/js/views/admin/Expense.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/views/admin/Expense.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExpenseItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ExpenseItem.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/ExpenseItem.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExpenseItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Expense.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Expense.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/ExpenseItem.vue?vue&type=template&id=55ace03c&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/views/admin/ExpenseItem.vue?vue&type=template&id=55ace03c& ***!
-  \*********************************************************************************/
+/***/ "./resources/js/views/admin/Expense.vue?vue&type=template&id=122b39ee&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/views/admin/Expense.vue?vue&type=template&id=122b39ee& ***!
+  \*****************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExpenseItem_vue_vue_type_template_id_55ace03c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ExpenseItem.vue?vue&type=template&id=55ace03c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/ExpenseItem.vue?vue&type=template&id=55ace03c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExpenseItem_vue_vue_type_template_id_55ace03c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expense_vue_vue_type_template_id_122b39ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Expense.vue?vue&type=template&id=122b39ee& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Expense.vue?vue&type=template&id=122b39ee&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expense_vue_vue_type_template_id_122b39ee___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExpenseItem_vue_vue_type_template_id_55ace03c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expense_vue_vue_type_template_id_122b39ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

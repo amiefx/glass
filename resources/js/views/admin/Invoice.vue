@@ -71,6 +71,7 @@
                 </td>
                 <td>
                   {{ item.product.sku }}
+                  <span v-if="item.g_height">({{item.g_height}} X {{item.g_width}} )</span>
                 </td>
                 <td>
                   <input
