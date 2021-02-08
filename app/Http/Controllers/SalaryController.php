@@ -26,6 +26,7 @@ class SalaryController extends Controller
         $user = auth()->user();
         
         $salary = new Salary([ 
+            'order_id' => $request->order_id,
             'employee_id' => $request->employee_id,
             'amount_paid' => $request->amount_paid,
             'note' => $request->note,
@@ -54,6 +55,7 @@ class SalaryController extends Controller
 
         $salary = Salary::find($id);
 
+        $salary->order_id = $request->order_id;
         $salary->employee_id = $request->employee_id;
         $salary->amount_paid = $request->amount_paid;
         $salary->status = $request->status;

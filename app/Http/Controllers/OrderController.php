@@ -11,6 +11,7 @@ use App\Models\Cash;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Receivable;
+use App\Models\Salary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -66,7 +67,7 @@ class OrderController extends Controller
                 'discount' => $order['discount'],
                 'total' => $order['total'],
                 'amount_recieved' => $order['received_amt'],
-                "discount" => $order['discount'],
+                // "discount" => $order['discount'],
                 'status' => $order['doc_type'],
                 // 'note' => $request->note,
                 'user_id' => $user->id,
@@ -114,7 +115,30 @@ class OrderController extends Controller
                     'status' => $order['doc_type'] == 'Invoice' ? 1 : 0,
                     'user_id' => $user->id
                 ]);
+            }
 
+            if ($order['suzuki_rent'] > 0) {
+
+                Salary::create([
+                    'order_id' => $neworder->id,
+                    'employee_id' => $order['driver'],
+                    'amount_paid' => $order['suzuki_rent'],
+                    'note' => '',
+                    'status' => $order['doc_type'],
+                    'user_id' => $user->id
+                ]);
+            }
+
+            if ($order['fitting_charges'] > 0) {
+
+                Salary::create([
+                    'order_id' => $neworder->id,
+                    'employee_id' => $order['fitter'],
+                    'amount_paid' => $order['fitting_charges'],
+                    'note' => '',
+                    'status' => $order['doc_type'],
+                    'user_id' => $user->id
+                ]);
             }
 
             
