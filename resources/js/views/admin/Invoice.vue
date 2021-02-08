@@ -71,7 +71,9 @@
                 </td>
                 <td>
                   {{ item.product.sku }}
-                  <span v-if="item.g_height">({{item.g_height}} X {{item.g_width}} )</span>
+                  <span v-if="item.g_height"
+                    >({{ item.g_height }} X {{ item.g_width }} )</span
+                  >
                 </td>
                 <td>
                   <input
@@ -80,13 +82,22 @@
                     v-model="item.quantity"
                   />
                 </td>
-                <td>
-                  <input
-                    class="numinput small1"
-                    type="number"
-                    v-model="item.product.selling_price"
-                  />
-                </td>
+
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <td @dblclick="activePrice">
+                      <div v-bind="attrs" v-on="on">
+                        <input
+                          class="numinput small1"
+                          type="number"
+                          v-model="item.product.selling_price"
+                          :disabled="priceStatus"
+                        />
+                      </div>
+                    </td>
+                  </template>
+                  <span>double click to change the price</span>
+                </v-tooltip>
 
                 <td allign="right">
                   {{ (item.product.selling_price * item.quantity).toFixed(0) }}
@@ -243,7 +254,7 @@
                           >Clear</v-btn
                         >
                       </v-tab-item>
-                       <!-- pannels -->
+                      <!-- pannels -->
                       <v-tab-item>
                         <v-row>
                           <v-col cols="4" class="pb-0">
@@ -265,7 +276,7 @@
                             ></v-text-field>
                           </v-col>
                           <v-col cols="4" class="pb-0">
-                              <v-text-field
+                            <v-text-field
                               v-model="panel.removals"
                               label="Removal"
                               type="number"
@@ -275,18 +286,18 @@
                           </v-col>
                           <v-col cols="4" class="py-0">
                             <v-select
-                               :items="panelSheetHight"
-                               v-model="panel.sheet_height"
-                               dense
-                               outlined
+                              :items="panelSheetHight"
+                              v-model="panel.sheet_height"
+                              dense
+                              outlined
                             ></v-select>
                           </v-col>
                           <v-col cols="4" class="py-0">
                             <v-select
-                               :items="panelSheetWidth"
-                               v-model="panel.sheet_width"
-                               dense
-                               outlined
+                              :items="panelSheetWidth"
+                              v-model="panel.sheet_width"
+                              dense
+                              outlined
                             ></v-select>
                           </v-col>
                           <v-col cols="4" class="py-0">
@@ -369,11 +380,10 @@
                           @click="clearPanelItems"
                           >Clear</v-btn
                         >
-
                       </v-tab-item>
                       <!-- glass -->
                       <v-tab-item>
-                          <v-row>
+                        <v-row>
                           <v-col cols="4" class="pb-0">
                             <v-text-field
                               v-model="glass.height"
@@ -395,7 +405,7 @@
                             ></v-text-field>
                           </v-col>
                           <v-col cols="4" class="pb-0">
-                              <v-text-field
+                            <v-text-field
                               v-model="glass.number"
                               label="Number"
                               type="number"
@@ -413,7 +423,7 @@
                             ></v-text-field>
                           </v-col>
                           <v-col cols="4" class="py-0">
-                              <v-text-field
+                            <v-text-field
                               v-model="glass.standard_width"
                               label="Standard Width"
                               type="number"
@@ -432,9 +442,9 @@
                             </v-btn>
                           </v-col>
                           {{ glass.back_end_sqrFt }} | {{ glass.invoice_sqrFt }}
-                          </v-row>
+                        </v-row>
 
-                          <v-simple-table height dense>
+                        <v-simple-table height dense>
                           <template v-slot:default>
                             <thead>
                               <tr>
@@ -450,7 +460,6 @@
                                 :key="item.index"
                               >
                                 <td>
-
                                   <v-select
                                     v-if="index == 0"
                                     v-model="glassItem[0].id"
@@ -709,8 +718,14 @@
             </v-radio-group>
 
             <v-row>
-              <v-checkbox label="Print Invoice" v-model="printInvoice"></v-checkbox>
-              <v-checkbox label="Print Gate Pass" v-model="printGatePass"></v-checkbox>
+              <v-checkbox
+                label="Print Invoice"
+                v-model="printInvoice"
+              ></v-checkbox>
+              <v-checkbox
+                label="Print Gate Pass"
+                v-model="printGatePass"
+              ></v-checkbox>
             </v-row>
           </v-col>
           <v-col cols="4">
@@ -772,7 +787,7 @@ export default {
 
       peneling: [
         { id: null, qty: 0, price: 0 },
-        { id: null, qty: 0, price: 0 }
+        { id: null, qty: 0, price: 0 },
       ],
 
       panelSheetHight: ["full", "half", "third"],
@@ -794,12 +809,10 @@ export default {
         standard_width: 0,
         back_end_sqrFt: 0,
         invoice_sqrFt: 0,
-        standar_var: 0
+        standar_var: 0,
       },
 
-      glassItem: [
-        { id: null, qty: 0, price: 0, g_height: 0, g_width: 0 }
-      ],
+      glassItem: [{ id: null, qty: 0, price: 0, g_height: 0, g_width: 0 }],
 
       doc_types: ["Invoice", "Quotation"],
       invoiceData: {
@@ -820,6 +833,8 @@ export default {
       printInvoice: false,
       printGatePass: false,
 
+      priceStatus: true,
+      priceChange: false,
       isLoading: false,
       items: [],
       cust_id: "",
@@ -861,6 +876,7 @@ export default {
           fitter: this.invoiceData.fitter,
           walkin_name: this.invoiceData.walkin_name,
           walkin_phone: this.invoiceData.walkin_phone,
+          priceflag: this.priceChange
         },
         orderedItems: this.cart,
       };
@@ -890,10 +906,9 @@ export default {
       );
 
       axios.post("/api/order", orderData).then((res) => {
-
         this.clearCartItems();
         this.clearData();
-        console.log(orderData)
+        console.log(orderData);
         this.invoiceData.discount = null;
         this.invoiceData.received_amt = null;
         this.invoiceData.suzuki_rent = null;
@@ -905,9 +920,8 @@ export default {
         this.initialize();
 
         if (this.printInvoice) {
-            this.$router.push(`/admin/invoice/print/${res.data.id}`)
+          this.$router.push(`/admin/invoice/print/${res.data.id}`);
         }
-
       });
     },
 
@@ -995,53 +1009,56 @@ export default {
     },
 
     standardSize(size) {
-        this.slabs.forEach((slab) => {
-          //  console.log(slab.min)
-          if (size >= slab.min && size <= slab.max) {
-              return slab.actual;
-          }
-        });
+      this.slabs.forEach((slab) => {
+        //  console.log(slab.min)
+        if (size >= slab.min && size <= slab.max) {
+          return slab.actual;
+        }
+      });
     },
 
     getStdHeight() {
-       let size = this.glass.height;
-       this.slabs.forEach((slab) => {
-          //  console.log(slab.min)
-          if (size >= slab.min && size <= slab.max) {
-              return this.glass.standard_height = slab.actual;
-          }
-        });
+      let size = this.glass.height;
+      this.slabs.forEach((slab) => {
+        //  console.log(slab.min)
+        if (size >= slab.min && size <= slab.max) {
+          return (this.glass.standard_height = slab.actual);
+        }
+      });
     },
 
     getStdWidth() {
-       let size = this.glass.width;
-       this.slabs.forEach((slab) => {
-          //  console.log(slab.min)
-          if (size >= slab.min && size <= slab.max) {
-              return this.glass.standard_width = slab.actual;
-          }
-        });
+      let size = this.glass.width;
+      this.slabs.forEach((slab) => {
+        //  console.log(slab.min)
+        if (size >= slab.min && size <= slab.max) {
+          return (this.glass.standard_width = slab.actual);
+        }
+      });
     },
 
     calculateSlab() {
-        let number = this.glass.number;
-        let width = this.glass.width;
-        let height = this.glass.height;
-        let width_s_size = this.glass.standard_width;
-        let height_s_size = this.glass.standard_height;
+      let number = this.glass.number;
+      let width = this.glass.width;
+      let height = this.glass.height;
+      let width_s_size = this.glass.standard_width;
+      let height_s_size = this.glass.standard_height;
 
-        this.glass.back_end_sqrFt = ((width * height * number) / 144).toFixed(2);
+      this.glass.back_end_sqrFt = ((width * height * number) / 144).toFixed(2);
 
-        this.glass.invoice_sqrFt = ((width_s_size * height_s_size * number) / 144).toFixed(2);
+      this.glass.invoice_sqrFt = (
+        (width_s_size * height_s_size * number) /
+        144
+      ).toFixed(2);
 
-        this.glassItem[0].qty = this.glass.invoice_sqrFt;
-        this.glassItem[0].g_height = this.glass.height;
-        this.glassItem[0].g_width = this.glass.width;
+      this.glassItem[0].qty = this.glass.invoice_sqrFt;
+      this.glassItem[0].g_height = this.glass.height;
+      this.glassItem[0].g_width = this.glass.width;
     },
 
     getCeiling() {
-      let width = parseInt( this.ceiling_width );
-      let length = parseInt( this.ceiling_length );
+      let width = parseInt(this.ceiling_width);
+      let length = parseInt(this.ceiling_length);
       let angle_max_length = 10;
       let main_t_max_length = 12;
 
@@ -1069,15 +1086,15 @@ export default {
     },
 
     getPanel() {
-      var number = parseInt( this.panel.number );
-      var length = parseInt( this.panel.length );
-      var sheet_width = parseInt( this.panel.sheet_width );
+      var number = parseInt(this.panel.number);
+      var length = parseInt(this.panel.length);
+      var sheet_width = parseInt(this.panel.sheet_width);
       var sheet_height = this.panel.sheet_height;
-      var removals = parseInt(  this.panel.removals );
+      var removals = parseInt(this.panel.removals);
       var gola_max_height = 9.5;
 
       if (sheet_height == "full") {
-          console.log('full')
+        console.log("full");
         sheet_height = 9.5;
       } else if (sheet_height == "half") {
         sheet_height = 4.75;
@@ -1096,13 +1113,15 @@ export default {
       }
 
       //number of sheets
-        var num_of_sheets = Math.ceil(((length * number * sheet_height) - (removals)) / sheet_width);
+      var num_of_sheets = Math.ceil(
+        (length * number * sheet_height - removals) / sheet_width
+      );
 
-
-        //gola
-        var num_of_gola = Math.ceil((((length * number * 2) + (sheet_height * number * 2)) + removals) / gola_max_height);
-
-
+      //gola
+      var num_of_gola = Math.ceil(
+        (length * number * 2 + sheet_height * number * 2 + removals) /
+          gola_max_height
+      );
 
       this.peneling[0].qty = num_of_sheets;
       this.peneling[1].qty = num_of_gola;
@@ -1131,7 +1150,7 @@ export default {
         product: prod[0],
         quantity: item.qty,
         g_height: item.g_height,
-        g_width: item.g_width
+        g_width: item.g_width,
       });
     },
 
@@ -1150,30 +1169,34 @@ export default {
     },
 
     clearPanelItems() {
-      this.panel.number = null,
-      this.panel.length = null,
-      this.panel.removals = null,
-      this.panel.sheet_height = "",
-      this.panel.sheet_width = null,
-
-      this.peneling[0].id = null;
+      (this.panel.number = null),
+        (this.panel.length = null),
+        (this.panel.removals = null),
+        (this.panel.sheet_height = ""),
+        (this.panel.sheet_width = null),
+        (this.peneling[0].id = null);
       this.peneling[1].id = null;
       this.peneling[0].qty = null;
       this.peneling[1].qty = null;
     },
 
     clearGlassItems() {
-        this.glass.number = 0;
-        this.glass.height = 0;
-        this.glass.width = 0;
-        this.glass.standard_height = 0;
-        this.glass.standard_width = 0;
-        this.glass.back_end_sqrFt = 0;
-        this.glass.invoice_sqrFt = 0;
+      this.glass.number = 0;
+      this.glass.height = 0;
+      this.glass.width = 0;
+      this.glass.standard_height = 0;
+      this.glass.standard_width = 0;
+      this.glass.back_end_sqrFt = 0;
+      this.glass.invoice_sqrFt = 0;
 
-        this.glassItem[0].id = null;
-        this.glassItem[0].qty = null;
-    }
+      this.glassItem[0].id = null;
+      this.glassItem[0].qty = null;
+    },
+
+    activePrice() {
+      this.priceStatus = false;
+      this.priceChange = true;
+    },
   },
 
   created() {
@@ -1337,5 +1360,4 @@ export default {
 .calculate {
   border-left: darkgrey solid 1px;
 }
-
 </style>
