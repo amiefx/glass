@@ -24,6 +24,8 @@ class OrderResource extends JsonResource
             'discount' => $this->discount,
             'note' => $this->note,
             'status' => $this->status,
+            'walkin_name' => $this->walkin_name,
+            'walkin_phone' => $this->walkin_phone,
             'user_id' => $this->user_id,
         ];
     }

@@ -22,6 +22,8 @@ class CreateOrdersTable extends Migration
             $table->integer('amount_recieved')->nullable()->default(null);
             $table->integer('note')->nullable()->default(null);
             $table->string('status')->nullable()->default(null);
+            $table->string('walkin_name')->nullable()->default(null);
+            $table->string('walkin_phone')->nullable()->default(null);
             $table->integer('user_id');
             $table->timestamps();
         });

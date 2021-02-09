@@ -15,9 +15,10 @@ class Order extends Model
         'discount',
         'total',
         'amount_recieved',
-        'discount',
         'note',
         'status',
+        'walkin_name',
+        'walkin_phone',
         'user_id'
     ];
 
