@@ -507,7 +507,7 @@
         <v-row class="cust mr-1">
           <v-col cols="6" class="pt-1 pb-0">
             <v-autocomplete
-              v-model="cust2.id"
+              v-model="cust_id"
               :items="items"
               :loading="isLoading"
               :search-input.sync="search"
@@ -827,6 +827,7 @@ export default {
       cust_id: "",
       search: null,
       tab: null,
+      obj: []
     };
   },
 
@@ -1175,7 +1176,15 @@ export default {
 
         this.glassItem[0].id = null;
         this.glassItem[0].qty = null;
+    },
+
+    productsEditted() {
+
+        const  xyz =  this.order.orderdetails.map(item => ({ quantity: item.quantity, product:{ id: item.product_id, sku: item.product_name, selling_price: item.price}}));
+        this.obj = xyz;
+
     }
+
   },
 
   created() {
@@ -1190,12 +1199,35 @@ export default {
     });
 
     axios
+        .get("/api/customers/all")
+        .then((res) => {
+          this.items = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+    axios
       .get(`/api/invoicedetail/${this.$route.params.id}`)
       .then(res => {
         this.order = res.data;
+        this.cust_id = res.data.order.customer_id;
+        this.invoiceData.discount = res.data.order.discount;
+        this.invoiceData.received_amt = res.data.order.amount_recieved;
+        this.invoiceData.suzuki_rent = res.data.order.discount;
+        // this.invoiceData.driver = res.data.order.discount;
+        // this.invoiceData.fitter = res.data.order.discount;
+        this.invoiceData.walkin_name = res.data.order.discount;
+        this.invoiceData.walkin_phone = res.data.order.discount;
       })
       .catch(err => {
       });
+
+  },
+
+  updated() {
+
+
   },
 
   computed: {
@@ -1266,7 +1298,8 @@ export default {
 
     fitters() {
       return this.employees.filter((item) => item.type == "Fitter");
-    },
+    }
+
   },
 
   watch: {
@@ -1308,6 +1341,15 @@ export default {
 
       //  this.product_item = null;
     },
+
+    order() {
+
+        this.productsEditted()
+        console.log(this.obj)
+        this.$store.dispatch("cart/addProductsToCart", {
+        product: this.obj
+      });
+    }
   },
 };
 </script>

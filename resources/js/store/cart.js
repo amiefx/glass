@@ -150,6 +150,10 @@ export default {
 
        },
 
+       ADD_PRODUCTS_TO_CART (state, product) {
+        state.cart = product.product;
+       },
+
        GET_CART_ITEMS (state, products) {}
     },
 
@@ -194,7 +198,11 @@ export default {
 
         getCartItems({ commit }, products) {
             commit('GET_CART_ITEMS', products)
-        }
+        },
+
+        addProductsToCart({ commit }, { product }) {
+            commit('ADD_PRODUCTS_TO_CART', { product});
+        },
 
     }
 

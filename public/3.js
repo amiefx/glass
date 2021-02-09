@@ -938,7 +938,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       items: [],
       cust_id: "",
       search: null,
-      tab: null
+      tab: null,
+      obj: []
     };
   },
   methods: {
@@ -1239,6 +1240,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.glass.invoice_sqrFt = 0;
       this.glassItem[0].id = null;
       this.glassItem[0].qty = null;
+    },
+    productsEditted: function productsEditted() {
+      var xyz = this.order.orderdetails.map(function (item) {
+        return {
+          quantity: item.quantity,
+          product: {
+            id: item.product_id,
+            sku: item.product_name,
+            selling_price: item.price
+          }
+        };
+      });
+      this.obj = xyz;
     }
   },
   created: function created() {
@@ -1251,10 +1265,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     axios.get("/api/employees/all").then(function (res) {
       _this8.employees = res.data.data;
     });
+    axios.get("/api/customers/all").then(function (res) {
+      _this8.items = res.data.data;
+    })["catch"](function (err) {
+      console.log(err);
+    });
     axios.get("/api/invoicedetail/".concat(this.$route.params.id)).then(function (res) {
       _this8.order = res.data;
+      _this8.cust_id = res.data.order.customer_id;
+      _this8.invoiceData.discount = res.data.order.discount;
+      _this8.invoiceData.received_amt = res.data.order.amount_recieved;
+      _this8.invoiceData.suzuki_rent = res.data.order.discount; // this.invoiceData.driver = res.data.order.discount;
+      // this.invoiceData.fitter = res.data.order.discount;
+
+      _this8.invoiceData.walkin_name = res.data.order.discount;
+      _this8.invoiceData.walkin_phone = res.data.order.discount;
     })["catch"](function (err) {});
   },
+  updated: function updated() {},
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
     cart: function cart(state) {
       return state.cart.cart;
@@ -1367,6 +1395,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         product: prod[0],
         quantity: 1
       }); //  this.product_item = null;
+    },
+    order: function order() {
+      this.productsEditted();
+      console.log(this.obj);
+      this.$store.dispatch("cart/addProductsToCart", {
+        product: this.obj
+      });
     }
   }
 });
@@ -3477,11 +3512,11 @@ var render = function() {
                           }
                         ]),
                         model: {
-                          value: _vm.cust2.id,
+                          value: _vm.cust_id,
                           callback: function($$v) {
-                            _vm.$set(_vm.cust2, "id", $$v)
+                            _vm.cust_id = $$v
                           },
-                          expression: "cust2.id"
+                          expression: "cust_id"
                         }
                       })
                     ],

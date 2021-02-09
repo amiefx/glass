@@ -1014,9 +1014,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.clearData();
 
         console.log(orderData);
-        _this.invoiceData.discount = null;
-        _this.invoiceData.received_amt = null;
-        _this.invoiceData.suzuki_rent = null;
+        _this.invoiceData.discount = 0;
+        _this.invoiceData.received_amt = 0;
+        _this.invoiceData.suzuki_rent = 0;
         _this.invoiceData.driver = null;
         _this.invoiceData.fitter = null;
         _this.invoiceData.walkin_name = "";

@@ -87037,6 +87037,9 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
     },
+    ADD_PRODUCTS_TO_CART: function ADD_PRODUCTS_TO_CART(state, product) {
+      state.cart = product.product;
+    },
     GET_CART_ITEMS: function GET_CART_ITEMS(state, products) {}
   },
   actions: {
@@ -87117,6 +87120,13 @@ __webpack_require__.r(__webpack_exports__);
     getCartItems: function getCartItems(_ref18, products) {
       var commit = _ref18.commit;
       commit('GET_CART_ITEMS', products);
+    },
+    addProductsToCart: function addProductsToCart(_ref19, _ref20) {
+      var commit = _ref19.commit;
+      var product = _ref20.product;
+      commit('ADD_PRODUCTS_TO_CART', {
+        product: product
+      });
     }
   }
 });

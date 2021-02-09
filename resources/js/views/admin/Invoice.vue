@@ -909,9 +909,9 @@ export default {
         this.clearCartItems();
         this.clearData();
         console.log(orderData);
-        this.invoiceData.discount = null;
-        this.invoiceData.received_amt = null;
-        this.invoiceData.suzuki_rent = null;
+        this.invoiceData.discount = 0;
+        this.invoiceData.received_amt = 0;
+        this.invoiceData.suzuki_rent = 0;
         this.invoiceData.driver = null;
         this.invoiceData.fitter = null;
         this.invoiceData.walkin_name = "";
@@ -1209,6 +1209,7 @@ export default {
     axios.get("/api/employees/all").then((res) => {
       this.employees = res.data.data;
     });
+
   },
 
   computed: {
