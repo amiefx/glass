@@ -56,10 +56,15 @@ class OrderController extends Controller
         $user = auth()->user();
         $postData = $request->all();
 
+
         try {
             DB::beginTransaction();
 
             $order = $postData['orderDetails'];
+
+            if ($order['priceflag'] == true) {
+                $order['doc_type'] = "Pendding";
+            }
 
             $neworder = new Order([
                 'customer_id' => $order['customer_id'],
@@ -67,9 +72,10 @@ class OrderController extends Controller
                 'discount' => $order['discount'],
                 'total' => $order['total'],
                 'amount_recieved' => $order['received_amt'],
-                // "discount" => $order['discount'],
                 'status' => $order['doc_type'],
-                // 'note' => $request->note,
+                'walkin_name' => $order['walkin_name'],
+                'walkin_phone' => $order['walkin_phone'],
+                // 'note' => $order['note'] ? $order['note'] : null,
                 'user_id' => $user->id,
             ]);
             $neworder->save();
@@ -83,6 +89,8 @@ class OrderController extends Controller
                     'product_id' => $item['product']['id'],
                     'quantity' => $item['quantity'],
                     'price' => $item['product']['selling_price'],
+                    'g_height' => $item['g_height'],
+                    'g_width' => $item['g_width'],
                     'is_active' => $item['product']['is_active'],
                     'user_id' => $user->id,
                 ]);
@@ -202,6 +210,8 @@ class OrderController extends Controller
         $order->amount_recieved = $request->amount_recieved;
         $order->discount = $request->discount;
         $order->status = $request->status;
+        $order->walkin_name = $request->walkin_name;
+        $order->walkin_phone = $request->walkin_phone;
         $order->note = $request->note;
         $order->user_id = $user->id;
 

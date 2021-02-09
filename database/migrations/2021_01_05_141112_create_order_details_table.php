@@ -19,6 +19,8 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('product_id');
             $table->integer('quantity')->nullable()->default(null);
             $table->integer('price')->nullable()->default(null); 
+            $table->string('g_height')->nullable()->default(null);
+            $table->string('g_width')->nullable()->default(null);
             $table->timestamps();
         });
     }

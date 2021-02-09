@@ -48,7 +48,9 @@ class OrderDetailController extends Controller
             'order_id' => $request->order_id,
             'product_id' => $request->product_id,
             'quantity' => $request->quantity,
-            'price' => $request->price,  
+            'price' => $request->price,
+            'g_height' => $request->g_height,
+            'g_width' => $request->g_width,  
         ]);
         $order_detail->save();
         return response()->json(['order_detail'=> new OrderDetailResource($order_detail)], 200);
@@ -91,6 +93,8 @@ class OrderDetailController extends Controller
         $order_detail->product_id = $request->product_id; 
         $order_detail->quantity = $request->quantity; 
         $order_detail->price = $request->price;
+        $order_detail->g_height = $request->g_height; 
+        $order_detail->g_width = $request->g_width;
 
         $order_detail->save();
         return response()->json(['order_detail' => new OrderDetailResource($order_detail)], 200);
