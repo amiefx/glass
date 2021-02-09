@@ -193,6 +193,8 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
+
+      <invoice-approve v-if="admin" />
       <login-avatar />
       <language-switcher />
     </v-app-bar>
@@ -222,11 +224,13 @@
 import LoginAvatar from "../components/LoginAvatar";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { mapGetters, mapActions } from "vuex";
+import InvoiceApprove from '../components/InvoiceApprove.vue';
 
 export default {
   components: {
     LoginAvatar,
     LanguageSwitcher,
+    InvoiceApprove,
   },
   data() {
     return {
@@ -434,6 +438,10 @@ export default {
       } else {
         this.$vuetify.rtl = false;
       }
+    },
+
+    admin() {
+      return this.$store.getters["auth/admin"];
     },
   },
 };

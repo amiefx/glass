@@ -920,10 +920,15 @@ export default {
         this.initialize();
 
         if (this.printInvoice) {
-          this.$router.push(`/admin/invoice/print/${res.data.id}`);
+           // let routeData = this.$router.resolve({name: 'order-edit', query: {data: res.data.id}});
+           let routeData = this.$router.resolve(`/admin/invoice/print/${res.data.order.id}`);
+            window.open(routeData.href, '_blank');
+        //  this.$router.push(`/admin/invoice/print/${res.data.id}`);
         }
       });
     },
+
+
 
     // clear data
     clearData() {

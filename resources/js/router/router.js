@@ -380,6 +380,28 @@ const routes = [
             ]
         }
     },
+    {
+        path: '/admin/invoice/view/:id',
+        name: 'order-view',
+        component: () => import('../views/admin/InvoiceView.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
+    {
+        path: '/admin/invoice/approvals',
+        name: 'order-approve',
+        component: () => import('../views/admin/InvoiceApprovals.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth, admin
+            ]
+        }
+    },
     // {
     //     path: '/admin/reports',
     //     name: 'admin-reports',

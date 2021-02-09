@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[28],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/PurchaseOrders.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/PurchaseOrders.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/InvoiceApprovals.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/InvoiceApprovals.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -60,21 +60,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: "admin",
   middleware: ["auth", "admin"],
-  props: ["supplier_id"],
+  props: ["customer_id"],
   data: function data() {
     return {
       valid: true,
@@ -101,13 +90,15 @@ __webpack_require__.r(__webpack_exports__);
         text: "Sub Total",
         value: "sub_total"
       }, {
-        text: "Amount Paid",
-        value: "amount_paid"
+        text: "Amount Received",
+        value: "amount_recieved"
       }, {
         text: "User",
         value: "user_id"
       }],
-      purchase_orders: []
+      orders: [],
+      invoices: [],
+      quotations: []
     };
   },
   methods: {
@@ -115,8 +106,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (e.length > 0) {
-        axios.get("/api/purchaseorder/".concat(e)).then(function (res) {
-          _this.purchase_orders = res.data.purchase_orders;
+        axios.get("/api/order/".concat(e)).then(function (res) {
+          _this.orders = res.data.orders;
+          _this.invoices = res.data.orders.data.filter(function (item) {
+            return item.status == 'Invoice';
+          });
+          _this.quotations = res.data.orders.data.filter(function (item) {
+            return item.status == 'Quotation';
+          });
         })["catch"](function (err) {
           return console.dir(err.response);
         });
@@ -125,15 +122,18 @@ __webpack_require__.r(__webpack_exports__);
       if (e.length <= 0) {
         var sortBy = this.options.sortBy.length == 0 ? "id" : this.options.sortBy[0];
         var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? "asc" : "desc";
-        axios.get("/api/purchaseorder?page=".concat(e.page), {
+        axios.get("/api/order?page=".concat(e.page), {
           params: {
             per_page: e.itemsPerPage,
             sort_by: sortBy,
             order_by: orderBy,
-            supplier_id: this.supplier_id
+            customer_id: this.customer_id
           }
         }).then(function (res) {
-          _this.purchase_orders = res.data.purchase_orders;
+          _this.orders = res.data.orders;
+          _this.invoices = res.data.orders.data.filter(function (item) {
+            return item;
+          });
         })["catch"](function (err) {
           return console.dir(err.response);
         });
@@ -144,15 +144,21 @@ __webpack_require__.r(__webpack_exports__);
 
       var sortBy = this.options.sortBy.length == 0 ? "id" : this.options.sortBy[0];
       var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? "asc" : "desc";
-      axios.get("/api/purchaseorder?page=".concat(e.page), {
+      axios.get("/api/order?page=".concat(e.page), {
         params: {
           per_page: e.itemsPerPage,
           sort_by: sortBy,
           order_by: orderBy,
-          supplier_id: this.supplier_id
+          customer_id: this.customer_id
         }
       }).then(function (res) {
-        _this2.purchase_orders = res.data.purchase_orders;
+        _this2.orders = res.data.orders;
+        _this2.invoices = res.data.orders.data.filter(function (item) {
+          return item.status == 'Invoice';
+        });
+        _this2.quotations = res.data.orders.data.filter(function (item) {
+          return item.status == 'Quotation';
+        });
       })["catch"](function (err) {//----
       });
     },
@@ -188,11 +194,11 @@ __webpack_require__.r(__webpack_exports__);
       this.paginate(e);
     },
     editInvoice: function editInvoice(item) {
-      this.$router.push("/admin/invoice/edit/".concat(item.id));
+      this.$router.push("/admin/invoice/view/".concat(item.id));
     }
   },
   watch: {
-    supplier_id: function supplier_id() {
+    customer_id: function customer_id() {
       var e = {
         itemsLength: 0,
         itemsPerPage: 5,
@@ -208,10 +214,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/PurchaseOrders.vue?vue&type=template&id=3d297ca5&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/PurchaseOrders.vue?vue&type=template&id=3d297ca5& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/InvoiceApprovals.vue?vue&type=template&id=7a444302&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/InvoiceApprovals.vue?vue&type=template&id=7a444302& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -230,12 +236,12 @@ var render = function() {
         staticClass: "elevation-0",
         attrs: {
           headers: _vm.headers,
-          items: _vm.purchase_orders.data,
+          items: _vm.invoices,
           "items-per-page": 5,
           "item-key": "id",
           loading: _vm.loading,
           options: _vm.options,
-          "server-items-length": _vm.purchase_orders.total,
+          "server-items-length": _vm.invoices.length,
           "loading-text": "Loading.. Please Wait!",
           "footer-props": {
             itemsPerPageOptions: [5, 10, 15],
@@ -375,17 +381,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/PurchaseOrders.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/views/admin/PurchaseOrders.vue ***!
-  \*****************************************************/
+/***/ "./resources/js/views/admin/InvoiceApprovals.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/views/admin/InvoiceApprovals.vue ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PurchaseOrders_vue_vue_type_template_id_3d297ca5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PurchaseOrders.vue?vue&type=template&id=3d297ca5& */ "./resources/js/views/admin/PurchaseOrders.vue?vue&type=template&id=3d297ca5&");
-/* harmony import */ var _PurchaseOrders_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PurchaseOrders.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/PurchaseOrders.vue?vue&type=script&lang=js&");
+/* harmony import */ var _InvoiceApprovals_vue_vue_type_template_id_7a444302___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InvoiceApprovals.vue?vue&type=template&id=7a444302& */ "./resources/js/views/admin/InvoiceApprovals.vue?vue&type=template&id=7a444302&");
+/* harmony import */ var _InvoiceApprovals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InvoiceApprovals.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/InvoiceApprovals.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
@@ -402,9 +408,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PurchaseOrders_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PurchaseOrders_vue_vue_type_template_id_3d297ca5___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PurchaseOrders_vue_vue_type_template_id_3d297ca5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _InvoiceApprovals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _InvoiceApprovals_vue_vue_type_template_id_7a444302___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _InvoiceApprovals_vue_vue_type_template_id_7a444302___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -424,38 +430,38 @@ _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/admin/PurchaseOrders.vue"
+component.options.__file = "resources/js/views/admin/InvoiceApprovals.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/PurchaseOrders.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/views/admin/PurchaseOrders.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
+/***/ "./resources/js/views/admin/InvoiceApprovals.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/views/admin/InvoiceApprovals.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PurchaseOrders_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PurchaseOrders.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/PurchaseOrders.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PurchaseOrders_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InvoiceApprovals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./InvoiceApprovals.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/InvoiceApprovals.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InvoiceApprovals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/PurchaseOrders.vue?vue&type=template&id=3d297ca5&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/views/admin/PurchaseOrders.vue?vue&type=template&id=3d297ca5& ***!
-  \************************************************************************************/
+/***/ "./resources/js/views/admin/InvoiceApprovals.vue?vue&type=template&id=7a444302&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/views/admin/InvoiceApprovals.vue?vue&type=template&id=7a444302& ***!
+  \**************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PurchaseOrders_vue_vue_type_template_id_3d297ca5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PurchaseOrders.vue?vue&type=template&id=3d297ca5& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/PurchaseOrders.vue?vue&type=template&id=3d297ca5&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PurchaseOrders_vue_vue_type_template_id_3d297ca5___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InvoiceApprovals_vue_vue_type_template_id_7a444302___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./InvoiceApprovals.vue?vue&type=template&id=7a444302& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/InvoiceApprovals.vue?vue&type=template&id=7a444302&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InvoiceApprovals_vue_vue_type_template_id_7a444302___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PurchaseOrders_vue_vue_type_template_id_3d297ca5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InvoiceApprovals_vue_vue_type_template_id_7a444302___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

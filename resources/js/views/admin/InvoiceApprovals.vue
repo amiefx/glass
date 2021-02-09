@@ -2,14 +2,14 @@
   <div>
     <v-data-table
       :headers="headers"
-      :items="quotations"
+      :items="invoices"
       :items-per-page="5"
       class="elevation-0"
       item-key="id"
       :loading="loading"
       @pagination="paginate"
       :options.sync="options"
-      :server-items-length="quotations.length"
+      :server-items-length="invoices.length"
       loading-text="Loading.. Please Wait!"
       :footer-props="{
         itemsPerPageOptions: [5, 10, 15],
@@ -18,17 +18,6 @@
       }"
     >
       <template v-slot:top>
-        <!-- <v-toolbar flat color="">
-        <v-toolbar-title>Transactions</v-toolbar-title>
-        <v-divider
-          class="mx-4"
-          inset
-          vertical
-        ></v-divider>
-        <v-spacer></v-spacer>
-
-      </v-toolbar> -->
-
         <v-text-field
           @input="searchIt"
           append-icon="mdi-search"
@@ -45,7 +34,7 @@
               item.id
             }}</span>
           </template>
-          <span>Click to Edit</span>
+          <span>Click to View</span>
         </v-tooltip>
       </template>
       <template v-slot:no-data>
@@ -90,7 +79,7 @@ export default {
     ],
     orders: [],
     invoices: [],
-    quotations: [],
+    quotations: []
   }),
 
   methods: {
@@ -101,13 +90,14 @@ export default {
           .then((res) => {
             this.orders = res.data.orders;
 
-            this.invoices = res.data.orders.data.filter((item) => {
-              return item.status == "Invoice";
-            });
+            this.invoices = res.data.orders.data.filter(item => {
+                return item.status == 'Invoice';
+            })
 
-            this.quotations = res.data.orders.data.filter((item) => {
-              return item.status == "Quotation";
-            });
+          this.quotations = res.data.orders.data.filter(item => {
+                return item.status == 'Quotation';
+            })
+
           })
           .catch((err) => console.dir(err.response));
       }
@@ -130,9 +120,10 @@ export default {
           .then((res) => {
             this.orders = res.data.orders;
 
-            this.invoices = res.data.orders.data.filter((item) => {
-              return item;
-            });
+            this.invoices = res.data.orders.data.filter(item => {
+                return item;
+            })
+
           })
           .catch((err) => console.dir(err.response));
       }
@@ -156,13 +147,13 @@ export default {
         .then((res) => {
           this.orders = res.data.orders;
 
-          this.invoices = res.data.orders.data.filter((item) => {
-            return item.status == "Invoice";
-          });
+          this.invoices = res.data.orders.data.filter(item => {
+                return item.status == 'Invoice';
+            })
 
-          this.quotations = res.data.orders.data.filter((item) => {
-            return item.status == "Quotation";
-          });
+          this.quotations = res.data.orders.data.filter(item => {
+                return item.status == 'Quotation';
+            })
         })
         .catch((err) => {
           //----
@@ -208,8 +199,8 @@ export default {
     },
 
     editInvoice(item) {
-      this.$router.push(`/admin/invoice/edit/${item.id}`);
-    },
+        this.$router.push(`/admin/invoice/view/${item.id}`);
+    }
   },
 
   watch: {
