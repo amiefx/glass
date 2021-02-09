@@ -231,6 +231,12 @@ class OrderController extends Controller
         return response()->json(['order' => $order], 200);
     }
 
+    public function orderByWalkinPhone($id)
+    {
+        $orders= DB::table('orders')->where('walkin_phone', $id)->get();
+        return response()->json(['orders'=>$orders]);
+    }
+
 
     //relationships methods
     public function orderCustomer($id)
