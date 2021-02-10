@@ -305,6 +305,7 @@ export default {
             .then(res => {
             //    this.$router.push(`/checkout/${res.data.id}`)
                 this.clearPurchaseItems()
+                console.log(orderData);
                 this.model = null
                 this.purchaseData.discount = null
                 this.purchaseData.paid_amt = null

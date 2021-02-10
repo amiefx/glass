@@ -14,15 +14,15 @@ Vue.use(VueRouter)
 
 const routes = [
 
-    {
-        path: '/',
-        name: 'home',
-        component: () => import(/* webpackPreload: true */ '../views/Home.vue'),
-        meta: {
-                   layout: 'admin'
-               }
-    },
-    // { path: '/home', redirect: '/' },
+    // {
+    //     path: '/',
+    //     name: 'home',
+    //     component: () => import(/* webpackPreload: true */ '../views/Home.vue'),
+    //     meta: {
+    //                layout: 'admin'
+    //            }
+    // },
+     { path: '/', redirect: '/admin/dashboard' },
     // {
     //     path: '/painting-decorating',
     //     name: 'painting',
@@ -101,7 +101,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -112,7 +112,7 @@ const routes = [
       meta: {
           layout: 'admin',
           middleware: [
-              auth, admin
+              auth
           ]
       }
   },
@@ -123,7 +123,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -134,7 +134,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -145,7 +145,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -156,7 +156,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -167,7 +167,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -178,7 +178,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -189,7 +189,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -200,7 +200,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -211,7 +211,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -222,7 +222,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -233,7 +233,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -244,7 +244,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -255,7 +255,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -266,7 +266,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -277,7 +277,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -288,7 +288,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -299,7 +299,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -310,7 +310,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -321,7 +321,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -332,7 +332,7 @@ const routes = [
     //     meta: {
     //         layout: 'admin',
     //         middleware: [
-    //             auth, admin
+    //             auth
     //         ]
     //     }
     // },
@@ -343,7 +343,7 @@ const routes = [
     //     meta: {
     //         layout: 'admin',
     //         middleware: [
-    //             auth, admin
+    //             auth
     //         ]
     //     }
     // },
@@ -354,7 +354,7 @@ const routes = [
     //     meta: {
     //         layout: 'admin',
     //         middleware: [
-    //             auth, admin
+    //             auth
     //         ]
     //     }
     // },
@@ -365,7 +365,7 @@ const routes = [
         meta: {
             layout: '',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -376,7 +376,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -387,7 +387,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -398,7 +398,7 @@ const routes = [
         meta: {
             layout: 'admin',
             middleware: [
-                auth, admin
+                auth
             ]
         }
     },
@@ -409,7 +409,7 @@ const routes = [
     //     meta: {
     //         layout: 'admin',
     //         middleware: [
-    //             auth, admin
+    //             auth
     //         ]
     //     }
     // },
@@ -572,7 +572,7 @@ const routes = [
     //     path: '/404',
     //     component: () => import('../views/Error.vue'),
     // },
-    //{ path: '*', redirect: '/404' },
+    { path: '*', redirect: '/signin' },
 
   ]
 

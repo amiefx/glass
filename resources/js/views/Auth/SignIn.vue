@@ -150,7 +150,7 @@ import { mapGetters, mapActions } from "vuex";
                     if(this.user.type == 'Admin') {
                         this.$router.replace({ name: 'dashboard' })
                     }else{
-                        this.$router.replace({ name: 'home' })
+                        this.$router.replace({ name: 'dashboard' })
                     }
                 })
                 .catch( err => {

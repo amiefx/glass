@@ -23,7 +23,7 @@
         </v-list-item>
 
         <!-- accounts -->
-        <v-list-group :value="false" prepend-icon="mdi-account-cash-outline" v-if="admin">
+        <v-list-group :value="false" prepend-icon="mdi-account-cash-outline">
           <template v-slot:activator>
             <v-list-item-title>Accounts</v-list-item-title>
           </template>
@@ -42,8 +42,8 @@
           </v-list-item>
         </v-list-group>
 
-        <!-- product Management -->
-        <v-list-group :value="false" prepend-icon="mdi-shopping" v-if="admin">
+        <!-- procut Management -->
+        <v-list-group :value="false" prepend-icon="mdi-shopping">
           <template v-slot:activator>
             <v-list-item-title>Product Management</v-list-item-title>
           </template>
@@ -63,7 +63,7 @@
         </v-list-group>
 
         <!-- Customers -->
-        <v-list-group :value="false" prepend-icon="mdi-account-arrow-left" >
+        <v-list-group :value="false" prepend-icon="mdi-account-arrow-left">
           <template v-slot:activator>
             <v-list-item-title>Customers</v-list-item-title>
           </template>
@@ -146,7 +146,6 @@
         <v-list-group
           :value="false"
           prepend-icon="mdi-account-multiple-outline"
-          v-if="admin"
         >
           <template v-slot:activator>
             <v-list-item-title>Users</v-list-item-title>
@@ -172,7 +171,6 @@
           :key="item.title"
           link
           :to="item.to"
-          v-if="admin"
         >
           <v-list-item-icon>
             <v-icon v-text="item.icon"></v-icon>
@@ -195,7 +193,7 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <puchase-order-appr v-if="admin" />
+
       <invoice-approve v-if="admin" />
       <login-avatar />
       <language-switcher />
@@ -227,14 +225,12 @@ import LoginAvatar from "../components/LoginAvatar";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { mapGetters, mapActions } from "vuex";
 import InvoiceApprove from '../components/InvoiceApprove.vue';
-import PuchaseOrderAppr from '../components/PuchaseOrderAppr.vue';
 
 export default {
   components: {
     LoginAvatar,
     LanguageSwitcher,
     InvoiceApprove,
-    PuchaseOrderAppr,
   },
   data() {
     return {

@@ -174,7 +174,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           });
         } else {
           _this.$router.replace({
-            name: 'home'
+            name: 'dashboard'
           });
         }
       })["catch"](function (err) {
