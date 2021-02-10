@@ -134,6 +134,7 @@ Route::group([
     Route::post('panelling', 'OrderController@panel_calculation');
     Route::post('glass', 'OrderController@glass_calculation');
     Route::get('invoicedetail/{id}', 'OrderController@invoice_detail');
+    Route::get('orderbywalkinphone/{id}', 'OrderController@orderByWalkinPhone');
     Route::resource('order', 'OrderController');
 
 

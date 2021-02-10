@@ -35,7 +35,6 @@ class CustomersController extends Controller
          );
     }
 
-
     public function customerRecievable($id)
     {
         return response()->json([
