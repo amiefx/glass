@@ -17,7 +17,8 @@ class SalaryResource extends JsonResource
         return [
             'id' => $this->id, 
             'order_id' => $this->order_id, 
-            'employee_id' => $this->employee_id, 
+            'employee_name' => $this->employee->name,
+            'employee_type' => $this->employee->type, 
             'amount_paid' => $this->amount_paid,
             'status' => $this->status,
             'note' => $this->note,
