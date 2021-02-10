@@ -47,6 +47,116 @@ class PurchaseController extends Controller
         ]);
         $purchase->save();
         return response()->json(['purchase'=> new PurchaseResource($purchase)], 200);
+
+    //     $user = auth()->user();
+    //     $postData = $request->all();
+    //     $priceflag = "";
+
+
+    //     try {
+    //         DB::beginTransaction();
+
+    //         $order = $postData['orderDetails'];
+
+    //         if ($order['priceflag'] == true) {
+    //             $priceflag = "Pendding";
+    //         }
+
+    //         $neworder = new Order([
+    //             'customer_id' => $order['customer_id'],
+    //             'sub_total' => $order['sub_total'],
+    //             'discount' => $order['discount'],
+    //             'total' => $order['total'],
+    //             'amount_recieved' => $order['received_amt'],
+    //             'status' => $priceflag,
+    //             'walkin_name' => $order['walkin_name'],
+    //             'walkin_phone' => $order['walkin_phone'],
+    //             // 'note' => $order['note'] ? $order['note'] : null,
+    //             'user_id' => $user->id,
+    //         ]);
+    //         $neworder->save();
+
+    //         $items = $postData['orderedItems'];
+
+    //         foreach($items as $item)
+    //         {
+    //             OrderDetail::create([
+    //                 'order_id' => $neworder->id,
+    //                 'product_id' => $item['product']['id'],
+    //                 'quantity' => $item['quantity'],
+    //                 'price' => $item['product']['selling_price'],
+    //                 'g_height' => isset($item['g_height']) ? $item['g_height'] : null,
+    //                 'g_width' => isset($item['g_width']) ? $item['g_width'] : null,
+    //                 'is_active' => $item['product']['is_active'],
+    //                 'user_id' => $user->id,
+    //             ]);
+    //         }
+
+    //         if ($order['receivable_amt'] > 0) {
+
+    //             Receivable::create([
+    //                 'type' => 'invoice',
+    //                 'doc_id' => $neworder->id,
+    //                 'customer_id' => $order['customer_id'],
+    //                 'debit' => $order['receivable_amt'],
+    //                 'credit' => 0,
+    //                 'balance' => $order['receivable_amt'],
+    //                 'status' => $order['doc_type'] == 'Invoice' ? 1 : 0,
+    //                 'user_id' => $user->id
+    //             ]);
+
+    //         }
+
+    //         if ($order['received_amt'] > 0) {
+
+    //             Cash::create([
+    //                 'doc_type' => 'invoice',
+    //                 'doc_id' => $neworder->id,
+    //                 'customer_id' => $order['customer_id'],
+    //                 'debit' => $order['received_amt'],
+    //                 'credit' => 0,
+    //                 'balance' => $order['received_amt'],
+    //                 'status' => $order['doc_type'] == 'Invoice' ? 1 : 0,
+    //                 'user_id' => $user->id
+    //             ]);
+    //         }
+
+    //         if ($order['suzuki_rent'] > 0) {
+
+    //             Salary::create([
+    //                 'order_id' => $neworder->id,
+    //                 'employee_id' => $order['driver'],
+    //                 'amount_paid' => $order['suzuki_rent'],
+    //                 'note' => '',
+    //                 'status' => $order['doc_type'],
+    //                 'user_id' => $user->id
+    //             ]);
+    //         }
+
+    //         if ($order['fitting_charges'] > 0) {
+
+    //             Salary::create([
+    //                 'order_id' => $neworder->id,
+    //                 'employee_id' => $order['fitter'],
+    //                 'amount_paid' => $order['fitting_charges'],
+    //                 'note' => '',
+    //                 'status' => $order['doc_type'],
+    //                 'user_id' => $user->id
+    //             ]);
+    //         }
+
+            
+
+
+    //         DB::commit();
+    //     } catch (\Throwable $th) {
+    //         DB::rollback();
+
+    //         return response()->json(['error'=> $th->getMessage()], 500);
+    //     }
+
+    // return response()->json(['order'=> $neworder, 'order_items' => $items, 'priceflag'  => $priceflag], 200);
+
     }
 
     /**

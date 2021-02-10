@@ -388,20 +388,12 @@ class OrderController extends Controller
             $order->orderdetails[$i] = new OrderDetailResource($order->orderdetails[$i]);
         }
 
-        
 
         $slry = Salary::where('order_id', $order->id)->get();
-        // $slry= DB::table('salaries')->where('order_id', $order->id)->get();
 
         for ($i=0; $i < count($slry); $i++) { 
             $slry[$i] = new SalaryResource($slry[$i]);
         }
-
-        // if (isset($slry)) {
-        //     for ($i=0; $i < count($slry->employee); $i++) { 
-        //         $slry->employee[$i] = new SalaryResource($slry->employee[$i]);
-        //     }
-        // }
 
         return response()->json([
             'order' => new InvoiceDetailResource($order),
