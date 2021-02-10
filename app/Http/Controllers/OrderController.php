@@ -55,6 +55,7 @@ class OrderController extends Controller
 
         $user = auth()->user();
         $postData = $request->all();
+        $priceflag = "";
 
 
         try {
@@ -63,7 +64,7 @@ class OrderController extends Controller
             $order = $postData['orderDetails'];
 
             if ($order['priceflag'] == true) {
-                $order['doc_type'] = "Pendding";
+                $priceflag = "Pendding";
             }
 
             $neworder = new Order([
@@ -72,7 +73,7 @@ class OrderController extends Controller
                 'discount' => $order['discount'],
                 'total' => $order['total'],
                 'amount_recieved' => $order['received_amt'],
-                'status' => $order['doc_type'],
+                'status' => $priceflag,
                 'walkin_name' => $order['walkin_name'],
                 'walkin_phone' => $order['walkin_phone'],
                 // 'note' => $order['note'] ? $order['note'] : null,
@@ -89,8 +90,8 @@ class OrderController extends Controller
                     'product_id' => $item['product']['id'],
                     'quantity' => $item['quantity'],
                     'price' => $item['product']['selling_price'],
-                    'g_height' => $item['g_height'],
-                    'g_width' => $item['g_width'],
+                    'g_height' => isset($item['g_height']) ? $item['g_height'] : null,
+                    'g_width' => isset($item['g_width']) ? $item['g_width'] : null,
                     'is_active' => $item['product']['is_active'],
                     'user_id' => $user->id,
                 ]);
@@ -159,7 +160,7 @@ class OrderController extends Controller
             return response()->json(['error'=> $th->getMessage()], 500);
         }
 
-    return response()->json(['order'=> $neworder, 'order_items' => $items], 200);
+    return response()->json(['order'=> $neworder, 'order_items' => $items, 'priceflag'  => $priceflag], 200);
     }
 
     /**
