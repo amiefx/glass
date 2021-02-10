@@ -40,16 +40,20 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'api',
+    // 'middleware' => 'api',
+    'middleware' => 'App\Http\Middleware\AccountantMiddelware',
     'namespace' => 'App\Http\Controllers',
 ], function($router) {
-    Route::resource('todos', 'TodoController@login');
-    Route::get('me', 'MeController@getMe');
+    
+    // Route::get('penddingpurchasescount', 'PurchaseOrderController@pendingsPurchasesCount');
+    // Route::get('penddingpurchaseorders', 'PurchaseOrderController@pendingsPurchasesOrders');
+
 
 });
 
 Route::group([
-    'middleware' => ['auth:api'],
+    // 'middleware' => ['auth:api'],
+    'middleware' => 'App\Http\Middleware\AdminMiddelware',
     'namespace' => 'App\Http\Controllers',
 ], function () {
     // logout
@@ -265,3 +269,14 @@ Route::group([
    // Route::get('me', 'MeController@getMe');
    
 });
+
+
+// Route::group([
+//     'middleware' => 'App\Http\Middleware\AdminMiddelware',
+//     'namespace' => 'App\Http\Controllers',
+//     ], function()
+//     {
+//         Route::get('penddingpurchasescount', 'PurchaseOrderController@pendingsPurchasesCount');
+//         Route::get('penddingpurchaseorders', 'PurchaseOrderController@pendingsPurchasesOrders');
+        
+//     });
