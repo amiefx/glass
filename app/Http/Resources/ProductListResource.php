@@ -44,13 +44,13 @@ class ProductListResource extends JsonResource
             'onhand' => DB::table('product_qty')->select('qty')->where('product_id', '=', $this->id)->first(),
         ];
 
-        // $data['onhand'] = json_decode($data['onhand']->qty, true);
+        $data['onhand'] = json_decode($data['onhand']->qty, true);
 
-        // if ($data['onhand'] > $data['alert_qty']) {
-        //     $data['alert'] = false;
-        // } else {
-        //     $data['alert'] = true;
-        // }
+        if ($data['onhand'] > $data['alert_qty']) {
+            $data['alert'] = false;
+        } else {
+            $data['alert'] = true;
+        }
 
         return $data;
     }

@@ -396,6 +396,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //    this.$router.push(`/checkout/${res.data.id}`)
         _this.clearPurchaseItems();
 
+        console.log(orderData);
         _this.model = null;
         _this.purchaseData.discount = null;
         _this.purchaseData.paid_amt = null;
