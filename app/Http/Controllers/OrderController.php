@@ -7,6 +7,7 @@ use App\Http\Resources\OrderCollection;
 use App\Http\Resources\OrderResource;
 use App\Http\Resources\OrderDetailResource;
 use App\Http\Resources\InvoiceDetailResource;
+use App\Http\Resources\SalaryResource;
 use App\Models\Cash;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -381,15 +382,31 @@ class OrderController extends Controller
 
     public function invoice_detail($id)
     {
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
 
         for ($i=0; $i < count($order->orderdetails); $i++) { 
             $order->orderdetails[$i] = new OrderDetailResource($order->orderdetails[$i]);
         }
 
+        
+
+        $slry = Salary::where('order_id', $order->id)->get();
+        // $slry= DB::table('salaries')->where('order_id', $order->id)->get();
+
+        for ($i=0; $i < count($slry); $i++) { 
+            $slry[$i] = new SalaryResource($slry[$i]);
+        }
+
+        // if (isset($slry)) {
+        //     for ($i=0; $i < count($slry->employee); $i++) { 
+        //         $slry->employee[$i] = new SalaryResource($slry->employee[$i]);
+        //     }
+        // }
+
         return response()->json([
             'order' => new InvoiceDetailResource($order),
-            'orderdetails' => $order->orderdetails
+            'orderdetails' => $order->orderdetails,
+            'salary' => $slry
         ], 200);
     }
 

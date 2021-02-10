@@ -21,4 +21,9 @@ class Employee extends Model
 
     protected $table = 'employees';
 
+    public function employees()
+    {
+        return $this->hasMany(Salary::class);
+    }
+
 }

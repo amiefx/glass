@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model; 
 
 class Salary extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'order_id',
         'employee_id',
+        'order_id',
         'amount_paid',
         'status',
         'note',
@@ -20,5 +20,11 @@ class Salary extends Model
 
 
     protected $table = 'salaries';
+
+    //relationships
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id');
+    }
 
 }
