@@ -248,6 +248,25 @@ class OrderController extends Controller
     }
 
 
+    public function PenddingOrdersCount()
+    {
+        $order= Order::where('status', '=', 'Pendding')->count();
+        return response()->json(['order'=>$order]);
+    }
+
+    public function PenddingOrders()
+    {
+        $order= Order::where('status', '=', 'Pendding')->get();
+
+        for ($i=0; $i < count($order); $i++) { 
+            $order[$i] = new OrderResource($order[$i]);
+        }
+
+        return response()->json(['order'=>$order]);
+    }
+
+
+
     public function ceilling_calculation(Request $request)
     {
         $width = $request->width;

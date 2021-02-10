@@ -28,7 +28,7 @@ class Purchase extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public function products()
+    public function product()
     {
         return $this->belongsTo(products::class);
     }
@@ -37,5 +37,11 @@ class Purchase extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function purchaseorder()
+    {
+        return $this->belongsTo(PurchaseOrder::class, 'id');
+    }
+
     
 }

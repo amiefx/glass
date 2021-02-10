@@ -123,13 +123,17 @@ Route::group([
     Route::resource('purchase', 'PurchaseController');
 
     // purchase order
+    Route::get('penddingpurchasescount', 'PurchaseOrderController@pendingsPurchasesCount');
+    Route::get('penddingpurchaseorders', 'PurchaseOrderController@pendingsPurchasesOrders');
+    Route::get('purchaseinvoicedetail/{id}', 'PurchaseOrderController@purchase_invoice_detail');
     Route::resource('purchaseorder', 'PurchaseOrderController');
 
     // orderdetail
     Route::resource('orderdetail', 'OrderDetailController');
 
     // order
-    // Route::post('ceilling', 'OrderController@ceilling_calculation');
+    Route::get('penddingorderscount', 'OrderController@PenddingOrdersCount');
+    Route::get('penddingorders', 'OrderController@PenddingOrders');
     Route::post('ceilling', 'OrderController@ceilling_calculation');
     Route::post('panelling', 'OrderController@panel_calculation');
     Route::post('glass', 'OrderController@glass_calculation');

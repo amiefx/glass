@@ -68,4 +68,5 @@ class products extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
 }

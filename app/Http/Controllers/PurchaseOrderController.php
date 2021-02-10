@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Resources\PurchaseOrderCollection;
 use App\Http\Resources\PurchaseOrderResource;
+use App\Http\Resources\PurchaseInvoiceDetailResource;
+use App\Http\Resources\PurchaseInvoiceResource;
 use App\Http\Controllers\PayablesController;
 use App\Models\Payable;
 use Illuminate\Support\Facades\DB;
@@ -226,6 +228,39 @@ class PurchaseOrderController extends Controller
     {
         $supplier= PurchaseOrder::findOrFail($id)->supplier;
         return response()->json(['supplier'=>$supplier]);
+    }
+
+
+    public function pendingsPurchasesCount()
+    {
+        $purchase_order= PurchaseOrder::where('status', '=', 'Pendding')->count();
+        return response()->json(['purchase_order'=>$purchase_order]);
+    }
+
+    public function pendingsPurchaseOrders()
+    {
+        $purchase_order= PurchaseOrder::where('status', '=', 'Pendding')->get();
+
+        for ($i=0; $i < count($purchase_order); $i++) { 
+            $purchase_order[$i] = new PurchaseOrderResource($purchase_order[$i]);
+        }
+
+        return response()->json(['purchase_order'=>$purchase_order]);
+    }
+
+
+    public function purchase_invoice_detail($id)
+    {
+        $order = PurchaseOrder::findOrFail($id);
+
+        for ($i=0; $i < count($order->purchaseorderdetails); $i++) {
+            $order->purchaseorderdetails[$i] = new PurchaseInvoiceDetailResource($order->purchaseorderdetails[$i]);
+        }
+
+        return response()->json([
+            'order' => new PurchaseInvoiceResource($order),
+            'purchaseorderdetails' => $order->purchaseorderdetails,
+        ], 200);
     }
 
 

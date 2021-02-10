@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderResource extends JsonResource
+class PurchaseInvoiceResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,19 +16,17 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'customer_id' => $this->customer_id,
-            'customer_name' => $this->customer->name,
+            'supplier_name' => $this->supplier->name,
+            'supplier_id' => $this->supplier_id,
             'sub_total' => $this->sub_total,
             'discount' => $this->discount,
             'total' => $this->total,
-            'amount_recieved' => $this->amount_recieved,
-            'discount' => $this->discount,
+            'amount_paid' => $this->amount_paid,
             'note' => $this->note,
             'status' => $this->status,
-            'walkin_name' => $this->walkin_name,
-            'walkin_phone' => $this->walkin_phone,
             'user_id' => $this->user_id,
             'user_name' => $this->user->name,
+            'created_at' => $this->created_at->format('d M, Y'),
         ];
     }
 }
