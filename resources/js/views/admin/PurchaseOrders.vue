@@ -186,7 +186,7 @@ export default {
     },
 
     editInvoice(item) {
-      this.$router.push(`/admin/invoice/edit/${item.id}`);
+      this.$router.push(`/admin/purchase-order/view/${item.id}`);
     },
   },
 

@@ -402,6 +402,28 @@ const routes = [
             ]
         }
     },
+    {
+        path: '/admin/purchase-order/view/:id',
+        name: 'po-view',
+        component: () => import('../views/admin/PurchaseOrderView.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
+        path: '/admin/purchase-order/print/:id',
+        name: 'admin-order',
+        component: () => import('../views/admin/purchase-order/print/Id.vue'),
+        meta: {
+            layout: '',
+            middleware: [
+                auth
+            ]
+        }
+    },
     // {
     //     path: '/admin/reports',
     //     name: 'admin-reports',

@@ -16,10 +16,14 @@ class AdminMiddelware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user() && $request->user()->type != 'Admin')
+        if ($request->user() && $request->user()->type == 'Admin')
         {
-            return response()->json(['error'=> 'Unauthorized to access these content'], 500);
+            dd('hello');
+            return $next($request);
+
+            exit;
         }
-        return $next($request);
+
+        return response()->json(['error'=> 'Unauthorized to access these content'], 500);
     }
 }
