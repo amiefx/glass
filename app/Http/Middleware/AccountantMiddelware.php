@@ -16,10 +16,10 @@ class AccountantMiddelware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user() && ($request->user()->type != 'Accountant'))
+        if ($request->user() && ($request->user()->type == 'Accountant' || $request->user()->type == 'Admin'))
         {
-            return response()->json(['error'=> 'Unauthorized to access these content'], 500);
+            return $next($request);            
         }
-        return $next($request);
+        return response()->json(['error'=> 'Unauthorized to access these content'], 500);
     }
 }

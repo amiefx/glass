@@ -18,10 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 */
 
 
@@ -31,29 +27,15 @@ Route::group([
     'namespace' => 'App\Http\Controllers',
     'prefix' => 'auth',
 ], function($router) {
-   // Route::post('login', 'AuthController@login');
-   // Route::post('register', 'AuthController@register');
-  //  Route::post('logout', 'AuthController@logout');
     Route::get('profile', 'AuthController@profile');
     Route::post('refresh', 'AuthController@refresh');
     Route::get('open', ['TodoController@open']);
 });
 
-Route::group([
-    // 'middleware' => 'api',
-    'middleware' => 'App\Http\Middleware\AccountantMiddelware',
-    'namespace' => 'App\Http\Controllers',
-], function($router) {
-    
-    // Route::get('penddingpurchasescount', 'PurchaseOrderController@pendingsPurchasesCount');
-    // Route::get('penddingpurchaseorders', 'PurchaseOrderController@pendingsPurchasesOrders');
 
-
-});
 
 Route::group([
-    // 'middleware' => ['auth:api'],
-    'middleware' => 'App\Http\Middleware\AdminMiddelware',
+    'middleware' => ['auth:api'],
     'namespace' => 'App\Http\Controllers',
 ], function () {
     // logout
@@ -61,17 +43,27 @@ Route::group([
     Route::put('settings/profile', 'SettingsController@updateProfile');
      Route::put('settings/password', 'SettingsController@updatePassword');
 
-    // user management
-    Route::post('email/verify', 'UsersController@verifyEmail');
-    Route::post('change-role', 'UsersController@changeRole');
-    Route::post('change-status', 'UsersController@changeStatus');
-    Route::post('change-photo', 'UsersController@changePhoto');
-    Route::post('users/delete', 'UsersController@deleteAll');
-    Route::resource('users', 'UsersController');
+
+     //accountant routes
+     Route::group([
+        'middleware' => 'App\Http\Middleware\AccountantMiddelware'
+    ], function($router) {
+        
+        // brand
+    Route::get('brands/all', 'BrandController@allBrands');
+    Route::resource('brands', 'BrandController');
+
+    // unit
+    Route::get('units/all', 'UnitController@allUnits');
+    Route::resource('units', 'UnitController');
+
+    // category
+    Route::get('categories/all', 'CategoryController@allCategories');
+    Route::resource('categories', 'CategoryController');
 
     // cusotmer
     Route::get('customers/all', 'CustomersController@allCustomers');
-    // Route::get('customers/all/active', 'CustomersController@allActiveCustomers');
+    Route::get('customers/all/active', 'CustomersController@allActiveCustomers');
     Route::get('customer/{id}/recievable', 'CustomersController@customerRecievable');
     Route::resource('customers', 'CustomersController');
 
@@ -87,6 +79,7 @@ Route::group([
     Route::post('employee/changestatus/{id}', 'EmployeeController@changeStatus');
     Route::resource('employees', 'EmployeeController');
 
+
     // products
     Route::get('products/all', 'ProductsController@allProducts');
     Route::get('products/{id}/brand', 'ProductsController@productBrand');
@@ -95,9 +88,8 @@ Route::group([
     Route::get('products/{id}/user', 'ProductsController@productUser');
     Route::get('products/filter/{column}/{value}', 'ProductsController@allProductsWithFilter');
     Route::post('products/changeStatus', 'ProductsController@changeStatus');
-    Route::post('products/deleteAll', 'ProductsController@deleteAll');
-    Route::get('products/report', 'ProductsController@report'); //view for remaining quantity
-    Route::resource('products', 'ProductsController');
+    Route::get('products/report', 'ProductsController@report');
+    Route::resource('products', 'ProductsController')->only(['index', 'show']);
 
     // adjust quantity
     Route::resource('qtyadjustments', 'QtyAdjustmentController');
@@ -123,6 +115,7 @@ Route::group([
     // Receipt
     Route::resource('receipts', 'ReceiptController');
 
+
     // purchase detail
     Route::resource('purchase', 'PurchaseController');
 
@@ -131,6 +124,7 @@ Route::group([
     Route::get('penddingpurchaseorders', 'PurchaseOrderController@pendingsPurchasesOrders');
     Route::get('purchaseinvoicedetail/{id}', 'PurchaseOrderController@purchase_invoice_detail');
     Route::resource('purchaseorder', 'PurchaseOrderController');
+
 
     // orderdetail
     Route::resource('orderdetail', 'OrderDetailController');
@@ -145,22 +139,10 @@ Route::group([
     Route::get('orderbywalkinphone/{id}', 'OrderController@orderByWalkinPhone');
     Route::resource('order', 'OrderController');
 
-
-    // brand
-    Route::get('brands/all', 'BrandController@allBrands');
-    Route::resource('brands', 'BrandController');
-
-    // unit
-    Route::get('units/all', 'UnitController@allUnits');
-    Route::resource('units', 'UnitController');
-
-    // category
-    Route::get('categories/all', 'CategoryController@allCategories');
-    Route::resource('categories', 'CategoryController');
-
     // business
     Route::get('business/all', 'BusinessController@allBusiness');
     Route::resource('business', 'BusinessController');
+
 
     // Recievable Routes
     Route::get('recievables', 'RecievablesController@recievables');
@@ -186,15 +168,14 @@ Route::group([
     // expenses
     Route::resource('expenses', 'ExpenseController');
 
-    // expenses items
-    Route::get('expenseitems/allitems', 'ExpenseItemsController@allitems');
-    Route::resource('expenseitems', 'ExpenseItemsController');
+     // expenses items
+     Route::get('expenseitems/allitems', 'ExpenseItemsController@allitems');
+     Route::resource('expenseitems', 'ExpenseItemsController');
+ 
+     // salary
+     Route::resource('salaries', 'SalaryController');
 
-    // salary
-    Route::resource('salaries', 'SalaryController');
-
-
-    //reports
+     //reports
     Route::get('report/totalproducts', 'ReportController@totalNumberProducts');
     Route::get('report/totalusers', 'ReportController@totalNumberUsers');
     Route::get('report/totalsuppliers', 'ReportController@totalNumberSuppliers');
@@ -257,26 +238,58 @@ Route::group([
     Route::get('report/totalexpenseitemsbyid/{id}', 'ReportController@totalNumberExpenseItemsById');
 
 
+    });
+
+
+
+
+
+    //admin routes
+    Route::group([
+        'middleware' => 'App\Http\Middleware\AdminMiddelware'
+    ], function () {
+
+        // user management
+    Route::post('email/verify', 'UsersController@verifyEmail');
+    Route::post('change-role', 'UsersController@changeRole');
+    Route::post('change-status', 'UsersController@changeStatus');
+    Route::post('change-photo', 'UsersController@changePhoto');
+    Route::post('users/delete', 'UsersController@deleteAll');
+    Route::resource('users', 'UsersController');
+
+    //products
+    Route::post('products/deleteAll', 'ProductsController@deleteAll');
+    Route::resource('products', 'ProductsController')->only(['create', 'store', 'update', 'destroy']);
+
+        
+    });
+
+
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+   
+
+
+    
+
+
 });
 
 Route::group([
     'middleware' => 'guest:api',
     'namespace' => 'App\Http\Controllers',
 ], function($router) {
-    // authentication
     Route::post('register', 'Auth\RegisterController@register');
-    Route::post('login', 'Auth\LoginController@login');
-   // Route::get('me', 'MeController@getMe');
-   
+    Route::post('login', 'Auth\LoginController@login');   
 });
-
-
-// Route::group([
-//     'middleware' => 'App\Http\Middleware\AdminMiddelware',
-//     'namespace' => 'App\Http\Controllers',
-//     ], function()
-//     {
-//         Route::get('penddingpurchasescount', 'PurchaseOrderController@pendingsPurchasesCount');
-//         Route::get('penddingpurchaseorders', 'PurchaseOrderController@pendingsPurchasesOrders');
-        
-//     });

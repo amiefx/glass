@@ -4431,7 +4431,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.lang {\n    width: 50px !important;\n}\n", ""]);
+exports.push([module.i, "\n.lang {\r\n    width: 50px !important;\n}\r\n", ""]);
 
 // exports
 
@@ -87733,8 +87733,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\karimglass-master\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\karimglass-master\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\apps\githubkarimglass\glass\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\apps\githubkarimglass\glass\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
