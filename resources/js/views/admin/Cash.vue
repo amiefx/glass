@@ -2,6 +2,7 @@
   <div>
 
   <v-data-table
+  dense
     :headers="headers"
     :items="cashes.data"
     :items-per-page=5

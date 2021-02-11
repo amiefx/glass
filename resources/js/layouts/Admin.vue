@@ -195,7 +195,7 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <puchase-order-appr v-if="admin" />
+      <!-- <puchase-order-appr v-if="admin" /> -->
       <invoice-approve v-if="admin" />
       <login-avatar />
       <language-switcher />

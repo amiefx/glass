@@ -1,11 +1,22 @@
 <template>
   <v-tab to="/admin/invoice/approvals">
-    <v-badge color="green" content="6"> Invoice Approvals </v-badge>
+    <v-badge color="green" :content="invoiceCount"> Invoice Approvals </v-badge>
   </v-tab>
 </template>
 
 <script>
-export default {};
+export default {
+    data: () => ({
+      invoiceCount: null,
+    }),
+
+    created() {
+        axios.get('/api/penddingorderscount')
+            .then(res => {
+               this.invoiceCount =  res.data.order
+                })
+    }
+};
 </script>
 
 <style>
