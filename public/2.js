@@ -272,40 +272,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -788,7 +754,7 @@ var render = function() {
                   !_vm.supplier.name
                     ? _c("h3", { staticClass: "text-center" }, [
                         _vm._v(
-                          "\n            Please select a Supplier from Supplier list\n          "
+                          "\n          Please select a Supplier from Supplier list\n        "
                         )
                       ])
                     : _c(
@@ -798,9 +764,6 @@ var render = function() {
                             _c("table", [
                               _c("tbody", [
                                 _c("tr", [
-                                  _vm._v(
-                                    "\n<<<<<<< HEAD\n                    "
-                                  ),
                                   _c("td", { attrs: { width: "150px" } }, [
                                     _c("strong", [_vm._v("Company")])
                                   ]),
@@ -824,50 +787,7 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("tr", [
                                   _c("td", [_c("strong", [_vm._v("Address")])]),
-                                  _vm._v("\n=======\n                    "),
-                                  _c(
-                                    "td",
-                                    {
-                                      staticClass: "text-dark bolder",
-                                      attrs: { width: "100px" }
-                                    },
-                                    [_vm._v("Company:")]
-                                  ),
                                   _vm._v(" "),
-                                  _c("td", [
-                                    _vm._v(_vm._s(_vm.supplier.company_name))
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _c(
-                                    "td",
-                                    { staticClass: "text-dark bolder" },
-                                    [_vm._v("Name:")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(_vm.supplier.name))])
-                                ]),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _c(
-                                    "td",
-                                    { staticClass: "text-dark bolder" },
-                                    [_vm._v("Email:")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(_vm.supplier.email))])
-                                ]),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _c(
-                                    "td",
-                                    { staticClass: "text-dark bolder" },
-                                    [_vm._v("Address:")]
-                                  ),
-                                  _vm._v(
-                                    "\n>>>>>>> cefa8d936f32c8deda6266c6f2b12cb1a098b1eb\n                    "
-                                  ),
                                   _c("td", [
                                     _vm._v(_vm._s(_vm.supplier.address))
                                   ])
@@ -880,9 +800,6 @@ var render = function() {
                             _c("table", { staticClass: "float-right" }, [
                               _c("tbody", [
                                 _c("tr", [
-                                  _vm._v(
-                                    "\n<<<<<<< HEAD\n                    "
-                                  ),
                                   _c("td", { attrs: { width: "150px" } }, [
                                     _c("strong", [_vm._v("Phone")])
                                   ]),
@@ -914,61 +831,7 @@ var render = function() {
                                   _c("td", [
                                     _c("strong", { staticClass: "red--text" }, [
                                       _vm._v(_vm._s(_vm.supplier.payables))
-                                    ]),
-                                    _vm._v("\n=======\n                    ")
-                                  ]),
-                                  _c(
-                                    "td",
-                                    {
-                                      staticClass: "text-dark bolder",
-                                      attrs: { width: "100px" }
-                                    },
-                                    [_vm._v("Phone:")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _vm._v(_vm._s(_vm.supplier.work_number))
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _c(
-                                    "td",
-                                    { staticClass: "text-dark bolder" },
-                                    [_vm._v("Type:")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(_vm.supplier.type))])
-                                ]),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _c(
-                                    "td",
-                                    { staticClass: "text-dark bolder" },
-                                    [_vm._v("Credit Limit:")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _vm._v(_vm._s(_vm.supplier.credit_limit))
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _c(
-                                    "td",
-                                    { staticClass: "text-dark bolder" },
-                                    [_vm._v("Balance:")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _c(
-                                      "strong",
-                                      { staticClass: "text-success bolder" },
-                                      [_vm._v(_vm._s(_vm.supplier.payables))]
-                                    ),
-                                    _vm._v(
-                                      "\n>>>>>>> cefa8d936f32c8deda6266c6f2b12cb1a098b1eb\n                    "
-                                    )
+                                    ])
                                   ])
                                 ])
                               ])
@@ -1001,7 +864,7 @@ var render = function() {
                                     _vm._v(" mdi-cash-register ")
                                   ]),
                                   _vm._v(
-                                    "\n                Purchases\n              "
+                                    "\n              Purchases\n            "
                                   )
                                 ],
                                 1
@@ -1014,7 +877,7 @@ var render = function() {
                                     _vm._v(" mdi-cash-multiple ")
                                   ]),
                                   _vm._v(
-                                    "\n                Payments\n              "
+                                    "\n              Payments\n            "
                                   )
                                 ],
                                 1
@@ -1027,7 +890,7 @@ var render = function() {
                                     _vm._v(" mdi-cash-minus ")
                                   ]),
                                   _vm._v(
-                                    "\n                Pay Bills\n              "
+                                    "\n              Pay Bills\n            "
                                   )
                                 ],
                                 1
