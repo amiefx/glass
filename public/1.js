@@ -920,6 +920,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1684,7 +1717,7 @@ var render = function() {
                   !_vm.customer.name
                     ? _c("h3", { staticClass: "text-center" }, [
                         _vm._v(
-                          "\n                    Please select a Customer from Customer list\n                "
+                          "\n                      Please select a Customer from Customer list\n                  "
                         )
                       ])
                     : _c(
@@ -1694,6 +1727,9 @@ var render = function() {
                             _c("table", [
                               _c("tbody", [
                                 _c("tr", [
+                                  _vm._v(
+                                    "\n<<<<<<< HEAD\n                          "
+                                  ),
                                   _c("td", { attrs: { width: "150px" } }, [
                                     _c("strong", [_vm._v("Company")])
                                   ]),
@@ -1717,7 +1753,52 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("tr", [
                                   _c("td", [_c("strong", [_vm._v("Address")])]),
+                                  _vm._v(
+                                    "\n=======\n                          "
+                                  ),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "text-dark bolder",
+                                      attrs: { width: "100px" }
+                                    },
+                                    [_vm._v("Company:")]
+                                  ),
                                   _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(_vm._s(_vm.customer.company_name))
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-dark bolder" },
+                                    [_vm._v("Name:")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(_vm.customer.name))])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-dark bolder" },
+                                    [_vm._v("Email:")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(_vm.customer.email))])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-dark bolder" },
+                                    [_vm._v("Address:")]
+                                  ),
+                                  _vm._v(
+                                    "\n>>>>>>> cefa8d936f32c8deda6266c6f2b12cb1a098b1eb\n                          "
+                                  ),
                                   _c("td", [
                                     _vm._v(_vm._s(_vm.customer.address))
                                   ])
@@ -1730,6 +1811,9 @@ var render = function() {
                             _c("table", { staticClass: "float-right" }, [
                               _c("tbody", [
                                 _c("tr", [
+                                  _vm._v(
+                                    "\n<<<<<<< HEAD\n                          "
+                                  ),
                                   _c("td", { attrs: { width: "150px" } }, [
                                     _c("strong", [_vm._v("Phone")])
                                   ]),
@@ -1762,7 +1846,63 @@ var render = function() {
                                     _c("strong", { staticClass: "red--text" }, [
                                       _vm._v(_vm._s(_vm.customer.receivable))
                                     ])
+                                  ]),
+                                  _vm._v(
+                                    "\n=======\n                          "
+                                  ),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "text-dark bolder",
+                                      attrs: { width: "100px" }
+                                    },
+                                    [_vm._v("Phone:")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(_vm._s(_vm.customer.work_number))
                                   ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-dark bolder" },
+                                    [_vm._v("Type:")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(_vm.customer.type))])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-dark bolder" },
+                                    [_vm._v("Credit Limit:")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(_vm._s(_vm.customer.credit_limit))
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-dark bolder" },
+                                    [_vm._v("Balance:")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "strong",
+                                      { staticClass: "text-success bolder" },
+                                      [_vm._v(_vm._s(_vm.customer.receivable))]
+                                    )
+                                  ]),
+                                  _vm._v(
+                                    "\n>>>>>>> cefa8d936f32c8deda6266c6f2b12cb1a098b1eb\n                      "
+                                  )
                                 ])
                               ])
                             ])
@@ -1794,7 +1934,7 @@ var render = function() {
                                     _vm._v(" mdi-file-document-outline ")
                                   ]),
                                   _vm._v(
-                                    "\n              Invoices\n            "
+                                    "\n                Invoices\n              "
                                   )
                                 ],
                                 1
@@ -1807,7 +1947,7 @@ var render = function() {
                                     _vm._v(" mdi-note-text-outline ")
                                   ]),
                                   _vm._v(
-                                    "\n              Quotations\n            "
+                                    "\n                Quotations\n              "
                                   )
                                 ],
                                 1
@@ -1820,7 +1960,7 @@ var render = function() {
                                     _vm._v(" mdi-cash-multiple ")
                                   ]),
                                   _vm._v(
-                                    "\n              Receipts\n            "
+                                    "\n                Receipts\n              "
                                   )
                                 ],
                                 1
@@ -1833,7 +1973,7 @@ var render = function() {
                                     _vm._v(" mdi-cash-plus ")
                                   ]),
                                   _vm._v(
-                                    "\n              Receive Payment\n            "
+                                    "\n                Receive Payment\n              "
                                   )
                                 ],
                                 1
