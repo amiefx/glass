@@ -475,7 +475,7 @@ var render = function() {
                   "v-toolbar",
                   { attrs: { flat: "", color: "" } },
                   [
-                    _c("v-toolbar-title", [
+                    _c("v-toolbar-title", { staticClass: "text-primary" }, [
                       _vm._v(" " + _vm._s(_vm.$t("Cash Register")))
                     ]),
                     _vm._v(" "),
@@ -486,7 +486,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("v-spacer"),
                     _vm._v(" "),
-                    _c("v-toolbar-title", [
+                    _c("v-toolbar-title", { staticClass: "bg-success" }, [
                       _vm._v(" Balance: " + _vm._s(_vm.balance))
                     ]),
                     _vm._v(" "),

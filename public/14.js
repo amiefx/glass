@@ -132,6 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'admin',
   middleware: ['auth', 'admin'],
@@ -437,6 +438,7 @@ var render = function() {
       _c("v-data-table", {
         staticClass: "elevation-1",
         attrs: {
+          dense: "",
           headers: _vm.headers,
           items: _vm.banks.data,
           "items-per-page": 5,
@@ -466,7 +468,7 @@ var render = function() {
                   "v-toolbar",
                   { attrs: { flat: "", color: "" } },
                   [
-                    _c("v-toolbar-title", [
+                    _c("v-toolbar-title", { staticClass: "text-primary" }, [
                       _vm._v(" " + _vm._s(_vm.$t("bank Account")))
                     ]),
                     _vm._v(" "),
@@ -477,7 +479,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("v-spacer"),
                     _vm._v(" "),
-                    _c("v-toolbar-title", [
+                    _c("v-toolbar-title", { staticClass: "bg-success" }, [
                       _vm._v(" Balance: " + _vm._s(_vm.balance))
                     ]),
                     _vm._v(" "),
