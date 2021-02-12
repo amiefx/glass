@@ -283,35 +283,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-<<<<<<< HEAD
-=======
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -454,30 +425,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     model: function model(val) {
       var _this3 = this;
 
-<<<<<<< HEAD
-=======
-      // axios
-      //   .get('/api/supplier/'+ val +'/payable')
-      //   .then(res => {
-      //    // this.items = res.data.data
-      //    console.log(res.data)
-      //     this.isLoading = false
-      //   })
-      //   .catch(err => {
-      //     console.log( err )
-      //     this.isLoading = false
-      //   })
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
       this.items.forEach(function (item) {
         if (val == item.id) {
           _this3.balance = item.payables;
         }
-<<<<<<< HEAD
       });
-=======
-      }); // if (val != null) this.tab = 0
-      // else this.tab = null
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
     },
     search: function search(val) {
       var _this4 = this;
@@ -1240,13 +1192,6 @@ var render = function() {
                           _vm._v(" "),
                           _c("option", { attrs: { value: "Bank" } }, [
                             _vm._v("Bank")
-<<<<<<< HEAD
-=======
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "Credit" } }, [
-                            _vm._v("Credit")
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
                           ])
                         ]
                       )

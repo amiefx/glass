@@ -27,7 +27,7 @@
           vertical
         ></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="900px">
+        <v-dialog v-model="dialog" max-width="600px">
           <template v-slot:activator="{ on }">
             <v-btn color="primary" dark class="mb-2" v-on="on">New product</v-btn>
             <!-- <v-btn color="error" dark class="mb-2 mr-2"  @click="deleteAll">Delete</v-btn> -->
@@ -64,15 +64,7 @@
                      >
                      </v-select>
                      <v-text-field v-model="editedItem.name" label="Name" :rules="[rules.required]"></v-text-field>
-                     <v-select
-                       :items="units"
-                       item-text="short_name"
-                       item-value="id"
-                       label="Unit"
-                       v-model="editedItem.unit_id"
-                       :rules="[rules.required]"
-                     ></v-select>
-                     <v-text-field type="number" v-model="editedItem.selling_price" label="Selling Price" ></v-text-field>
+
                       <v-text-field v-model="editedItem.color" label="Color" ></v-text-field>
 
                      </v-col>
@@ -90,6 +82,15 @@
                   </v-col> -->
 
                   <v-col cols="12" md="6" lg="6" >
+                      <v-select
+                       :items="units"
+                       item-text="short_name"
+                       item-value="id"
+                       label="Unit"
+                       v-model="editedItem.unit_id"
+                       :rules="[rules.required]"
+                     ></v-select>
+                    <v-text-field type="number" v-model="editedItem.selling_price" label="Selling Price" ></v-text-field>
                     <v-checkbox
                         v-model="editedItem.enable_stock"
                         label="Enable Stock"
@@ -99,7 +100,7 @@
                      <v-text-field type="number" v-model="editedItem.alert_quantity" label="Alert Quantity" ></v-text-field>
                      <v-text-field type="number" v-if="editedIndex === -1" v-model="editedItem.qty_on_hand" label="Quantity on Hand" ></v-text-field>
                      <v-text-field type="number" v-if="editedIndex === -1" v-model="editedItem.purchase_price" label="Purchase Price" ></v-text-field>
-                     <v-text-field type="number" v-if="editedIndex === -1" v-model="editedItem.total" label="Total" ></v-text-field>
+                     <!-- <v-text-field type="number" v-if="editedIndex === -1" v-model="editedItem.total" label="Total" ></v-text-field> -->
                     </div>
 
                      <v-checkbox
@@ -255,7 +256,7 @@
         // weight: '',
         // size: '',
         color: '',
-        is_active: '',
+        is_active: true,
         qty_on_hand: '',
         purchase_price: ''
       },
@@ -277,7 +278,7 @@
         // weight: '',
         // size: '',
         color: '',
-        is_active: '',
+        is_active: true,
         qty_on_hand: '',
         purchase_price: ''
       },
@@ -343,12 +344,12 @@
           console.log(items)
       },
 
-      getSku (item) {
-        let a = this.editedItem.brand.name.slice(0, 2) + " " + this.editedItem.name;
-        var color = ( this.editedItem.color !== '' ) ? " " + this.editedItem.color.slice(0, 3) : "";
-        // var vol = ( this.editedItem.height !== '' ) ? " " + this.editedItem.height + "X" + this.editedItem.width + "X" + this.editedItem.thickness : "";
+      getSku () {
+        let brand =  this.editedItem.brand.name ? this.editedItem.brand.name.slice(0, 2) : '';
+        let name =  this.editedItem.name ? this.editedItem.name : '';
+        let color =  this.editedItem.color ? this.editedItem.color.slice(0, 3) : '';
+        this.editedItem.sku = (brand + ' ' + name + ' ' + color ).toUpperCase();
         this.editedItem.brand_id = this.editedItem.brand.id
-        this.editedItem.sku = (a + color).toUpperCase();
       },
 
     //   itemChanged(item) {

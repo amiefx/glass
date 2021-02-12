@@ -4,113 +4,6 @@
 /*!******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CustomerList.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************************************************************************************************************************************************/
-<<<<<<< HEAD
-=======
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    customers: {
-      required: true,
-      type: Array
-    }
-  },
-  data: function data() {
-    return {
-      search: '',
-      headers: [{
-        text: 'Company',
-        align: 'start',
-        sortable: false,
-        value: 'company_name'
-      }, {
-        text: 'Name',
-        value: 'name'
-      }, {
-        text: 'Phone',
-        value: 'work_number'
-      }, {
-        text: 'Balance',
-        value: 'receivable'
-      }]
-    };
-  },
-  created: function created() {
-    this.initialize();
-  },
-  methods: {
-    initialize: function initialize() {
-      var _this = this;
-
-      // Add a request interceptor
-      axios.interceptors.request.use(function (config) {
-        _this.loading = true;
-        return config;
-      }, function (error) {
-        _this.loading = false;
-        return Promise.reject(error);
-      }); // Add a response interceptor
-
-      axios.interceptors.response.use(function (response) {
-        _this.loading = false;
-        return response;
-      }, function (error) {
-        _this.loading = false;
-        return Promise.reject(error);
-      }); // axios.get("/api/customers/all").then(res => {
-      //    this.customers = res.data.data;
-      //    });
-    },
-    editItem: function editItem(item) {
-      console.log(item);
-    },
-    getID: function getID(item) {
-      this.$emit('getCust', item);
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Quotation.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Quotation.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************************************/
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1802,11 +1695,7 @@ var render = function() {
                               _c("tbody", [
                                 _c("tr", [
                                   _c("td", { attrs: { width: "150px" } }, [
-<<<<<<< HEAD
                                     _c("strong", [_vm._v("Company")])
-=======
-                                    _vm._v("Company")
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
                                   ]),
                                   _vm._v(" "),
                                   _c("td", [
@@ -1815,31 +1704,19 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("tr", [
-<<<<<<< HEAD
                                   _c("td", [_c("strong", [_vm._v("Name")])]),
-=======
-                                  _c("td", [_vm._v("Name")]),
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
                                   _vm._v(" "),
                                   _c("td", [_vm._v(_vm._s(_vm.customer.name))])
                                 ]),
                                 _vm._v(" "),
                                 _c("tr", [
-<<<<<<< HEAD
                                   _c("td", [_c("strong", [_vm._v("Email")])]),
-=======
-                                  _c("td", [_vm._v("Email")]),
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
                                   _vm._v(" "),
                                   _c("td", [_vm._v(_vm._s(_vm.customer.email))])
                                 ]),
                                 _vm._v(" "),
                                 _c("tr", [
-<<<<<<< HEAD
                                   _c("td", [_c("strong", [_vm._v("Address")])]),
-=======
-                                  _c("td", [_vm._v("Address")]),
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
                                   _vm._v(" "),
                                   _c("td", [
                                     _vm._v(_vm._s(_vm.customer.address))
@@ -1854,11 +1731,7 @@ var render = function() {
                               _c("tbody", [
                                 _c("tr", [
                                   _c("td", { attrs: { width: "150px" } }, [
-<<<<<<< HEAD
                                     _c("strong", [_vm._v("Phone")])
-=======
-                                    _vm._v("Phone")
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
                                   ]),
                                   _vm._v(" "),
                                   _c("td", [
@@ -1867,23 +1740,15 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("tr", [
-<<<<<<< HEAD
                                   _c("td", [_c("strong", [_vm._v("Type")])]),
-=======
-                                  _c("td", [_vm._v("Type")]),
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
                                   _vm._v(" "),
                                   _c("td", [_vm._v(_vm._s(_vm.customer.type))])
                                 ]),
                                 _vm._v(" "),
                                 _c("tr", [
-<<<<<<< HEAD
                                   _c("td", [
                                     _c("strong", [_vm._v("Credit Limit")])
                                   ]),
-=======
-                                  _c("td", [_vm._v("Credit Limit")]),
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
                                   _vm._v(" "),
                                   _c("td", [
                                     _vm._v(_vm._s(_vm.customer.credit_limit))
@@ -1891,17 +1756,10 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("tr", [
-<<<<<<< HEAD
                                   _c("td", [_c("strong", [_vm._v("Balance")])]),
                                   _vm._v(" "),
                                   _c("td", [
                                     _c("strong", { staticClass: "red--text" }, [
-=======
-                                  _c("td", [_vm._v("Balance")]),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _c("strong", [
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
                                       _vm._v(_vm._s(_vm.customer.receivable))
                                     ])
                                   ])

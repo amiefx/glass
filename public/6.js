@@ -205,11 +205,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-<<<<<<< HEAD
 exports.push([module.i, "\n.center {\n  justify-content: center;\n  align-items: center;\n}\n", ""]);
-=======
-exports.push([module.i, "\n.center {\r\n  justify-content: center;\r\n  align-items: center;\n}\r\n", ""]);
->>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
 
 // exports
 
