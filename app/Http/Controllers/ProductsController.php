@@ -53,7 +53,7 @@ class ProductsController extends Controller
                 'enable_stock' => $request->enable_stock,
                 'alert_quantity' => $request->alert_quantity,
                 'sku' => $request->sku,
-                'urdu_sku' => $request->urdu_sku,
+                'urdu_sku' => $request->urdusku,
                 'selling_price' => $request->selling_price,
                 // 'length' => $request->length,
                 // 'width' => $request->width,
@@ -116,7 +116,7 @@ class ProductsController extends Controller
         $product->enable_stock = $request->enable_stock;
         $product->alert_quantity = $request->alert_quantity;
         $product->sku = $request->sku;
-        $product->urdu_sku = $request->urdu_sku;
+        $product->urdu_sku = $request->urdusku;
         $product->selling_price = $request->selling_price;
         // $product->length = $request->length;
         // $product->width = $request->width;

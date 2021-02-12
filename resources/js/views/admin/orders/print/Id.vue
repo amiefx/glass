@@ -12,7 +12,7 @@
       <v-divider class="my-1"></v-divider>
       <div class="customer">
         <p class="caption">
-          Invoice No# {{ order.order.id }} <br>
+          Invoice No# {{ order.order.id }} <br />
           Customer: {{ order.order.customer_name }} <br />
         </p>
       </div>
@@ -22,63 +22,72 @@
           <strong>{{ item.product_name }}</strong>
         </span>
         <v-row class="btm">
-          <v-col cols="7" class="py-0  pl-5 caption"> <i> Qty: {{item.quantity}}</i> </v-col>
-          <v-col cols="5" class="py-0 caption"> <i> Rs. {{ item.price }}</i> </v-col>
+          <v-col cols="7" class="py-0 pl-5 caption">
+            <i> Qty: {{ item.quantity }}</i>
+          </v-col>
+          <v-col cols="5" class="py-0 caption">
+            <i> Rs. {{ item.price }}</i>
+          </v-col>
         </v-row>
       </div>
 
-<br>
+      <br />
 
       <div>
-          <v-simple-table dense>
+        <v-simple-table dense>
           <tbody>
-              <tr>
-                  <td width='15%' > </td>
-                  <td width='44%' class="caption"> Subtotal </td>
-                  <td width='33%' class="px-0 caption"> Rs. {{ order.order.sub_total}} </td>
-              </tr>
-              <tr>
-                  <td > </td>
-                  <td class="caption"> Discount </td>
-                  <td class="px-0 caption"> Rs. {{ order.order.discount }} </td>
-              </tr>
-              <tr>
-                  <td > </td>
-                  <td class="caption"> Suzuki Rent </td>
-                  <td class="px-0 caption"> Rs. 555,142 </td>
-              </tr>
-              <tr>
-                  <td > </td>
-                  <td class="caption"> Fitting Charges </td>
-                  <td class="px-0 caption"> Rs. 555,142 </td>
-              </tr>
-              <tr>
-                  <td > </td>
-                  <td class="caption"> Total </td>
-                  <td class="px-0 caption"> Rs. {{ order.order.total }} </td>
-              </tr>
-              <tr>
-                  <td > </td>
-                  <td class="caption"> Received </td>
-                  <td class="px-0 caption"> Rs. {{ order.order.amount_recieved }} </td>
-              </tr>
-              <tr>
-                  <td > </td>
-                  <td class="caption"> Balance </td>
-                  <td class="px-0 caption"> Rs. {{ order.order.amount_recieved }} </td>
-              </tr>
+            <tr>
+              <td width="15%"></td>
+              <td width="44%" class="caption">Subtotal</td>
+              <td width="33%" class="px-0 caption">
+                Rs. {{ order.order.sub_total }}
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="caption">Discount</td>
+              <td class="px-0 caption">Rs. {{ order.order.discount }}</td>
+            </tr>
+            <tr v-if="driver[0]">
+              <td></td>
+              <td class="caption">Suzuki Rent</td>
+              <td class="px-0 caption">Rs. {{ driver[0].amount_paid }}</td>
+            </tr>
+            <tr v-if="fitter[0]">
+              <td></td>
+              <td class="caption">Fitting Charges</td>
+              <td class="px-0 caption">Rs. {{ fitter[0].amount_paid }} </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="caption">Total</td>
+              <td class="px-0 caption">Rs. {{ order.order.total }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="caption">Received</td>
+              <td class="px-0 caption">
+                Rs. {{ order.order.amount_recieved }}
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="caption">Balance</td>
+              <td class="px-0 caption">
+                Rs. {{ order.order.amount_recieved }}
+              </td>
+            </tr>
           </tbody>
-          </v-simple-table>
+        </v-simple-table>
       </div>
 
-      <br>
+      <br />
 
       <v-divider class="my-1"></v-divider>
 
       <div class="text-center caption">
-          Software developed by: www.wogale.com | 030012345678
+        Software developed by: www.wogale.com | 030012345678
       </div>
-
     </v-container>
   </v-app>
 </template>
@@ -86,73 +95,62 @@
 <script>
 //var moment = require('moment');
 export default {
-  layout: 'print',
-    metaInfo: {
-        // title will be injected into parent titleTemplate
-        title: 'Orders' ,
-        titleTemplate: '%s | Khodgi'
-        },
-
-    data: () => {
-    return {
-        order: [],
-        business: '',
-        logoImg: window.location.origin + "/storage/images/khodgilogo.png",
-        }
-    },
-
-    updated() {
-        // setTimeout(() => {
-        //      window.addEventListener("load", window.print());
-        // }, 1000);
-
-    },
-
-//     filters: {
-//       formatDate: function (value) {
-//           return moment(value).format('MMMM D, YYYY');
-//       }
-//   },
-
-    created() {
-    axios
-      .get(`/api/invoicedetail/${this.$route.params.id}`)
-      .then(res => {
-        this.order = res.data;
-      })
-      .catch(err => {
-      });
-
-    axios
-      .get('/api/business/all')
-      .then(res => {
-        this.business = res.data.business;
-      })
-      .catch(err => {
-      });
-
-    },
-
-    methods: {
-        printme(el) {
-            // let restorepage = document.body.innerHTML;
-            // let printcontent = document.getElementById(el).innerHTML;
-            // document.body.innerHTML = restorepage;
-            window.print();
-            // document.body.innerHTML = restorepage;
-        }
-    },
-
-    filters: {
-      formatDate: function (value) {
-          return moment(value).format('MMMM D, YYYY');
-      }
+  layout: "print",
+  metaInfo: {
+    // title will be injected into parent titleTemplate
+    title: "Orders",
+    titleTemplate: "%s | Khodgi",
   },
 
-    computed: {
+  data: () => {
+    return {
+      order: [],
+      business: "",
+      logoImg: window.location.origin + "/storage/images/khodgilogo.png",
+    };
+  },
 
-    }
-}
+  created() {
+    axios
+      .get(`/api/invoicedetail/${this.$route.params.id}`)
+      .then((res) => {
+        this.order = res.data;
+      })
+      .catch((err) => {});
+
+    axios
+      .get("/api/business/all")
+      .then((res) => {
+        this.business = res.data.business;
+      })
+      .catch((err) => {});
+  },
+
+  methods: {
+    printme(el) {
+      // let restorepage = document.body.innerHTML;
+      // let printcontent = document.getElementById(el).innerHTML;
+      // document.body.innerHTML = restorepage;
+      window.print();
+      // document.body.innerHTML = restorepage;
+    },
+  },
+
+  filters: {
+    formatDate: function (value) {
+      return moment(value).format("MMMM D, YYYY");
+    },
+  },
+
+  computed: {
+    driver() {
+      return this.order.salary.filter((item) => item.employee_type == "Driver");
+    },
+    fitter() {
+      return this.order.salary.filter((item) => item.employee_type == "Fitter");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

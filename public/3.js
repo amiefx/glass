@@ -849,6 +849,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1017,6 +1020,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.invoiceData.discount = 0;
         _this.invoiceData.received_amt = 0;
         _this.invoiceData.suzuki_rent = 0;
+        _this.invoiceData.fitting_charges = 0;
         _this.invoiceData.driver = null;
         _this.invoiceData.fitter = null;
         _this.invoiceData.walkin_name = "";
@@ -1028,7 +1032,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           // let routeData = this.$router.resolve({name: 'order-edit', query: {data: res.data.id}});
           var routeData = _this.$router.resolve("/admin/invoice/print/".concat(res.data.order.id));
 
-          window.open(routeData.href, '_blank'); //  this.$router.push(`/admin/invoice/print/${res.data.id}`);
+          window.open(routeData.href, "_blank"); //  this.$router.push(`/admin/invoice/print/${res.data.id}`);
         }
       });
     },
@@ -1263,17 +1267,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     activePrice: function activePrice() {
       this.priceStatus = false;
       this.priceChange = true;
+    },
+    getRA: function getRA() {
+      var _this8 = this;
+
+      axios.get("/api/orderbywalkinphone/".concat(this.invoiceData.walkin_phone)).then(function (res) {
+        _this8.ra_balance = res;
+        console.log(res);
+      });
     }
   },
   created: function created() {
-    var _this8 = this;
+    var _this9 = this;
 
     this.initialize();
     axios.get("/api/slabs/all").then(function (res) {
-      _this8.slabs = res.data.data;
+      _this9.slabs = res.data.data;
     });
     axios.get("/api/employees/all").then(function (res) {
-      _this8.employees = res.data.data;
+      _this9.employees = res.data.data;
     });
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -1355,33 +1367,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (val != null) this.tab = 0;else this.tab = null;
     },
     search: function search(val) {
-      var _this9 = this;
+      var _this10 = this;
 
       // Items have already been loaded
       if (this.items.length > 0) return;
       this.isLoading = true; // axios method
 
       axios.get("/api/customers/all").then(function (res) {
-        _this9.items = res.data.data;
-        _this9.isLoading = false;
+        _this10.items = res.data.data;
+        _this10.isLoading = false;
       })["catch"](function (err) {
         console.log(err);
-        _this9.isLoading = false;
+        _this10.isLoading = false;
       });
     },
     cust_id: function cust_id() {
-      var _this10 = this;
+      var _this11 = this;
 
       var customer = this.items.filter(function (item) {
-        return item.id == _this10.cust_id;
+        return item.id == _this11.cust_id;
       });
       this.cust2 = customer[0];
     },
     product_item: function product_item() {
-      var _this11 = this;
+      var _this12 = this;
 
       var prod = this.products.filter(function (item) {
-        return item.id == _this11.product_item;
+        return item.id == _this12.product_item;
       }); //    console.log(prod[0])
 
       this.$store.dispatch("cart/addProductToCart", {
@@ -3589,7 +3601,13 @@ var render = function() {
                     ? _c(
                         "v-col",
                         { staticClass: "bg-warning", attrs: { cols: "3" } },
-                        [_vm._v(" Rs: " + _vm._s(_vm.cust2.receivable) + " ")]
+                        [
+                          _vm._v(
+                            "\n          Rs: " +
+                              _vm._s(_vm.cust2.receivable) +
+                              "\n        "
+                          )
+                        ]
                       )
                     : _vm._e()
                 ],
@@ -3659,6 +3677,7 @@ var render = function() {
                                   value: _vm.invoiceData.walkin_phone
                                 },
                                 on: {
+                                  click: _vm.getRA,
                                   input: function($event) {
                                     if ($event.target.composing) {
                                       return

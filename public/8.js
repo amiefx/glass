@@ -92,6 +92,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 //var moment = require('moment');
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: "print",
@@ -107,20 +112,13 @@ __webpack_require__.r(__webpack_exports__);
       logoImg: window.location.origin + "/storage/images/khodgilogo.png"
     };
   },
-  updated: function updated() {// setTimeout(() => {
-    //      window.addEventListener("load", window.print());
-    // }, 1000);
-  },
-  //     filters: {
-  //       formatDate: function (value) {
-  //           return moment(value).format('MMMM D, YYYY');
-  //       }
-  //   },
   created: function created() {
     var _this = this;
 
     axios.get("/api/invoicedetail/".concat(this.$route.params.id)).then(function (res) {
       _this.order = res.data;
+
+      _this.getSalaryData();
     })["catch"](function (err) {});
     axios.get("/api/business/all").then(function (res) {
       _this.business = res.data.business;
@@ -134,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
       // window.print();
       // document.body.innerHTML = restorepage;
       var routeData = this.$router.resolve("/admin/invoice/print/".concat(this.order.order.id));
-      window.open(routeData.href, '_blank');
+      window.open(routeData.href, "_blank");
     }
   },
   filters: {
@@ -142,7 +140,18 @@ __webpack_require__.r(__webpack_exports__);
       return moment(value).format("MMMM D, YYYY");
     }
   },
-  computed: {}
+  computed: {
+    driver: function driver() {
+      return this.order.salary.filter(function (item) {
+        return item.employee_type == "Driver";
+      });
+    },
+    fitter: function fitter() {
+      return this.order.salary.filter(function (item) {
+        return item.employee_type == "Fitter";
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -313,25 +322,37 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("tr", [
-                        _c("td"),
-                        _vm._v(" "),
-                        _c("td", {}, [_vm._v("Suzuki Rent")]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "px-0" }, [
-                          _vm._v("Rs. 555,142")
-                        ])
-                      ]),
+                      _vm.driver[0]
+                        ? _c("tr", [
+                            _c("td"),
+                            _vm._v(" "),
+                            _c("td", {}, [_vm._v("Suzuki Rent")]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "px-0" }, [
+                              _vm._v("Rs. "),
+                              _c("span", [
+                                _vm._v(_vm._s(_vm.driver[0].amount_paid))
+                              ])
+                            ])
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c("tr", [
-                        _c("td"),
-                        _vm._v(" "),
-                        _c("td", {}, [_vm._v("Fitting Charges")]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "px-0" }, [
-                          _vm._v("Rs. 555,142")
-                        ])
-                      ]),
+                      _vm.fitter[0]
+                        ? _c("tr", [
+                            _c("td"),
+                            _vm._v(" "),
+                            _c("td", {}, [_vm._v("Fitting Charges")]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "px-0" }, [
+                              _vm._v("Rs. "),
+                              _c("span", [
+                                _vm._v(
+                                  " " + _vm._s(_vm.fitter[0].amount_paid) + " "
+                                )
+                              ])
+                            ])
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       _c("tr", [
                         _c("td"),
@@ -362,11 +383,12 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", { staticClass: "px-0" }, [
                           _vm._v(
-                            "Rs. " +
+                            "\n                Rs. " +
                               _vm._s(
                                 _vm.order.order.total -
                                   _vm.order.order.amount_recieved
-                              )
+                              ) +
+                              "\n              "
                           )
                         ])
                       ])

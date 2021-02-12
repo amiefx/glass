@@ -549,7 +549,9 @@
             </v-autocomplete>
           </v-col>
           <v-col cols="3" v-if="cust2"> {{ cust2.work_number }} </v-col>
-          <v-col cols="3" v-if="cust2" class="bg-warning"> Rs: {{ cust2.receivable }} </v-col>
+          <v-col cols="3" v-if="cust2" class="bg-warning">
+            Rs: {{ cust2.receivable }}
+          </v-col>
         </v-row>
 
         <v-row v-if="cust2.id">
@@ -567,6 +569,7 @@
               type="text"
               v-model="invoiceData.walkin_phone"
               placeholder="Phone"
+              @click="getRA"
             />
           </v-col>
         </v-row>
@@ -876,7 +879,7 @@ export default {
           fitter: this.invoiceData.fitter,
           walkin_name: this.invoiceData.walkin_name,
           walkin_phone: this.invoiceData.walkin_phone,
-          priceflag: this.priceChange
+          priceflag: this.priceChange,
         },
         orderedItems: this.cart,
       };
@@ -912,6 +915,7 @@ export default {
         this.invoiceData.discount = 0;
         this.invoiceData.received_amt = 0;
         this.invoiceData.suzuki_rent = 0;
+        this.invoiceData.fitting_charges = 0;
         this.invoiceData.driver = null;
         this.invoiceData.fitter = null;
         this.invoiceData.walkin_name = "";
@@ -920,15 +924,15 @@ export default {
         this.initialize();
 
         if (this.printInvoice) {
-           // let routeData = this.$router.resolve({name: 'order-edit', query: {data: res.data.id}});
-           let routeData = this.$router.resolve(`/admin/invoice/print/${res.data.order.id}`);
-            window.open(routeData.href, '_blank');
-        //  this.$router.push(`/admin/invoice/print/${res.data.id}`);
+          // let routeData = this.$router.resolve({name: 'order-edit', query: {data: res.data.id}});
+          let routeData = this.$router.resolve(
+            `/admin/invoice/print/${res.data.order.id}`
+          );
+          window.open(routeData.href, "_blank");
+          //  this.$router.push(`/admin/invoice/print/${res.data.id}`);
         }
       });
     },
-
-
 
     // clear data
     clearData() {
@@ -1202,6 +1206,14 @@ export default {
       this.priceStatus = false;
       this.priceChange = true;
     },
+
+    getRA() {
+
+    axios.get(`/api/orderbywalkinphone/${this.invoiceData.walkin_phone}`).then((res) => {
+      this.ra_balance = res;
+      console.log(res)
+    });
+    }
   },
 
   created() {
@@ -1214,7 +1226,6 @@ export default {
     axios.get("/api/employees/all").then((res) => {
       this.employees = res.data.data;
     });
-
   },
 
   computed: {

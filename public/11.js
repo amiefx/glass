@@ -94,37 +94,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //var moment = require('moment');
 /* harmony default export */ __webpack_exports__["default"] = ({
-  layout: 'print',
+  layout: "print",
   metaInfo: {
     // title will be injected into parent titleTemplate
-    title: 'Orders',
-    titleTemplate: '%s | Khodgi'
+    title: "Orders",
+    titleTemplate: "%s | Khodgi"
   },
   data: function data() {
     return {
       order: [],
-      business: '',
+      business: "",
       logoImg: window.location.origin + "/storage/images/khodgilogo.png"
     };
   },
-  updated: function updated() {// setTimeout(() => {
-    //      window.addEventListener("load", window.print());
-    // }, 1000);
-  },
-  //     filters: {
-  //       formatDate: function (value) {
-  //           return moment(value).format('MMMM D, YYYY');
-  //       }
-  //   },
   created: function created() {
     var _this = this;
 
     axios.get("/api/invoicedetail/".concat(this.$route.params.id)).then(function (res) {
       _this.order = res.data;
     })["catch"](function (err) {});
-    axios.get('/api/business/all').then(function (res) {
+    axios.get("/api/business/all").then(function (res) {
       _this.business = res.data.business;
     })["catch"](function (err) {});
   },
@@ -138,10 +138,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   filters: {
     formatDate: function formatDate(value) {
-      return moment(value).format('MMMM D, YYYY');
+      return moment(value).format("MMMM D, YYYY");
     }
   },
-  computed: {}
+  computed: {
+    driver: function driver() {
+      return this.order.salary.filter(function (item) {
+        return item.employee_type == "Driver";
+      });
+    },
+    fitter: function fitter() {
+      return this.order.salary.filter(function (item) {
+        return item.employee_type == "Fitter";
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -224,14 +235,14 @@ var render = function() {
             _vm._v(" "),
             _c("p", [
               _vm._v(
-                "\n          " +
+                "\n        " +
                   _vm._s(_vm.business.address) +
                   " , " +
                   _vm._s(_vm.business.city) +
                   " "
               ),
               _c("br"),
-              _vm._v("\n          " + _vm._s(_vm.business.phone) + "\n        ")
+              _vm._v("\n        " + _vm._s(_vm.business.phone) + "\n      ")
             ])
           ]),
           _vm._v(" "),
@@ -240,11 +251,11 @@ var render = function() {
           _c("div", { staticClass: "customer" }, [
             _c("p", { staticClass: "caption" }, [
               _vm._v(
-                "\n          Invoice No# " + _vm._s(_vm.order.order.id) + " "
+                "\n        Invoice No# " + _vm._s(_vm.order.order.id) + " "
               ),
               _c("br"),
               _vm._v(
-                "\n          Customer: " +
+                "\n        Customer: " +
                   _vm._s(_vm.order.order.customer_name) +
                   " "
               ),
@@ -270,7 +281,7 @@ var render = function() {
                     _c(
                       "v-col",
                       {
-                        staticClass: "py-0  pl-5 caption",
+                        staticClass: "py-0 pl-5 caption",
                         attrs: { cols: "7" }
                       },
                       [_c("i", [_vm._v(" Qty: " + _vm._s(item.quantity))])]
@@ -302,7 +313,7 @@ var render = function() {
                     _c(
                       "td",
                       { staticClass: "caption", attrs: { width: "44%" } },
-                      [_vm._v(" Subtotal ")]
+                      [_vm._v("Subtotal")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -310,7 +321,9 @@ var render = function() {
                       { staticClass: "px-0 caption", attrs: { width: "33%" } },
                       [
                         _vm._v(
-                          " Rs. " + _vm._s(_vm.order.order.sub_total) + " "
+                          "\n              Rs. " +
+                            _vm._s(_vm.order.order.sub_total) +
+                            "\n            "
                         )
                       ]
                     )
@@ -319,59 +332,63 @@ var render = function() {
                   _c("tr", [
                     _c("td"),
                     _vm._v(" "),
-                    _c("td", { staticClass: "caption" }, [
-                      _vm._v(" Discount ")
-                    ]),
+                    _c("td", { staticClass: "caption" }, [_vm._v("Discount")]),
                     _vm._v(" "),
                     _c("td", { staticClass: "px-0 caption" }, [
-                      _vm._v(" Rs. " + _vm._s(_vm.order.order.discount) + " ")
+                      _vm._v("Rs. " + _vm._s(_vm.order.order.discount))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.driver[0]
+                    ? _c("tr", [
+                        _c("td"),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "caption" }, [
+                          _vm._v("Suzuki Rent")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "px-0 caption" }, [
+                          _vm._v("Rs. " + _vm._s(_vm.driver[0].amount_paid))
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.fitter[0]
+                    ? _c("tr", [
+                        _c("td"),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "caption" }, [
+                          _vm._v("Fitting Charges")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "px-0 caption" }, [
+                          _vm._v(
+                            "Rs. " + _vm._s(_vm.fitter[0].amount_paid) + " "
+                          )
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "caption" }, [_vm._v("Total")]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "px-0 caption" }, [
+                      _vm._v("Rs. " + _vm._s(_vm.order.order.total))
                     ])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
                     _c("td"),
                     _vm._v(" "),
-                    _c("td", { staticClass: "caption" }, [
-                      _vm._v(" Suzuki Rent ")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "px-0 caption" }, [
-                      _vm._v(" Rs. 555,142 ")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "caption" }, [
-                      _vm._v(" Fitting Charges ")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "px-0 caption" }, [
-                      _vm._v(" Rs. 555,142 ")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "caption" }, [_vm._v(" Total ")]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "px-0 caption" }, [
-                      _vm._v(" Rs. " + _vm._s(_vm.order.order.total) + " ")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "caption" }, [
-                      _vm._v(" Received ")
-                    ]),
+                    _c("td", { staticClass: "caption" }, [_vm._v("Received")]),
                     _vm._v(" "),
                     _c("td", { staticClass: "px-0 caption" }, [
                       _vm._v(
-                        " Rs. " + _vm._s(_vm.order.order.amount_recieved) + " "
+                        "\n              Rs. " +
+                          _vm._s(_vm.order.order.amount_recieved) +
+                          "\n            "
                       )
                     ])
                   ]),
@@ -379,11 +396,13 @@ var render = function() {
                   _c("tr", [
                     _c("td"),
                     _vm._v(" "),
-                    _c("td", { staticClass: "caption" }, [_vm._v(" Balance ")]),
+                    _c("td", { staticClass: "caption" }, [_vm._v("Balance")]),
                     _vm._v(" "),
                     _c("td", { staticClass: "px-0 caption" }, [
                       _vm._v(
-                        " Rs. " + _vm._s(_vm.order.order.amount_recieved) + " "
+                        "\n              Rs. " +
+                          _vm._s(_vm.order.order.amount_recieved) +
+                          "\n            "
                       )
                     ])
                   ])
@@ -399,7 +418,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "text-center caption" }, [
             _vm._v(
-              "\n          Software developed by: www.wogale.com | 030012345678\n      "
+              "\n      Software developed by: www.wogale.com | 030012345678\n    "
             )
           ])
         ],

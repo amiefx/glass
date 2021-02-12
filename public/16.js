@@ -440,11 +440,7 @@ var render = function() {
                   { attrs: { flat: "", color: "" } },
                   [
                     _c("v-toolbar-title", { staticClass: "text-primary" }, [
-<<<<<<< HEAD
                       _vm._v("Brand Management")
-=======
-                      _vm._v(" " + _vm._s(_vm.$t("Cash Register")))
->>>>>>> cefa8d936f32c8deda6266c6f2b12cb1a098b1eb
                     ]),
                     _vm._v(" "),
                     _c("v-divider", {
@@ -454,13 +450,6 @@ var render = function() {
                     _vm._v(" "),
                     _c("v-spacer"),
                     _vm._v(" "),
-<<<<<<< HEAD
-=======
-                    _c("v-toolbar-title", { staticClass: "bg-success" }, [
-                      _vm._v(" Balance: " + _vm._s(_vm.balance))
-                    ]),
-                    _vm._v(" "),
->>>>>>> cefa8d936f32c8deda6266c6f2b12cb1a098b1eb
                     _c(
                       "v-dialog",
                       {
