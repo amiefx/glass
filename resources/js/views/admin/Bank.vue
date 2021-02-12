@@ -2,9 +2,10 @@
   <div>
 
   <v-data-table
+    dense
     :headers="headers"
     :items="banks.data"
-    :items-per-page=5
+    :items-per-page=15
     class="elevation-1"
     item-key="id"
     :loading="loading"

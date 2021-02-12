@@ -74,8 +74,6 @@
               <tr>
                 <th></th>
                 <th class="text-left"> Sku </th>
-                <!-- <th class="text-left"> Height </th>
-                <th class="text-left"> Width </th> -->
                 <th class="text-left"> Price </th>
                 <th class="text-left"> Qty </th>
                 <th class="text-left"> Total </th>
@@ -92,8 +90,6 @@
                 <td>
                   {{ item.product.sku}}
                 </td>
-                <!-- <td></td>
-                <td></td> -->
                 <td>
                   <input class="numinput qty" type="number" v-model="item.product.purchase_price">
                 </td>
@@ -139,7 +135,6 @@
                     </td>
                     <td>Discount</td>
                     <td class="">
-                        <!-- <v-text-field height="1" outlined dense v-model="discount" type="number"></v-text-field> -->
                         <input class="numinput" type="number" v-model="purchaseData.discount">
                     </td>
                 </tr>
@@ -152,31 +147,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <!-- <v-select
-                         :items="pmt_methods"
-                         dense
-                         class="sel"
-                        >
-                        </v-select> -->
                         <select name="" id="" class="minimal numinput" v-model="purchaseData.pmt_method">
                             <option value="Cash">Cash</option>
                             <option value="Bank">Bank</option>
-                            <option value="Credit">Credit</option>
                         </select>
-                        <!-- <v-radio-group
-      v-model="row"
-      row
-      class="sel"
-    >
-      <v-radio
-        label="Option 1"
-        value="radio-1"
-      ></v-radio>
-      <v-radio
-        label="Option 2"
-        value="radio-2"
-      ></v-radio>
-    </v-radio-group> -->
                     </td>
                     <td>Amount Paid</td>
                     <td>
@@ -367,18 +341,6 @@ export default {
   watch: {
       model (val) {
 
-        // axios
-        //   .get('/api/supplier/'+ val +'/payable')
-        //   .then(res => {
-        //    // this.items = res.data.data
-        //    console.log(res.data)
-        //     this.isLoading = false
-        //   })
-        //   .catch(err => {
-        //     console.log( err )
-        //     this.isLoading = false
-        //   })
-
         this.items.forEach(item => {
 
                 if (val == item.id ) {
@@ -387,8 +349,6 @@ export default {
 
             })
 
-        // if (val != null) this.tab = 0
-        // else this.tab = null
       },
 
       search (val) {

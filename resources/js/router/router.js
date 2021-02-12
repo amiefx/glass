@@ -392,6 +392,17 @@ const routes = [
         }
     },
     {
+        path: '/admin/invoice-pending/view/:id',
+        name: 'order-pending-view',
+        component: () => import('../views/admin/InvoicePending.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
         path: '/admin/invoice/approvals',
         name: 'order-approve',
         component: () => import('../views/admin/InvoiceApprovals.vue'),

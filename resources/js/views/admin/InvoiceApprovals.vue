@@ -1,47 +1,45 @@
 <template>
   <div>
-    <v-data-table
-      :headers="headers"
-      :items="invoices"
-      :items-per-page="5"
-      class="elevation-0"
-      item-key="id"
-      :loading="loading"
-      @pagination="paginate"
-      :options.sync="options"
-      :server-items-length="invoices.length"
-      loading-text="Loading.. Please Wait!"
-      :footer-props="{
-        itemsPerPageOptions: [5, 10, 15],
-        'show-current-page': true,
-        'show-first-last-page': true,
-      }"
-    >
-      <template v-slot:top>
-        <v-text-field
-          @input="searchIt"
-          append-icon="mdi-search"
-          label="Search"
-          single-line
-          hide-details
-          class="mx-4"
-        ></v-text-field>
-      </template>
-      <template v-slot:item.id="{ item }">
+      <v-card>
+      <v-card-title>
+      Pending Invoices
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table :headers="headers" :items="orders" :search="search">
+        <template v-slot:item.id="{ item }">
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <span @click="editInvoice(item)" v-bind="attrs" v-on="on">{{
               item.id
             }}</span>
           </template>
-          <span>Click to View</span>
+          <span>Click to Edit</span>
         </v-tooltip>
       </template>
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
-      </template>
+      <template v-slot:item.action="{ item }">
+      <v-icon
+        small
+        class="mr-2"
+        @click="editItem(item)"
+      >
+        mdi-pencil
+      </v-icon>
+      <v-icon
+        small
+        @click="deleteItem(item)"
+      >
+        mdi-delete
+      </v-icon>
+    </template>
     </v-data-table>
-
+      </v-card>
     <v-snackbar v-model="snackbar">
       {{ text }}
       <v-btn color="white" text @click="snackbar = false"> Close </v-btn>
@@ -59,6 +57,7 @@ export default {
     dialog: false,
     loading: false,
     snackbar: false,
+    search: '',
     text: "",
     success: "",
     error: "",
@@ -76,10 +75,11 @@ export default {
       { text: "Sub Total", value: "sub_total" },
       { text: "Amount Received", value: "amount_recieved" },
       { text: "User", value: "user_id" },
+       { text: 'Actions', value: 'action', sortable: false },
     ],
     orders: [],
     invoices: [],
-    quotations: []
+    quotations: [],
   }),
 
   methods: {
@@ -183,6 +183,11 @@ export default {
           return Promise.reject(error);
         }
       );
+
+      axios.get('/api/penddingorders')
+        .then( (res) => {
+           this.orders = res.data.order
+        })
     },
 
     testM() {
@@ -199,8 +204,13 @@ export default {
     },
 
     editInvoice(item) {
-        this.$router.push(`/admin/invoice/view/${item.id}`);
-    }
+      this.$router.push(`/admin/invoice-pending/view/${item.id}`);
+    },
+
+  },
+
+  created() {
+     this.initialize()
   },
 
   watch: {

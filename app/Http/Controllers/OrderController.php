@@ -151,7 +151,7 @@ class OrderController extends Controller
                 ]);
             }
 
-            
+
 
 
             DB::commit();
@@ -258,7 +258,7 @@ class OrderController extends Controller
     {
         $order= Order::where('status', '=', 'Pendding')->get();
 
-        for ($i=0; $i < count($order); $i++) { 
+        for ($i=0; $i < count($order); $i++) {
             $order[$i] = new OrderResource($order[$i]);
         }
 
@@ -343,59 +343,59 @@ class OrderController extends Controller
         $height_s_size = 0;
 
         $back_end_sqft = ($width * $height * $number) / 144;
-        
+
         $width_s_size = $this->standard_sizes($width);
         $height_s_size = $this->standard_sizes($height);
 
-        
+
         $invoice_sqft = ($width_s_size * $height_s_size * $number) / 144;
 
-        return response()->json(['invoice_sqft' => $invoice_sqft, 'back_end_sqft' => $back_end_sqft, 'number' => $number, 
+        return response()->json(['invoice_sqft' => $invoice_sqft, 'back_end_sqft' => $back_end_sqft, 'number' => $number,
         'width' => $width, 'height' => $height, 'width_s_size' => $width_s_size, 'height_s_size' => $height_s_size], 200);
     }
 
     public function standard_sizes($var)
     {
-        if ($var>=1 && $var<=6) { 
+        if ($var>=1 && $var<=6) {
             return 6;
-        } else if ($var>=7 && $var<=12) { 
+        } else if ($var>=7 && $var<=12) {
             return 12;
-        }else if ($var>=13 && $var<=18) { 
+        }else if ($var>=13 && $var<=18) {
             return 18;
-        }else if ($var>=19 && $var<=24) { 
+        }else if ($var>=19 && $var<=24) {
             return 24;
-        }else if ($var>=25 && $var<=30) { 
+        }else if ($var>=25 && $var<=30) {
             return 30;
-        }else if ($var>=31 && $var<=36) { 
+        }else if ($var>=31 && $var<=36) {
             return 36;
-        }else if ($var>=37 && $var<=42) { 
+        }else if ($var>=37 && $var<=42) {
             return 42;
-        }else if ($var>=43 && $var<=48) { 
+        }else if ($var>=43 && $var<=48) {
             return 48;
-        }else if ($var>=49 && $var<=54) { 
+        }else if ($var>=49 && $var<=54) {
             return 54;
-        }else if ($var>=55 && $var<=60) { 
+        }else if ($var>=55 && $var<=60) {
             return 60;
-        }else if ($var>=11 && $var<=66) { 
+        }else if ($var>=11 && $var<=66) {
             return 66;
-        }else if ($var>=67 && $var<=72) { 
+        }else if ($var>=67 && $var<=72) {
             return 72;
-        }else if ($var>=73 && $var<=84) { 
+        }else if ($var>=73 && $var<=84) {
             return 84;
-        }else if ($var>=85 && $var<=96) { 
+        }else if ($var>=85 && $var<=96) {
             return 96;
-        }else if ($var>=97 && $var<=108) { 
+        }else if ($var>=97 && $var<=108) {
             return 108;
-        }else if ($var>=109 && $var<=120) { 
+        }else if ($var>=109 && $var<=120) {
             return 120;
-        }else if ($var>=121 && $var<=132) { 
+        }else if ($var>=121 && $var<=132) {
             return 132;
-        }else if ($var>=133 && $var<=144) { 
+        }else if ($var>=133 && $var<=144) {
             return 144;
         }else{
             return 0;
         }
-        
+
     }
 
 
@@ -403,14 +403,14 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        for ($i=0; $i < count($order->orderdetails); $i++) { 
+        for ($i=0; $i < count($order->orderdetails); $i++) {
             $order->orderdetails[$i] = new OrderDetailResource($order->orderdetails[$i]);
         }
 
 
         $slry = Salary::where('order_id', $order->id)->get();
 
-        for ($i=0; $i < count($slry); $i++) { 
+        for ($i=0; $i < count($slry); $i++) {
             $slry[$i] = new SalaryResource($slry[$i]);
         }
 
