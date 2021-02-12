@@ -202,7 +202,7 @@ export default {
     metaInfo: {
         // title will be injected into parent titleTemplate
         title: 'Orders' ,
-        titleTemplate: '%s | Khodgi'
+        titleTemplate: '%s | Karim Glass '
         },
 
     data: () => {

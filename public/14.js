@@ -133,7 +133,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
 //
 //
 //
@@ -169,8 +168,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-=======
->>>>>>> cefa8d936f32c8deda6266c6f2b12cb1a098b1eb
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'khod',
   middleware: ['auth'],
@@ -294,7 +291,6 @@ var render = function() {
   return _c(
     "v-container",
     [
-<<<<<<< HEAD
       _c(
         "v-card",
         { staticClass: "mx-auto" },
@@ -338,66 +334,6 @@ var render = function() {
                           on: {
                             click: function($event) {
                               _vm.dialog = !_vm.dialog
-=======
-      _c("v-data-table", {
-        staticClass: "elevation-1",
-        attrs: {
-          dense: "",
-          headers: _vm.headers,
-          items: _vm.banks.data,
-          "items-per-page": 5,
-          "item-key": "id",
-          loading: _vm.loading,
-          options: _vm.options,
-          "server-items-length": _vm.banks.total,
-          "loading-text": "Loading.. Please Wait!",
-          "footer-props": {
-            itemsPerPageOptions: [5, 10, 15],
-            "show-current-page": true,
-            "show-first-last-page": true
-          }
-        },
-        on: {
-          pagination: _vm.paginate,
-          "update:options": function($event) {
-            _vm.options = $event
-          }
-        },
-        scopedSlots: _vm._u([
-          {
-            key: "top",
-            fn: function() {
-              return [
-                _c(
-                  "v-toolbar",
-                  { attrs: { flat: "", color: "" } },
-                  [
-                    _c("v-toolbar-title", { staticClass: "text-primary" }, [
-                      _vm._v(" " + _vm._s(_vm.$t("bank Account")))
-                    ]),
-                    _vm._v(" "),
-                    _c("v-divider", {
-                      staticClass: "mx-4",
-                      attrs: { inset: "", vertical: "" }
-                    }),
-                    _vm._v(" "),
-                    _c("v-spacer"),
-                    _vm._v(" "),
-                    _c("v-toolbar-title", { staticClass: "bg-success" }, [
-                      _vm._v(" Balance: " + _vm._s(_vm.balance))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "v-dialog",
-                      {
-                        attrs: { "max-width": "500px" },
-                        scopedSlots: _vm._u([
-                          {
-                            key: "activator",
-                            fn: function(ref) {
-                              var on = ref.on
-                              return undefined
->>>>>>> cefa8d936f32c8deda6266c6f2b12cb1a098b1eb
                             }
                           }
                         },

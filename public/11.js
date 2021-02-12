@@ -94,13 +94,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 //var moment = require('moment');
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'print',
   metaInfo: {
     // title will be injected into parent titleTemplate
-    title: 'Orders',
-    titleTemplate: '%s | Khodgi'
+    title: 'Order',
+    titleTemplate: '%s | Invoice'
   },
   data: function data() {
     return {
@@ -254,32 +261,56 @@ var render = function() {
           _vm._v(" "),
           _c("v-divider", { staticClass: "my-1" }),
           _vm._v(" "),
+          _c(
+            "v-row",
+            { staticClass: "btm" },
+            [
+              _c(
+                "v-col",
+                { staticClass: "py-1 caption", attrs: { cols: "7" } },
+                [_c("strong", [_vm._v("Items")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { staticClass: "py-1 caption", attrs: { cols: "2" } },
+                [_c("strong", [_vm._v("Qty")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { staticClass: "py-1 caption", attrs: { cols: "3" } },
+                [_c("strong", [_vm._v("Price")])]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
           _vm._l(_vm.order.orderdetails, function(item) {
             return _c(
               "div",
               { key: item.id },
               [
-                _c("span", { staticClass: "pt-1 caption" }, [
-                  _c("strong", [_vm._v(_vm._s(item.product_name))])
-                ]),
-                _vm._v(" "),
                 _c(
                   "v-row",
                   { staticClass: "btm" },
                   [
                     _c(
                       "v-col",
-                      {
-                        staticClass: "py-0  pl-5 caption",
-                        attrs: { cols: "7" }
-                      },
-                      [_c("i", [_vm._v(" Qty: " + _vm._s(item.quantity))])]
+                      { staticClass: "py-0 caption", attrs: { cols: "7" } },
+                      [_c("i", [_vm._v(_vm._s(item.product_name))])]
                     ),
                     _vm._v(" "),
                     _c(
                       "v-col",
-                      { staticClass: "py-0 caption", attrs: { cols: "5" } },
-                      [_c("i", [_vm._v(" Rs. " + _vm._s(item.price))])]
+                      { staticClass: "py-0 caption", attrs: { cols: "2" } },
+                      [_c("i", [_vm._v(_vm._s(item.quantity))])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-col",
+                      { staticClass: "py-0 caption", attrs: { cols: "3" } },
+                      [_c("i", [_vm._v(_vm._s(item.price))])]
                     )
                   ],
                   1
