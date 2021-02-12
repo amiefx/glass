@@ -5,151 +5,9 @@
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/orders/print/Id.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//var moment = require('moment');
-/* harmony default export */ __webpack_exports__["default"] = ({
-  layout: 'print',
-  metaInfo: {
-    // title will be injected into parent titleTemplate
-    title: 'Order',
-    titleTemplate: '%s | Invoice'
-  },
-  data: function data() {
-    return {
-      order: [],
-      business: '',
-      logoImg: window.location.origin + "/storage/images/khodgilogo.png"
-    };
-  },
-  updated: function updated() {// setTimeout(() => {
-    //      window.addEventListener("load", window.print());
-    // }, 1000);
-  },
-  //     filters: {
-  //       formatDate: function (value) {
-  //           return moment(value).format('MMMM D, YYYY');
-  //       }
-  //   },
-  created: function created() {
-    var _this = this;
-
-    axios.get("/api/invoicedetail/".concat(this.$route.params.id)).then(function (res) {
-      _this.order = res.data;
-    })["catch"](function (err) {});
-    axios.get('/api/business/all').then(function (res) {
-      _this.business = res.data.business;
-    })["catch"](function (err) {});
-  },
-  methods: {
-    printme: function printme(el) {
-      // let restorepage = document.body.innerHTML;
-      // let printcontent = document.getElementById(el).innerHTML;
-      // document.body.innerHTML = restorepage;
-      window.print(); // document.body.innerHTML = restorepage;
-    }
-  },
-  filters: {
-    formatDate: function formatDate(value) {
-      return moment(value).format('MMMM D, YYYY');
-    }
-  },
-  computed: {}
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\apps\\githubkarimglass\\glass\\resources\\js\\views\\admin\\orders\\print\\Id.vue: Unexpected token (110:0)\n\n\u001b[0m \u001b[90m 108 | \u001b[39m\u001b[90m//var moment = require('moment');\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 109 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mdefault\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 110 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 111 | \u001b[39m  layout\u001b[33m:\u001b[39m \u001b[32m'print'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 112 | \u001b[39m    metaInfo\u001b[33m:\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 113 | \u001b[39m        \u001b[90m// title will be injected into parent titleTemplate\u001b[39m\u001b[0m\n    at Parser._raise (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:748:17)\n    at Parser.raiseWithData (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:741:17)\n    at Parser.raise (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.unexpected (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:9101:16)\n    at Parser.parseIdentifierName (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:11344:18)\n    at Parser.parseIdentifier (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:11317:23)\n    at Parser.parseMaybePrivateName (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:10645:19)\n    at Parser.parsePropertyName (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:11130:155)\n    at Parser.parsePropertyDefinition (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:11016:22)\n    at Parser.parseObjectLike (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:10931:25)\n    at Parser.parseExprAtom (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:10491:23)\n    at Parser.parseExprSubscripts (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:10150:23)\n    at Parser.parseUpdate (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:10130:21)\n    at Parser.parseMaybeUnary (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:10119:17)\n    at Parser.parseExprOps (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:9989:23)\n    at Parser.parseMaybeConditional (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:9963:23)\n    at Parser.parseMaybeAssign (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:9926:21)\n    at allowInAnd (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:9893:39)\n    at Parser.allowInAnd (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:11541:16)\n    at Parser.parseMaybeAssignAllowIn (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:9893:17)\n    at Parser.parseExportDefaultExpression (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:12885:24)\n    at Parser.parseExport (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:12795:31)\n    at Parser.parseStatementContent (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:11782:27)\n    at Parser.parseStatement (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:11676:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:12258:25)\n    at Parser.parseBlockBody (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:12249:10)\n    at Parser.parseTopLevel (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:11607:10)\n    at Parser.parse (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:13415:10)\n    at parse (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\parser\\lib\\index.js:13468:38)\n    at parser (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\core\\lib\\parser\\index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:99:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (D:\\apps\\githubkarimglass\\glass\\node_modules\\@babel\\core\\lib\\transform.js:27:41)");
 
 /***/ }),
 
@@ -295,6 +153,7 @@ var render = function() {
                   "v-row",
                   { staticClass: "btm" },
                   [
+                    _vm._v("\n<<<<<<< HEAD\n          "),
                     _c(
                       "v-col",
                       { staticClass: "py-0 caption", attrs: { cols: "7" } },
@@ -311,6 +170,24 @@ var render = function() {
                       "v-col",
                       { staticClass: "py-0 caption", attrs: { cols: "3" } },
                       [_c("i", [_vm._v(_vm._s(item.price))])]
+                    ),
+                    _vm._v("\n=======\n          "),
+                    _c(
+                      "v-col",
+                      {
+                        staticClass: "py-0 pl-5 caption",
+                        attrs: { cols: "7" }
+                      },
+                      [_c("i", [_vm._v(" Qty: " + _vm._s(item.quantity))])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-col",
+                      { staticClass: "py-0 caption", attrs: { cols: "5" } },
+                      [_c("i", [_vm._v(" Rs. " + _vm._s(item.price))])]
+                    ),
+                    _vm._v(
+                      "\n>>>>>>> 06d7e0904ed267f78d229fa261ecdb65948d94b3\n        "
                     )
                   ],
                   1
@@ -333,7 +210,7 @@ var render = function() {
                     _c(
                       "td",
                       { staticClass: "caption", attrs: { width: "44%" } },
-                      [_vm._v(" Subtotal ")]
+                      [_vm._v("Subtotal")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -341,7 +218,9 @@ var render = function() {
                       { staticClass: "px-0 caption", attrs: { width: "33%" } },
                       [
                         _vm._v(
-                          " Rs. " + _vm._s(_vm.order.order.sub_total) + " "
+                          "\n                Rs. " +
+                            _vm._s(_vm.order.order.sub_total) +
+                            "\n              "
                         )
                       ]
                     )
@@ -350,59 +229,63 @@ var render = function() {
                   _c("tr", [
                     _c("td"),
                     _vm._v(" "),
-                    _c("td", { staticClass: "caption" }, [
-                      _vm._v(" Discount ")
-                    ]),
+                    _c("td", { staticClass: "caption" }, [_vm._v("Discount")]),
                     _vm._v(" "),
                     _c("td", { staticClass: "px-0 caption" }, [
-                      _vm._v(" Rs. " + _vm._s(_vm.order.order.discount) + " ")
+                      _vm._v("Rs. " + _vm._s(_vm.order.order.discount))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.driver[0]
+                    ? _c("tr", [
+                        _c("td"),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "caption" }, [
+                          _vm._v("Suzuki Rent")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "px-0 caption" }, [
+                          _vm._v("Rs. " + _vm._s(_vm.driver[0].amount_paid))
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.fitter[0]
+                    ? _c("tr", [
+                        _c("td"),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "caption" }, [
+                          _vm._v("Fitting Charges")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "px-0 caption" }, [
+                          _vm._v(
+                            "Rs. " + _vm._s(_vm.fitter[0].amount_paid) + " "
+                          )
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "caption" }, [_vm._v("Total")]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "px-0 caption" }, [
+                      _vm._v("Rs. " + _vm._s(_vm.order.order.total))
                     ])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
                     _c("td"),
                     _vm._v(" "),
-                    _c("td", { staticClass: "caption" }, [
-                      _vm._v(" Suzuki Rent ")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "px-0 caption" }, [
-                      _vm._v(" Rs. 555,142 ")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "caption" }, [
-                      _vm._v(" Fitting Charges ")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "px-0 caption" }, [
-                      _vm._v(" Rs. 555,142 ")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "caption" }, [_vm._v(" Total ")]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "px-0 caption" }, [
-                      _vm._v(" Rs. " + _vm._s(_vm.order.order.total) + " ")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "caption" }, [
-                      _vm._v(" Received ")
-                    ]),
+                    _c("td", { staticClass: "caption" }, [_vm._v("Received")]),
                     _vm._v(" "),
                     _c("td", { staticClass: "px-0 caption" }, [
                       _vm._v(
-                        " Rs. " + _vm._s(_vm.order.order.amount_recieved) + " "
+                        "\n                Rs. " +
+                          _vm._s(_vm.order.order.amount_recieved) +
+                          "\n              "
                       )
                     ])
                   ]),
@@ -410,11 +293,13 @@ var render = function() {
                   _c("tr", [
                     _c("td"),
                     _vm._v(" "),
-                    _c("td", { staticClass: "caption" }, [_vm._v(" Balance ")]),
+                    _c("td", { staticClass: "caption" }, [_vm._v("Balance")]),
                     _vm._v(" "),
                     _c("td", { staticClass: "px-0 caption" }, [
                       _vm._v(
-                        " Rs. " + _vm._s(_vm.order.order.amount_recieved) + " "
+                        "\n                Rs. " +
+                          _vm._s(_vm.order.order.amount_recieved) +
+                          "\n              "
                       )
                     ])
                   ])
@@ -430,7 +315,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "text-center caption" }, [
             _vm._v(
-              "\n          Software developed by: www.wogale.com | 030012345678\n      "
+              "\n        Software developed by: www.wogale.com | 030012345678\n      "
             )
           ])
         ],

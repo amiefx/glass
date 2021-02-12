@@ -93,6 +93,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 //var moment = require('moment');
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: "print",
@@ -108,11 +116,6 @@ __webpack_require__.r(__webpack_exports__);
       logoImg: window.location.origin + "/storage/images/khodgilogo.png"
     };
   },
-  //     filters: {
-  //       formatDate: function (value) {
-  //           return moment(value).format('MMMM D, YYYY');
-  //       }
-  //   },
   created: function created() {
     var _this = this;
 
@@ -131,16 +134,16 @@ __webpack_require__.r(__webpack_exports__);
       // window.print();
       // document.body.innerHTML = restorepage;
       var routeData = this.$router.resolve("/admin/invoice/print/".concat(this.order.order.id));
-      window.open(routeData.href, '_blank');
+      window.open(routeData.href, "_blank");
     },
     deleteItem: function deleteItem() {
       var _this2 = this;
 
-      var decide = confirm('Are you sure you want to delete this item?');
+      var decide = confirm("Are you sure you want to delete this item?");
 
       if (decide) {
-        axios["delete"]('/api/order/' + this.order.order.id).then(function (res) {
-          _this2.$router.replace('/admin/invoice/approvals');
+        axios["delete"]("/api/order/" + this.order.order.id).then(function (res) {
+          _this2.$router.replace("/admin/invoice/approvals");
         })["catch"](function (err) {
           console.log(err.response);
         });
@@ -149,8 +152,8 @@ __webpack_require__.r(__webpack_exports__);
     approveItem: function approveItem() {
       var _this3 = this;
 
-      axios.post('/api/order/approve/' + this.order.order.id).then(function (res) {
-        _this3.$router.replace('/admin/invoice/approvals');
+      axios.post("/api/order/approve/" + this.order.order.id).then(function (res) {
+        _this3.$router.replace("/admin/invoice/approvals");
       })["catch"](function (err) {
         console.log(err.response);
       });
@@ -161,7 +164,18 @@ __webpack_require__.r(__webpack_exports__);
       return moment(value).format("MMMM D, YYYY");
     }
   },
-  computed: {}
+  computed: {
+    driver: function driver() {
+      return this.order.salary.filter(function (item) {
+        return item.employee_type == "Driver";
+      });
+    },
+    fitter: function fitter() {
+      return this.order.salary.filter(function (item) {
+        return item.employee_type == "Fitter";
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -338,7 +352,7 @@ var render = function() {
                         _c("td", {}, [_vm._v("Suzuki Rent")]),
                         _vm._v(" "),
                         _c("td", { staticClass: "px-0" }, [
-                          _vm._v("Rs. 555,142")
+                          _vm._v("Rs. " + _vm._s(_vm.driver[0].amount_paid))
                         ])
                       ]),
                       _vm._v(" "),
@@ -348,7 +362,7 @@ var render = function() {
                         _c("td", {}, [_vm._v("Fitting Charges")]),
                         _vm._v(" "),
                         _c("td", { staticClass: "px-0" }, [
-                          _vm._v("Rs. 555,142")
+                          _vm._v("Rs. " + _vm._s(_vm.fitter[0].amount_paid))
                         ])
                       ]),
                       _vm._v(" "),
@@ -381,11 +395,12 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", { staticClass: "px-0" }, [
                           _vm._v(
-                            "Rs. " +
+                            "\n                Rs. " +
                               _vm._s(
                                 _vm.order.order.total -
                                   _vm.order.order.amount_recieved
-                              )
+                              ) +
+                              "\n              "
                           )
                         ])
                       ])

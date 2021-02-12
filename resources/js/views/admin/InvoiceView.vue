@@ -12,7 +12,7 @@
     <v-divider class="my-1"></v-divider>
     <v-row>
       <v-col cols="6">
-        <v-simple-table >
+        <v-simple-table>
           <thead>
             <tr>
               <td>Item</td>
@@ -32,7 +32,7 @@
       <v-divider vertical class="pa-5"></v-divider>
       <v-col cols="5">
         <div>
-          <v-simple-table >
+          <v-simple-table>
             <tbody>
               <tr>
                 <td width="15%"></td>
@@ -46,15 +46,16 @@
                 <td class="">Discount</td>
                 <td class="px-0">Rs. {{ order.order.discount }}</td>
               </tr>
-              <tr>
+              <tr v-if="driver[0]">
                 <td></td>
                 <td class="">Suzuki Rent</td>
-                <td class="px-0">Rs. 555,142</td>
+                <td class="px-0">Rs. <span>{{ driver[0].amount_paid}}</span>
+                </td>
               </tr>
-              <tr>
+              <tr v-if="fitter[0]">
                 <td></td>
                 <td class="">Fitting Charges</td>
-                <td class="px-0">Rs. 555,142</td>
+                <td class="px-0">Rs. <span> {{ fitter[0].amount_paid }} </span></td>
               </tr>
               <tr>
                 <td></td>
@@ -69,13 +70,17 @@
               <tr>
                 <td></td>
                 <td class="">Balance</td>
-                <td class="px-0">Rs. {{ order.order.total - order.order.amount_recieved }}</td>
+                <td class="px-0">
+                  Rs. {{ order.order.total - order.order.amount_recieved }}
+                </td>
               </tr>
             </tbody>
           </v-simple-table>
         </div>
 
-        <v-btn color="primary" class="float-right" @click="printme">Print</v-btn>
+        <v-btn color="primary" class="float-right" @click="printme"
+          >Print</v-btn
+        >
       </v-col>
     </v-row>
   </div>
@@ -99,23 +104,12 @@ export default {
     };
   },
 
-  updated() {
-    // setTimeout(() => {
-    //      window.addEventListener("load", window.print());
-    // }, 1000);
-  },
-
-  //     filters: {
-  //       formatDate: function (value) {
-  //           return moment(value).format('MMMM D, YYYY');
-  //       }
-  //   },
-
   created() {
     axios
       .get(`/api/invoicedetail/${this.$route.params.id}`)
       .then((res) => {
         this.order = res.data;
+        this.getSalaryData();
       })
       .catch((err) => {});
 
@@ -134,8 +128,10 @@ export default {
       // document.body.innerHTML = restorepage;
       // window.print();
       // document.body.innerHTML = restorepage;
-      let routeData = this.$router.resolve(`/admin/invoice/print/${this.order.order.id}`);
-            window.open(routeData.href, '_blank');
+      let routeData = this.$router.resolve(
+        `/admin/invoice/print/${this.order.order.id}`
+      );
+      window.open(routeData.href, "_blank");
     },
   },
 
@@ -145,7 +141,14 @@ export default {
     },
   },
 
-  computed: {},
+  computed: {
+    driver() {
+      return this.order.salary.filter((item) => item.employee_type == "Driver");
+    },
+    fitter() {
+      return this.order.salary.filter((item) => item.employee_type == "Fitter");
+    },
+  },
 };
 </script>
 
