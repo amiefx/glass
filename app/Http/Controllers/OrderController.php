@@ -66,6 +66,8 @@ class OrderController extends Controller
 
             if ($order['priceflag'] == true) {
                 $priceflag = "Pendding";
+            }else {
+                $priceflag = $order['doc_type'];
             }
 
             $neworder = new Order([
@@ -235,7 +237,7 @@ class OrderController extends Controller
 
     public function orderByWalkinPhone($id)
     {
-        $orders= DB::table('orders')->where('walkin_phone', $id)->get();
+        $orders= DB::table('recievablesbyphone')->where('walkin_phone', $id)->get();
         return response()->json(['orders'=>$orders]);
     }
 
