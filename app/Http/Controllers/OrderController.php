@@ -109,7 +109,7 @@ class OrderController extends Controller
                     'debit' => $order['receivable_amt'],
                     'credit' => 0,
                     'balance' => $order['receivable_amt'],
-                    'status' => $order['doc_type'] == 'Invoice' ? 1 : 0,
+                    'status' => $priceflag == 'Invoice' ? 1 : 0,
                     'user_id' => $user->id
                 ]);
 
@@ -124,7 +124,7 @@ class OrderController extends Controller
                     'debit' => $order['received_amt'],
                     'credit' => 0,
                     'balance' => $order['received_amt'],
-                    'status' => $order['doc_type'] == 'Invoice' ? 1 : 0,
+                    'status' => $priceflag == 'Invoice' ? 1 : 0,
                     'user_id' => $user->id
                 ]);
             }
@@ -136,7 +136,7 @@ class OrderController extends Controller
                     'employee_id' => $order['driver'],
                     'amount_paid' => $order['suzuki_rent'],
                     'note' => '',
-                    'status' => $order['doc_type'],
+                    'status' => $priceflag,
                     'user_id' => $user->id
                 ]);
             }
@@ -148,7 +148,7 @@ class OrderController extends Controller
                     'employee_id' => $order['fitter'],
                     'amount_paid' => $order['fitting_charges'],
                     'note' => '',
-                    'status' => $order['doc_type'],
+                    'status' => $priceflag,
                     'user_id' => $user->id
                 ]);
             }
@@ -421,6 +421,66 @@ class OrderController extends Controller
             'orderdetails' => $order->orderdetails,
             'salary' => $slry
         ], 200);
+    }
+
+
+    public function orderApprove($id)
+    {
+
+        // $order = Order::find($id);
+
+        // $order->status= 'Invoice';
+
+        // $order->save();
+
+
+        // return response()->json(['order' => new OrderResource($order)], 200);
+
+        $user = auth()->user();
+        $postData = $request->all();
+        $priceflag = "";
+
+
+        try {
+            DB::beginTransaction();
+
+            // $order = $postData['orderDetails'];
+            $order = Order::find($id);
+            $order->status= 'Invoice';
+            $order->save();
+
+    
+            if (Receivable::where('doc_id', '=', $order->id)->where('type', '=', 'invoice')->first()) {
+                $rec = Receivable::where('doc_id', '=', $order->id)->where('type', '=', 'invoice')->first();
+                $rec->status = 1;
+                $rec->save();
+            }
+            
+            if (Cash::where('doc_id', '=', $order->id)->where('doc_type', '=', 'invoice')->first()) {
+                $cash = Cash::where('doc_id', '=', $order->id)->where('doc_type', '=', 'invoice')->first();
+                $cash->status = 1;
+                $cash->save();
+            }
+
+            if (Salary::where('order_id', '=', $order->id)->where('status', '=', 'Pendding')->first()) {
+
+                $slry = Salary::where('order_id', '=', $order->id)->where('status', '=', 'Pendding')->first();
+                $slry->status = 1;
+                $slry->save();
+            }
+
+
+
+
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            return response()->json(['error'=> $th->getMessage()], 500);
+        }
+
+        return response()->json(['order' => new OrderResource($order)], 200);
     }
 
 

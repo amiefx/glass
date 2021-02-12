@@ -46,12 +46,12 @@
                 <td class="">Discount</td>
                 <td class="px-0">Rs. {{ order.order.discount }}</td>
               </tr>
-              <tr>
+              <tr v-if="driver[0]">
                 <td></td>
                 <td class="">Suzuki Rent</td>
                 <td class="px-0">Rs. {{ driver[0].amount_paid }}</td>
               </tr>
-              <tr>
+              <tr v-if="fitter[0]">
                 <td></td>
                 <td class="">Fitting Charges</td>
                 <td class="px-0">Rs. {{ fitter[0].amount_paid }}</td>
@@ -97,7 +97,7 @@ export default {
   metaInfo: {
     // title will be injected into parent titleTemplate
     title: "Orders",
-    titleTemplate: "%s | Khodgi",
+    titleTemplate: "%s | Karim Glass",
   },
 
   data: () => {

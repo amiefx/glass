@@ -1272,8 +1272,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this8 = this;
 
       axios.get("/api/orderbywalkinphone/".concat(this.invoiceData.walkin_phone)).then(function (res) {
-        _this8.ra_balance = res;
-        console.log(res);
+        _this8.ra_balance = res.data.orders[0].balance;
+        _this8.cust2.receivable = _this8.ra_balance;
+        console.log(res.data.orders[0].balance);
       });
     }
   },
@@ -4195,7 +4196,7 @@ var render = function() {
                         "v-row",
                         [
                           _c("v-checkbox", {
-                            attrs: { label: "Print Invoice" },
+                            attrs: { label: "Invoice" },
                             model: {
                               value: _vm.printInvoice,
                               callback: function($$v) {
@@ -4206,7 +4207,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("v-checkbox", {
-                            attrs: { label: "Print Gate Pass" },
+                            attrs: { label: "Gate Pass" },
                             model: {
                               value: _vm.printGatePass,
                               callback: function($$v) {

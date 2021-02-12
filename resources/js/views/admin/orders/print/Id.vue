@@ -28,18 +28,15 @@
           <strong>{{ item.product_name }}</strong>
         </span> -->
         <v-row class="btm">
-<<<<<<< HEAD
           <v-col cols="7" class="py-0 caption"><i>{{ item.product_name }}</i></v-col>
           <v-col cols="2" class="py-0 caption"> <i>{{item.quantity}}</i> </v-col>
           <v-col cols="3" class="py-0 caption"> <i>{{ item.price }}</i> </v-col>
-=======
-          <v-col cols="7" class="py-0 pl-5 caption">
-            <i> Qty: {{ item.quantity }}</i>
+          <!-- <v-col cols="7" class="py-0 pl-5 caption">
+            <i> {{ item.quantity }}</i>
           </v-col>
           <v-col cols="5" class="py-0 caption">
-            <i> Rs. {{ item.price }}</i>
-          </v-col>
->>>>>>> 06d7e0904ed267f78d229fa261ecdb65948d94b3
+            <i>{{ item.price }}</i>
+          </v-col>  -->
         </v-row>
       </div>
 
@@ -106,22 +103,19 @@
 
 <script>
 //var moment = require('moment');
-export default {
-<<<<<<< HEAD
+export default { 
   layout: 'print',
     metaInfo: {
         // title will be injected into parent titleTemplate
         title: 'Order' ,
         titleTemplate: '%s | Invoice'
-        },
-=======
+        }, 
   layout: "print",
   metaInfo: {
     // title will be injected into parent titleTemplate
     title: "Orders",
-    titleTemplate: "%s | Khodgi",
-  },
->>>>>>> 06d7e0904ed267f78d229fa261ecdb65948d94b3
+    titleTemplate: "%s | Karim Glass",
+  }, 
 
   data: () => {
     return {

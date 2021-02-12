@@ -972,7 +972,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           driver: this.invoiceData.driver,
           fitter: this.invoiceData.fitter,
           walkin_name: this.invoiceData.walkin_name,
-          walkin_phone: this.invoiceData.walkin_phone
+          walkin_phone: this.invoiceData.walkin_phone,
+          priceflag: false
         },
         orderedItems: this.cart
       }; // Add a request interceptor

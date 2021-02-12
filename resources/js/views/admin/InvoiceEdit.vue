@@ -864,6 +864,7 @@ export default {
           fitter: this.invoiceData.fitter,
           walkin_name: this.invoiceData.walkin_name,
           walkin_phone: this.invoiceData.walkin_phone,
+          priceflag: false,
         },
         orderedItems: this.cart,
       };
