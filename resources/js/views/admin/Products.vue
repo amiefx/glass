@@ -20,7 +20,7 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="">
-        <v-toolbar-title>product Management</v-toolbar-title>
+        <v-toolbar-title class="text-primary">product Management</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -41,8 +41,9 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" md="4" lg="4" >
+                  <v-col cols="12" md="6" lg="6" >
                     <v-text-field v-model="editedItem.sku" label="SKU" :rules="[rules.required]" ></v-text-field>
+                    <v-text-field v-model="editedItem.urdusku" label="URDU SKU" :rules="[rules.required]"></v-text-field>
                     <v-select
                        :items="categories"
                        item-text="name"
@@ -72,10 +73,11 @@
                        :rules="[rules.required]"
                      ></v-select>
                      <v-text-field type="number" v-model="editedItem.selling_price" label="Selling Price" ></v-text-field>
+                      <v-text-field v-model="editedItem.color" label="Color" ></v-text-field>
 
                      </v-col>
 
-                  <v-col cols="12" md="4" lg="4" >
+                  <!-- <v-col cols="12" md="4" lg="4" >
 
                      <v-text-field type="number" v-model.number="editedItem.height" label="Height" ></v-text-field>
                      <v-text-field type="number" v-model.number="editedItem.width" label="Width" ></v-text-field>
@@ -85,9 +87,9 @@
                      <v-text-field v-model="editedItem.size" label="Size" ></v-text-field>
                      <v-text-field v-model="editedItem.color" label="Color" ></v-text-field>
 
-                  </v-col>
+                  </v-col> -->
 
-                  <v-col cols="12" md="4" lg="4" >
+                  <v-col cols="12" md="6" lg="6" >
                     <v-checkbox
                         v-model="editedItem.enable_stock"
                         label="Enable Stock"
@@ -214,12 +216,12 @@
         { text: 'Enable Stock', value: 'stock' },
         { text: 'Alert Qty', value: 'alert_quantity' },
         { text: 'Price', value: 'selling_price' },
-        { text: 'Height', value: 'height' },
-        { text: 'Width', value: 'width' },
-        { text: 'Thickness', value: 'thickness' },
-        { text: 'Length', value: 'length' },
-        { text: 'Weight', value: 'weight' },
-        { text: 'Size', value: 'size' },
+        // { text: 'Height', value: 'height' },
+        // { text: 'Width', value: 'width' },
+        // { text: 'Thickness', value: 'thickness' },
+        // { text: 'Length', value: 'length' },
+        // { text: 'Weight', value: 'weight' },
+        // { text: 'Size', value: 'size' },
         { text: 'Color', value: 'color' },
         { text: 'Active', value: 'active' },
         { text: 'Actions', value: 'action', sortable: false },
@@ -238,6 +240,7 @@
       editedItem: {
         id: '',
         sku: '',
+        urdusku: '',
         name: '',
         category_id: '',
         brand_id: '',
@@ -245,12 +248,12 @@
         enable_stock: false,
         alert_quantity: '',
         selling_price: '',
-        height: '',
-        width: '',
-        thickness: '',
-        length: '',
-        weight: '',
-        size: '',
+        // height: '',
+        // width: '',
+        // thickness: '',
+        // length: '',
+        // weight: '',
+        // size: '',
         color: '',
         is_active: '',
         qty_on_hand: '',
@@ -259,6 +262,7 @@
       defaultItem: {
         id: '',
         sku: '',
+        urdusku: '',
         name: '',
         category_id: '',
         brand_id: '',
@@ -266,12 +270,12 @@
         enable_stock: false,
         alert_quantity: '',
         selling_price: '',
-        height: '',
-        width: '',
-        thickness: '',
-        length: '',
-        weight: '',
-        size: '',
+        // height: '',
+        // width: '',
+        // thickness: '',
+        // length: '',
+        // weight: '',
+        // size: '',
         color: '',
         is_active: '',
         qty_on_hand: '',
@@ -342,9 +346,9 @@
       getSku (item) {
         let a = this.editedItem.brand.name.slice(0, 2) + " " + this.editedItem.name;
         var color = ( this.editedItem.color !== '' ) ? " " + this.editedItem.color.slice(0, 3) : "";
-        var vol = ( this.editedItem.height !== '' ) ? " " + this.editedItem.height + "X" + this.editedItem.width + "X" + this.editedItem.thickness : "";
+        // var vol = ( this.editedItem.height !== '' ) ? " " + this.editedItem.height + "X" + this.editedItem.width + "X" + this.editedItem.thickness : "";
         this.editedItem.brand_id = this.editedItem.brand.id
-        this.editedItem.sku = (a + color + vol).toUpperCase();
+        this.editedItem.sku = (a + color).toUpperCase();
       },
 
     //   itemChanged(item) {
@@ -487,10 +491,12 @@
             .then(res => {
                 this.text = "Record Added Successfully!";
                 this.snackbar = true;
+                console.dir(this.editedItem)
                 this.products.data.push(res.data.product)
             })
             .catch(err => {
                 console.dir(err)
+                console.dir(this.editedItem)
                 this.text = "Error Inserting Record";
                 this.snackbar = true;
             })

@@ -20,7 +20,7 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="">
-        <v-toolbar-title>Brand Management</v-toolbar-title>
+        <v-toolbar-title class="text-primary">Brand Management</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -43,7 +43,7 @@
                 <v-row>
                   <v-col cols="12" >
                     <v-text-field v-model="editedItem.name" label="Name" :rules="[rules.required]"></v-text-field>
-                    <v-text-field v-model="editedItem.description" label="Description" ></v-text-field>
+                    <v-text-field v-model="editedItem.description" label="Description"></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -142,10 +142,7 @@
           validEmail: v => /.+@.+\..+/.test(v) || 'Email must be valid',
       },
       headers: [
-        {
-          text: '#',
-          value: 'id',
-        },
+        { text: '#', value: 'id' },
         { text: 'Name', value: 'name' },
         { text: 'Description', value: 'description' },
         { text: 'Actions', value: 'action', sortable: false },
