@@ -14,19 +14,19 @@
                   <table>
                   <tbody>
                       <tr>
-                          <td width="150px">Company</td>
+                          <td width="100px" class="text-dark bolder">Company:</td>
                           <td>{{customer.company_name}}</td>
                       </tr>
                       <tr>
-                          <td>Name</td>
+                          <td class="text-dark bolder">Name:</td>
                           <td>{{customer.name}}</td>
                       </tr>
                       <tr>
-                          <td>Email</td>
+                          <td class="text-dark bolder">Email:</td>
                           <td>{{customer.email}}</td>
                       </tr>
                       <tr>
-                          <td>Address</td>
+                          <td class="text-dark bolder">Address:</td>
                           <td>{{customer.address}}</td>
                       </tr>
                   </tbody>
@@ -36,20 +36,20 @@
                   <table class="float-right">
                   <tbody>
                       <tr>
-                          <td width="150px">Phone</td>
+                          <td width="100px" class="text-dark bolder">Phone:</td>
                           <td>{{customer.work_number}}</td>
                       </tr>
                       <tr>
-                          <td>Type</td>
+                          <td class="text-dark bolder">Type:</td>
                           <td>{{customer.type}}</td>
                       </tr>
                       <tr>
-                          <td>Credit Limit</td>
+                          <td class="text-dark bolder">Credit Limit:</td>
                           <td>{{customer.credit_limit}}</td>
                       </tr>
                       <tr>
-                          <td>Balance</td>
-                          <td><strong>{{customer.receivable}}</strong></td>
+                          <td class="text-dark bolder">Balance:</td>
+                          <td><strong class="text-success bolder">{{customer.receivable}}</strong></td>
                       </tr>
                   </tbody>
               </table>

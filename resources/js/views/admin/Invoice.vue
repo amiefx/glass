@@ -549,7 +549,7 @@
             </v-autocomplete>
           </v-col>
           <v-col cols="3" v-if="cust2"> {{ cust2.work_number }} </v-col>
-          <v-col cols="3" v-if="cust2"> Rs: {{ cust2.receivable }} </v-col>
+          <v-col cols="3" v-if="cust2" class="bg-warning"> Rs: {{ cust2.receivable }} </v-col>
         </v-row>
 
         <v-row v-if="cust2.id">
@@ -603,16 +603,16 @@
         <v-simple-table dense>
           <tbody>
             <tr>
-              <td width="25%">Suzuki Rent</td>
-              <td width="25%">
+              <td width="20%">Suzuki Rent</td>
+              <td width="30%">
                 <input
                   class="numinput"
                   type="number"
                   v-model="invoiceData.suzuki_rent"
                 />
               </td>
-              <td width="25%">Subtotal</td>
-              <td width="25%">
+              <td width="20%">Subtotal</td>
+              <td width="30%">
                 <input disabled class="numinput" v-model="invoiceTotal" />
               </td>
             </tr>

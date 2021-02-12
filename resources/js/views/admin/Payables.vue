@@ -14,19 +14,19 @@
               <table>
                 <tbody>
                   <tr>
-                    <td width="150px">Company</td>
+                    <td width="100px" class="text-dark bolder">Company:</td>
                     <td>{{ supplier.company_name }}</td>
                   </tr>
                   <tr>
-                    <td>Name</td>
+                    <td class="text-dark bolder">Name:</td>
                     <td>{{ supplier.name }}</td>
                   </tr>
                   <tr>
-                    <td>Email</td>
+                    <td class="text-dark bolder">Email:</td>
                     <td>{{ supplier.email }}</td>
                   </tr>
                   <tr>
-                    <td>Address</td>
+                    <td class="text-dark bolder">Address:</td>
                     <td>{{ supplier.address }}</td>
                   </tr>
                 </tbody>
@@ -36,21 +36,21 @@
               <table class="float-right">
                 <tbody>
                   <tr>
-                    <td width="150px">Phone</td>
+                    <td width="100px" class="text-dark bolder">Phone:</td>
                     <td>{{ supplier.work_number }}</td>
                   </tr>
                   <tr>
-                    <td>Type</td>
+                    <td class="text-dark bolder">Type:</td>
                     <td>{{ supplier.type }}</td>
                   </tr>
                   <tr>
-                    <td>Credit Limit</td>
+                    <td class="text-dark bolder">Credit Limit:</td>
                     <td>{{ supplier.credit_limit }}</td>
                   </tr>
                   <tr>
-                    <td>Balance</td>
+                    <td class="text-dark bolder">Balance:</td>
                     <td>
-                      <strong>{{ supplier.payables }}</strong>
+                      <strong class="text-success bolder">{{ supplier.payables }}</strong>
                     </td>
                   </tr>
                 </tbody>

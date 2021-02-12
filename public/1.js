@@ -1704,9 +1704,14 @@ var render = function() {
                             _c("table", [
                               _c("tbody", [
                                 _c("tr", [
-                                  _c("td", { attrs: { width: "150px" } }, [
-                                    _vm._v("Company")
-                                  ]),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "text-dark bolder",
+                                      attrs: { width: "100px" }
+                                    },
+                                    [_vm._v("Company:")]
+                                  ),
                                   _vm._v(" "),
                                   _c("td", [
                                     _vm._v(_vm._s(_vm.customer.company_name))
@@ -1714,19 +1719,31 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("tr", [
-                                  _c("td", [_vm._v("Name")]),
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-dark bolder" },
+                                    [_vm._v("Name:")]
+                                  ),
                                   _vm._v(" "),
                                   _c("td", [_vm._v(_vm._s(_vm.customer.name))])
                                 ]),
                                 _vm._v(" "),
                                 _c("tr", [
-                                  _c("td", [_vm._v("Email")]),
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-dark bolder" },
+                                    [_vm._v("Email:")]
+                                  ),
                                   _vm._v(" "),
                                   _c("td", [_vm._v(_vm._s(_vm.customer.email))])
                                 ]),
                                 _vm._v(" "),
                                 _c("tr", [
-                                  _c("td", [_vm._v("Address")]),
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-dark bolder" },
+                                    [_vm._v("Address:")]
+                                  ),
                                   _vm._v(" "),
                                   _c("td", [
                                     _vm._v(_vm._s(_vm.customer.address))
@@ -1740,9 +1757,14 @@ var render = function() {
                             _c("table", { staticClass: "float-right" }, [
                               _c("tbody", [
                                 _c("tr", [
-                                  _c("td", { attrs: { width: "150px" } }, [
-                                    _vm._v("Phone")
-                                  ]),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "text-dark bolder",
+                                      attrs: { width: "100px" }
+                                    },
+                                    [_vm._v("Phone:")]
+                                  ),
                                   _vm._v(" "),
                                   _c("td", [
                                     _vm._v(_vm._s(_vm.customer.work_number))
@@ -1750,13 +1772,21 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("tr", [
-                                  _c("td", [_vm._v("Type")]),
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-dark bolder" },
+                                    [_vm._v("Type:")]
+                                  ),
                                   _vm._v(" "),
                                   _c("td", [_vm._v(_vm._s(_vm.customer.type))])
                                 ]),
                                 _vm._v(" "),
                                 _c("tr", [
-                                  _c("td", [_vm._v("Credit Limit")]),
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-dark bolder" },
+                                    [_vm._v("Credit Limit:")]
+                                  ),
                                   _vm._v(" "),
                                   _c("td", [
                                     _vm._v(_vm._s(_vm.customer.credit_limit))
@@ -1764,12 +1794,18 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("tr", [
-                                  _c("td", [_vm._v("Balance")]),
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-dark bolder" },
+                                    [_vm._v("Balance:")]
+                                  ),
                                   _vm._v(" "),
                                   _c("td", [
-                                    _c("strong", [
-                                      _vm._v(_vm._s(_vm.customer.receivable))
-                                    ])
+                                    _c(
+                                      "strong",
+                                      { staticClass: "text-success bolder" },
+                                      [_vm._v(_vm._s(_vm.customer.receivable))]
+                                    )
                                   ])
                                 ])
                               ])

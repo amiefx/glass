@@ -3586,9 +3586,11 @@ var render = function() {
                     : _vm._e(),
                   _vm._v(" "),
                   _vm.cust2
-                    ? _c("v-col", { attrs: { cols: "3" } }, [
-                        _vm._v(" Rs: " + _vm._s(_vm.cust2.receivable) + " ")
-                      ])
+                    ? _c(
+                        "v-col",
+                        { staticClass: "bg-warning", attrs: { cols: "3" } },
+                        [_vm._v(" Rs: " + _vm._s(_vm.cust2.receivable) + " ")]
+                      )
                     : _vm._e()
                 ],
                 1
@@ -3816,11 +3818,11 @@ var render = function() {
               _c("v-simple-table", { attrs: { dense: "" } }, [
                 _c("tbody", [
                   _c("tr", [
-                    _c("td", { attrs: { width: "25%" } }, [
+                    _c("td", { attrs: { width: "20%" } }, [
                       _vm._v("Suzuki Rent")
                     ]),
                     _vm._v(" "),
-                    _c("td", { attrs: { width: "25%" } }, [
+                    _c("td", { attrs: { width: "30%" } }, [
                       _c("input", {
                         directives: [
                           {
@@ -3848,9 +3850,9 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("td", { attrs: { width: "25%" } }, [_vm._v("Subtotal")]),
+                    _c("td", { attrs: { width: "20%" } }, [_vm._v("Subtotal")]),
                     _vm._v(" "),
-                    _c("td", { attrs: { width: "25%" } }, [
+                    _c("td", { attrs: { width: "30%" } }, [
                       _c("input", {
                         directives: [
                           {
