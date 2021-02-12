@@ -416,7 +416,9 @@ var render = function() {
                   "v-toolbar",
                   { attrs: { flat: "", color: "" } },
                   [
-                    _c("v-toolbar-title", [_vm._v("slab Management")]),
+                    _c("v-toolbar-title", { staticClass: "text-primary" }, [
+                      _vm._v("slab Management")
+                    ]),
                     _vm._v(" "),
                     _c("v-divider", {
                       staticClass: "mx-4",

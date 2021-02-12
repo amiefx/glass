@@ -448,7 +448,11 @@ var render = function() {
           dense: "",
           headers: _vm.headers,
           items: _vm.cashes.data,
+<<<<<<< HEAD
           "items-per-page": 15,
+=======
+          "items-per-page": 5,
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
           "item-key": "id",
           loading: _vm.loading,
           options: _vm.options,

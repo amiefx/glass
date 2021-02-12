@@ -132,7 +132,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
 //
+=======
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'admin',
   middleware: ['auth', 'admin'],
@@ -178,6 +181,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Supplier',
         value: 'supplier_id'
+<<<<<<< HEAD
       }, {
         text: 'Employee',
         value: 'employee_id'
@@ -188,6 +192,18 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Credit',
         value: 'credit'
       }, {
+=======
+      }, {
+        text: 'Employee',
+        value: 'employee_id'
+      }, {
+        text: 'Debit',
+        value: 'debit'
+      }, {
+        text: 'Credit',
+        value: 'credit'
+      }, {
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
         text: 'User',
         value: 'user_id'
       }],
@@ -441,7 +457,11 @@ var render = function() {
           dense: "",
           headers: _vm.headers,
           items: _vm.banks.data,
+<<<<<<< HEAD
           "items-per-page": 15,
+=======
+          "items-per-page": 5,
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
           "item-key": "id",
           loading: _vm.loading,
           options: _vm.options,

@@ -271,7 +271,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
 //
+=======
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
 
 
 
@@ -602,8 +605,24 @@ exports.push([module.i, ".pointer[data-v-07367775] {\n  cursor: pointer;\n}", ""
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
+<<<<<<< HEAD
 
 
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SupplierList.vue?vue&type=style&index=0&id=07367775&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SupplierList.vue?vue&type=style&index=0&id=07367775&lang=scss&scoped=true&");
+=======
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+<<<<<<< HEAD
+=======
 var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SupplierList.vue?vue&type=style&index=0&id=07367775&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SupplierList.vue?vue&type=style&index=0&id=07367775&lang=scss&scoped=true&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
@@ -615,6 +634,7 @@ var insertInto;
 
 var options = {"hmr":true}
 
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
 options.transform = transform
 options.insertInto = undefined;
 
@@ -829,7 +849,11 @@ var render = function() {
                                   _c("td", [_c("strong", [_vm._v("Balance")])]),
                                   _vm._v(" "),
                                   _c("td", [
+<<<<<<< HEAD
                                     _c("strong", { staticClass: "red--text" }, [
+=======
+                                    _c("strong", [
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
                                       _vm._v(_vm._s(_vm.supplier.payables))
                                     ])
                                   ])

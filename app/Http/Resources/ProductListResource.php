@@ -33,12 +33,11 @@ class ProductListResource extends JsonResource
         $data = [
             'id' => $this->id,
             'sku' => $this->sku,
+            'urdu_sku' => $this->urdu_sku,
             'name' => $this->name,
             'selling_price' => $this->selling_price,
             'is_active' => $this->is_active,
             'enable_stock' => $this->enable_stock,
-            'height' => $this->height,
-            'width' => $this->width,
             'alert_qty' => $this->alert_quantity,
             'category' => $this->category->name,
             'onhand' => DB::table('product_qty')->select('qty')->where('product_id', '=', $this->id)->first(),

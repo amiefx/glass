@@ -20,7 +20,7 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="">
-        <v-toolbar-title> {{ $t('category management') }}</v-toolbar-title>
+        <v-toolbar-title class="text-primary"> {{ $t('category management') }}</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset

@@ -449,7 +449,7 @@ var render = function() {
                   "v-toolbar",
                   { attrs: { flat: "", color: "" } },
                   [
-                    _c("v-toolbar-title", [
+                    _c("v-toolbar-title", { staticClass: "text-primary" }, [
                       _vm._v(" " + _vm._s(_vm.$t("category management")))
                     ]),
                     _vm._v(" "),

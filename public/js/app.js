@@ -86904,6 +86904,7 @@ var routes = [// {
   name: 'order-view',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../views/admin/InvoiceView.vue */ "./resources/js/views/admin/InvoiceView.vue"));
+<<<<<<< HEAD
   },
   meta: {
     layout: 'admin',
@@ -86914,6 +86915,8 @@ var routes = [// {
   name: 'order-pending-view',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! ../views/admin/InvoicePending.vue */ "./resources/js/views/admin/InvoicePending.vue"));
+=======
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
   },
   meta: {
     layout: 'admin',

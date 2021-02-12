@@ -58,6 +58,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
+=======
+//
+//
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: "admin",
   middleware: ["auth", "admin"],
@@ -68,7 +73,10 @@ __webpack_require__.r(__webpack_exports__);
       dialog: false,
       loading: false,
       snackbar: false,
+<<<<<<< HEAD
       search: '',
+=======
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
       text: "",
       success: "",
       error: "",
@@ -79,6 +87,7 @@ __webpack_require__.r(__webpack_exports__);
       headers: [{
         text: "#",
         value: "id"
+<<<<<<< HEAD
       }, {
         text: "Total",
         value: "total"
@@ -98,6 +107,23 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Actions',
         value: 'action',
         sortable: false
+=======
+      }, {
+        text: "Total",
+        value: "total"
+      }, {
+        text: "Discount",
+        value: "discount"
+      }, {
+        text: "Sub Total",
+        value: "sub_total"
+      }, {
+        text: "Amount Received",
+        value: "amount_recieved"
+      }, {
+        text: "User",
+        value: "user_id"
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
       }],
       orders: [],
       invoices: [],
@@ -200,12 +226,18 @@ __webpack_require__.r(__webpack_exports__);
       this.paginate(e);
     },
     editInvoice: function editInvoice(item) {
+<<<<<<< HEAD
       this.$router.push("/admin/invoice-pending/view/".concat(item.id));
     }
   },
   created: function created() {
     this.initialize();
   },
+=======
+      this.$router.push("/admin/invoice/view/".concat(item.id));
+    }
+  },
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
   watch: {
     customer_id: function customer_id() {
       var e = {
@@ -241,6 +273,7 @@ var render = function() {
   return _c(
     "div",
     [
+<<<<<<< HEAD
       _c(
         "v-card",
         [
@@ -364,6 +397,117 @@ var render = function() {
         ],
         1
       ),
+=======
+      _c("v-data-table", {
+        staticClass: "elevation-0",
+        attrs: {
+          headers: _vm.headers,
+          items: _vm.invoices,
+          "items-per-page": 5,
+          "item-key": "id",
+          loading: _vm.loading,
+          options: _vm.options,
+          "server-items-length": _vm.invoices.length,
+          "loading-text": "Loading.. Please Wait!",
+          "footer-props": {
+            itemsPerPageOptions: [5, 10, 15],
+            "show-current-page": true,
+            "show-first-last-page": true
+          }
+        },
+        on: {
+          pagination: _vm.paginate,
+          "update:options": function($event) {
+            _vm.options = $event
+          }
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "top",
+            fn: function() {
+              return [
+                _c("v-text-field", {
+                  staticClass: "mx-4",
+                  attrs: {
+                    "append-icon": "mdi-search",
+                    label: "Search",
+                    "single-line": "",
+                    "hide-details": ""
+                  },
+                  on: { input: _vm.searchIt }
+                })
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "item.id",
+            fn: function(ref) {
+              var item = ref.item
+              return [
+                _c(
+                  "v-tooltip",
+                  {
+                    attrs: { bottom: "" },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "activator",
+                          fn: function(ref) {
+                            var on = ref.on
+                            var attrs = ref.attrs
+                            return [
+                              _c(
+                                "span",
+                                _vm._g(
+                                  _vm._b(
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.editInvoice(item)
+                                        }
+                                      }
+                                    },
+                                    "span",
+                                    attrs,
+                                    false
+                                  ),
+                                  on
+                                ),
+                                [_vm._v(_vm._s(item.id))]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [_vm._v(" "), _c("span", [_vm._v("Click to View")])]
+                )
+              ]
+            }
+          },
+          {
+            key: "no-data",
+            fn: function() {
+              return [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "primary" },
+                    on: { click: _vm.initialize }
+                  },
+                  [_vm._v("Reset")]
+                )
+              ]
+            },
+            proxy: true
+          }
+        ])
+      }),
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
       _vm._v(" "),
       _c(
         "v-snackbar",
@@ -419,6 +563,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/index.js");
+<<<<<<< HEAD
 /* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
 /* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
 /* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
@@ -426,6 +571,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
 /* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
 /* harmony import */ var vuetify_lib_components_VTooltip__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VTooltip */ "./node_modules/vuetify/lib/components/VTooltip/index.js");
+=======
+/* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
+/* harmony import */ var vuetify_lib_components_VSnackbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VSnackbar */ "./node_modules/vuetify/lib/components/VSnackbar/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+/* harmony import */ var vuetify_lib_components_VTooltip__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VTooltip */ "./node_modules/vuetify/lib/components/VTooltip/index.js");
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
 
 
 
@@ -451,11 +602,15 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
+<<<<<<< HEAD
 
 
 
 
 _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_6__["VDataTable"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_7__["VIcon"],VSnackbar: vuetify_lib_components_VSnackbar__WEBPACK_IMPORTED_MODULE_8__["VSnackbar"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_9__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_10__["VTextField"],VTooltip: vuetify_lib_components_VTooltip__WEBPACK_IMPORTED_MODULE_11__["VTooltip"]})
+=======
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_5__["VDataTable"],VSnackbar: vuetify_lib_components_VSnackbar__WEBPACK_IMPORTED_MODULE_6__["VSnackbar"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_7__["VTextField"],VTooltip: vuetify_lib_components_VTooltip__WEBPACK_IMPORTED_MODULE_8__["VTooltip"]})
+>>>>>>> eb9423dc5c625531d6e02f6e9b7d40b7013f7a1a
 
 
 /* hot reload */

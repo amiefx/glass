@@ -192,6 +192,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'admin',
   middleware: ['auth', 'admin'],
@@ -243,25 +245,13 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Price',
         value: 'selling_price'
-      }, {
-        text: 'Height',
-        value: 'height'
-      }, {
-        text: 'Width',
-        value: 'width'
-      }, {
-        text: 'Thickness',
-        value: 'thickness'
-      }, {
-        text: 'Length',
-        value: 'length'
-      }, {
-        text: 'Weight',
-        value: 'weight'
-      }, {
-        text: 'Size',
-        value: 'size'
-      }, {
+      }, // { text: 'Height', value: 'height' },
+      // { text: 'Width', value: 'width' },
+      // { text: 'Thickness', value: 'thickness' },
+      // { text: 'Length', value: 'length' },
+      // { text: 'Weight', value: 'weight' },
+      // { text: 'Size', value: 'size' },
+      {
         text: 'Color',
         value: 'color'
       }, {
@@ -289,6 +279,7 @@ __webpack_require__.r(__webpack_exports__);
       editedItem: {
         id: '',
         sku: '',
+        urdusku: '',
         name: '',
         category_id: '',
         brand_id: '',
@@ -296,12 +287,12 @@ __webpack_require__.r(__webpack_exports__);
         enable_stock: false,
         alert_quantity: '',
         selling_price: '',
-        height: '',
-        width: '',
-        thickness: '',
-        length: '',
-        weight: '',
-        size: '',
+        // height: '',
+        // width: '',
+        // thickness: '',
+        // length: '',
+        // weight: '',
+        // size: '',
         color: '',
         is_active: '',
         qty_on_hand: '',
@@ -310,6 +301,7 @@ __webpack_require__.r(__webpack_exports__);
       defaultItem: {
         id: '',
         sku: '',
+        urdusku: '',
         name: '',
         category_id: '',
         brand_id: '',
@@ -317,12 +309,12 @@ __webpack_require__.r(__webpack_exports__);
         enable_stock: false,
         alert_quantity: '',
         selling_price: '',
-        height: '',
-        width: '',
-        thickness: '',
-        length: '',
-        weight: '',
-        size: '',
+        // height: '',
+        // width: '',
+        // thickness: '',
+        // length: '',
+        // weight: '',
+        // size: '',
         color: '',
         is_active: '',
         qty_on_hand: '',
@@ -384,10 +376,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     getSku: function getSku(item) {
       var a = this.editedItem.brand.name.slice(0, 2) + " " + this.editedItem.name;
-      var color = this.editedItem.color !== '' ? " " + this.editedItem.color.slice(0, 3) : "";
-      var vol = this.editedItem.height !== '' ? " " + this.editedItem.height + "X" + this.editedItem.width + "X" + this.editedItem.thickness : "";
+      var color = this.editedItem.color !== '' ? " " + this.editedItem.color.slice(0, 3) : ""; // var vol = ( this.editedItem.height !== '' ) ? " " + this.editedItem.height + "X" + this.editedItem.width + "X" + this.editedItem.thickness : "";
+
       this.editedItem.brand_id = this.editedItem.brand.id;
-      this.editedItem.sku = (a + color + vol).toUpperCase();
+      this.editedItem.sku = (a + color).toUpperCase();
     },
     //   itemChanged(item) {
     //     this.editedItem.sku = item.name.slice(0, 2) + " " + this.editedItem.name;
@@ -538,10 +530,12 @@ __webpack_require__.r(__webpack_exports__);
         axios.post('/api/products', this.editedItem).then(function (res) {
           _this8.text = "Record Added Successfully!";
           _this8.snackbar = true;
+          console.dir(_this8.editedItem);
 
           _this8.products.data.push(res.data.product);
         })["catch"](function (err) {
           console.dir(err);
+          console.dir(_this8.editedItem);
           _this8.text = "Error Inserting Record";
           _this8.snackbar = true;
         });
@@ -607,7 +601,9 @@ var render = function() {
                   "v-toolbar",
                   { attrs: { flat: "", color: "" } },
                   [
-                    _c("v-toolbar-title", [_vm._v("product Management")]),
+                    _c("v-toolbar-title", { staticClass: "text-primary" }, [
+                      _vm._v("product Management")
+                    ]),
                     _vm._v(" "),
                     _c("v-divider", {
                       staticClass: "mx-4",
@@ -694,8 +690,8 @@ var render = function() {
                                               {
                                                 attrs: {
                                                   cols: "12",
-                                                  md: "4",
-                                                  lg: "4"
+                                                  md: "6",
+                                                  lg: "6"
                                                 }
                                               },
                                               [
@@ -714,6 +710,26 @@ var render = function() {
                                                       )
                                                     },
                                                     expression: "editedItem.sku"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    label: "URDU SKU",
+                                                    rules: [_vm.rules.required]
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editedItem.urdusku,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "urdusku",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.urdusku"
                                                   }
                                                 }),
                                                 _vm._v(" "),
@@ -825,134 +841,6 @@ var render = function() {
                                                     expression:
                                                       "editedItem.selling_price"
                                                   }
-                                                })
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-col",
-                                              {
-                                                attrs: {
-                                                  cols: "12",
-                                                  md: "4",
-                                                  lg: "4"
-                                                }
-                                              },
-                                              [
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    type: "number",
-                                                    label: "Height"
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedItem.height,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "height",
-                                                        _vm._n($$v)
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.height"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    type: "number",
-                                                    label: "Width"
-                                                  },
-                                                  model: {
-                                                    value: _vm.editedItem.width,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "width",
-                                                        _vm._n($$v)
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.width"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    type: "number",
-                                                    label: "Thinkness"
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedItem.thickness,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "thickness",
-                                                        _vm._n($$v)
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.thickness"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    type: "number",
-                                                    label: "Length"
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedItem.length,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "length",
-                                                        _vm._n($$v)
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.length"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    type: "number",
-                                                    label: "Weight"
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedItem.weight,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "weight",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.weight"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: { label: "Size" },
-                                                  model: {
-                                                    value: _vm.editedItem.size,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "size",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.size"
-                                                  }
                                                 }),
                                                 _vm._v(" "),
                                                 _c("v-text-field", {
@@ -979,8 +867,8 @@ var render = function() {
                                               {
                                                 attrs: {
                                                   cols: "12",
-                                                  md: "4",
-                                                  lg: "4"
+                                                  md: "6",
+                                                  lg: "6"
                                                 }
                                               },
                                               [

@@ -31,16 +31,11 @@ class ProductResource extends JsonResource
             'stock' => $this->enable_stock == 1 ? 'yes' : 'no',
             'alert_quantity' => $this->alert_quantity,
             'sku' => $this->sku,
+            'urdu_sku' => $this->urdu_sku,
             'selling_price' => $this->selling_price,
             'active' => $this->is_active == 1 ? 'yes' : 'no',
             'is_active' => $this->is_active,
-            'size' => $this->size,
-            'height' => $this->height,
-            'width' => $this->width,
-            'length' => $this->length,
             'color' => $this->color,
-            'thickness' => $this->thickness,
-            'weight' => $this->weight,
             'selling_price' => $this->selling_price,
             'user_id' => $this->user_id
         ];
