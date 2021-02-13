@@ -9,7 +9,7 @@
       :loading="loading"
       @pagination="paginate"
       :options.sync="options"
-      :server-items-length="invoices.length"
+      :server-items-length="salaries.length"
       loading-text="Loading.. Please Wait!"
       :footer-props="{
         itemsPerPageOptions: [5, 10, 15],
@@ -89,8 +89,6 @@ export default {
       { text: "User", value: "user_id" },
     ],
     salaries: [],
-    invoices: [],
-    quotations: []
   }),
 
   methods: {
@@ -99,8 +97,8 @@ export default {
         axios
           .get(`/api/salaries/${e}`)
           .then((res) => {
-            this.salaires = res.data.salaries;
-
+            this.salaries = res.data.salaries.data;
+             console.log(res.data)
           })
           .catch((err) => console.dir(err.response));
       }
@@ -121,7 +119,7 @@ export default {
             },
           })
           .then((res) => {
-            this.salaries = res.data.salaries;
+            this.salaries = res.data.salaries.data;
 
           })
           .catch((err) => console.dir(err.response));
@@ -144,7 +142,7 @@ export default {
           },
         })
         .then((res) => {
-          this.salaries = res.data.salaries;
+          this.salaries = res.data.salaries.data;
 
         })
         .catch((err) => {

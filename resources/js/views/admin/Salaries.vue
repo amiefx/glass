@@ -94,7 +94,7 @@
                               label="Amount"
                               :rules="[rules.required]"
                             ></v-text-field>
-                            <div v-if="editedItem.pmt_method == 'Bank' ">
+                            <!-- <div v-if="editedItem.pmt_method == 'Bank' ">
                                 <v-text-field
                                 dense
                               v-model="editedItem.payer_account"
@@ -105,12 +105,12 @@
                               v-model="editedItem.details"
                               label="Details"
                             ></v-text-field>
+                            </div> -->
                             <v-text-field
                               dense
                               v-model="editedItem.notes"
                               label="Notes"
                             ></v-text-field>
-                            </div>
                           </v-col>
                         </v-row>
                     </v-card-text>
@@ -233,7 +233,7 @@ export default {
         }
       );
 
-        axios.post("/api/receipts", paymentData).then((res) => {
+        axios.post("/api/paysalary", paymentData).then((res) => {
           this.editedItem.amount = null,
           this.editedItem.pmt_method = null,
           this.editedItem.payer_account = null,

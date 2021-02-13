@@ -544,7 +544,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.loading = false;
         return Promise.reject(error);
       });
-      axios.post("/api/receipts", paymentData).then(function (res) {
+      axios.post("/api/paysalary", paymentData).then(function (res) {
         _this2.editedItem.amount = null, _this2.editedItem.pmt_method = null, _this2.editedItem.payer_account = null, _this2.editedItem.details = null, _this2.editedItem.notes = null;
 
         _this2.getEmployee(); //  this.newData = res.data.payments.id
@@ -664,9 +664,7 @@ __webpack_require__.r(__webpack_exports__);
         text: "User",
         value: "user_id"
       }],
-      salaries: [],
-      invoices: [],
-      quotations: []
+      salaries: []
     };
   },
   methods: {
@@ -675,7 +673,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (e.length > 0) {
         axios.get("/api/salaries/".concat(e)).then(function (res) {
-          _this.salaires = res.data.salaries;
+          _this.salaries = res.data.salaries.data;
+          console.log(res.data);
         })["catch"](function (err) {
           return console.dir(err.response);
         });
@@ -692,7 +691,7 @@ __webpack_require__.r(__webpack_exports__);
             employee_id: this.employee_id
           }
         }).then(function (res) {
-          _this.salaries = res.data.salaries;
+          _this.salaries = res.data.salaries.data;
         })["catch"](function (err) {
           return console.dir(err.response);
         });
@@ -711,7 +710,7 @@ __webpack_require__.r(__webpack_exports__);
           employee_id: this.employee_id
         }
       }).then(function (res) {
-        _this2.salaries = res.data.salaries;
+        _this2.salaries = res.data.salaries.data;
       })["catch"](function (err) {//----
       });
     },
@@ -1325,98 +1324,28 @@ var render = function() {
                                                         }
                                                       }),
                                                       _vm._v(" "),
-                                                      _vm.editedItem
-                                                        .pmt_method == "Bank"
-                                                        ? _c(
-                                                            "div",
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    dense: "",
-                                                                    label:
-                                                                      "Payer Account#"
-                                                                  },
-                                                                  model: {
-                                                                    value:
-                                                                      _vm
-                                                                        .editedItem
-                                                                        .payer_account,
-                                                                    callback: function(
-                                                                      $$v
-                                                                    ) {
-                                                                      _vm.$set(
-                                                                        _vm.editedItem,
-                                                                        "payer_account",
-                                                                        $$v
-                                                                      )
-                                                                    },
-                                                                    expression:
-                                                                      "editedItem.payer_account"
-                                                                  }
-                                                                }
-                                                              ),
-                                                              _vm._v(" "),
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    dense: "",
-                                                                    label:
-                                                                      "Details"
-                                                                  },
-                                                                  model: {
-                                                                    value:
-                                                                      _vm
-                                                                        .editedItem
-                                                                        .details,
-                                                                    callback: function(
-                                                                      $$v
-                                                                    ) {
-                                                                      _vm.$set(
-                                                                        _vm.editedItem,
-                                                                        "details",
-                                                                        $$v
-                                                                      )
-                                                                    },
-                                                                    expression:
-                                                                      "editedItem.details"
-                                                                  }
-                                                                }
-                                                              ),
-                                                              _vm._v(" "),
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    dense: "",
-                                                                    label:
-                                                                      "Notes"
-                                                                  },
-                                                                  model: {
-                                                                    value:
-                                                                      _vm
-                                                                        .editedItem
-                                                                        .notes,
-                                                                    callback: function(
-                                                                      $$v
-                                                                    ) {
-                                                                      _vm.$set(
-                                                                        _vm.editedItem,
-                                                                        "notes",
-                                                                        $$v
-                                                                      )
-                                                                    },
-                                                                    expression:
-                                                                      "editedItem.notes"
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                        : _vm._e()
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          dense: "",
+                                                          label: "Notes"
+                                                        },
+                                                        model: {
+                                                          value:
+                                                            _vm.editedItem
+                                                              .notes,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.$set(
+                                                              _vm.editedItem,
+                                                              "notes",
+                                                              $$v
+                                                            )
+                                                          },
+                                                          expression:
+                                                            "editedItem.notes"
+                                                        }
+                                                      })
                                                     ],
                                                     1
                                                   )
@@ -1517,7 +1446,7 @@ var render = function() {
           "item-key": "id",
           loading: _vm.loading,
           options: _vm.options,
-          "server-items-length": _vm.invoices.length,
+          "server-items-length": _vm.salaries.length,
           "loading-text": "Loading.. Please Wait!",
           "footer-props": {
             itemsPerPageOptions: [5, 10, 15],

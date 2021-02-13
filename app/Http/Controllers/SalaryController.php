@@ -16,7 +16,7 @@ class SalaryController extends Controller
         $sortBy = $request->sort_by ? $request->sort_by : 'order_id';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
         $employee_id = $request->employee_id;
-        $salaires = Salary::where('employee_id', '=', $employee_id );
+        $salaires = Salary::where('employee_id', '=', 1 );
         return response()->json([
             'salaries' => new SalaryCollection($salaires->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
@@ -47,7 +47,7 @@ class SalaryController extends Controller
         $orderBy = $request->order_by ? $request->order_by : 'asc';
         $salary = Salary::where('id', '=', "$id");
         return response()->json([
-            'salary' => new SalaryCollection($salary->orderBy($sortBy, $orderBy)->paginate($per_page)),
+            'salaries' => new SalaryCollection($salary->orderBy($sortBy, $orderBy)->paginate($per_page)),
         ], 200);
     }
 
