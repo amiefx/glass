@@ -103,7 +103,7 @@ __webpack_require__.r(__webpack_exports__);
   metaInfo: {
     // title will be injected into parent titleTemplate
     title: "Orders",
-    titleTemplate: "%s | Khodgi"
+    titleTemplate: "%s | Karim Glass"
   },
   data: function data() {
     return {

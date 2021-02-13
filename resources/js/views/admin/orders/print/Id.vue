@@ -17,17 +17,26 @@
         </p>
       </div>
       <v-divider class="my-1"></v-divider>
+      <v-row class="btm">
+          <v-col cols="7" class="py-1 caption"><strong>Items</strong> </v-col>
+          <v-col cols="2" class="py-1 caption"> <strong>Qty</strong> </v-col>
+          <v-col cols="3" class="py-1 caption"> <strong>Price</strong> </v-col>
+        </v-row>
+
       <div v-for="item in order.orderdetails" :key="item.id">
-        <span class="pt-1 caption">
+        <!-- <span class="pt-1 caption">
           <strong>{{ item.product_name }}</strong>
-        </span>
+        </span> -->
         <v-row class="btm">
-          <v-col cols="7" class="py-0 pl-5 caption">
-            <i> Qty: {{ item.quantity }}</i>
+          <v-col cols="7" class="py-0 caption"><i>{{ item.product_name }}</i></v-col>
+          <v-col cols="2" class="py-0 caption"> <i>{{item.quantity}}</i> </v-col>
+          <v-col cols="3" class="py-0 caption"> <i>{{ item.price }}</i> </v-col>
+          <!-- <v-col cols="7" class="py-0 pl-5 caption">
+            <i> {{ item.quantity }}</i>
           </v-col>
           <v-col cols="5" class="py-0 caption">
-            <i> Rs. {{ item.price }}</i>
-          </v-col>
+            <i>{{ item.price }}</i>
+          </v-col>  -->
         </v-row>
       </div>
 
@@ -94,13 +103,19 @@
 
 <script>
 //var moment = require('moment');
-export default {
+export default { 
+  layout: 'print',
+    metaInfo: {
+        // title will be injected into parent titleTemplate
+        title: 'Order' ,
+        titleTemplate: '%s | Invoice'
+        }, 
   layout: "print",
   metaInfo: {
     // title will be injected into parent titleTemplate
     title: "Orders",
-    titleTemplate: "%s | Khodgi",
-  },
+    titleTemplate: "%s | Karim Glass",
+  }, 
 
   data: () => {
     return {

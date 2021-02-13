@@ -107,7 +107,7 @@ __webpack_require__.r(__webpack_exports__);
   metaInfo: {
     // title will be injected into parent titleTemplate
     title: "Orders",
-    titleTemplate: "%s | Khodgi"
+    titleTemplate: "%s | Karim Glass"
   },
   data: function data() {
     return {
@@ -358,15 +358,17 @@ var render = function() {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("tr", [
-                        _c("td"),
-                        _vm._v(" "),
-                        _c("td", {}, [_vm._v("Fitting Charges")]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "px-0" }, [
-                          _vm._v("Rs. " + _vm._s(_vm.fitter[0].amount_paid))
-                        ])
-                      ]),
+                      _vm.fitter[0]
+                        ? _c("tr", [
+                            _c("td"),
+                            _vm._v(" "),
+                            _c("td", {}, [_vm._v("Fitting Charges")]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "px-0" }, [
+                              _vm._v("Rs. " + _vm._s(_vm.fitter[0].amount_paid))
+                            ])
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       _c("tr", [
                         _c("td"),

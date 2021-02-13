@@ -14,7 +14,7 @@ class CashController extends Controller
     public function balance()
     {
         return response()->json([
-            'balance' => Cash::get()->sum('balance')
+            'balance' => Cash::where('status', '=', 1)->sum('balance')
         ], 200);
     }
 
@@ -153,7 +153,7 @@ class CashController extends Controller
         $sortBy = $request->sort_by ? $request->sort_by : 'created_at';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
         return response()->json([
-            'cashes' => new CashCollection(Cash::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
+            'cashes' => new CashCollection(Cash::where('status', '=', 1)->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
     }
 
@@ -203,7 +203,7 @@ class CashController extends Controller
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'id';
         $orderBy = $request->order_by ? $request->order_by : 'asc';
-        $cashes = Cash::where('id', 'LIKE', "%$id%");
+        $cashes = Cash::where('status', '=', 1)->where('id', 'LIKE', "%$id%");
         return response()->json([
             'cashes' => new CashCollection($cashes->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);

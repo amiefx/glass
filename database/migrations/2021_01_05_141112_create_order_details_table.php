@@ -17,7 +17,7 @@ class CreateOrderDetailsTable extends Migration
             $table->id();
             $table->integer('order_id'); 
             $table->integer('product_id');
-            $table->integer('quantity')->nullable()->default(null);
+            $table->float('quantity')->nullable()->default(null);
             $table->integer('price')->nullable()->default(null); 
             $table->string('g_height')->nullable()->default(null);
             $table->string('g_width')->nullable()->default(null);

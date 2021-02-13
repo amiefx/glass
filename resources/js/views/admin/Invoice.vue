@@ -721,11 +721,11 @@
 
             <v-row>
               <v-checkbox
-                label="Print Invoice"
+                label="Invoice"
                 v-model="printInvoice"
               ></v-checkbox>
               <v-checkbox
-                label="Print Gate Pass"
+                label="Gate Pass"
                 v-model="printGatePass"
               ></v-checkbox>
             </v-row>
@@ -1209,8 +1209,9 @@ export default {
     getRA() {
 
     axios.get(`/api/orderbywalkinphone/${this.invoiceData.walkin_phone}`).then((res) => {
-      this.ra_balance = res;
-      console.log(res)
+      this.ra_balance = res.data.orders[0].balance;
+      this.cust2.receivable = this.ra_balance;
+      console.log(res.data.orders[0].balance)
     });
     }
   },

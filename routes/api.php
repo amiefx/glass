@@ -139,6 +139,7 @@ Route::group([
     Route::post('glass', 'OrderController@glass_calculation');
     Route::get('invoicedetail/{id}', 'OrderController@invoice_detail');
     Route::get('orderbywalkinphone/{id}', 'OrderController@orderByWalkinPhone');
+    Route::post('order/approve/{id}', 'OrderController@orderApprove');
     Route::resource('order', 'OrderController');
 
 

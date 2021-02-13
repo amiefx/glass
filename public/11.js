@@ -9,6 +9,19 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+var _layout$metaInfo$layo;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -104,56 +117,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //var moment = require('moment');
-/* harmony default export */ __webpack_exports__["default"] = ({
-  layout: "print",
+/* harmony default export */ __webpack_exports__["default"] = (_layout$metaInfo$layo = {
+  layout: 'print',
   metaInfo: {
     // title will be injected into parent titleTemplate
-    title: "Orders",
-    titleTemplate: "%s | Khodgi"
-  },
-  data: function data() {
-    return {
-      order: [],
-      business: "",
-      logoImg: window.location.origin + "/storage/images/khodgilogo.png"
-    };
-  },
-  created: function created() {
-    var _this = this;
-
-    axios.get("/api/invoicedetail/".concat(this.$route.params.id)).then(function (res) {
-      _this.order = res.data;
-    })["catch"](function (err) {});
-    axios.get("/api/business/all").then(function (res) {
-      _this.business = res.data.business;
-    })["catch"](function (err) {});
-  },
-  methods: {
-    printme: function printme(el) {
-      // let restorepage = document.body.innerHTML;
-      // let printcontent = document.getElementById(el).innerHTML;
-      // document.body.innerHTML = restorepage;
-      window.print(); // document.body.innerHTML = restorepage;
-    }
-  },
-  filters: {
-    formatDate: function formatDate(value) {
-      return moment(value).format("MMMM D, YYYY");
-    }
-  },
-  computed: {
-    driver: function driver() {
-      return this.order.salary.filter(function (item) {
-        return item.employee_type == "Driver";
-      });
-    },
-    fitter: function fitter() {
-      return this.order.salary.filter(function (item) {
-        return item.employee_type == "Fitter";
-      });
-    }
+    title: 'Order',
+    titleTemplate: '%s | Invoice'
   }
-});
+}, _defineProperty(_layout$metaInfo$layo, "layout", "print"), _defineProperty(_layout$metaInfo$layo, "metaInfo", {
+  // title will be injected into parent titleTemplate
+  title: "Orders",
+  titleTemplate: "%s | Karim Glass"
+}), _defineProperty(_layout$metaInfo$layo, "data", function data() {
+  return {
+    order: [],
+    business: "",
+    logoImg: window.location.origin + "/storage/images/khodgilogo.png"
+  };
+}), _defineProperty(_layout$metaInfo$layo, "created", function created() {
+  var _this = this;
+
+  axios.get("/api/invoicedetail/".concat(this.$route.params.id)).then(function (res) {
+    _this.order = res.data;
+  })["catch"](function (err) {});
+  axios.get("/api/business/all").then(function (res) {
+    _this.business = res.data.business;
+  })["catch"](function (err) {});
+}), _defineProperty(_layout$metaInfo$layo, "methods", {
+  printme: function printme(el) {
+    // let restorepage = document.body.innerHTML;
+    // let printcontent = document.getElementById(el).innerHTML;
+    // document.body.innerHTML = restorepage;
+    window.print(); // document.body.innerHTML = restorepage;
+  }
+}), _defineProperty(_layout$metaInfo$layo, "filters", {
+  formatDate: function formatDate(value) {
+    return moment(value).format("MMMM D, YYYY");
+  }
+}), _defineProperty(_layout$metaInfo$layo, "computed", {
+  driver: function driver() {
+    return this.order.salary.filter(function (item) {
+      return item.employee_type == "Driver";
+    });
+  },
+  fitter: function fitter() {
+    return this.order.salary.filter(function (item) {
+      return item.employee_type == "Fitter";
+    });
+  }
+}), _layout$metaInfo$layo);
 
 /***/ }),
 
@@ -265,32 +277,56 @@ var render = function() {
           _vm._v(" "),
           _c("v-divider", { staticClass: "my-1" }),
           _vm._v(" "),
+          _c(
+            "v-row",
+            { staticClass: "btm" },
+            [
+              _c(
+                "v-col",
+                { staticClass: "py-1 caption", attrs: { cols: "7" } },
+                [_c("strong", [_vm._v("Items")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { staticClass: "py-1 caption", attrs: { cols: "2" } },
+                [_c("strong", [_vm._v("Qty")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { staticClass: "py-1 caption", attrs: { cols: "3" } },
+                [_c("strong", [_vm._v("Price")])]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
           _vm._l(_vm.order.orderdetails, function(item) {
             return _c(
               "div",
               { key: item.id },
               [
-                _c("span", { staticClass: "pt-1 caption" }, [
-                  _c("strong", [_vm._v(_vm._s(item.product_name))])
-                ]),
-                _vm._v(" "),
                 _c(
                   "v-row",
                   { staticClass: "btm" },
                   [
                     _c(
                       "v-col",
-                      {
-                        staticClass: "py-0 pl-5 caption",
-                        attrs: { cols: "7" }
-                      },
-                      [_c("i", [_vm._v(" Qty: " + _vm._s(item.quantity))])]
+                      { staticClass: "py-0 caption", attrs: { cols: "7" } },
+                      [_c("i", [_vm._v(_vm._s(item.product_name))])]
                     ),
                     _vm._v(" "),
                     _c(
                       "v-col",
-                      { staticClass: "py-0 caption", attrs: { cols: "5" } },
-                      [_c("i", [_vm._v(" Rs. " + _vm._s(item.price))])]
+                      { staticClass: "py-0 caption", attrs: { cols: "2" } },
+                      [_c("i", [_vm._v(_vm._s(item.quantity))])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-col",
+                      { staticClass: "py-0 caption", attrs: { cols: "3" } },
+                      [_c("i", [_vm._v(_vm._s(item.price))])]
                     )
                   ],
                   1
