@@ -527,7 +527,8 @@ __webpack_require__.r(__webpack_exports__);
         payer_account: this.editedItem.payer_account,
         details: this.editedItem.details,
         notes: this.editedItem.notes
-      }; // Add a request interceptor
+      };
+      console.log(paymentData); // Add a request interceptor
 
       axios.interceptors.request.use(function (config) {
         _this2.loading = true;

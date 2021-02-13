@@ -7,6 +7,7 @@ use App\Http\Resources\SalaryCollection;
 use App\Http\Resources\SalaryResource;
 use App\Models\Salary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SalaryController extends Controller
 {
@@ -112,7 +113,7 @@ class SalaryController extends Controller
                     ]);
                 }
                 if ($order['type'] == 'Bank') {
-    
+
                     Bank::create([
                         'doc_type' => 'salary',
                         'doc_id' => $slry->id,
