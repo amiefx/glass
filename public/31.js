@@ -97,6 +97,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     getID: function getID(item) {
       this.$emit('getCust', item);
+      console.log(item);
     }
   }
 });
@@ -648,17 +649,17 @@ __webpack_require__.r(__webpack_exports__);
         text: "#",
         value: "id"
       }, {
-        text: "Total",
-        value: "total"
+        text: "Order",
+        value: "order_id"
       }, {
-        text: "Discount",
-        value: "discount"
+        text: "Employee",
+        value: "employee_name"
       }, {
-        text: "Sub Total",
-        value: "sub_total"
+        text: "Type",
+        value: "employee_type"
       }, {
-        text: "Amount Received",
-        value: "amount_recieved"
+        text: "Amount",
+        value: "amount_paid"
       }, {
         text: "User",
         value: "user_id"
@@ -674,13 +675,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (e.length > 0) {
         axios.get("/api/salaries/".concat(e)).then(function (res) {
-          _this.salaries = res.data.salaries;
-          _this.invoices = res.data.salaries.data.filter(function (item) {
-            return item.status == 'Invoice';
-          });
-          _this.quotations = res.data.salaries.data.filter(function (item) {
-            return item.status == 'Quotation';
-          });
+          _this.salaires = res.data.salaries;
         })["catch"](function (err) {
           return console.dir(err.response);
         });
@@ -688,19 +683,16 @@ __webpack_require__.r(__webpack_exports__);
 
       if (e.length <= 0) {
         var sortBy = this.options.sortBy.length == 0 ? "id" : this.options.sortBy[0];
-        var salariesBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? "asc" : "desc";
+        var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? "asc" : "desc";
         axios.get("/api/salaries?page=".concat(e.page), {
           params: {
             per_page: e.itemsPerPage,
             sort_by: sortBy,
-            salaries_by: salariesBy,
+            order_by: orderBy,
             employee_id: this.employee_id
           }
         }).then(function (res) {
           _this.salaries = res.data.salaries;
-          _this.invoices = res.data.salaries.data.filter(function (item) {
-            return item;
-          });
         })["catch"](function (err) {
           return console.dir(err.response);
         });
@@ -710,22 +702,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var sortBy = this.options.sortBy.length == 0 ? "id" : this.options.sortBy[0];
-      var salariesBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? "asc" : "desc";
+      var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? "asc" : "desc";
       axios.get("/api/salaries?page=".concat(e.page), {
         params: {
           per_page: e.itemsPerPage,
           sort_by: sortBy,
-          salaries_by: salariesBy,
+          order_by: orderBy,
           employee_id: this.employee_id
         }
       }).then(function (res) {
         _this2.salaries = res.data.salaries;
-        _this2.invoices = res.data.salaries.data.filter(function (item) {
-          return item.status == 'Invoice';
-        });
-        _this2.quotations = res.data.salaries.data.filter(function (item) {
-          return item.status == 'Quotation';
-        });
       })["catch"](function (err) {//----
       });
     },
@@ -1526,7 +1512,7 @@ var render = function() {
         staticClass: "elevation-0",
         attrs: {
           headers: _vm.headers,
-          items: _vm.invoices,
+          items: _vm.salaries,
           "items-per-page": 5,
           "item-key": "id",
           loading: _vm.loading,
