@@ -424,27 +424,12 @@ class OrderController extends Controller
     }
 
 
-    public function orderApprove($id)
+    public function orderApprove($id, Request $request)
     {
-
-        // $order = Order::find($id);
-
-        // $order->status= 'Invoice';
-
-        // $order->save();
-
-
-        // return response()->json(['order' => new OrderResource($order)], 200);
-
-        $user = auth()->user();
-        $postData = $request->all();
-        $priceflag = "";
-
 
         try {
             DB::beginTransaction();
 
-            // $order = $postData['orderDetails'];
             $order = Order::find($id);
             $order->status= 'Invoice';
             $order->save();
@@ -465,7 +450,14 @@ class OrderController extends Controller
             if (Salary::where('order_id', '=', $order->id)->where('status', '=', 'Pendding')->first()) {
 
                 $slry = Salary::where('order_id', '=', $order->id)->where('status', '=', 'Pendding')->first();
-                $slry->status = 1;
+                $slry->status = "Invoice";
+                $slry->save();
+            }
+
+            if (Salary::where('order_id', '=', $order->id)->where('status', '=', 'Pendding')->latest()->first()) {
+
+                $slry = Salary::where('order_id', '=', $order->id)->where('status', '=', 'Pendding')->latest()->first();
+                $slry->status = "Invoice";
                 $slry->save();
             }
 

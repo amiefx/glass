@@ -188,6 +188,7 @@ Route::group([
     Route::resource('expenseitems', 'ExpenseItemsController');
 
     // salary
+    Route::post('paysalary', 'SalaryController@paySalary');
     Route::resource('salaries', 'SalaryController');
 
 

@@ -18,7 +18,7 @@ class SalaryController extends Controller
         $employee_id = $request->employee_id;
         $salaires = Salary::where('employee_id', '=', $employee_id );
         return response()->json([
-            'salaries' => new SalaryCollection($salaires::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
+            'salaries' => new SalaryCollection($salaires->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
     }
 
@@ -72,6 +72,70 @@ class SalaryController extends Controller
     {
         $salary = Salary::find($id)->delete();
         return response()->json(['salary' => $salary], 200);
+    }
+
+
+    public function paySalary(Request $request)
+    {
+        $user = auth()->user();
+        $postData = $request->all();
+
+
+        try {
+            DB::beginTransaction();
+
+            $order = $postData['orderDetails'];
+
+            if ($order['amount'] > 0) {
+
+                $slry = Salary::create([
+                    'order_id' => 0,
+                    'employee_id' => $order['employee_id'],
+                    'amount_paid' => $order['amount'],
+                    'note' => $order['note'],
+                    'status' => 1,
+                    'user_id' => $user->id
+                ]);
+
+
+                if ($order['type'] == 'Cash') {
+
+                    Cash::create([
+                        'doc_type' => 'salary',
+                        'doc_id' => $slry->id,
+                        'employee_id' => $order['employee_id'],
+                        'debit' => 0,
+                        'credit' => $order['amount'],
+                        'balance' => $order['amount'] * (-1),
+                        'status' => 1,
+                        'user_id' => $user->id
+                    ]);
+                }
+                if ($order['type'] == 'Bank') {
+    
+                    Bank::create([
+                        'doc_type' => 'salary',
+                        'doc_id' => $slry->id,
+                        'employee_id' => $order['employee_id'],
+                        'debit' => 0,
+                        'credit' => $order['amount'],
+                        'balance' => $order['amount'] * (-1),
+                        'status' => 1,
+                        'user_id' => $user->id
+                    ]);
+                }
+
+            }
+
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            return response()->json(['error'=> $th->getMessage()], 500);
+        }
+
+    return response()->json(['order'=> $neworder, 'order_items' => $items, 'priceflag'  => $priceflag], 200);
     }
 
 
