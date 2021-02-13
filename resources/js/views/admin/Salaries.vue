@@ -208,7 +208,7 @@ export default {
         details: this.editedItem.details,
         notes: this.editedItem.notes
       };
-
+console.log(paymentData)
       // Add a request interceptor
       axios.interceptors.request.use(
         (config) => {
