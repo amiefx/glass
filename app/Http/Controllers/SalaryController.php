@@ -8,6 +8,8 @@ use App\Http\Resources\SalaryResource;
 use App\Models\Salary;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+
 class SalaryController extends Controller
 {
     public function index(Request $request)
