@@ -17,53 +17,37 @@
                 hide-selected
                 item-text="name"
                 item-value="id"
-                label="Search for a customer..."
+                label="Search for a product..."
                 solo
               >
                 <template v-slot:no-data>
                   <v-list-item>
                     <v-list-item-title>
                       Search for a
-                      <strong>Customer</strong>
+                      <strong>Product</strong>
                     </v-list-item-title>
                   </v-list-item>
                 </template>
                 <template v-slot:selection="{ attr, on, item, selected }">
-                  <v-chip
+                  <span
                     v-bind="attr"
                     :input-value="selected"
-                    color="blue-grey"
-                    class="white--text"
                     v-on="on"
                   >
-                    <v-icon left> mdi-bag </v-icon>
-                    <span v-text="item.sku"></span>
-                  </v-chip>
+                    {{ item.sku }}
+                  </span>
                 </template>
                 <template v-slot:item="{ item }">
-                  <v-list-item-avatar
-                    color="indigo"
-                    class="headline font-weight-light white--text"
-                  >
-                    <v-icon class="white--text">mdi-account</v-icon>
-                  </v-list-item-avatar>
                   <v-list-item-content>
                     <v-list-item-title v-text="item.sku"></v-list-item-title>
                     <v-list-item-subtitle>
-                      {{ item.name }} | {{ item.selling_price }}
+                      {{ item.name }} | Rs. {{ item.selling_price }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
                   <v-list-item-action>
-                    <span v-if="item.credit_limit > 0">
-                      Credit limit:
-                      <strong>
-                        {{ item.credit_limit }}
-                      </strong>
-                    </span>
                     <span>
-                      Receivable:
                       <strong>
-                        {{ item.receivable }}
+                        {{ item.onhand }}
                       </strong>
                     </span>
                   </v-list-item-action>

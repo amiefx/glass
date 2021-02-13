@@ -18,12 +18,11 @@
       </div>
       <v-divider class="my-1"></v-divider>
       <div v-for="item in order.purchaseorderdetails" :key="item.id">
-        <span class="pt-1 caption">
-          <strong>{{ item.product_name }}</strong>
-        </span>
+
         <v-row class="btm">
-          <v-col cols="7" class="py-0  pl-5 caption"> <i> Qty: {{item.quantity}}</i> </v-col>
-          <v-col cols="5" class="py-0 caption"> <i> Rs. {{ item.price }}</i> </v-col>
+            <v-col cols="7" class="py-0 caption"><i>{{ item.product_name }}</i></v-col>
+          <v-col cols="2" class="py-0 caption"> <i>{{item.quantity}}</i> </v-col>
+          <v-col cols="3" class="py-0 caption"> <i>{{ item.price }}</i> </v-col>
         </v-row>
       </div>
 
@@ -80,7 +79,7 @@ export default {
     metaInfo: {
         // title will be injected into parent titleTemplate
         title: 'Orders' ,
-        titleTemplate: '%s | Khodgi'
+        titleTemplate: '%s | Karim Glass'
         },
 
     data: () => {

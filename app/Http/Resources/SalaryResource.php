@@ -15,14 +15,14 @@ class SalaryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id, 
-            'order_id' => $this->order_id, 
+            'id' => $this->id,
+            'order_id' => $this->order_id,
             'employee_name' => $this->employee->name,
-            'employee_type' => $this->employee->type, 
+            'employee_type' => $this->employee->type,
             'amount_paid' => $this->amount_paid,
             'status' => $this->status,
             'note' => $this->note,
-            'user_id' => $this->user_id,
+            'user_id' => $this->user->name,
         ];
     }
 }

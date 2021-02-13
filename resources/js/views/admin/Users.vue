@@ -152,7 +152,7 @@
       loading: false,
       snackbar: false,
       text: '',
-      roles: ['Admin', 'Accountant', 'Cashier', 'User'],
+      roles: ['Admin', 'Accountant'],
       success: '',
       error: '',
       options: {

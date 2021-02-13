@@ -435,6 +435,17 @@ const routes = [
             ]
         }
     },
+    {
+        path: '/admin/salaries',
+        name: 'admin-order',
+        component: () => import('../views/admin/Salaries.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
     // {
     //     path: '/admin/reports',
     //     name: 'admin-reports',

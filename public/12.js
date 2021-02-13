@@ -83,14 +83,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 //var moment = require('moment');
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'print',
   metaInfo: {
     // title will be injected into parent titleTemplate
     title: 'Orders',
-    titleTemplate: '%s | Khodgi'
+    titleTemplate: '%s | Karim Glass'
   },
   data: function data() {
     return {
@@ -249,27 +248,26 @@ var render = function() {
               "div",
               { key: item.id },
               [
-                _c("span", { staticClass: "pt-1 caption" }, [
-                  _c("strong", [_vm._v(_vm._s(item.product_name))])
-                ]),
-                _vm._v(" "),
                 _c(
                   "v-row",
                   { staticClass: "btm" },
                   [
                     _c(
                       "v-col",
-                      {
-                        staticClass: "py-0  pl-5 caption",
-                        attrs: { cols: "7" }
-                      },
-                      [_c("i", [_vm._v(" Qty: " + _vm._s(item.quantity))])]
+                      { staticClass: "py-0 caption", attrs: { cols: "7" } },
+                      [_c("i", [_vm._v(_vm._s(item.product_name))])]
                     ),
                     _vm._v(" "),
                     _c(
                       "v-col",
-                      { staticClass: "py-0 caption", attrs: { cols: "5" } },
-                      [_c("i", [_vm._v(" Rs. " + _vm._s(item.price))])]
+                      { staticClass: "py-0 caption", attrs: { cols: "2" } },
+                      [_c("i", [_vm._v(_vm._s(item.quantity))])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-col",
+                      { staticClass: "py-0 caption", attrs: { cols: "3" } },
+                      [_c("i", [_vm._v(_vm._s(item.price))])]
                     )
                   ],
                   1

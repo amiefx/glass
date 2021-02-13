@@ -4453,7 +4453,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.lang {\r\n    width: 50px !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.lang {\n    width: 50px !important;\n}\n", ""]);
 
 // exports
 
@@ -86949,6 +86949,16 @@ var routes = [// {
     layout: '',
     middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"]]
   }
+}, {
+  path: '/admin/salaries',
+  name: 'admin-order',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ../views/admin/Salaries.vue */ "./resources/js/views/admin/Salaries.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"]]
+  }
 }, // {
 //     path: '/admin/reports',
 //     name: 'admin-reports',
@@ -87783,8 +87793,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\apps\githubkarimglass\glass\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\apps\githubkarimglass\glass\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\karimglass-master\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\karimglass-master\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
