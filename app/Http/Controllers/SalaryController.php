@@ -18,7 +18,7 @@ class SalaryController extends Controller
         $employee_id = $request->employee_id;
         $salaires = Salary::where('employee_id', '=', $employee_id );
         return response()->json([
-            'salaries' => new SalaryCollection($salaires::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
+            'salaries' => new SalaryCollection($salaires->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);
     }
 

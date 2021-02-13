@@ -2,7 +2,7 @@
   <div>
     <v-data-table
       :headers="headers"
-      :items="invoices"
+      :items="salaries"
       :items-per-page="5"
       class="elevation-0"
       item-key="id"
@@ -82,10 +82,10 @@ export default {
         text: "#",
         value: "id",
       },
-      { text: "Total", value: "total" },
-      { text: "Discount", value: "discount" },
-      { text: "Sub Total", value: "sub_total" },
-      { text: "Amount Received", value: "amount_recieved" },
+      { text: "Order", value: "order_id" },
+      { text: "Employee", value: "employee_name" },
+      { text: "Type", value: "employee_type" },
+      { text: "Amount", value: "amount_paid" },
       { text: "User", value: "user_id" },
     ],
     salaries: [],
@@ -99,15 +99,7 @@ export default {
         axios
           .get(`/api/salaries/${e}`)
           .then((res) => {
-            this.salaries = res.data.salaries;
-
-            this.invoices = res.data.salaries.data.filter(item => {
-                return item.status == 'Invoice';
-            })
-
-          this.quotations = res.data.salaries.data.filter(item => {
-                return item.status == 'Quotation';
-            })
+            this.salaires = res.data.salaries;
 
           })
           .catch((err) => console.dir(err.response));
@@ -115,7 +107,7 @@ export default {
       if (e.length <= 0) {
         const sortBy =
           this.options.sortBy.length == 0 ? "id" : this.options.sortBy[0];
-        const salariesBy =
+        const orderBy =
           this.options.sortDesc.length > 0 || this.options.sortDesc[0]
             ? "asc"
             : "desc";
@@ -124,16 +116,12 @@ export default {
             params: {
               per_page: e.itemsPerPage,
               sort_by: sortBy,
-              salaries_by: salariesBy,
+              order_by: orderBy,
               employee_id: this.employee_id,
             },
           })
           .then((res) => {
             this.salaries = res.data.salaries;
-
-            this.invoices = res.data.salaries.data.filter(item => {
-                return item;
-            })
 
           })
           .catch((err) => console.dir(err.response));
@@ -142,7 +130,7 @@ export default {
     paginate(e) {
       const sortBy =
         this.options.sortBy.length == 0 ? "id" : this.options.sortBy[0];
-      const salariesBy =
+      const orderBy =
         this.options.sortDesc.length > 0 || this.options.sortDesc[0]
           ? "asc"
           : "desc";
@@ -151,20 +139,13 @@ export default {
           params: {
             per_page: e.itemsPerPage,
             sort_by: sortBy,
-            salaries_by: salariesBy,
+            order_by: orderBy,
             employee_id: this.employee_id,
           },
         })
         .then((res) => {
           this.salaries = res.data.salaries;
 
-          this.invoices = res.data.salaries.data.filter(item => {
-                return item.status == 'Invoice';
-            })
-
-          this.quotations = res.data.salaries.data.filter(item => {
-                return item.status == 'Quotation';
-            })
         })
         .catch((err) => {
           //----

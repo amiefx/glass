@@ -90,6 +90,7 @@ import { mapGetters, mapActions } from "vuex"
 
     getID(item) {
        this.$emit('getCust', item )
+       console.log(item)
     },
   }
 
