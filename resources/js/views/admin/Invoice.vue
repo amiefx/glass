@@ -6,7 +6,6 @@
           <v-autocomplete
             v-model="product_item"
             :items="products"
-            clearable
             hide-details
             hide-selected
             item-text="sku"
@@ -1329,7 +1328,8 @@ export default {
     },
 
     product_item() {
-      let prod = this.products.filter((item) => item.id == this.product_item);
+      let product_id =  this.product_item ? this.product_item : 0;
+      let prod = this.products.filter((item) => item.id == product_id);
       //    console.log(prod[0])
       this.$store.dispatch("cart/addProductToCart", {
         product: prod[0],

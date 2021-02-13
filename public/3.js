@@ -851,7 +851,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1390,10 +1389,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.cust2 = customer[0];
     },
     product_item: function product_item() {
-      var _this12 = this;
-
+      var product_id = this.product_item ? this.product_item : 0;
       var prod = this.products.filter(function (item) {
-        return item.id == _this12.product_item;
+        return item.id == product_id;
       }); //    console.log(prod[0])
 
       this.$store.dispatch("cart/addProductToCart", {
@@ -1654,7 +1652,6 @@ var render = function() {
                   _c("v-autocomplete", {
                     attrs: {
                       items: _vm.products,
-                      clearable: "",
                       "hide-details": "",
                       "hide-selected": "",
                       "item-text": "sku",

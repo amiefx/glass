@@ -346,15 +346,17 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("tr", [
-                        _c("td"),
-                        _vm._v(" "),
-                        _c("td", {}, [_vm._v("Suzuki Rent")]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "px-0" }, [
-                          _vm._v("Rs. " + _vm._s(_vm.driver[0].amount_paid))
-                        ])
-                      ]),
+                      _vm.driver[0]
+                        ? _c("tr", [
+                            _c("td"),
+                            _vm._v(" "),
+                            _c("td", {}, [_vm._v("Suzuki Rent")]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "px-0" }, [
+                              _vm._v("Rs. " + _vm._s(_vm.driver[0].amount_paid))
+                            ])
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       _c("tr", [
                         _c("td"),
