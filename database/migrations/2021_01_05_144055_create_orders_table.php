@@ -19,8 +19,9 @@ class CreateOrdersTable extends Migration
             $table->integer('sub_total')->default(0);
             $table->integer('discount')->nullable()->default(0);
             $table->integer('total')->default(0);
-            $table->integer('amount_recieved')->nullable()->default(null);
-            $table->integer('note')->nullable()->default(null);
+            $table->integer('amount_recieved')->nullable()->default(0);
+            $table->integer('polish')->nullable()->default(0);
+            $table->json('note')->nullable()->default(null);
             $table->string('status')->nullable()->default(null);
             $table->string('walkin_name')->nullable()->default(null);
             $table->string('walkin_phone')->nullable()->default(null);

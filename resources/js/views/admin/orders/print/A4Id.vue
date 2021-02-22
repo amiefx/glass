@@ -1,5 +1,5 @@
 <template>
-  <v-app class="printInvoice">
+  <v-app class="">
     <v-container>
       <div class="text-center">
         <h3>{{ business.name }}</h3>
@@ -33,8 +33,36 @@
 
       <br />
 
-      <div>
-        <v-simple-table dense>
+      <v-row>
+          <v-col cols="6">
+             <div class="caption" v-if="order.order.note.ceiling_input.length > 0">
+          <strong>Ceiling:</strong>
+          <ul class="mb-0">
+              <li v-for="(item, index) in order.order.note.ceiling_input" :key="item.index">
+                  {{item.width}} X {{ item.length }} X {{ item.number}}
+              </li>
+          </ul>
+      </div>
+      <div class="caption" v-if="order.order.note.panel_input.length > 0">
+          <strong>Panels:</strong>
+          <ul class="mb-0">
+              <li v-for="(item, index) in order.order.note.panel_input" :key="item.index">
+                  {{ item.length }} X {{ item.number}} - {{item.removals}} ({{item.sheet_height}} {{item.sheet_width}})
+              </li>
+          </ul>
+      </div>
+      <div class="caption" v-if="order.order.note.glass_input.length > 0">
+          <strong>Glass:</strong>
+          <ul class="mb-0">
+              <li v-for="(item, index) in order.order.note.glass_input" :key="item.index">
+                  {{ item.width }} X {{item.height}} X {{ item.number}} ({{item.sqft}}) | {{ item.std_width }} X {{item.std_height}} ({{item.std_sqft}})
+              </li>
+          </ul>
+      </div>
+          </v-col>
+        <v-col cols="1"></v-col>
+        <v-col cols="5">
+           <v-simple-table dense>
           <tbody>
             <tr>
               <td width="15%"></td>
@@ -79,35 +107,12 @@
             </tr>
           </tbody>
         </v-simple-table>
-      </div>
+        </v-col>
+      </v-row>
 
       <br />
 
-      <v-divider class="my-1"></v-divider>
-      <div class="caption" v-if="order.order.note.ceiling_input.length > 0">
-          <strong>Ceiling:</strong>
-          <ul class="mb-0">
-              <li v-for="(item, index) in order.order.note.ceiling_input" :key="item.index">
-                  {{item.width}} X {{ item.length }} X {{ item.number}}
-              </li>
-          </ul>
-      </div>
-      <div class="caption" v-if="order.order.note.panel_input.length > 0">
-          <strong>Panels:</strong>
-          <ul class="mb-0">
-              <li v-for="(item, index) in order.order.note.panel_input" :key="item.index">
-                  {{ item.length }} X {{ item.number}} - {{item.removals}} ({{item.sheet_height}} {{item.sheet_width}})
-              </li>
-          </ul>
-      </div>
-      <div class="caption" v-if="order.order.note.glass_input.length > 0">
-          <strong>Glass:</strong>
-          <ul class="mb-0">
-              <li v-for="(item, index) in order.order.note.glass_input" :key="item.index">
-                  {{ item.width }} X {{item.height}} X {{ item.number}} ({{item.sqft}}) | {{ item.std_width }} X {{item.std_height}} ({{item.std_sqft}})
-              </li>
-          </ul>
-      </div>
+
 
 
       <v-divider class="my-1"></v-divider>

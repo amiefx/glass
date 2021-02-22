@@ -108,53 +108,71 @@
         <v-divider></v-divider>
       </v-col>
       <v-col cols="5" class="calculate">
-        <!-- calculation part -->
-        <v-dialog v-model="dialog" max-width="600px">
-          <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on" block
-              >Calculations</v-btn
-            >
-          </template>
-          <v-card>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12">
-                    <v-tabs>
-                      <v-tab>
-                        <v-icon left> mdi-file-document-outline </v-icon>
-                        Ceiling
-                      </v-tab>
-                      <v-tab>
-                        <v-icon left> mdi-note-text-outline </v-icon>
-                        Pannels
-                      </v-tab>
-                      <v-tab>
-                        <v-icon left> mdi-cash-multiple </v-icon>
-                        Glass
-                      </v-tab>
-                      <!-- ceiling -->
-                      <v-tab-item>
-                        <v-row>
-                          <v-col cols="4">
-                            <v-text-field
-                              v-model="ceiling_width"
-                              label="Width"
-                              type="number"
-                              dense
-                              outlined
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="4">
-                            <v-text-field
-                              v-model="ceiling_length"
-                              label="Length"
-                              type="number"
-                              dense
-                              outlined
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="4">
+        <v-row>
+          <v-col cols="6" class="py-0">
+            <!-- add customer  -->
+            <add-customer />
+          </v-col>
+          <v-col cols="6" class="py-0">
+            <!-- calculation part -->
+            <v-dialog v-model="dialog" max-width="600px">
+              <template v-slot:activator="{ on }">
+                <v-btn color="primary" dark class="mb-2" v-on="on" block
+                  >Calculations</v-btn
+                >
+              </template>
+              <v-card>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-tabs>
+                          <v-tab>
+                            <v-icon left> mdi-file-document-outline </v-icon>
+                            Ceiling
+                          </v-tab>
+                          <v-tab>
+                            <v-icon left> mdi-note-text-outline </v-icon>
+                            Pannels
+                          </v-tab>
+                          <v-tab>
+                            <v-icon left> mdi-cash-multiple </v-icon>
+                            Glass
+                          </v-tab>
+                          <!-- ceiling -->
+                          <v-tab-item>
+                            <v-row>
+                              <v-col cols="3">
+                                <v-text-field
+                                  v-model="ceiling_width"
+                                  label="Width"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  @change="getCeiling"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="3">
+                                <v-text-field
+                                  v-model="ceiling_length"
+                                  label="Length"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  @change="getCeiling"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="3">
+                                <v-text-field
+                                  v-model="ceiling_number"
+                                  label="Number"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  @change="getCeiling"
+                                ></v-text-field>
+                              </v-col>
+                              <!-- <v-col cols="3">
                             <v-btn
                               dark
                               color="primary"
@@ -163,75 +181,75 @@
                             >
                               Calculate
                             </v-btn>
-                          </v-col>
-                        </v-row>
+                          </v-col> -->
+                            </v-row>
 
-                        <v-simple-table height dense>
-                          <template v-slot:default>
-                            <thead>
-                              <tr>
-                                <th class="text-left">Item</th>
-                                <th class="text-left">Quantity</th>
-                                <th class="text-left">Unit Price</th>
-                                <th class="text-left"></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr
-                                v-for="(item, index) in ceiling"
-                                :key="item.index"
-                              >
-                                <td>
-                                  <v-select
-                                    v-if="index == 0"
-                                    v-model="ceiling[0].id"
-                                    :items="angle"
-                                    item-text="name"
-                                    item-value="id"
-                                    label="Select Angle"
-                                  ></v-select>
+                            <v-simple-table height dense>
+                              <template v-slot:default>
+                                <thead>
+                                  <tr>
+                                    <th class="text-left">Item</th>
+                                    <th class="text-left">Quantity</th>
+                                    <!-- <th class="text-left">Unit Price</th>
+                                <th class="text-left"></th> -->
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr
+                                    v-for="(item, index) in ceiling"
+                                    :key="item.index"
+                                  >
+                                    <td>
+                                      <v-autocomplete
+                                        v-if="index == 0"
+                                        v-model="ceiling[0].id"
+                                        :items="angle"
+                                        item-text="name"
+                                        item-value="id"
+                                        label="Select Angle"
+                                      ></v-autocomplete>
 
-                                  <v-select
-                                    v-if="index == 1"
-                                    v-model="ceiling[1].id"
-                                    :items="mainT"
-                                    item-text="name"
-                                    item-value="id"
-                                    label="Select Main T"
-                                  ></v-select>
+                                      <v-autocomplete
+                                        v-if="index == 1"
+                                        v-model="ceiling[1].id"
+                                        :items="mainT"
+                                        item-text="name"
+                                        item-value="id"
+                                        label="Select Main T"
+                                      ></v-autocomplete>
 
-                                  <v-select
-                                    v-if="index == 2"
-                                    v-model="ceiling[2].id"
-                                    :items="crossT"
-                                    item-text="name"
-                                    item-value="id"
-                                    label="Select Cross T"
-                                  ></v-select>
+                                      <v-autocomplete
+                                        v-if="index == 2"
+                                        v-model="ceiling[2].id"
+                                        :items="crossT"
+                                        item-text="name"
+                                        item-value="id"
+                                        label="Select Cross T"
+                                      ></v-autocomplete>
 
-                                  <v-select
-                                    v-if="index == 3"
-                                    v-model="ceiling[3].id"
-                                    :items="sheets"
-                                    item-text="name"
-                                    item-value="id"
-                                    label="Select Sheet"
-                                  ></v-select>
-                                </td>
-                                <td>
-                                  <v-text-field
-                                    v-model="item.qty"
-                                    label="Quantity"
-                                    type="number"
-                                  ></v-text-field>
-                                </td>
-                                <td>
+                                      <v-autocomplete
+                                        v-if="index == 3"
+                                        v-model="ceiling[3].id"
+                                        :items="sheets"
+                                        item-text="name"
+                                        item-value="id"
+                                        label="Select Sheet"
+                                      ></v-autocomplete>
+                                    </td>
+                                    <td>
+                                      <v-text-field
+                                        v-model="item.qty"
+                                        label="Quantity"
+                                        type="number"
+                                      ></v-text-field>
+                                    </td>
+                                    <!-- <td>
                                   <span v-if="item.id">
                                     {{ getPrice(item.id) }}
                                   </span>
-                                </td>
+                                </td> -->
 
-                                <td>
+                                    <!-- <td>
                                   <v-btn
                                     class="green--text"
                                     icon
@@ -239,67 +257,80 @@
                                   >
                                     <v-icon>mdi-plus</v-icon>
                                   </v-btn>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </template>
-                        </v-simple-table>
+                                </td> -->
+                                  </tr>
+                                </tbody>
+                              </template>
+                            </v-simple-table>
 
-                        <v-btn
-                          dark
-                          color="primary"
-                          class="float-right"
-                          @click="clearCeilingItems"
-                          >Clear</v-btn
-                        >
-                      </v-tab-item>
-                      <!-- pannels -->
-                      <v-tab-item>
-                        <v-row>
-                          <v-col cols="4" class="pb-0">
-                            <v-text-field
-                              v-model="panel.length"
-                              label="Length"
-                              type="number"
-                              dense
-                              outlined
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="4" class="pb-0">
-                            <v-text-field
-                              v-model="panel.number"
-                              label="Number"
-                              type="number"
-                              dense
-                              outlined
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="4" class="pb-0">
-                            <v-text-field
-                              v-model="panel.removals"
-                              label="Removal"
-                              type="number"
-                              dense
-                              outlined
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="4" class="py-0">
-                            <v-select
-                              :items="panelSheetHight"
-                              v-model="panel.sheet_height"
-                              dense
-                              outlined
-                            ></v-select>
-                          </v-col>
-                          <v-col cols="4" class="py-0">
-                            <v-select
-                              :items="panelSheetWidth"
-                              v-model="panel.sheet_width"
-                              dense
-                              outlined
-                            ></v-select>
-                          </v-col>
-                          <v-col cols="4" class="py-0">
+                            <v-btn
+                              dark
+                              color="primary"
+                              class="float-right"
+                              @click="addCeilingProductToInvoice"
+                              >Add to Invoice</v-btn
+                            >
+
+                            <v-btn
+                              dark
+                              color="red"
+                              class="float-right mx-2"
+                              @click="clearCeilingItems"
+                              >Clear
+                            </v-btn>
+                          </v-tab-item>
+                          <!-- pannels -->
+                          <v-tab-item>
+                            <v-row>
+                              <v-col cols="3" class="pb-0">
+                                <v-text-field
+                                  v-model="panel.length"
+                                  label="Length"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  @change="getPanel"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="3" class="pb-0">
+                                <v-text-field
+                                  v-model="panel.number"
+                                  label="Number"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  @change="getPanel"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="3" class="pb-0">
+                                <v-text-field
+                                  v-model="panel.removals"
+                                  label="Removal"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  @change="getPanel"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="3" class="pb-0">
+                                <v-select
+                                  :items="panelSheetHight"
+                                  v-model="panel.sheet_height"
+                                  dense
+                                  outlined
+                                  @change="getPanel"
+                                ></v-select>
+                              </v-col>
+                              <v-col cols="3" class="py-0">
+                                <v-select
+                                  :items="panelSheetWidth"
+                                  v-model="panel.sheet_width"
+                                  dense
+                                  outlined
+                                  @change="getPanel"
+                                ></v-select>
+                              </v-col>
+                              <!-- <v-col cols="4" class="py-0">
                             <v-btn
                               dark
                               color="primary"
@@ -308,51 +339,51 @@
                             >
                               Calculate
                             </v-btn>
-                          </v-col>
-                        </v-row>
+                          </v-col> -->
+                            </v-row>
 
-                        <v-simple-table height dense>
-                          <template v-slot:default>
-                            <thead>
-                              <tr>
-                                <th class="text-left">Item</th>
-                                <th class="text-left">Quantity</th>
-                                <th class="text-left">Unit Price</th>
-                                <th class="text-left"></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr
-                                v-for="(item, index) in peneling"
-                                :key="item.index"
-                              >
-                                <td>
-                                  <v-select
-                                    v-if="index == 0"
-                                    v-model="peneling[0].id"
-                                    :items="panelSheets"
-                                    item-text="name"
-                                    item-value="id"
-                                    label="Select Sheet"
-                                  ></v-select>
+                            <v-simple-table height dense>
+                              <template v-slot:default>
+                                <thead>
+                                  <tr>
+                                    <th class="text-left">Item</th>
+                                    <th class="text-left">Quantity</th>
+                                    <!-- <th class="text-left">Unit Price</th>
+                                <th class="text-left"></th> -->
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr
+                                    v-for="(item, index) in peneling"
+                                    :key="item.index"
+                                  >
+                                    <td>
+                                      <v-autocomplete
+                                        v-if="index == 0"
+                                        v-model="peneling[0].id"
+                                        :items="panelSheets"
+                                        item-text="name"
+                                        item-value="id"
+                                        label="Select Sheet"
+                                      ></v-autocomplete>
 
-                                  <v-select
-                                    v-if="index == 1"
-                                    v-model="peneling[1].id"
-                                    :items="golas"
-                                    item-text="name"
-                                    item-value="id"
-                                    label="Select Gola"
-                                  ></v-select>
-                                </td>
-                                <td>
-                                  <v-text-field
-                                    v-model="item.qty"
-                                    label="Quantity"
-                                    type="number"
-                                  ></v-text-field>
-                                </td>
-                                <td>
+                                      <v-autocomplete
+                                        v-if="index == 1"
+                                        v-model="peneling[1].id"
+                                        :items="golas"
+                                        item-text="name"
+                                        item-value="id"
+                                        label="Select Gola"
+                                      ></v-autocomplete>
+                                    </td>
+                                    <td>
+                                      <v-text-field
+                                        v-model="item.qty"
+                                        label="Quantity"
+                                        type="number"
+                                      ></v-text-field>
+                                    </td>
+                                    <!-- <td>
                                   <span v-if="item.id">
                                     {{ getPrice(item.id) }}
                                   </span>
@@ -366,71 +397,105 @@
                                   >
                                     <v-icon>mdi-plus</v-icon>
                                   </v-btn>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </template>
-                        </v-simple-table>
+                                </td> -->
+                                  </tr>
+                                </tbody>
+                              </template>
+                            </v-simple-table>
 
-                        <v-btn
-                          dark
-                          color="primary"
-                          class="float-right"
-                          @click="clearPanelItems"
-                          >Clear</v-btn
-                        >
-                      </v-tab-item>
-                      <!-- glass -->
-                      <v-tab-item>
-                        <v-row>
-                          <v-col cols="4" class="pb-0">
-                            <v-text-field
-                              v-model="glass.height"
-                              label="Height"
-                              type="number"
-                              dense
-                              outlined
-                              @change="getStdHeight"
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="4" class="pb-0">
-                            <v-text-field
-                              v-model="glass.width"
-                              label="Width"
-                              type="number"
-                              dense
-                              outlined
-                              @change="getStdWidth"
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="4" class="pb-0">
-                            <v-text-field
-                              v-model="glass.number"
-                              label="Number"
-                              type="number"
-                              dense
-                              outlined
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="4" class="py-0">
-                            <v-text-field
-                              v-model="glass.standard_height"
-                              label="Standard Hegith"
-                              type="number"
-                              dense
-                              outlined
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="4" class="py-0">
-                            <v-text-field
-                              v-model="glass.standard_width"
-                              label="Standard Width"
-                              type="number"
-                              dense
-                              outlined
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="4" class="py-0">
+                            <v-btn
+                              dark
+                              color="primary"
+                              class="float-right"
+                              @click="addPanelProductToInvoice"
+                              >Add to invoice</v-btn
+                            >
+
+                            <v-btn
+                              dark
+                              color="red"
+                              class="float-right mx-2"
+                              @click="clearPanelItems"
+                              >Clear</v-btn
+                            >
+                          </v-tab-item>
+                          <!-- glass -->
+                          <v-tab-item>
+                            <v-row>
+                              <v-col cols="3" class="pb-0">
+                                <v-text-field
+                                  v-model="glass.width"
+                                  label="Width"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  @change="getStdWidth"
+                                  @input="calculateSlab"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="3" class="pb-0">
+                                <v-text-field
+                                  v-model="glass.height"
+                                  label="Height"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  @change="getStdHeight"
+                                  @input="calculateSlab"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="3" class="pb-0">
+                                <v-text-field
+                                  v-model="glass.number"
+                                  label="Number"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  @change="calculateSlab"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="3" class="pb-0">
+                                <v-text-field
+                                  v-model="glass.back_end_sqrFt"
+                                  label="Actual sqft"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  disabled
+                                  @change="calculateSlab"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="3" class="py-0">
+                                <v-text-field
+                                  v-model="glass.standard_height"
+                                  label="Standard Hegith"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  @change="calculateSlab"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="3" class="py-0">
+                                <v-text-field
+                                  v-model="glass.standard_width"
+                                  label="Standard Width"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  @change="calculateSlab"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="3" class="py-0">
+                                <v-text-field
+                                  v-model="glass.invoice_sqrFt"
+                                  label="Standard sqft"
+                                  type="number"
+                                  dense
+                                  outlined
+                                  @change="calculateSlab"
+                                ></v-text-field>
+                              </v-col>
+                              <!-- <v-col cols="3" class="py-0">
                             <v-btn
                               dark
                               color="primary"
@@ -439,77 +504,77 @@
                             >
                               Calculate
                             </v-btn>
-                          </v-col>
-                          {{ glass.back_end_sqrFt }} | {{ glass.invoice_sqrFt }}
-                        </v-row>
+                          </v-col> -->
+                            </v-row>
 
-                        <v-simple-table height dense>
-                          <template v-slot:default>
-                            <thead>
-                              <tr>
-                                <th class="text-left">Item</th>
-                                <th class="text-left">SqrFeet</th>
-                                <th class="text-left">Unit Price</th>
-                                <th class="text-left"></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr
-                                v-for="(item, index) in glassItem"
-                                :key="item.index"
-                              >
-                                <td>
-                                  <v-select
-                                    v-if="index == 0"
-                                    v-model="glassItem[0].id"
-                                    :items="glassProducts"
-                                    item-text="name"
-                                    item-value="id"
-                                    label="Select Glass"
-                                  ></v-select>
-                                </td>
-                                <td>
-                                  <v-text-field
-                                    v-model="item.qty"
-                                    label="SqrFeet"
-                                    type="number"
-                                  ></v-text-field>
-                                </td>
-                                <td>
+                            <v-simple-table height dense>
+                              <template v-slot:default>
+                                <thead>
+                                  <tr>
+                                    <th class="text-left">Item</th>
+                                    <th class="text-left">SqrFeet</th>
+                                    <!-- <th class="text-left">Unit Price</th> -->
+                                    <th class="text-left"></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr
+                                    v-for="(item, index) in glassItem"
+                                    :key="item.index"
+                                  >
+                                    <td>
+                                      <v-autocomplete
+                                        v-if="index == 0"
+                                        v-model="glassItem[0].id"
+                                        :items="glassProducts"
+                                        item-text="name"
+                                        item-value="id"
+                                        label="Select Glass"
+                                      ></v-autocomplete>
+                                    </td>
+                                    <td>
+                                      <v-text-field
+                                        v-model="item.qty"
+                                        label="SqrFeet"
+                                        type="number"
+                                      ></v-text-field>
+                                    </td>
+                                    <!-- <td>
                                   <span v-if="item.id">
                                     {{ getPrice(item.id) }}
                                   </span>
-                                </td>
+                                </td> -->
+                                    <td>
+                                      <v-btn
+                                        dark
+                                        color="primary"
+                                        @click="addProductToInvoiceSingle(item)"
+                                      >
+                                        Add to Invoice
+                                      </v-btn>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </template>
+                            </v-simple-table>
 
-                                <td>
-                                  <v-btn
-                                    class="green--text"
-                                    icon
-                                    @click="addProductToInvoiceSingle(item)"
-                                  >
-                                    <v-icon>mdi-plus</v-icon>
-                                  </v-btn>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </template>
-                        </v-simple-table>
-
-                        <v-btn
-                          dark
-                          color="primary"
-                          class="float-right"
-                          @click="clearGlassItems"
-                          >Clear</v-btn
-                        >
-                      </v-tab-item>
-                    </v-tabs>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
+                            <v-btn
+                              dark
+                              color="red"
+                              class="float-right mr-4"
+                              @click="clearGlassItems"
+                              >Clear</v-btn
+                            >
+                          </v-tab-item>
+                        </v-tabs>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+              </v-card>
+            </v-dialog>
+          </v-col>
+        </v-row>
 
         <!-- customers -->
         <v-row class="cust mr-1">
@@ -693,8 +758,14 @@
               </td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
+              <td>Polish</td>
+              <td>
+                <input
+                  class="numinput"
+                  type="number"
+                  v-model="invoiceData.polish"
+                />
+              </td>
               <td>Amount Due</td>
               <td>
                 <input
@@ -714,19 +785,29 @@
               mandatory
               row
               class="radio mt-1"
+              dense
             >
               <v-radio label="Invoice" value="Invoice"></v-radio>
               <v-radio label="Quotation" value="Quotation"></v-radio>
             </v-radio-group>
 
-            <v-row>
-              <v-checkbox
-                label="Invoice"
-                v-model="printInvoice"
-              ></v-checkbox>
+            <v-radio-group
+              v-model="printPage"
+              mandatory
+              row
+              class="radio mt-1"
+              dense
+            >
+              <v-radio label="thermal" value="thermal"></v-radio>
+              <v-radio label="A4" value="a4"></v-radio>
+            </v-radio-group>
+
+            <v-row class="ma-0 pa-0 mt-n2">
+              <v-checkbox label="Invoice" v-model="printInvoice"></v-checkbox>
               <v-checkbox
                 label="Gate Pass"
                 v-model="printGatePass"
+                dense
               ></v-checkbox>
             </v-row>
           </v-col>
@@ -749,10 +830,12 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
+import AddCustomer from "../../components/AddCustomer.vue";
 import ProductList from "../../components/ProductList.vue";
 export default {
   components: {
     ProductList,
+    AddCustomer,
   },
 
   data: () => {
@@ -775,22 +858,26 @@ export default {
         { id: null, qty: 0, price: 0 },
         { id: null, qty: 0, price: 0 },
       ],
-      ceiling_width: null,
-      ceiling_length: null,
+      ceiling_width: 0,
+      ceiling_length: 0,
+      ceiling_number: 0,
+      ceiling_input: [],
       employees: [],
 
       panel: {
-        number: null,
-        length: null,
-        removals: null,
-        sheet_height: "",
-        sheet_width: null,
+        number: 0,
+        length: 0,
+        removals: 0,
+        sheet_height: "full",
+        sheet_width: 10,
       },
 
       peneling: [
         { id: null, qty: 0, price: 0 },
         { id: null, qty: 0, price: 0 },
       ],
+
+      paneling_input: [],
 
       panelSheetHight: ["full", "half", "third"],
       panelSheetWidth: [8, 10, 16, 19],
@@ -814,6 +901,8 @@ export default {
         standar_var: 0,
       },
 
+      glass_input: [],
+
       glassItem: [{ id: null, qty: 0, price: 0, g_height: 0, g_width: 0 }],
 
       doc_types: ["Invoice", "Quotation"],
@@ -830,10 +919,13 @@ export default {
         fitter: null,
         walkin_name: "",
         walkin_phone: "",
+        polish: 0,
+        note: {},
       },
 
       printInvoice: false,
       printGatePass: false,
+      printPage: "thermal",
 
       priceStatus: true,
       priceChange: false,
@@ -878,7 +970,13 @@ export default {
           fitter: this.invoiceData.fitter,
           walkin_name: this.invoiceData.walkin_name,
           walkin_phone: this.invoiceData.walkin_phone,
+          polish: this.invoiceData.polish,
           priceflag: this.priceChange,
+          note: {
+            panel_input: this.paneling_input,
+            ceiling_input: this.ceiling_input,
+            glass_input: this.glass_input,
+          },
         },
         orderedItems: this.cart,
       };
@@ -907,10 +1005,13 @@ export default {
         }
       );
 
+      console.log(orderData);
+
       axios.post("/api/order", orderData).then((res) => {
+        console.log(orderData);
         this.clearCartItems();
         this.clearData();
-        console.log(orderData);
+
         this.invoiceData.discount = 0;
         this.invoiceData.received_amt = 0;
         this.invoiceData.suzuki_rent = 0;
@@ -922,13 +1023,58 @@ export default {
 
         this.initialize();
 
-        if (this.printInvoice) {
-          // let routeData = this.$router.resolve({name: 'order-edit', query: {data: res.data.id}});
-          let routeData = this.$router.resolve(
-            `/admin/invoice/print/${res.data.order.id}`
-          );
-          window.open(routeData.href, "_blank");
-          //  this.$router.push(`/admin/invoice/print/${res.data.id}`);
+        if (this.printPage == "thermal") {
+          if (this.printInvoice && this.printGatePass) {
+            // let routeData = this.$router.resolve({name: 'order-edit', query: {data: res.data.id}});
+            let routeData = this.$router.resolve(
+              `/admin/invoice/print/${res.data.order.id}`
+            );
+            window.open(routeData.href, "_blank");
+            //  this.$router.push(`/admin/invoice/print/${res.data.id}`);
+
+            let routeData2 = this.$router.resolve(
+              `/admin/invoice/print/tmgatepass/${res.data.order.id}`
+            );
+            window.open(routeData2.href, "_blank");
+          } else if (this.printInvoice) {
+            let routeData = this.$router.resolve(
+              `/admin/invoice/print/${res.data.order.id}`
+            );
+            window.open(routeData.href, "_blank");
+          } else if (this.printGatePass) {
+            let routeData2 = this.$router.resolve(
+              `/admin/invoice/print/tmgatepass/${res.data.order.id}`
+            );
+            window.open(routeData2.href, "_blank");
+          } else {
+            return;
+          }
+        } else if (this.printPage == "a4") {
+          if (this.printInvoice && this.printGatePass) {
+            // let routeData = this.$router.resolve({name: 'order-edit', query: {data: res.data.id}});
+            let routeData = this.$router.resolve(
+              `/admin/invoice/print/a4/${res.data.order.id}`
+            );
+            window.open(routeData.href, "_blank");
+            //  this.$router.push(`/admin/invoice/print/${res.data.id}`);
+
+            let routeData2 = this.$router.resolve(
+              `/admin/invoice/print/a4gatepass/${res.data.order.id}`
+            );
+            window.open(routeData2.href, "_blank");
+          } else if (this.printInvoice) {
+            let routeData = this.$router.resolve(
+              `/admin/invoice/print/${res.data.order.id}`
+            );
+            window.open(routeData.href, "_blank");
+          } else if (this.printGatePass) {
+            let routeData2 = this.$router.resolve(
+              `/admin/invoice/print/a4gatepass/${res.data.order.id}`
+            );
+            window.open(routeData2.href, "_blank");
+          } else {
+            return;
+          }
         }
       });
     },
@@ -1067,25 +1213,25 @@ export default {
     getCeiling() {
       let width = parseInt(this.ceiling_width);
       let length = parseInt(this.ceiling_length);
+      let number = parseInt(this.ceiling_number);
       let angle_max_length = 10;
       let main_t_max_length = 12;
 
       //number of angles
       let total_length = width * 2 + length * 2;
-      let num_of_angles = Math.ceil(total_length / angle_max_length);
+      let num_of_angles = Math.ceil(total_length / angle_max_length) * number;
 
       // //main-t
       let maint_lines = Math.ceil(width / 2) - 1;
       let maint_length = length * maint_lines;
-      let num_of_main_t = Math.ceil(maint_length / main_t_max_length);
-
-      console.log(num_of_main_t);
+      let num_of_main_t = Math.ceil(maint_length / main_t_max_length) * number;
 
       // //cross-t
-      let num_of_cross_t = Math.ceil(Math.ceil(width / 2) * (length / 2 - 1));
+      let num_of_cross_t =
+        Math.ceil(Math.ceil(width / 2) * (length / 2 - 1)) * number;
 
       // //sheets
-      let num_of_sheets = Math.ceil((width * length) / 4);
+      let num_of_sheets = Math.ceil((width * length) / 4) * number;
 
       this.ceiling[0].qty = num_of_angles;
       this.ceiling[2].qty = num_of_cross_t;
@@ -1150,6 +1296,56 @@ export default {
       });
     },
 
+    addCeilingProductToInvoice() {
+      // add product
+      this.ceiling.forEach((prod) => {
+        let item = this.products.filter((p) => p.id == prod.id);
+        this.$store.dispatch("cart/addProductToCart", {
+          product: item[0],
+          quantity: prod.qty,
+        });
+      });
+
+      // add inputs
+      this.ceiling_input.push({
+        width: this.ceiling_width,
+        length: this.ceiling_length,
+        number: this.ceiling_number,
+      });
+
+      // remove inputs ceiling
+      this.clearCeilingItems();
+
+      // close modal
+      this.dialog = false;
+    },
+
+    addPanelProductToInvoice() {
+      // add product
+      this.peneling.forEach((prod) => {
+        let item = this.products.filter((p) => p.id == prod.id);
+        this.$store.dispatch("cart/addProductToCart", {
+          product: item[0],
+          quantity: prod.qty,
+        });
+      });
+
+      // add inputs
+      this.paneling_input.push({
+        number: this.panel.number,
+        length: this.panel.length,
+        removals: this.panel.removals,
+        sheet_height: this.panel.sheet_height,
+        sheet_width: this.panel.sheet_width,
+      });
+
+      // remove inputs ceiling
+      this.clearPanelItems();
+
+      // close modal
+      this.dialog = false;
+    },
+
     addProductToInvoiceSingle(item) {
       //  console.log(item)
       let prod = this.products.filter((p) => p.id == item.id);
@@ -1160,11 +1356,25 @@ export default {
         g_height: item.g_height,
         g_width: item.g_width,
       });
+
+      // add input
+      this.glass_input.push({
+        width: this.glass.width,
+        height: this.glass.height,
+        number: this.glass.number,
+        sqft: this.glass.back_end_sqrFt,
+        std_width: this.glass.standard_width,
+        std_height: this.glass.standard_height,
+        std_sqft: this.glass.invoice_sqrFt,
+      });
+
+      this.clearGlassItems();
     },
 
     clearCeilingItems() {
-      (this.ceiling_width = null),
-        (this.ceiling_length = null),
+      (this.ceiling_width = 0),
+        (this.ceiling_length = 0),
+        (this.ceiling_number = 0),
         (this.ceiling[0].id = null);
       this.ceiling[2].id = null;
       this.ceiling[1].id = null;
@@ -1180,8 +1390,8 @@ export default {
       (this.panel.number = null),
         (this.panel.length = null),
         (this.panel.removals = null),
-        (this.panel.sheet_height = ""),
-        (this.panel.sheet_width = null),
+        (this.panel.sheet_height = "full"),
+        (this.panel.sheet_width = 10),
         (this.peneling[0].id = null);
       this.peneling[1].id = null;
       this.peneling[0].qty = null;
@@ -1199,6 +1409,8 @@ export default {
 
       this.glassItem[0].id = null;
       this.glassItem[0].qty = null;
+
+      this.dialog = false;
     },
 
     activePrice() {
@@ -1207,13 +1419,14 @@ export default {
     },
 
     getRA() {
-
-    axios.get(`/api/orderbywalkinphone/${this.invoiceData.walkin_phone}`).then((res) => {
-      this.ra_balance = res.data.orders[0].balance;
-      this.cust2.receivable = this.ra_balance;
-      console.log(res.data.orders[0].balance)
-    });
-    }
+      axios
+        .get(`/api/orderbywalkinphone/${this.invoiceData.walkin_phone}`)
+        .then((res) => {
+          this.ra_balance = res.data.orders[0].balance;
+          this.cust2.receivable = this.ra_balance;
+          console.log(res.data.orders[0].balance);
+        });
+    },
   },
 
   created() {
@@ -1254,8 +1467,11 @@ export default {
       let discount = this.invoiceData.discount;
       let fitting_charges = parseInt(this.invoiceData.fitting_charges);
       let suzuki_rent = parseInt(this.invoiceData.suzuki_rent);
+      let polish = parseInt(this.invoiceData.polish);
 
-      return parseInt(subtotal - discount + fitting_charges + suzuki_rent);
+      return parseInt(
+        subtotal - discount + fitting_charges + suzuki_rent + polish
+      );
     },
 
     amtDue() {
@@ -1306,7 +1522,7 @@ export default {
     },
     search(val) {
       // Items have already been loaded
-      if (this.items.length > 0) return;
+      // if (this.items.length > 0) return;
 
       this.isLoading = true;
 
@@ -1329,7 +1545,7 @@ export default {
     },
 
     product_item() {
-      let product_id =  this.product_item ? this.product_item : 0;
+      let product_id = this.product_item ? this.product_item : 0;
       let prod = this.products.filter((item) => item.id == product_id);
       //    console.log(prod[0])
       this.$store.dispatch("cart/addProductToCart", {

@@ -15,6 +15,7 @@ class Order extends Model
         'discount',
         'total',
         'amount_recieved',
+        'polish',
         'note',
         'status',
         'walkin_name',
@@ -24,6 +25,10 @@ class Order extends Model
 
 
     protected $table = 'orders';
+
+    protected $casts = [
+        'note' => 'array'
+    ];
 
 
     //relationships
