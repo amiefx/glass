@@ -76,10 +76,11 @@ class OrderController extends Controller
                 'discount' => $order['discount'],
                 'total' => $order['total'],
                 'amount_recieved' => $order['received_amt'],
+                'polish' => $order['polish'],
                 'status' => $priceflag,
                 'walkin_name' => $order['walkin_name'],
                 'walkin_phone' => $order['walkin_phone'],
-                // 'note' => $order['note'] ? $order['note'] : null,
+                'note' => $order['note'] ? $order['note'] : null,
                 'user_id' => $user->id,
             ]);
             $neworder->save();
@@ -434,13 +435,13 @@ class OrderController extends Controller
             $order->status= 'Invoice';
             $order->save();
 
-    
+
             if (Receivable::where('doc_id', '=', $order->id)->where('type', '=', 'invoice')->first()) {
                 $rec = Receivable::where('doc_id', '=', $order->id)->where('type', '=', 'invoice')->first();
                 $rec->status = 1;
                 $rec->save();
             }
-            
+
             if (Cash::where('doc_id', '=', $order->id)->where('doc_type', '=', 'invoice')->first()) {
                 $cash = Cash::where('doc_id', '=', $order->id)->where('doc_type', '=', 'invoice')->first();
                 $cash->status = 1;

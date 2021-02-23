@@ -7,6 +7,9 @@ export default {
     state: {
         //cart: cart ? JSON.parse(cart) : [],
         cart: [],
+        ceiling: [],
+        panel: [],
+        glass: []
     },
 
     getters: {
@@ -154,7 +157,12 @@ export default {
         state.cart = product.product;
        },
 
-       GET_CART_ITEMS (state, products) {}
+       ADD_ITEMS_TO_CEILING (state, product) {
+        state.ceiling.push({
+            product
+        })
+       },
+
     },
 
     actions: {
@@ -202,6 +210,10 @@ export default {
 
         addProductsToCart({ commit }, { product }) {
             commit('ADD_PRODUCTS_TO_CART', { product});
+        },
+
+        addItemsToCeiling({ commit }, { product }) {
+            commit('ADD_ITEMS_TO_CEILING', { product});
         },
 
     }

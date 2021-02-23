@@ -55,7 +55,7 @@
                      <v-select
                        :items="types"
                        label="Role"
-                       v-model="editedItem.type" 
+                       v-model="editedItem.type"
                        :rules="[rules.required]"
                      ></v-select>
                      <v-checkbox
@@ -192,7 +192,7 @@
         email: '',
         type: '',
         credit_limit: '',
-        is_active: '',
+        is_active: true,
         opening_balance: ''
       },
       defaultItem: {
@@ -205,7 +205,7 @@
         email: '',
         type: '',
         credit_limit: '',
-        is_active: '',
+        is_active: true,
         opening_balance: ''
       },
     }),

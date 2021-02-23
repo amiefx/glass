@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\DB;
 class SalaryController extends Controller
 {
     public function index(Request $request)
-    {
+    {  //dd($request->employee_id);
         $per_page = $request->per_page ? $request->per_page : 5;
-        $sortBy = $request->sort_by ? $request->sort_by : 'order_id';
-        $orderBy = $request->order_by ? $request->order_by : 'desc';
+        $sortBy = $request->sort_by ? $request->sort_by : 'id';
+        $orderBy = $request->order_by ? $request->order_by : 'asc';
         $employee_id = $request->employee_id;
-        $salaires = Salary::where('employee_id', '=', 1 );
+        $salaires = Salary::where('employee_id', '=', $employee_id );
         return response()->json([
             'salaries' => new SalaryCollection($salaires->orderBy($sortBy, $orderBy)->paginate($per_page)) ,
         ], 200);

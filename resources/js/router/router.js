@@ -370,6 +370,39 @@ const routes = [
         }
     },
     {
+        path: '/admin/invoice/print/a4/:id',
+        name: 'admin-order',
+        component: () => import('../views/admin/orders/print/A4Id.vue'),
+        meta: {
+            layout: '',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
+        path: '/admin/invoice/print/tmgatepass/:id',
+        name: 'gatepass-a4',
+        component: () => import('../views/admin/orders/print/TmGatepass.vue'),
+        meta: {
+            layout: '',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
+        path: '/admin/invoice/print/a4gatepass/:id',
+        name: 'gatepass-a4',
+        component: () => import('../views/admin/orders/print/A4Gatepass.vue'),
+        meta: {
+            layout: '',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
         path: '/admin/invoice/edit/:id',
         name: 'order-edit',
         component: () => import('../views/admin/InvoiceEdit.vue'),

@@ -1,5 +1,159 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddCustomer.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AddCustomer.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      valid: true,
+      dialog: false,
+      editedItem: {
+        id: "",
+        name: "",
+        company_name: "",
+        address: "",
+        work_number: "",
+        whatsapp_number: "",
+        email: "",
+        type: "",
+        credit_limit: "",
+        is_active: true,
+        opening_balance: ""
+      },
+      rules: {
+        required: function required(v) {
+          return !!v || "This Field is Required";
+        },
+        min: function min(v) {
+          return v.length >= 5 || "Minimum 5 Chracters Required";
+        },
+        validEmail: function validEmail(v) {
+          return /.+@.+\..+/.test(v) || "Email must be valid";
+        }
+      },
+      status: [{
+        text: "Active",
+        value: true
+      }, {
+        text: "In Active",
+        value: false
+      }],
+      types: ["Walkin", "Regular", "Wholesale", "Retail"],
+      customers: [],
+      text: ''
+    };
+  },
+  methods: {
+    close: function close() {
+      this.dialog = false;
+    },
+    save: function save() {
+      var _this = this;
+
+      axios.post("/api/customers", this.editedItem).then(function (res) {
+        _this.text = "Record Added Successfully!";
+        _this.editedItem.name = "", _this.editedItem.company_name = "", _this.editedItem.address = "", _this.editedItem.work_number = "", _this.editedItem.whatsapp_number = "", _this.editedItem.email = "", _this.editedItem.type = "", _this.editedItem.credit_limit = "", _this.editedItem.is_active = true, _this.editedItem.opening_balance = "", _this.close();
+      })["catch"](function (err) {
+        console.dir(err);
+        _this.text = "Error Inserting Record";
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProductList.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ProductList.vue?vue&type=script&lang=js& ***!
@@ -95,7 +249,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _components_ProductList_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ProductList.vue */ "./resources/js/components/ProductList.vue");
+/* harmony import */ var _components_AddCustomer_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/AddCustomer.vue */ "./resources/js/components/AddCustomer.vue");
+/* harmony import */ var _components_ProductList_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/ProductList.vue */ "./resources/js/components/ProductList.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -851,11 +1006,94 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ProductList: _components_ProductList_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    ProductList: _components_ProductList_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    AddCustomer: _components_AddCustomer_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -888,15 +1126,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         qty: 0,
         price: 0
       }],
-      ceiling_width: null,
-      ceiling_length: null,
+      ceiling_width: 0,
+      ceiling_length: 0,
+      ceiling_number: 0,
+      ceiling_input: [],
       employees: [],
       panel: {
-        number: null,
-        length: null,
-        removals: null,
-        sheet_height: "",
-        sheet_width: null
+        number: 0,
+        length: 0,
+        removals: 0,
+        sheet_height: "full",
+        sheet_width: 10
       },
       peneling: [{
         id: null,
@@ -907,6 +1147,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         qty: 0,
         price: 0
       }],
+      paneling_input: [],
       panelSheetHight: ["full", "half", "third"],
       panelSheetWidth: [8, 10, 16, 19],
       panelWallLength: null,
@@ -926,6 +1167,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         invoice_sqrFt: 0,
         standar_var: 0
       },
+      glass_input: [],
       glassItem: [{
         id: null,
         qty: 0,
@@ -946,10 +1188,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         driver: null,
         fitter: null,
         walkin_name: "",
-        walkin_phone: ""
+        walkin_phone: "",
+        polish: 0,
+        note: {}
       },
       printInvoice: false,
       printGatePass: false,
+      printPage: "thermal",
       priceStatus: true,
       priceChange: false,
       isLoading: false,
@@ -990,7 +1235,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           fitter: this.invoiceData.fitter,
           walkin_name: this.invoiceData.walkin_name,
           walkin_phone: this.invoiceData.walkin_phone,
-          priceflag: this.priceChange
+          polish: this.invoiceData.polish,
+          priceflag: this.priceChange,
+          note: {
+            panel_input: this.paneling_input,
+            ceiling_input: this.ceiling_input,
+            glass_input: this.glass_input
+          }
         },
         orderedItems: this.cart
       }; // Add a request interceptor
@@ -1010,12 +1261,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.loading = false;
         return Promise.reject(error);
       });
+      console.log(orderData);
       axios.post("/api/order", orderData).then(function (res) {
+        console.log(orderData);
+
         _this.clearCartItems();
 
         _this.clearData();
 
-        console.log(orderData);
         _this.invoiceData.discount = 0;
         _this.invoiceData.received_amt = 0;
         _this.invoiceData.suzuki_rent = 0;
@@ -1027,11 +1280,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         _this.initialize();
 
-        if (_this.printInvoice) {
-          // let routeData = this.$router.resolve({name: 'order-edit', query: {data: res.data.id}});
-          var routeData = _this.$router.resolve("/admin/invoice/print/".concat(res.data.order.id));
+        if (_this.printPage == "thermal") {
+          if (_this.printInvoice && _this.printGatePass) {
+            // let routeData = this.$router.resolve({name: 'order-edit', query: {data: res.data.id}});
+            var routeData = _this.$router.resolve("/admin/invoice/print/".concat(res.data.order.id));
 
-          window.open(routeData.href, "_blank"); //  this.$router.push(`/admin/invoice/print/${res.data.id}`);
+            window.open(routeData.href, "_blank"); //  this.$router.push(`/admin/invoice/print/${res.data.id}`);
+
+            var routeData2 = _this.$router.resolve("/admin/invoice/print/tmgatepass/".concat(res.data.order.id));
+
+            window.open(routeData2.href, "_blank");
+          } else if (_this.printInvoice) {
+            var _routeData = _this.$router.resolve("/admin/invoice/print/".concat(res.data.order.id));
+
+            window.open(_routeData.href, "_blank");
+          } else if (_this.printGatePass) {
+            var _routeData2 = _this.$router.resolve("/admin/invoice/print/tmgatepass/".concat(res.data.order.id));
+
+            window.open(_routeData2.href, "_blank");
+          } else {
+            return;
+          }
+        } else if (_this.printPage == "a4") {
+          if (_this.printInvoice && _this.printGatePass) {
+            // let routeData = this.$router.resolve({name: 'order-edit', query: {data: res.data.id}});
+            var _routeData3 = _this.$router.resolve("/admin/invoice/print/a4/".concat(res.data.order.id));
+
+            window.open(_routeData3.href, "_blank"); //  this.$router.push(`/admin/invoice/print/${res.data.id}`);
+
+            var _routeData4 = _this.$router.resolve("/admin/invoice/print/a4gatepass/".concat(res.data.order.id));
+
+            window.open(_routeData4.href, "_blank");
+          } else if (_this.printInvoice) {
+            var _routeData5 = _this.$router.resolve("/admin/invoice/print/".concat(res.data.order.id));
+
+            window.open(_routeData5.href, "_blank");
+          } else if (_this.printGatePass) {
+            var _routeData6 = _this.$router.resolve("/admin/invoice/print/a4gatepass/".concat(res.data.order.id));
+
+            window.open(_routeData6.href, "_blank");
+          } else {
+            return;
+          }
         }
       });
     },
@@ -1155,20 +1445,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     getCeiling: function getCeiling() {
       var width = parseInt(this.ceiling_width);
       var length = parseInt(this.ceiling_length);
+      var number = parseInt(this.ceiling_number);
       var angle_max_length = 10;
       var main_t_max_length = 12; //number of angles
 
       var total_length = width * 2 + length * 2;
-      var num_of_angles = Math.ceil(total_length / angle_max_length); // //main-t
+      var num_of_angles = Math.ceil(total_length / angle_max_length) * number; // //main-t
 
       var maint_lines = Math.ceil(width / 2) - 1;
       var maint_length = length * maint_lines;
-      var num_of_main_t = Math.ceil(maint_length / main_t_max_length);
-      console.log(num_of_main_t); // //cross-t
+      var num_of_main_t = Math.ceil(maint_length / main_t_max_length) * number; // //cross-t
 
-      var num_of_cross_t = Math.ceil(Math.ceil(width / 2) * (length / 2 - 1)); // //sheets
+      var num_of_cross_t = Math.ceil(Math.ceil(width / 2) * (length / 2 - 1)) * number; // //sheets
 
-      var num_of_sheets = Math.ceil(width * length / 4);
+      var num_of_sheets = Math.ceil(width * length / 4) * number;
       this.ceiling[0].qty = num_of_angles;
       this.ceiling[2].qty = num_of_cross_t;
       this.ceiling[1].qty = num_of_main_t;
@@ -1224,6 +1514,58 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         quantity: item.qty
       });
     },
+    addCeilingProductToInvoice: function addCeilingProductToInvoice() {
+      var _this8 = this;
+
+      // add product
+      this.ceiling.forEach(function (prod) {
+        var item = _this8.products.filter(function (p) {
+          return p.id == prod.id;
+        });
+
+        _this8.$store.dispatch("cart/addProductToCart", {
+          product: item[0],
+          quantity: prod.qty
+        });
+      }); // add inputs
+
+      this.ceiling_input.push({
+        width: this.ceiling_width,
+        length: this.ceiling_length,
+        number: this.ceiling_number
+      }); // remove inputs ceiling
+
+      this.clearCeilingItems(); // close modal
+
+      this.dialog = false;
+    },
+    addPanelProductToInvoice: function addPanelProductToInvoice() {
+      var _this9 = this;
+
+      // add product
+      this.peneling.forEach(function (prod) {
+        var item = _this9.products.filter(function (p) {
+          return p.id == prod.id;
+        });
+
+        _this9.$store.dispatch("cart/addProductToCart", {
+          product: item[0],
+          quantity: prod.qty
+        });
+      }); // add inputs
+
+      this.paneling_input.push({
+        number: this.panel.number,
+        length: this.panel.length,
+        removals: this.panel.removals,
+        sheet_height: this.panel.sheet_height,
+        sheet_width: this.panel.sheet_width
+      }); // remove inputs ceiling
+
+      this.clearPanelItems(); // close modal
+
+      this.dialog = false;
+    },
     addProductToInvoiceSingle: function addProductToInvoiceSingle(item) {
       //  console.log(item)
       var prod = this.products.filter(function (p) {
@@ -1234,10 +1576,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         quantity: item.qty,
         g_height: item.g_height,
         g_width: item.g_width
+      }); // add input
+
+      this.glass_input.push({
+        width: this.glass.width,
+        height: this.glass.height,
+        number: this.glass.number,
+        sqft: this.glass.back_end_sqrFt,
+        std_width: this.glass.standard_width,
+        std_height: this.glass.standard_height,
+        std_sqft: this.glass.invoice_sqrFt
       });
+      this.clearGlassItems();
     },
     clearCeilingItems: function clearCeilingItems() {
-      this.ceiling_width = null, this.ceiling_length = null, this.ceiling[0].id = null;
+      this.ceiling_width = 0, this.ceiling_length = 0, this.ceiling_number = 0, this.ceiling[0].id = null;
       this.ceiling[2].id = null;
       this.ceiling[1].id = null;
       this.ceiling[3].id = null;
@@ -1247,7 +1600,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.ceiling[3].qty = null;
     },
     clearPanelItems: function clearPanelItems() {
-      this.panel.number = null, this.panel.length = null, this.panel.removals = null, this.panel.sheet_height = "", this.panel.sheet_width = null, this.peneling[0].id = null;
+      this.panel.number = null, this.panel.length = null, this.panel.removals = null, this.panel.sheet_height = "full", this.panel.sheet_width = 10, this.peneling[0].id = null;
       this.peneling[1].id = null;
       this.peneling[0].qty = null;
       this.peneling[1].qty = null;
@@ -1262,30 +1615,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.glass.invoice_sqrFt = 0;
       this.glassItem[0].id = null;
       this.glassItem[0].qty = null;
+      this.dialog = false;
     },
     activePrice: function activePrice() {
       this.priceStatus = false;
       this.priceChange = true;
     },
     getRA: function getRA() {
-      var _this8 = this;
+      var _this10 = this;
 
       axios.get("/api/orderbywalkinphone/".concat(this.invoiceData.walkin_phone)).then(function (res) {
-        _this8.ra_balance = res.data.orders[0].balance;
-        _this8.cust2.receivable = _this8.ra_balance;
+        _this10.ra_balance = res.data.orders[0].balance;
+        _this10.cust2.receivable = _this10.ra_balance;
         console.log(res.data.orders[0].balance);
       });
     }
   },
   created: function created() {
-    var _this9 = this;
+    var _this11 = this;
 
     this.initialize();
     axios.get("/api/slabs/all").then(function (res) {
-      _this9.slabs = res.data.data;
+      _this11.slabs = res.data.data;
     });
     axios.get("/api/employees/all").then(function (res) {
-      _this9.employees = res.data.data;
+      _this11.employees = res.data.data;
     });
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -1311,7 +1665,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var discount = this.invoiceData.discount;
       var fitting_charges = parseInt(this.invoiceData.fitting_charges);
       var suzuki_rent = parseInt(this.invoiceData.suzuki_rent);
-      return parseInt(subtotal - discount + fitting_charges + suzuki_rent);
+      var polish = parseInt(this.invoiceData.polish);
+      return parseInt(subtotal - discount + fitting_charges + suzuki_rent + polish);
     },
     amtDue: function amtDue() {
       return this.total - this.invoiceData.received_amt;
@@ -1367,25 +1722,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (val != null) this.tab = 0;else this.tab = null;
     },
     search: function search(val) {
-      var _this10 = this;
+      var _this12 = this;
 
       // Items have already been loaded
-      if (this.items.length > 0) return;
+      // if (this.items.length > 0) return;
       this.isLoading = true; // axios method
 
       axios.get("/api/customers/all").then(function (res) {
-        _this10.items = res.data.data;
-        _this10.isLoading = false;
+        _this12.items = res.data.data;
+        _this12.isLoading = false;
       })["catch"](function (err) {
         console.log(err);
-        _this10.isLoading = false;
+        _this12.isLoading = false;
       });
     },
     cust_id: function cust_id() {
-      var _this11 = this;
+      var _this13 = this;
 
       var customer = this.items.filter(function (item) {
-        return item.id == _this11.cust_id;
+        return item.id == _this13.cust_id;
       });
       this.cust2 = customer[0];
     },
@@ -1500,6 +1855,292 @@ var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/a
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddCustomer.vue?vue&type=template&id=c7f581f8&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AddCustomer.vue?vue&type=template&id=c7f581f8& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-dialog",
+    {
+      attrs: { "max-width": "600px" },
+      scopedSlots: _vm._u([
+        {
+          key: "activator",
+          fn: function(ref) {
+            var on = ref.on
+            return [
+              _c(
+                "v-btn",
+                _vm._g({ attrs: { color: "primary", dark: "" } }, on),
+                [_vm._v("New Customer")]
+              )
+            ]
+          }
+        }
+      ]),
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
+      }
+    },
+    [
+      _vm._v(" "),
+      _c(
+        "v-card",
+        [
+          _c(
+            "v-form",
+            {
+              attrs: { method: "post" },
+              on: {
+                submit: function($event) {
+                  $event.stopPropagation()
+                  $event.preventDefault()
+                  return _vm.save($event)
+                }
+              },
+              model: {
+                value: _vm.valid,
+                callback: function($$v) {
+                  _vm.valid = $$v
+                },
+                expression: "valid"
+              }
+            },
+            [
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-container",
+                    [
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12", md: "6", lg: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Name",
+                                  rules: [_vm.rules.required, _vm.rules.min]
+                                },
+                                model: {
+                                  value: _vm.editedItem.name,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "name", $$v)
+                                  },
+                                  expression: "editedItem.name"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Company",
+                                  rules: [_vm.rules.required, _vm.rules.min]
+                                },
+                                model: {
+                                  value: _vm.editedItem.company_name,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.editedItem,
+                                      "company_name",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "editedItem.company_name"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: { label: "Address" },
+                                model: {
+                                  value: _vm.editedItem.address,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "address", $$v)
+                                  },
+                                  expression: "editedItem.address"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: { label: "Email" },
+                                model: {
+                                  value: _vm.editedItem.email,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "email", $$v)
+                                  },
+                                  expression: "editedItem.email"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: { label: "Phone" },
+                                model: {
+                                  value: _vm.editedItem.work_number,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "work_number", $$v)
+                                  },
+                                  expression: "editedItem.work_number"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: { label: "Whatsapp" },
+                                model: {
+                                  value: _vm.editedItem.whatsapp_number,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.editedItem,
+                                      "whatsapp_number",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "editedItem.whatsapp_number"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12", md: "6", lg: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "Opening Balance" },
+                                model: {
+                                  value: _vm.editedItem.opening_balance,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.editedItem,
+                                      "opening_balance",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "editedItem.opening_balance"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: { label: "Credit limit" },
+                                model: {
+                                  value: _vm.editedItem.credit_limit,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.editedItem,
+                                      "credit_limit",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "editedItem.credit_limit"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-select", {
+                                attrs: {
+                                  items: _vm.types,
+                                  label: "Role",
+                                  rules: [_vm.rules.required]
+                                },
+                                model: {
+                                  value: _vm.editedItem.type,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "type", $$v)
+                                  },
+                                  expression: "editedItem.type"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-checkbox", {
+                                attrs: { label: "Active" },
+                                model: {
+                                  value: _vm.editedItem.is_active,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "is_active", $$v)
+                                  },
+                                  expression: "editedItem.is_active"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "primary", text: "" },
+                      on: { click: _vm.close }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        color: "primary",
+                        type: "submit",
+                        disabled: !_vm.valid
+                      },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.save($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Save")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
 
 /***/ }),
 
@@ -1979,176 +2620,525 @@ var render = function() {
             { staticClass: "calculate", attrs: { cols: "5" } },
             [
               _c(
-                "v-dialog",
-                {
-                  attrs: { "max-width": "600px" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "activator",
-                      fn: function(ref) {
-                        var on = ref.on
-                        return [
-                          _c(
-                            "v-btn",
-                            _vm._g(
-                              {
-                                staticClass: "mb-2",
-                                attrs: { color: "primary", dark: "", block: "" }
-                              },
-                              on
-                            ),
-                            [_vm._v("Calculations")]
-                          )
-                        ]
-                      }
-                    }
-                  ]),
-                  model: {
-                    value: _vm.dialog,
-                    callback: function($$v) {
-                      _vm.dialog = $$v
-                    },
-                    expression: "dialog"
-                  }
-                },
+                "v-row",
                 [
+                  _c(
+                    "v-col",
+                    { staticClass: "py-0", attrs: { cols: "6" } },
+                    [_c("add-customer")],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
-                    "v-card",
+                    "v-col",
+                    { staticClass: "py-0", attrs: { cols: "6" } },
                     [
                       _c(
-                        "v-card-text",
+                        "v-dialog",
+                        {
+                          attrs: { "max-width": "600px" },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "activator",
+                              fn: function(ref) {
+                                var on = ref.on
+                                return [
+                                  _c(
+                                    "v-btn",
+                                    _vm._g(
+                                      {
+                                        staticClass: "mb-2",
+                                        attrs: {
+                                          color: "primary",
+                                          dark: "",
+                                          block: ""
+                                        }
+                                      },
+                                      on
+                                    ),
+                                    [_vm._v("Calculations")]
+                                  )
+                                ]
+                              }
+                            }
+                          ]),
+                          model: {
+                            value: _vm.dialog,
+                            callback: function($$v) {
+                              _vm.dialog = $$v
+                            },
+                            expression: "dialog"
+                          }
+                        },
                         [
+                          _vm._v(" "),
                           _c(
-                            "v-container",
+                            "v-card",
                             [
                               _c(
-                                "v-row",
+                                "v-card-text",
                                 [
                                   _c(
-                                    "v-col",
-                                    { attrs: { cols: "12" } },
+                                    "v-container",
                                     [
                                       _c(
-                                        "v-tabs",
+                                        "v-row",
                                         [
                                           _c(
-                                            "v-tab",
+                                            "v-col",
+                                            { attrs: { cols: "12" } },
                                             [
                                               _c(
-                                                "v-icon",
-                                                { attrs: { left: "" } },
-                                                [
-                                                  _vm._v(
-                                                    " mdi-file-document-outline "
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(
-                                                "\n                      Ceiling\n                    "
-                                              )
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-tab",
-                                            [
-                                              _c(
-                                                "v-icon",
-                                                { attrs: { left: "" } },
-                                                [
-                                                  _vm._v(
-                                                    " mdi-note-text-outline "
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(
-                                                "\n                      Pannels\n                    "
-                                              )
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-tab",
-                                            [
-                                              _c(
-                                                "v-icon",
-                                                { attrs: { left: "" } },
-                                                [_vm._v(" mdi-cash-multiple ")]
-                                              ),
-                                              _vm._v(
-                                                "\n                      Glass\n                    "
-                                              )
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-tab-item",
-                                            [
-                                              _c(
-                                                "v-row",
+                                                "v-tabs",
                                                 [
                                                   _c(
-                                                    "v-col",
-                                                    { attrs: { cols: "4" } },
+                                                    "v-tab",
                                                     [
-                                                      _c("v-text-field", {
-                                                        attrs: {
-                                                          label: "Width",
-                                                          type: "number",
-                                                          dense: "",
-                                                          outlined: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.ceiling_width,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.ceiling_width = $$v
-                                                          },
-                                                          expression:
-                                                            "ceiling_width"
-                                                        }
-                                                      })
+                                                      _c(
+                                                        "v-icon",
+                                                        { attrs: { left: "" } },
+                                                        [
+                                                          _vm._v(
+                                                            " mdi-file-document-outline "
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(
+                                                        "\n                          Ceiling\n                        "
+                                                      )
                                                     ],
                                                     1
                                                   ),
                                                   _vm._v(" "),
                                                   _c(
-                                                    "v-col",
-                                                    { attrs: { cols: "4" } },
+                                                    "v-tab",
                                                     [
-                                                      _c("v-text-field", {
-                                                        attrs: {
-                                                          label: "Length",
-                                                          type: "number",
-                                                          dense: "",
-                                                          outlined: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.ceiling_length,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.ceiling_length = $$v
-                                                          },
-                                                          expression:
-                                                            "ceiling_length"
-                                                        }
-                                                      })
+                                                      _c(
+                                                        "v-icon",
+                                                        { attrs: { left: "" } },
+                                                        [
+                                                          _vm._v(
+                                                            " mdi-note-text-outline "
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(
+                                                        "\n                          Pannels\n                        "
+                                                      )
                                                     ],
                                                     1
                                                   ),
                                                   _vm._v(" "),
                                                   _c(
-                                                    "v-col",
-                                                    { attrs: { cols: "4" } },
+                                                    "v-tab",
                                                     [
+                                                      _c(
+                                                        "v-icon",
+                                                        { attrs: { left: "" } },
+                                                        [
+                                                          _vm._v(
+                                                            " mdi-cash-multiple "
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(
+                                                        "\n                          Glass\n                        "
+                                                      )
+                                                    ],
+                                                    1
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-tab-item",
+                                                    [
+                                                      _c(
+                                                        "v-row",
+                                                        [
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Width",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.getCeiling
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.ceiling_width,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.ceiling_width = $$v
+                                                                    },
+                                                                    expression:
+                                                                      "ceiling_width"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Length",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.getCeiling
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.ceiling_length,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.ceiling_length = $$v
+                                                                    },
+                                                                    expression:
+                                                                      "ceiling_length"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Number",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.getCeiling
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.ceiling_number,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.ceiling_number = $$v
+                                                                    },
+                                                                    expression:
+                                                                      "ceiling_number"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          )
+                                                        ],
+                                                        1
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c("v-simple-table", {
+                                                        attrs: {
+                                                          height: "",
+                                                          dense: ""
+                                                        },
+                                                        scopedSlots: _vm._u([
+                                                          {
+                                                            key: "default",
+                                                            fn: function() {
+                                                              return [
+                                                                _c("thead", [
+                                                                  _c("tr", [
+                                                                    _c(
+                                                                      "th",
+                                                                      {
+                                                                        staticClass:
+                                                                          "text-left"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "Item"
+                                                                        )
+                                                                      ]
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "th",
+                                                                      {
+                                                                        staticClass:
+                                                                          "text-left"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "Quantity"
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  ])
+                                                                ]),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "tbody",
+                                                                  _vm._l(
+                                                                    _vm.ceiling,
+                                                                    function(
+                                                                      item,
+                                                                      index
+                                                                    ) {
+                                                                      return _c(
+                                                                        "tr",
+                                                                        {
+                                                                          key:
+                                                                            item.index
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "td",
+                                                                            [
+                                                                              index ==
+                                                                              0
+                                                                                ? _c(
+                                                                                    "v-autocomplete",
+                                                                                    {
+                                                                                      attrs: {
+                                                                                        items:
+                                                                                          _vm.angle,
+                                                                                        "item-text":
+                                                                                          "name",
+                                                                                        "item-value":
+                                                                                          "id",
+                                                                                        label:
+                                                                                          "Select Angle"
+                                                                                      },
+                                                                                      model: {
+                                                                                        value:
+                                                                                          _vm
+                                                                                            .ceiling[0]
+                                                                                            .id,
+                                                                                        callback: function(
+                                                                                          $$v
+                                                                                        ) {
+                                                                                          _vm.$set(
+                                                                                            _vm
+                                                                                              .ceiling[0],
+                                                                                            "id",
+                                                                                            $$v
+                                                                                          )
+                                                                                        },
+                                                                                        expression:
+                                                                                          "ceiling[0].id"
+                                                                                      }
+                                                                                    }
+                                                                                  )
+                                                                                : _vm._e(),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              index ==
+                                                                              1
+                                                                                ? _c(
+                                                                                    "v-autocomplete",
+                                                                                    {
+                                                                                      attrs: {
+                                                                                        items:
+                                                                                          _vm.mainT,
+                                                                                        "item-text":
+                                                                                          "name",
+                                                                                        "item-value":
+                                                                                          "id",
+                                                                                        label:
+                                                                                          "Select Main T"
+                                                                                      },
+                                                                                      model: {
+                                                                                        value:
+                                                                                          _vm
+                                                                                            .ceiling[1]
+                                                                                            .id,
+                                                                                        callback: function(
+                                                                                          $$v
+                                                                                        ) {
+                                                                                          _vm.$set(
+                                                                                            _vm
+                                                                                              .ceiling[1],
+                                                                                            "id",
+                                                                                            $$v
+                                                                                          )
+                                                                                        },
+                                                                                        expression:
+                                                                                          "ceiling[1].id"
+                                                                                      }
+                                                                                    }
+                                                                                  )
+                                                                                : _vm._e(),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              index ==
+                                                                              2
+                                                                                ? _c(
+                                                                                    "v-autocomplete",
+                                                                                    {
+                                                                                      attrs: {
+                                                                                        items:
+                                                                                          _vm.crossT,
+                                                                                        "item-text":
+                                                                                          "name",
+                                                                                        "item-value":
+                                                                                          "id",
+                                                                                        label:
+                                                                                          "Select Cross T"
+                                                                                      },
+                                                                                      model: {
+                                                                                        value:
+                                                                                          _vm
+                                                                                            .ceiling[2]
+                                                                                            .id,
+                                                                                        callback: function(
+                                                                                          $$v
+                                                                                        ) {
+                                                                                          _vm.$set(
+                                                                                            _vm
+                                                                                              .ceiling[2],
+                                                                                            "id",
+                                                                                            $$v
+                                                                                          )
+                                                                                        },
+                                                                                        expression:
+                                                                                          "ceiling[2].id"
+                                                                                      }
+                                                                                    }
+                                                                                  )
+                                                                                : _vm._e(),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              index ==
+                                                                              3
+                                                                                ? _c(
+                                                                                    "v-autocomplete",
+                                                                                    {
+                                                                                      attrs: {
+                                                                                        items:
+                                                                                          _vm.sheets,
+                                                                                        "item-text":
+                                                                                          "name",
+                                                                                        "item-value":
+                                                                                          "id",
+                                                                                        label:
+                                                                                          "Select Sheet"
+                                                                                      },
+                                                                                      model: {
+                                                                                        value:
+                                                                                          _vm
+                                                                                            .ceiling[3]
+                                                                                            .id,
+                                                                                        callback: function(
+                                                                                          $$v
+                                                                                        ) {
+                                                                                          _vm.$set(
+                                                                                            _vm
+                                                                                              .ceiling[3],
+                                                                                            "id",
+                                                                                            $$v
+                                                                                          )
+                                                                                        },
+                                                                                        expression:
+                                                                                          "ceiling[3].id"
+                                                                                      }
+                                                                                    }
+                                                                                  )
+                                                                                : _vm._e()
+                                                                            ],
+                                                                            1
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "td",
+                                                                            [
+                                                                              _c(
+                                                                                "v-text-field",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    label:
+                                                                                      "Quantity",
+                                                                                    type:
+                                                                                      "number"
+                                                                                  },
+                                                                                  model: {
+                                                                                    value:
+                                                                                      item.qty,
+                                                                                    callback: function(
+                                                                                      $$v
+                                                                                    ) {
+                                                                                      _vm.$set(
+                                                                                        item,
+                                                                                        "qty",
+                                                                                        $$v
+                                                                                      )
+                                                                                    },
+                                                                                    expression:
+                                                                                      "item.qty"
+                                                                                  }
+                                                                                }
+                                                                              )
+                                                                            ],
+                                                                            1
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    }
+                                                                  ),
+                                                                  0
+                                                                )
+                                                              ]
+                                                            },
+                                                            proxy: true
+                                                          }
+                                                        ])
+                                                      }),
+                                                      _vm._v(" "),
                                                       _c(
                                                         "v-btn",
                                                         {
@@ -2160,1042 +3150,458 @@ var render = function() {
                                                           },
                                                           on: {
                                                             click:
-                                                              _vm.getCeiling
+                                                              _vm.addCeilingProductToInvoice
                                                           }
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "\n                            Calculate\n                          "
+                                                            "Add to Invoice"
                                                           )
                                                         ]
-                                                      )
-                                                    ],
-                                                    1
-                                                  )
-                                                ],
-                                                1
-                                              ),
-                                              _vm._v(" "),
-                                              _c("v-simple-table", {
-                                                attrs: {
-                                                  height: "",
-                                                  dense: ""
-                                                },
-                                                scopedSlots: _vm._u([
-                                                  {
-                                                    key: "default",
-                                                    fn: function() {
-                                                      return [
-                                                        _c("thead", [
-                                                          _c("tr", [
-                                                            _c(
-                                                              "th",
-                                                              {
-                                                                staticClass:
-                                                                  "text-left"
-                                                              },
-                                                              [_vm._v("Item")]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "th",
-                                                              {
-                                                                staticClass:
-                                                                  "text-left"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "Quantity"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "th",
-                                                              {
-                                                                staticClass:
-                                                                  "text-left"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "Unit Price"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c("th", {
-                                                              staticClass:
-                                                                "text-left"
-                                                            })
-                                                          ])
-                                                        ]),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "tbody",
-                                                          _vm._l(
-                                                            _vm.ceiling,
-                                                            function(
-                                                              item,
-                                                              index
-                                                            ) {
-                                                              return _c(
-                                                                "tr",
-                                                                {
-                                                                  key:
-                                                                    item.index
-                                                                },
-                                                                [
-                                                                  _c(
-                                                                    "td",
-                                                                    [
-                                                                      index == 0
-                                                                        ? _c(
-                                                                            "v-select",
-                                                                            {
-                                                                              attrs: {
-                                                                                items:
-                                                                                  _vm.angle,
-                                                                                "item-text":
-                                                                                  "name",
-                                                                                "item-value":
-                                                                                  "id",
-                                                                                label:
-                                                                                  "Select Angle"
-                                                                              },
-                                                                              model: {
-                                                                                value:
-                                                                                  _vm
-                                                                                    .ceiling[0]
-                                                                                    .id,
-                                                                                callback: function(
-                                                                                  $$v
-                                                                                ) {
-                                                                                  _vm.$set(
-                                                                                    _vm
-                                                                                      .ceiling[0],
-                                                                                    "id",
-                                                                                    $$v
-                                                                                  )
-                                                                                },
-                                                                                expression:
-                                                                                  "ceiling[0].id"
-                                                                              }
-                                                                            }
-                                                                          )
-                                                                        : _vm._e(),
-                                                                      _vm._v(
-                                                                        " "
-                                                                      ),
-                                                                      index == 1
-                                                                        ? _c(
-                                                                            "v-select",
-                                                                            {
-                                                                              attrs: {
-                                                                                items:
-                                                                                  _vm.mainT,
-                                                                                "item-text":
-                                                                                  "name",
-                                                                                "item-value":
-                                                                                  "id",
-                                                                                label:
-                                                                                  "Select Main T"
-                                                                              },
-                                                                              model: {
-                                                                                value:
-                                                                                  _vm
-                                                                                    .ceiling[1]
-                                                                                    .id,
-                                                                                callback: function(
-                                                                                  $$v
-                                                                                ) {
-                                                                                  _vm.$set(
-                                                                                    _vm
-                                                                                      .ceiling[1],
-                                                                                    "id",
-                                                                                    $$v
-                                                                                  )
-                                                                                },
-                                                                                expression:
-                                                                                  "ceiling[1].id"
-                                                                              }
-                                                                            }
-                                                                          )
-                                                                        : _vm._e(),
-                                                                      _vm._v(
-                                                                        " "
-                                                                      ),
-                                                                      index == 2
-                                                                        ? _c(
-                                                                            "v-select",
-                                                                            {
-                                                                              attrs: {
-                                                                                items:
-                                                                                  _vm.crossT,
-                                                                                "item-text":
-                                                                                  "name",
-                                                                                "item-value":
-                                                                                  "id",
-                                                                                label:
-                                                                                  "Select Cross T"
-                                                                              },
-                                                                              model: {
-                                                                                value:
-                                                                                  _vm
-                                                                                    .ceiling[2]
-                                                                                    .id,
-                                                                                callback: function(
-                                                                                  $$v
-                                                                                ) {
-                                                                                  _vm.$set(
-                                                                                    _vm
-                                                                                      .ceiling[2],
-                                                                                    "id",
-                                                                                    $$v
-                                                                                  )
-                                                                                },
-                                                                                expression:
-                                                                                  "ceiling[2].id"
-                                                                              }
-                                                                            }
-                                                                          )
-                                                                        : _vm._e(),
-                                                                      _vm._v(
-                                                                        " "
-                                                                      ),
-                                                                      index == 3
-                                                                        ? _c(
-                                                                            "v-select",
-                                                                            {
-                                                                              attrs: {
-                                                                                items:
-                                                                                  _vm.sheets,
-                                                                                "item-text":
-                                                                                  "name",
-                                                                                "item-value":
-                                                                                  "id",
-                                                                                label:
-                                                                                  "Select Sheet"
-                                                                              },
-                                                                              model: {
-                                                                                value:
-                                                                                  _vm
-                                                                                    .ceiling[3]
-                                                                                    .id,
-                                                                                callback: function(
-                                                                                  $$v
-                                                                                ) {
-                                                                                  _vm.$set(
-                                                                                    _vm
-                                                                                      .ceiling[3],
-                                                                                    "id",
-                                                                                    $$v
-                                                                                  )
-                                                                                },
-                                                                                expression:
-                                                                                  "ceiling[3].id"
-                                                                              }
-                                                                            }
-                                                                          )
-                                                                        : _vm._e()
-                                                                    ],
-                                                                    1
-                                                                  ),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "td",
-                                                                    [
-                                                                      _c(
-                                                                        "v-text-field",
-                                                                        {
-                                                                          attrs: {
-                                                                            label:
-                                                                              "Quantity",
-                                                                            type:
-                                                                              "number"
-                                                                          },
-                                                                          model: {
-                                                                            value:
-                                                                              item.qty,
-                                                                            callback: function(
-                                                                              $$v
-                                                                            ) {
-                                                                              _vm.$set(
-                                                                                item,
-                                                                                "qty",
-                                                                                $$v
-                                                                              )
-                                                                            },
-                                                                            expression:
-                                                                              "item.qty"
-                                                                          }
-                                                                        }
-                                                                      )
-                                                                    ],
-                                                                    1
-                                                                  ),
-                                                                  _vm._v(" "),
-                                                                  _c("td", [
-                                                                    item.id
-                                                                      ? _c(
-                                                                          "span",
-                                                                          [
-                                                                            _vm._v(
-                                                                              "\n                                  " +
-                                                                                _vm._s(
-                                                                                  _vm.getPrice(
-                                                                                    item.id
-                                                                                  )
-                                                                                ) +
-                                                                                "\n                                "
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      : _vm._e()
-                                                                  ]),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "td",
-                                                                    [
-                                                                      _c(
-                                                                        "v-btn",
-                                                                        {
-                                                                          staticClass:
-                                                                            "green--text",
-                                                                          attrs: {
-                                                                            icon:
-                                                                              ""
-                                                                          },
-                                                                          on: {
-                                                                            click: function(
-                                                                              $event
-                                                                            ) {
-                                                                              return _vm.addProductToInvoice(
-                                                                                item
-                                                                              )
-                                                                            }
-                                                                          }
-                                                                        },
-                                                                        [
-                                                                          _c(
-                                                                            "v-icon",
-                                                                            [
-                                                                              _vm._v(
-                                                                                "mdi-plus"
-                                                                              )
-                                                                            ]
-                                                                          )
-                                                                        ],
-                                                                        1
-                                                                      )
-                                                                    ],
-                                                                    1
-                                                                  )
-                                                                ]
-                                                              )
-                                                            }
-                                                          ),
-                                                          0
-                                                        )
-                                                      ]
-                                                    },
-                                                    proxy: true
-                                                  }
-                                                ])
-                                              }),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  staticClass: "float-right",
-                                                  attrs: {
-                                                    dark: "",
-                                                    color: "primary"
-                                                  },
-                                                  on: {
-                                                    click: _vm.clearCeilingItems
-                                                  }
-                                                },
-                                                [_vm._v("Clear")]
-                                              )
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-tab-item",
-                                            [
-                                              _c(
-                                                "v-row",
-                                                [
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      staticClass: "pb-0",
-                                                      attrs: { cols: "4" }
-                                                    },
-                                                    [
-                                                      _c("v-text-field", {
-                                                        attrs: {
-                                                          label: "Length",
-                                                          type: "number",
-                                                          dense: "",
-                                                          outlined: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.panel.length,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.panel,
-                                                              "length",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "panel.length"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      staticClass: "pb-0",
-                                                      attrs: { cols: "4" }
-                                                    },
-                                                    [
-                                                      _c("v-text-field", {
-                                                        attrs: {
-                                                          label: "Number",
-                                                          type: "number",
-                                                          dense: "",
-                                                          outlined: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.panel.number,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.panel,
-                                                              "number",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "panel.number"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      staticClass: "pb-0",
-                                                      attrs: { cols: "4" }
-                                                    },
-                                                    [
-                                                      _c("v-text-field", {
-                                                        attrs: {
-                                                          label: "Removal",
-                                                          type: "number",
-                                                          dense: "",
-                                                          outlined: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.panel.removals,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.panel,
-                                                              "removals",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "panel.removals"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      staticClass: "py-0",
-                                                      attrs: { cols: "4" }
-                                                    },
-                                                    [
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items:
-                                                            _vm.panelSheetHight,
-                                                          dense: "",
-                                                          outlined: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.panel
-                                                              .sheet_height,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.panel,
-                                                              "sheet_height",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "panel.sheet_height"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      staticClass: "py-0",
-                                                      attrs: { cols: "4" }
-                                                    },
-                                                    [
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items:
-                                                            _vm.panelSheetWidth,
-                                                          dense: "",
-                                                          outlined: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.panel
-                                                              .sheet_width,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.panel,
-                                                              "sheet_width",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "panel.sheet_width"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      staticClass: "py-0",
-                                                      attrs: { cols: "4" }
-                                                    },
-                                                    [
+                                                      ),
+                                                      _vm._v(" "),
                                                       _c(
                                                         "v-btn",
                                                         {
                                                           staticClass:
-                                                            "float-right",
+                                                            "float-right mx-2",
                                                           attrs: {
                                                             dark: "",
-                                                            color: "primary"
+                                                            color: "red"
                                                           },
                                                           on: {
-                                                            click: _vm.getPanel
+                                                            click:
+                                                              _vm.clearCeilingItems
                                                           }
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "\n                            Calculate\n                          "
+                                                            "Clear\n                          "
                                                           )
                                                         ]
                                                       )
                                                     ],
                                                     1
-                                                  )
-                                                ],
-                                                1
-                                              ),
-                                              _vm._v(" "),
-                                              _c("v-simple-table", {
-                                                attrs: {
-                                                  height: "",
-                                                  dense: ""
-                                                },
-                                                scopedSlots: _vm._u([
-                                                  {
-                                                    key: "default",
-                                                    fn: function() {
-                                                      return [
-                                                        _c("thead", [
-                                                          _c("tr", [
-                                                            _c(
-                                                              "th",
-                                                              {
-                                                                staticClass:
-                                                                  "text-left"
-                                                              },
-                                                              [_vm._v("Item")]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "th",
-                                                              {
-                                                                staticClass:
-                                                                  "text-left"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "Quantity"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "th",
-                                                              {
-                                                                staticClass:
-                                                                  "text-left"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "Unit Price"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c("th", {
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-tab-item",
+                                                    [
+                                                      _c(
+                                                        "v-row",
+                                                        [
+                                                          _c(
+                                                            "v-col",
+                                                            {
                                                               staticClass:
-                                                                "text-left"
-                                                            })
-                                                          ])
-                                                        ]),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "tbody",
-                                                          _vm._l(
-                                                            _vm.peneling,
-                                                            function(
-                                                              item,
-                                                              index
-                                                            ) {
-                                                              return _c(
-                                                                "tr",
+                                                                "pb-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
                                                                 {
-                                                                  key:
-                                                                    item.index
-                                                                },
-                                                                [
-                                                                  _c(
-                                                                    "td",
-                                                                    [
-                                                                      index == 0
-                                                                        ? _c(
-                                                                            "v-select",
-                                                                            {
-                                                                              attrs: {
-                                                                                items:
-                                                                                  _vm.panelSheets,
-                                                                                "item-text":
-                                                                                  "name",
-                                                                                "item-value":
-                                                                                  "id",
-                                                                                label:
-                                                                                  "Select Sheet"
-                                                                              },
-                                                                              model: {
-                                                                                value:
-                                                                                  _vm
-                                                                                    .peneling[0]
-                                                                                    .id,
-                                                                                callback: function(
-                                                                                  $$v
-                                                                                ) {
-                                                                                  _vm.$set(
-                                                                                    _vm
-                                                                                      .peneling[0],
-                                                                                    "id",
-                                                                                    $$v
-                                                                                  )
-                                                                                },
-                                                                                expression:
-                                                                                  "peneling[0].id"
-                                                                              }
-                                                                            }
-                                                                          )
-                                                                        : _vm._e(),
-                                                                      _vm._v(
-                                                                        " "
-                                                                      ),
-                                                                      index == 1
-                                                                        ? _c(
-                                                                            "v-select",
-                                                                            {
-                                                                              attrs: {
-                                                                                items:
-                                                                                  _vm.golas,
-                                                                                "item-text":
-                                                                                  "name",
-                                                                                "item-value":
-                                                                                  "id",
-                                                                                label:
-                                                                                  "Select Gola"
-                                                                              },
-                                                                              model: {
-                                                                                value:
-                                                                                  _vm
-                                                                                    .peneling[1]
-                                                                                    .id,
-                                                                                callback: function(
-                                                                                  $$v
-                                                                                ) {
-                                                                                  _vm.$set(
-                                                                                    _vm
-                                                                                      .peneling[1],
-                                                                                    "id",
-                                                                                    $$v
-                                                                                  )
-                                                                                },
-                                                                                expression:
-                                                                                  "peneling[1].id"
-                                                                              }
-                                                                            }
-                                                                          )
-                                                                        : _vm._e()
-                                                                    ],
-                                                                    1
-                                                                  ),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "td",
-                                                                    [
-                                                                      _c(
-                                                                        "v-text-field",
-                                                                        {
-                                                                          attrs: {
-                                                                            label:
-                                                                              "Quantity",
-                                                                            type:
-                                                                              "number"
-                                                                          },
-                                                                          model: {
-                                                                            value:
-                                                                              item.qty,
-                                                                            callback: function(
-                                                                              $$v
-                                                                            ) {
-                                                                              _vm.$set(
-                                                                                item,
-                                                                                "qty",
-                                                                                $$v
-                                                                              )
-                                                                            },
-                                                                            expression:
-                                                                              "item.qty"
-                                                                          }
-                                                                        }
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Length",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.getPanel
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.panel
+                                                                        .length,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.$set(
+                                                                        _vm.panel,
+                                                                        "length",
+                                                                        $$v
                                                                       )
-                                                                    ],
-                                                                    1
-                                                                  ),
-                                                                  _vm._v(" "),
-                                                                  _c("td", [
-                                                                    item.id
-                                                                      ? _c(
-                                                                          "span",
-                                                                          [
-                                                                            _vm._v(
-                                                                              "\n                                  " +
-                                                                                _vm._s(
-                                                                                  _vm.getPrice(
-                                                                                    item.id
-                                                                                  )
-                                                                                ) +
-                                                                                "\n                                "
-                                                                            )
-                                                                          ]
+                                                                    },
+                                                                    expression:
+                                                                      "panel.length"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              staticClass:
+                                                                "pb-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Number",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.getPanel
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.panel
+                                                                        .number,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.$set(
+                                                                        _vm.panel,
+                                                                        "number",
+                                                                        $$v
+                                                                      )
+                                                                    },
+                                                                    expression:
+                                                                      "panel.number"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              staticClass:
+                                                                "pb-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Removal",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.getPanel
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.panel
+                                                                        .removals,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.$set(
+                                                                        _vm.panel,
+                                                                        "removals",
+                                                                        $$v
+                                                                      )
+                                                                    },
+                                                                    expression:
+                                                                      "panel.removals"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              staticClass:
+                                                                "pb-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c("v-select", {
+                                                                attrs: {
+                                                                  items:
+                                                                    _vm.panelSheetHight,
+                                                                  dense: "",
+                                                                  outlined: ""
+                                                                },
+                                                                on: {
+                                                                  change:
+                                                                    _vm.getPanel
+                                                                },
+                                                                model: {
+                                                                  value:
+                                                                    _vm.panel
+                                                                      .sheet_height,
+                                                                  callback: function(
+                                                                    $$v
+                                                                  ) {
+                                                                    _vm.$set(
+                                                                      _vm.panel,
+                                                                      "sheet_height",
+                                                                      $$v
+                                                                    )
+                                                                  },
+                                                                  expression:
+                                                                    "panel.sheet_height"
+                                                                }
+                                                              })
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              staticClass:
+                                                                "py-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c("v-select", {
+                                                                attrs: {
+                                                                  items:
+                                                                    _vm.panelSheetWidth,
+                                                                  dense: "",
+                                                                  outlined: ""
+                                                                },
+                                                                on: {
+                                                                  change:
+                                                                    _vm.getPanel
+                                                                },
+                                                                model: {
+                                                                  value:
+                                                                    _vm.panel
+                                                                      .sheet_width,
+                                                                  callback: function(
+                                                                    $$v
+                                                                  ) {
+                                                                    _vm.$set(
+                                                                      _vm.panel,
+                                                                      "sheet_width",
+                                                                      $$v
+                                                                    )
+                                                                  },
+                                                                  expression:
+                                                                    "panel.sheet_width"
+                                                                }
+                                                              })
+                                                            ],
+                                                            1
+                                                          )
+                                                        ],
+                                                        1
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c("v-simple-table", {
+                                                        attrs: {
+                                                          height: "",
+                                                          dense: ""
+                                                        },
+                                                        scopedSlots: _vm._u([
+                                                          {
+                                                            key: "default",
+                                                            fn: function() {
+                                                              return [
+                                                                _c("thead", [
+                                                                  _c("tr", [
+                                                                    _c(
+                                                                      "th",
+                                                                      {
+                                                                        staticClass:
+                                                                          "text-left"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "Item"
                                                                         )
-                                                                      : _vm._e()
-                                                                  ]),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "td",
-                                                                    [
-                                                                      _c(
-                                                                        "v-btn",
+                                                                      ]
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "th",
+                                                                      {
+                                                                        staticClass:
+                                                                          "text-left"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "Quantity"
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  ])
+                                                                ]),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "tbody",
+                                                                  _vm._l(
+                                                                    _vm.peneling,
+                                                                    function(
+                                                                      item,
+                                                                      index
+                                                                    ) {
+                                                                      return _c(
+                                                                        "tr",
                                                                         {
-                                                                          staticClass:
-                                                                            "green--text",
-                                                                          attrs: {
-                                                                            icon:
-                                                                              ""
-                                                                          },
-                                                                          on: {
-                                                                            click: function(
-                                                                              $event
-                                                                            ) {
-                                                                              return _vm.addProductToInvoice(
-                                                                                item
-                                                                              )
-                                                                            }
-                                                                          }
+                                                                          key:
+                                                                            item.index
                                                                         },
                                                                         [
                                                                           _c(
-                                                                            "v-icon",
+                                                                            "td",
                                                                             [
+                                                                              index ==
+                                                                              0
+                                                                                ? _c(
+                                                                                    "v-autocomplete",
+                                                                                    {
+                                                                                      attrs: {
+                                                                                        items:
+                                                                                          _vm.panelSheets,
+                                                                                        "item-text":
+                                                                                          "name",
+                                                                                        "item-value":
+                                                                                          "id",
+                                                                                        label:
+                                                                                          "Select Sheet"
+                                                                                      },
+                                                                                      model: {
+                                                                                        value:
+                                                                                          _vm
+                                                                                            .peneling[0]
+                                                                                            .id,
+                                                                                        callback: function(
+                                                                                          $$v
+                                                                                        ) {
+                                                                                          _vm.$set(
+                                                                                            _vm
+                                                                                              .peneling[0],
+                                                                                            "id",
+                                                                                            $$v
+                                                                                          )
+                                                                                        },
+                                                                                        expression:
+                                                                                          "peneling[0].id"
+                                                                                      }
+                                                                                    }
+                                                                                  )
+                                                                                : _vm._e(),
                                                                               _vm._v(
-                                                                                "mdi-plus"
+                                                                                " "
+                                                                              ),
+                                                                              index ==
+                                                                              1
+                                                                                ? _c(
+                                                                                    "v-autocomplete",
+                                                                                    {
+                                                                                      attrs: {
+                                                                                        items:
+                                                                                          _vm.golas,
+                                                                                        "item-text":
+                                                                                          "name",
+                                                                                        "item-value":
+                                                                                          "id",
+                                                                                        label:
+                                                                                          "Select Gola"
+                                                                                      },
+                                                                                      model: {
+                                                                                        value:
+                                                                                          _vm
+                                                                                            .peneling[1]
+                                                                                            .id,
+                                                                                        callback: function(
+                                                                                          $$v
+                                                                                        ) {
+                                                                                          _vm.$set(
+                                                                                            _vm
+                                                                                              .peneling[1],
+                                                                                            "id",
+                                                                                            $$v
+                                                                                          )
+                                                                                        },
+                                                                                        expression:
+                                                                                          "peneling[1].id"
+                                                                                      }
+                                                                                    }
+                                                                                  )
+                                                                                : _vm._e()
+                                                                            ],
+                                                                            1
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "td",
+                                                                            [
+                                                                              _c(
+                                                                                "v-text-field",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    label:
+                                                                                      "Quantity",
+                                                                                    type:
+                                                                                      "number"
+                                                                                  },
+                                                                                  model: {
+                                                                                    value:
+                                                                                      item.qty,
+                                                                                    callback: function(
+                                                                                      $$v
+                                                                                    ) {
+                                                                                      _vm.$set(
+                                                                                        item,
+                                                                                        "qty",
+                                                                                        $$v
+                                                                                      )
+                                                                                    },
+                                                                                    expression:
+                                                                                      "item.qty"
+                                                                                  }
+                                                                                }
                                                                               )
-                                                                            ]
+                                                                            ],
+                                                                            1
                                                                           )
-                                                                        ],
-                                                                        1
+                                                                        ]
                                                                       )
-                                                                    ],
-                                                                    1
-                                                                  )
-                                                                ]
-                                                              )
-                                                            }
-                                                          ),
-                                                          0
-                                                        )
-                                                      ]
-                                                    },
-                                                    proxy: true
-                                                  }
-                                                ])
-                                              }),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  staticClass: "float-right",
-                                                  attrs: {
-                                                    dark: "",
-                                                    color: "primary"
-                                                  },
-                                                  on: {
-                                                    click: _vm.clearPanelItems
-                                                  }
-                                                },
-                                                [_vm._v("Clear")]
-                                              )
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-tab-item",
-                                            [
-                                              _c(
-                                                "v-row",
-                                                [
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      staticClass: "pb-0",
-                                                      attrs: { cols: "4" }
-                                                    },
-                                                    [
-                                                      _c("v-text-field", {
-                                                        attrs: {
-                                                          label: "Height",
-                                                          type: "number",
-                                                          dense: "",
-                                                          outlined: ""
-                                                        },
-                                                        on: {
-                                                          change:
-                                                            _vm.getStdHeight
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.glass.height,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.glass,
-                                                              "height",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "glass.height"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      staticClass: "pb-0",
-                                                      attrs: { cols: "4" }
-                                                    },
-                                                    [
-                                                      _c("v-text-field", {
-                                                        attrs: {
-                                                          label: "Width",
-                                                          type: "number",
-                                                          dense: "",
-                                                          outlined: ""
-                                                        },
-                                                        on: {
-                                                          change:
-                                                            _vm.getStdWidth
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.glass.width,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.glass,
-                                                              "width",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "glass.width"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      staticClass: "pb-0",
-                                                      attrs: { cols: "4" }
-                                                    },
-                                                    [
-                                                      _c("v-text-field", {
-                                                        attrs: {
-                                                          label: "Number",
-                                                          type: "number",
-                                                          dense: "",
-                                                          outlined: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.glass.number,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.glass,
-                                                              "number",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "glass.number"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      staticClass: "py-0",
-                                                      attrs: { cols: "4" }
-                                                    },
-                                                    [
-                                                      _c("v-text-field", {
-                                                        attrs: {
-                                                          label:
-                                                            "Standard Hegith",
-                                                          type: "number",
-                                                          dense: "",
-                                                          outlined: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.glass
-                                                              .standard_height,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.glass,
-                                                              "standard_height",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "glass.standard_height"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      staticClass: "py-0",
-                                                      attrs: { cols: "4" }
-                                                    },
-                                                    [
-                                                      _c("v-text-field", {
-                                                        attrs: {
-                                                          label:
-                                                            "Standard Width",
-                                                          type: "number",
-                                                          dense: "",
-                                                          outlined: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.glass
-                                                              .standard_width,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.glass,
-                                                              "standard_width",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "glass.standard_width"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      staticClass: "py-0",
-                                                      attrs: { cols: "4" }
-                                                    },
-                                                    [
+                                                                    }
+                                                                  ),
+                                                                  0
+                                                                )
+                                                              ]
+                                                            },
+                                                            proxy: true
+                                                          }
+                                                        ])
+                                                      }),
+                                                      _vm._v(" "),
                                                       _c(
                                                         "v-btn",
                                                         {
@@ -3207,259 +3613,585 @@ var render = function() {
                                                           },
                                                           on: {
                                                             click:
-                                                              _vm.calculateSlab
+                                                              _vm.addPanelProductToInvoice
                                                           }
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "\n                            Calculate\n                          "
+                                                            "Add to invoice"
                                                           )
                                                         ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "v-btn",
+                                                        {
+                                                          staticClass:
+                                                            "float-right mx-2",
+                                                          attrs: {
+                                                            dark: "",
+                                                            color: "red"
+                                                          },
+                                                          on: {
+                                                            click:
+                                                              _vm.clearPanelItems
+                                                          }
+                                                        },
+                                                        [_vm._v("Clear")]
                                                       )
                                                     ],
                                                     1
                                                   ),
-                                                  _vm._v(
-                                                    "\n                        " +
-                                                      _vm._s(
-                                                        _vm.glass.back_end_sqrFt
-                                                      ) +
-                                                      " | " +
-                                                      _vm._s(
-                                                        _vm.glass.invoice_sqrFt
-                                                      ) +
-                                                      "\n                      "
-                                                  )
-                                                ],
-                                                1
-                                              ),
-                                              _vm._v(" "),
-                                              _c("v-simple-table", {
-                                                attrs: {
-                                                  height: "",
-                                                  dense: ""
-                                                },
-                                                scopedSlots: _vm._u([
-                                                  {
-                                                    key: "default",
-                                                    fn: function() {
-                                                      return [
-                                                        _c("thead", [
-                                                          _c("tr", [
-                                                            _c(
-                                                              "th",
-                                                              {
-                                                                staticClass:
-                                                                  "text-left"
-                                                              },
-                                                              [_vm._v("Item")]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "th",
-                                                              {
-                                                                staticClass:
-                                                                  "text-left"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "SqrFeet"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "th",
-                                                              {
-                                                                staticClass:
-                                                                  "text-left"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "Unit Price"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c("th", {
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-tab-item",
+                                                    [
+                                                      _c(
+                                                        "v-row",
+                                                        [
+                                                          _c(
+                                                            "v-col",
+                                                            {
                                                               staticClass:
-                                                                "text-left"
-                                                            })
-                                                          ])
-                                                        ]),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "tbody",
-                                                          _vm._l(
-                                                            _vm.glassItem,
-                                                            function(
-                                                              item,
-                                                              index
-                                                            ) {
-                                                              return _c(
-                                                                "tr",
+                                                                "pb-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
                                                                 {
-                                                                  key:
-                                                                    item.index
-                                                                },
-                                                                [
-                                                                  _c(
-                                                                    "td",
-                                                                    [
-                                                                      index == 0
-                                                                        ? _c(
-                                                                            "v-select",
-                                                                            {
-                                                                              attrs: {
-                                                                                items:
-                                                                                  _vm.glassProducts,
-                                                                                "item-text":
-                                                                                  "name",
-                                                                                "item-value":
-                                                                                  "id",
-                                                                                label:
-                                                                                  "Select Glass"
-                                                                              },
-                                                                              model: {
-                                                                                value:
-                                                                                  _vm
-                                                                                    .glassItem[0]
-                                                                                    .id,
-                                                                                callback: function(
-                                                                                  $$v
-                                                                                ) {
-                                                                                  _vm.$set(
-                                                                                    _vm
-                                                                                      .glassItem[0],
-                                                                                    "id",
-                                                                                    $$v
-                                                                                  )
-                                                                                },
-                                                                                expression:
-                                                                                  "glassItem[0].id"
-                                                                              }
-                                                                            }
-                                                                          )
-                                                                        : _vm._e()
-                                                                    ],
-                                                                    1
-                                                                  ),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "td",
-                                                                    [
-                                                                      _c(
-                                                                        "v-text-field",
-                                                                        {
-                                                                          attrs: {
-                                                                            label:
-                                                                              "SqrFeet",
-                                                                            type:
-                                                                              "number"
-                                                                          },
-                                                                          model: {
-                                                                            value:
-                                                                              item.qty,
-                                                                            callback: function(
-                                                                              $$v
-                                                                            ) {
-                                                                              _vm.$set(
-                                                                                item,
-                                                                                "qty",
-                                                                                $$v
-                                                                              )
-                                                                            },
-                                                                            expression:
-                                                                              "item.qty"
-                                                                          }
-                                                                        }
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Width",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.getStdWidth,
+                                                                    input:
+                                                                      _vm.calculateSlab
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.glass
+                                                                        .width,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.$set(
+                                                                        _vm.glass,
+                                                                        "width",
+                                                                        $$v
                                                                       )
-                                                                    ],
-                                                                    1
-                                                                  ),
-                                                                  _vm._v(" "),
-                                                                  _c("td", [
-                                                                    item.id
-                                                                      ? _c(
-                                                                          "span",
-                                                                          [
-                                                                            _vm._v(
-                                                                              "\n                                  " +
-                                                                                _vm._s(
-                                                                                  _vm.getPrice(
-                                                                                    item.id
-                                                                                  )
-                                                                                ) +
-                                                                                "\n                                "
-                                                                            )
-                                                                          ]
+                                                                    },
+                                                                    expression:
+                                                                      "glass.width"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              staticClass:
+                                                                "pb-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Height",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.getStdHeight,
+                                                                    input:
+                                                                      _vm.calculateSlab
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.glass
+                                                                        .height,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.$set(
+                                                                        _vm.glass,
+                                                                        "height",
+                                                                        $$v
+                                                                      )
+                                                                    },
+                                                                    expression:
+                                                                      "glass.height"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              staticClass:
+                                                                "pb-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Number",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.calculateSlab
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.glass
+                                                                        .number,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.$set(
+                                                                        _vm.glass,
+                                                                        "number",
+                                                                        $$v
+                                                                      )
+                                                                    },
+                                                                    expression:
+                                                                      "glass.number"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              staticClass:
+                                                                "pb-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Actual sqft",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined:
+                                                                      "",
+                                                                    disabled: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.calculateSlab
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.glass
+                                                                        .back_end_sqrFt,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.$set(
+                                                                        _vm.glass,
+                                                                        "back_end_sqrFt",
+                                                                        $$v
+                                                                      )
+                                                                    },
+                                                                    expression:
+                                                                      "glass.back_end_sqrFt"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              staticClass:
+                                                                "py-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Standard Hegith",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.calculateSlab
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.glass
+                                                                        .standard_height,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.$set(
+                                                                        _vm.glass,
+                                                                        "standard_height",
+                                                                        $$v
+                                                                      )
+                                                                    },
+                                                                    expression:
+                                                                      "glass.standard_height"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              staticClass:
+                                                                "py-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Standard Width",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.calculateSlab
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.glass
+                                                                        .standard_width,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.$set(
+                                                                        _vm.glass,
+                                                                        "standard_width",
+                                                                        $$v
+                                                                      )
+                                                                    },
+                                                                    expression:
+                                                                      "glass.standard_width"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              staticClass:
+                                                                "py-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Standard sqft",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.calculateSlab
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.glass
+                                                                        .invoice_sqrFt,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.$set(
+                                                                        _vm.glass,
+                                                                        "invoice_sqrFt",
+                                                                        $$v
+                                                                      )
+                                                                    },
+                                                                    expression:
+                                                                      "glass.invoice_sqrFt"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          )
+                                                        ],
+                                                        1
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c("v-simple-table", {
+                                                        attrs: {
+                                                          height: "",
+                                                          dense: ""
+                                                        },
+                                                        scopedSlots: _vm._u([
+                                                          {
+                                                            key: "default",
+                                                            fn: function() {
+                                                              return [
+                                                                _c("thead", [
+                                                                  _c("tr", [
+                                                                    _c(
+                                                                      "th",
+                                                                      {
+                                                                        staticClass:
+                                                                          "text-left"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "Item"
                                                                         )
-                                                                      : _vm._e()
-                                                                  ]),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "td",
-                                                                    [
-                                                                      _c(
-                                                                        "v-btn",
+                                                                      ]
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "th",
+                                                                      {
+                                                                        staticClass:
+                                                                          "text-left"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "SqrFeet"
+                                                                        )
+                                                                      ]
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c("th", {
+                                                                      staticClass:
+                                                                        "text-left"
+                                                                    })
+                                                                  ])
+                                                                ]),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "tbody",
+                                                                  _vm._l(
+                                                                    _vm.glassItem,
+                                                                    function(
+                                                                      item,
+                                                                      index
+                                                                    ) {
+                                                                      return _c(
+                                                                        "tr",
                                                                         {
-                                                                          staticClass:
-                                                                            "green--text",
-                                                                          attrs: {
-                                                                            icon:
-                                                                              ""
-                                                                          },
-                                                                          on: {
-                                                                            click: function(
-                                                                              $event
-                                                                            ) {
-                                                                              return _vm.addProductToInvoiceSingle(
-                                                                                item
-                                                                              )
-                                                                            }
-                                                                          }
+                                                                          key:
+                                                                            item.index
                                                                         },
                                                                         [
                                                                           _c(
-                                                                            "v-icon",
+                                                                            "td",
                                                                             [
-                                                                              _vm._v(
-                                                                                "mdi-plus"
+                                                                              index ==
+                                                                              0
+                                                                                ? _c(
+                                                                                    "v-autocomplete",
+                                                                                    {
+                                                                                      attrs: {
+                                                                                        items:
+                                                                                          _vm.glassProducts,
+                                                                                        "item-text":
+                                                                                          "name",
+                                                                                        "item-value":
+                                                                                          "id",
+                                                                                        label:
+                                                                                          "Select Glass"
+                                                                                      },
+                                                                                      model: {
+                                                                                        value:
+                                                                                          _vm
+                                                                                            .glassItem[0]
+                                                                                            .id,
+                                                                                        callback: function(
+                                                                                          $$v
+                                                                                        ) {
+                                                                                          _vm.$set(
+                                                                                            _vm
+                                                                                              .glassItem[0],
+                                                                                            "id",
+                                                                                            $$v
+                                                                                          )
+                                                                                        },
+                                                                                        expression:
+                                                                                          "glassItem[0].id"
+                                                                                      }
+                                                                                    }
+                                                                                  )
+                                                                                : _vm._e()
+                                                                            ],
+                                                                            1
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "td",
+                                                                            [
+                                                                              _c(
+                                                                                "v-text-field",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    label:
+                                                                                      "SqrFeet",
+                                                                                    type:
+                                                                                      "number"
+                                                                                  },
+                                                                                  model: {
+                                                                                    value:
+                                                                                      item.qty,
+                                                                                    callback: function(
+                                                                                      $$v
+                                                                                    ) {
+                                                                                      _vm.$set(
+                                                                                        item,
+                                                                                        "qty",
+                                                                                        $$v
+                                                                                      )
+                                                                                    },
+                                                                                    expression:
+                                                                                      "item.qty"
+                                                                                  }
+                                                                                }
                                                                               )
-                                                                            ]
+                                                                            ],
+                                                                            1
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "td",
+                                                                            [
+                                                                              _c(
+                                                                                "v-btn",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    dark:
+                                                                                      "",
+                                                                                    color:
+                                                                                      "primary"
+                                                                                  },
+                                                                                  on: {
+                                                                                    click: function(
+                                                                                      $event
+                                                                                    ) {
+                                                                                      return _vm.addProductToInvoiceSingle(
+                                                                                        item
+                                                                                      )
+                                                                                    }
+                                                                                  }
+                                                                                },
+                                                                                [
+                                                                                  _vm._v(
+                                                                                    "\n                                      Add to Invoice\n                                    "
+                                                                                  )
+                                                                                ]
+                                                                              )
+                                                                            ],
+                                                                            1
                                                                           )
-                                                                        ],
-                                                                        1
+                                                                        ]
                                                                       )
-                                                                    ],
-                                                                    1
-                                                                  )
-                                                                ]
-                                                              )
-                                                            }
-                                                          ),
-                                                          0
-                                                        )
-                                                      ]
-                                                    },
-                                                    proxy: true
-                                                  }
-                                                ])
-                                              }),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  staticClass: "float-right",
-                                                  attrs: {
-                                                    dark: "",
-                                                    color: "primary"
-                                                  },
-                                                  on: {
-                                                    click: _vm.clearGlassItems
-                                                  }
-                                                },
-                                                [_vm._v("Clear")]
+                                                                    }
+                                                                  ),
+                                                                  0
+                                                                )
+                                                              ]
+                                                            },
+                                                            proxy: true
+                                                          }
+                                                        ])
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "v-btn",
+                                                        {
+                                                          staticClass:
+                                                            "float-right mr-4",
+                                                          attrs: {
+                                                            dark: "",
+                                                            color: "red"
+                                                          },
+                                                          on: {
+                                                            click:
+                                                              _vm.clearGlassItems
+                                                          }
+                                                        },
+                                                        [_vm._v("Clear")]
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
                                               )
                                             ],
                                             1
@@ -4123,9 +4855,35 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td"),
+                    _c("td", [_vm._v("Polish")]),
                     _vm._v(" "),
-                    _c("td"),
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.invoiceData.polish,
+                            expression: "invoiceData.polish"
+                          }
+                        ],
+                        staticClass: "numinput",
+                        attrs: { type: "number" },
+                        domProps: { value: _vm.invoiceData.polish },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.invoiceData,
+                              "polish",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c("td", [_vm._v("Amount Due")]),
                     _vm._v(" "),
@@ -4168,7 +4926,7 @@ var render = function() {
                         "v-radio-group",
                         {
                           staticClass: "radio mt-1",
-                          attrs: { mandatory: "", row: "" },
+                          attrs: { mandatory: "", row: "", dense: "" },
                           model: {
                             value: _vm.invoiceData.doc_type,
                             callback: function($$v) {
@@ -4190,7 +4948,31 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c(
+                        "v-radio-group",
+                        {
+                          staticClass: "radio mt-1",
+                          attrs: { mandatory: "", row: "", dense: "" },
+                          model: {
+                            value: _vm.printPage,
+                            callback: function($$v) {
+                              _vm.printPage = $$v
+                            },
+                            expression: "printPage"
+                          }
+                        },
+                        [
+                          _c("v-radio", {
+                            attrs: { label: "thermal", value: "thermal" }
+                          }),
+                          _vm._v(" "),
+                          _c("v-radio", { attrs: { label: "A4", value: "a4" } })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
                         "v-row",
+                        { staticClass: "ma-0 pa-0 mt-n2" },
                         [
                           _c("v-checkbox", {
                             attrs: { label: "Invoice" },
@@ -4204,7 +4986,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("v-checkbox", {
-                            attrs: { label: "Gate Pass" },
+                            attrs: { label: "Gate Pass", dense: "" },
                             model: {
                               value: _vm.printGatePass,
                               callback: function($$v) {
@@ -4264,6 +5046,103 @@ var render = function() {
 }
 var staticRenderFns = []
 render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/AddCustomer.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/AddCustomer.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddCustomer_vue_vue_type_template_id_c7f581f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddCustomer.vue?vue&type=template&id=c7f581f8& */ "./resources/js/components/AddCustomer.vue?vue&type=template&id=c7f581f8&");
+/* harmony import */ var _AddCustomer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddCustomer.vue?vue&type=script&lang=js& */ "./resources/js/components/AddCustomer.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
+/* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/index.js");
+/* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
+/* harmony import */ var vuetify_lib_components_VCheckbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VCheckbox */ "./node_modules/vuetify/lib/components/VCheckbox/index.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
+/* harmony import */ var vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VDialog */ "./node_modules/vuetify/lib/components/VDialog/index.js");
+/* harmony import */ var vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VForm */ "./node_modules/vuetify/lib/components/VForm/index.js");
+/* harmony import */ var vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VSelect */ "./node_modules/vuetify/lib/components/VSelect/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddCustomer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddCustomer_vue_vue_type_template_id_c7f581f8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddCustomer_vue_vue_type_template_id_c7f581f8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* vuetify-loader */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VCheckbox: vuetify_lib_components_VCheckbox__WEBPACK_IMPORTED_MODULE_6__["VCheckbox"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VCol"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VContainer"],VDialog: vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_8__["VDialog"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_9__["VForm"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VRow"],VSelect: vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_10__["VSelect"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_11__["VTextField"]})
+
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AddCustomer.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AddCustomer.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/AddCustomer.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddCustomer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AddCustomer.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddCustomer.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddCustomer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AddCustomer.vue?vue&type=template&id=c7f581f8&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/AddCustomer.vue?vue&type=template&id=c7f581f8& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddCustomer_vue_vue_type_template_id_c7f581f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AddCustomer.vue?vue&type=template&id=c7f581f8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddCustomer.vue?vue&type=template&id=c7f581f8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddCustomer_vue_vue_type_template_id_c7f581f8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddCustomer_vue_vue_type_template_id_c7f581f8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
