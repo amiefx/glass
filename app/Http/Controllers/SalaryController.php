@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SalaryCollection;
 use App\Http\Resources\SalaryResource;
 use App\Models\Salary;
+use App\Models\Cash;
+use App\Models\Bank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -79,48 +81,48 @@ class SalaryController extends Controller
     public function paySalary(Request $request)
     {
         $user = auth()->user();
-        $postData = $request->all();
+        // $postData = $request->all();
 
 
         try {
             DB::beginTransaction();
 
-            $order = $postData['orderDetails'];
+            // $order = $postData['orderDetails'];
 
-            if ($order['amount'] > 0) {
+            if ($request->amount > 0) {
 
                 $slry = Salary::create([
                     'order_id' => 0,
-                    'employee_id' => $order['employee_id'],
-                    'amount_paid' => $order['amount'],
-                    'note' => $order['note'],
+                    'employee_id' => $request->employee_id,
+                    'amount_paid' => $request->amount,
+                    'note' => $request->notes,
                     'status' => 1,
                     'user_id' => $user->id
                 ]);
 
 
-                if ($order['type'] == 'Cash') {
+                if ($request->pmt_method == 'Cash') {
 
                     Cash::create([
                         'doc_type' => 'salary',
                         'doc_id' => $slry->id,
-                        'employee_id' => $order['employee_id'],
+                        'employee_id' => $request->employee_id,
                         'debit' => 0,
-                        'credit' => $order['amount'],
-                        'balance' => $order['amount'] * (-1),
+                        'credit' => $request->amount,
+                        'balance' => $request->amount * (-1),
                         'status' => 1,
                         'user_id' => $user->id
                     ]);
                 }
-                if ($order['type'] == 'Bank') {
+                if ($request->pmt_method == 'Bank') {
 
                     Bank::create([
                         'doc_type' => 'salary',
                         'doc_id' => $slry->id,
-                        'employee_id' => $order['employee_id'],
+                        'employee_id' => $request->employee_id,
                         'debit' => 0,
-                        'credit' => $order['amount'],
-                        'balance' => $order['amount'] * (-1),
+                        'credit' => $request->amount,
+                        'balance' => $request->amount * (-1),
                         'status' => 1,
                         'user_id' => $user->id
                     ]);
@@ -136,7 +138,7 @@ class SalaryController extends Controller
             return response()->json(['error'=> $th->getMessage()], 500);
         }
 
-    return response()->json(['order'=> $neworder, 'order_items' => $items, 'priceflag'  => $priceflag], 200);
+    return response()->json(['salary'  => $slry], 200);
     }
 
 
