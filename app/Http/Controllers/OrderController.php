@@ -96,6 +96,7 @@ class OrderController extends Controller
                     'price' => $item['product']['selling_price'],
                     'g_height' => isset($item['g_height']) ? $item['g_height'] : null,
                     'g_width' => isset($item['g_width']) ? $item['g_width'] : null,
+                    'g_number' => isset($item['g_number']) ? $item['g_number'] : null,
                     'is_active' => $item['product']['is_active'],
                     'user_id' => $user->id,
                 ]);

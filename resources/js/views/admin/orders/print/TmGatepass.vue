@@ -19,14 +19,17 @@
       </div>
       <v-divider class="my-1"></v-divider>
       <v-row class="btm">
-          <v-col cols="7" class="py-1 caption"><strong>Items</strong> </v-col>
-          <v-col cols="2" class="py-1 caption"> <strong>Qty</strong> </v-col>
+          <v-col cols="8" class="py-1 caption"><strong>Items</strong> </v-col>
+          <v-col cols="4" class="py-1 caption"> <strong>Qty</strong> </v-col>
         </v-row>
 
       <div v-for="item in order.orderdetails" :key="item.id">
         <v-row class="btm">
-          <v-col cols="7" class="py-0 caption"><i>{{ item.product_name }}</i></v-col>
-          <v-col cols="2" class="py-0 caption"> <i>{{item.quantity}}</i> </v-col>
+          <v-col cols="8" class="py-0 caption">
+              <i>{{ item.product_name }}</i>
+              <i v-if="item.g_width"> ({{ item.g_width }}X{{ item.g_height }}X{{ item.g_number }})</i>
+          </v-col>
+          <v-col cols="4" class="py-0 caption"> <i>{{item.quantity}}</i> </v-col>
         </v-row>
       </div>
 

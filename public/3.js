@@ -1173,7 +1173,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         qty: 0,
         price: 0,
         g_height: 0,
-        g_width: 0
+        g_width: 0,
+        g_number: 0
       }],
       doc_types: ["Invoice", "Quotation"],
       invoiceData: {
@@ -1277,6 +1278,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.invoiceData.fitter = null;
         _this.invoiceData.walkin_name = "";
         _this.invoiceData.walkin_phone = "";
+        _this.invoiceData.note = {};
+        _this.paneling_input = [], _this.ceiling_input = [], _this.glass_input = [];
 
         _this.initialize();
 
@@ -1441,6 +1444,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.glassItem[0].qty = this.glass.invoice_sqrFt;
       this.glassItem[0].g_height = this.glass.height;
       this.glassItem[0].g_width = this.glass.width;
+      this.glassItem[0].g_number = this.glass.number;
     },
     getCeiling: function getCeiling() {
       var width = parseInt(this.ceiling_width);
@@ -1575,7 +1579,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         product: prod[0],
         quantity: item.qty,
         g_height: item.g_height,
-        g_width: item.g_width
+        g_width: item.g_width,
+        g_number: item.g_number
       }); // add input
 
       this.glass_input.push({
@@ -1619,7 +1624,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     activePrice: function activePrice() {
       this.priceStatus = false;
-      this.priceChange = true;
+
+      if (!admin) {
+        this.priceChange = true;
+      }
     },
     getRA: function getRA() {
       var _this10 = this;
@@ -1647,6 +1655,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.cart.cart;
     }
   })), {}, {
+    admin: function admin() {
+      return this.$store.getters["auth/admin"];
+    },
     cartItemCount: function cartItemCount() {
       return this.$store.getters["cart/cartItemCount"];
     },
@@ -3858,53 +3869,6 @@ var render = function() {
                                                                 {
                                                                   attrs: {
                                                                     label:
-                                                                      "Standard Hegith",
-                                                                    type:
-                                                                      "number",
-                                                                    dense: "",
-                                                                    outlined: ""
-                                                                  },
-                                                                  on: {
-                                                                    change:
-                                                                      _vm.calculateSlab
-                                                                  },
-                                                                  model: {
-                                                                    value:
-                                                                      _vm.glass
-                                                                        .standard_height,
-                                                                    callback: function(
-                                                                      $$v
-                                                                    ) {
-                                                                      _vm.$set(
-                                                                        _vm.glass,
-                                                                        "standard_height",
-                                                                        $$v
-                                                                      )
-                                                                    },
-                                                                    expression:
-                                                                      "glass.standard_height"
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "v-col",
-                                                            {
-                                                              staticClass:
-                                                                "py-0",
-                                                              attrs: {
-                                                                cols: "3"
-                                                              }
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    label:
                                                                       "Standard Width",
                                                                     type:
                                                                       "number",
@@ -3930,6 +3894,53 @@ var render = function() {
                                                                     },
                                                                     expression:
                                                                       "glass.standard_width"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-col",
+                                                            {
+                                                              staticClass:
+                                                                "py-0",
+                                                              attrs: {
+                                                                cols: "3"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      "Standard Hegith",
+                                                                    type:
+                                                                      "number",
+                                                                    dense: "",
+                                                                    outlined: ""
+                                                                  },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.calculateSlab
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.glass
+                                                                        .standard_height,
+                                                                    callback: function(
+                                                                      $$v
+                                                                    ) {
+                                                                      _vm.$set(
+                                                                        _vm.glass,
+                                                                        "standard_height",
+                                                                        $$v
+                                                                      )
+                                                                    },
+                                                                    expression:
+                                                                      "glass.standard_height"
                                                                   }
                                                                 }
                                                               )

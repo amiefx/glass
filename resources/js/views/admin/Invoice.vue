@@ -467,8 +467,8 @@
                               </v-col>
                               <v-col cols="3" class="py-0">
                                 <v-text-field
-                                  v-model="glass.standard_height"
-                                  label="Standard Hegith"
+                                  v-model="glass.standard_width"
+                                  label="Standard Width"
                                   type="number"
                                   dense
                                   outlined
@@ -477,8 +477,8 @@
                               </v-col>
                               <v-col cols="3" class="py-0">
                                 <v-text-field
-                                  v-model="glass.standard_width"
-                                  label="Standard Width"
+                                  v-model="glass.standard_height"
+                                  label="Standard Hegith"
                                   type="number"
                                   dense
                                   outlined
@@ -903,7 +903,9 @@ export default {
 
       glass_input: [],
 
-      glassItem: [{ id: null, qty: 0, price: 0, g_height: 0, g_width: 0 }],
+      glassItem: [
+        { id: null, qty: 0, price: 0, g_height: 0, g_width: 0, g_number: 0 },
+      ],
 
       doc_types: ["Invoice", "Quotation"],
       invoiceData: {
@@ -1020,6 +1022,10 @@ export default {
         this.invoiceData.fitter = null;
         this.invoiceData.walkin_name = "";
         this.invoiceData.walkin_phone = "";
+        this.invoiceData.note = {};
+        (this.paneling_input = []),
+          (this.ceiling_input = []),
+          (this.glass_input = []);
 
         this.initialize();
 
@@ -1208,6 +1214,7 @@ export default {
       this.glassItem[0].qty = this.glass.invoice_sqrFt;
       this.glassItem[0].g_height = this.glass.height;
       this.glassItem[0].g_width = this.glass.width;
+      this.glassItem[0].g_number = this.glass.number;
     },
 
     getCeiling() {
@@ -1355,6 +1362,7 @@ export default {
         quantity: item.qty,
         g_height: item.g_height,
         g_width: item.g_width,
+        g_number: item.g_number,
       });
 
       // add input
@@ -1414,8 +1422,10 @@ export default {
     },
 
     activePrice() {
-      this.priceStatus = false;
-      this.priceChange = true;
+        this.priceStatus = false;
+      if (!admin) {
+        this.priceChange = true;
+      }
     },
 
     getRA() {
@@ -1445,6 +1455,10 @@ export default {
     ...mapState({
       cart: (state) => state.cart.cart,
     }),
+
+    admin() {
+      return this.$store.getters["auth/admin"];
+    },
 
     cartItemCount() {
       return this.$store.getters["cart/cartItemCount"];

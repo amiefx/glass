@@ -54,13 +54,14 @@ export default {
         //    window.localStorage.setItem('cart', JSON.stringify(state.cart));
         },
 
-        ADD_TO_CART_SINGLE(state, { product, quantity, price, g_height, g_width }) {
+        ADD_TO_CART_SINGLE(state, { product, quantity, price, g_height, g_width, g_number }) {
 
             state.cart.push({
                 product,
                 quantity,
                 g_height,
-                g_width
+                g_width,
+                g_number
             })
 
         },
@@ -171,8 +172,8 @@ export default {
             commit('ADD_TO_CART', { product, quantity, price, type, size, customSize });
         },
 
-        addProductToCartSingle({ commit }, { product, quantity, price, g_height, g_width }) {
-            commit('ADD_TO_CART_SINGLE', { product, quantity, price, g_height, g_width });
+        addProductToCartSingle({ commit }, { product, quantity, price, g_height, g_width, g_number }) {
+            commit('ADD_TO_CART_SINGLE', { product, quantity, price, g_height, g_width, g_number });
         },
 
         changeProductHeight({ commit }, { product, quantity, height}) {
