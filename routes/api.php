@@ -113,6 +113,9 @@ Route::group([
     Route::get('banks/balance', 'BankController@balance');
     Route::resource('banks', 'BankController');
 
+    // Bank Detail
+    Route::resource('bank_detail', 'BankDetailController');
+
     // Payment
     Route::resource('payments', 'PaymentsController');
 
@@ -192,6 +195,8 @@ Route::group([
     Route::resource('salaries', 'SalaryController');
 
 
+
+
     //reports
     Route::get('report/totalproducts', 'ReportController@totalNumberProducts');
     Route::get('report/totalusers', 'ReportController@totalNumberUsers');
@@ -253,6 +258,7 @@ Route::group([
     Route::get('report/totalexpensebyid/{id}', 'ReportController@totalNumberExpenseById');
     Route::get('report/totalexpensebydate/{date}', 'ReportController@totalNumberExpenseByDate');
     Route::get('report/totalexpenseitemsbyid/{id}', 'ReportController@totalNumberExpenseItemsById');
+
 
 
 });

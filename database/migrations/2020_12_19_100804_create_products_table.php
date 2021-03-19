@@ -20,9 +20,10 @@ class CreateProductsTable extends Migration
             $table->integer('brand_id')->nullable()->default(null);
             $table->longText('brand');
             $table->integer('category_id')->nullable()->default(null);
+            $table->string('type')->nullable()->default(null);
             $table->boolean('enable_stock')->default(false);
             $table->integer('alert_quantity')->nullable();
-            $table->string('sku');
+            $table->string('sku')->nullable()->default(null);
             $table->string('urdu_sku')->nullable()->default(null);
             $table->integer('selling_price')->nullable()->default(0);
             $table->string('color')->nullable()->default(null);

@@ -32,10 +32,6 @@ class ProductsController extends Controller
         ], 200);
     }
 
-    // public function allProducts()
-    // {
-    //     return response()->json(['products' =>  ProductListResource::collection(products::all())], 200);
-    // }
 
     public function store(Request $request)
     {
@@ -50,17 +46,12 @@ class ProductsController extends Controller
                 'brand_id' => $request->brand_id,
                 'brand' => $request->brand,
                 'category_id' => $request->category_id,
+                'type' => $request->type,
                 'enable_stock' => $request->enable_stock,
                 'alert_quantity' => $request->alert_quantity,
                 'sku' => $request->sku,
                 'urdu_sku' => $request->urdusku,
                 'selling_price' => $request->selling_price,
-                // 'length' => $request->length,
-                // 'width' => $request->width,
-                // 'height' => $request->height,
-                // 'thickness' => $request->thickness,
-                // 'weight' => $request->weight,
-                // 'size' => $request->size,
                 'color' => $request->color,
                 'user_id' => $user->id,
                 'is_active' => $request->is_active
@@ -113,17 +104,12 @@ class ProductsController extends Controller
         $product->brand_id = $request->brand_id;
         $product->brand = $request->brand;
         $product->category_id = $request->category_id;
+        $product->type = $request->type;
         $product->enable_stock = $request->enable_stock;
         $product->alert_quantity = $request->alert_quantity;
         $product->sku = $request->sku;
         $product->urdu_sku = $request->urdusku;
         $product->selling_price = $request->selling_price;
-        // $product->length = $request->length;
-        // $product->width = $request->width;
-        // $product->height = $request->height;
-        // $product->thickness = $request->thickness;
-        // $product->weight = $request->weight;
-        // $product->size = $request->size;
         $product->color = $request->color;
         $product->user_id = $user->id;
         $product->is_active = $request->is_active;
