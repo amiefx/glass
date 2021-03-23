@@ -56,12 +56,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-<<<<<<< HEAD
 //
 //
 //
-=======
->>>>>>> 6b972a3af834aaf261bfcc5a8a42115e2569e502
 //var moment = require('moment');
 /* harmony default export */ __webpack_exports__["default"] = (_layout$metaInfo$layo = {
   layout: 'print',
@@ -230,21 +227,13 @@ var render = function() {
             [
               _c(
                 "v-col",
-<<<<<<< HEAD
                 { staticClass: "py-1 caption", attrs: { cols: "8" } },
-=======
-                { staticClass: "py-1 caption", attrs: { cols: "7" } },
->>>>>>> 6b972a3af834aaf261bfcc5a8a42115e2569e502
                 [_c("strong", [_vm._v("Items")])]
               ),
               _vm._v(" "),
               _c(
                 "v-col",
-<<<<<<< HEAD
                 { staticClass: "py-1 caption", attrs: { cols: "4" } },
-=======
-                { staticClass: "py-1 caption", attrs: { cols: "2" } },
->>>>>>> 6b972a3af834aaf261bfcc5a8a42115e2569e502
                 [_c("strong", [_vm._v("Qty")])]
               )
             ],
@@ -262,7 +251,6 @@ var render = function() {
                   [
                     _c(
                       "v-col",
-<<<<<<< HEAD
                       { staticClass: "py-0 caption", attrs: { cols: "8" } },
                       [
                         _c("i", [_vm._v(_vm._s(item.product_name))]),
@@ -281,19 +269,11 @@ var render = function() {
                             ])
                           : _vm._e()
                       ]
-=======
-                      { staticClass: "py-0 caption", attrs: { cols: "7" } },
-                      [_c("i", [_vm._v(_vm._s(item.product_name))])]
->>>>>>> 6b972a3af834aaf261bfcc5a8a42115e2569e502
                     ),
                     _vm._v(" "),
                     _c(
                       "v-col",
-<<<<<<< HEAD
                       { staticClass: "py-0 caption", attrs: { cols: "4" } },
-=======
-                      { staticClass: "py-0 caption", attrs: { cols: "2" } },
->>>>>>> 6b972a3af834aaf261bfcc5a8a42115e2569e502
                       [_c("i", [_vm._v(_vm._s(item.quantity))])]
                     )
                   ],

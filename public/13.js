@@ -135,14 +135,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
 //
 //
 //
 //
 //
-=======
->>>>>>> 6b972a3af834aaf261bfcc5a8a42115e2569e502
 //var moment = require('moment');
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'print',
@@ -311,27 +308,18 @@ var render = function() {
             [
               _c(
                 "v-col",
-<<<<<<< HEAD
                 { staticClass: "py-1 px-0 caption", attrs: { cols: "6" } },
-=======
-                { staticClass: "py-1 caption", attrs: { cols: "7" } },
->>>>>>> 6b972a3af834aaf261bfcc5a8a42115e2569e502
                 [_c("strong", [_vm._v("Items")])]
               ),
               _vm._v(" "),
               _c(
                 "v-col",
-<<<<<<< HEAD
                 { staticClass: "py-1 px-0 caption", attrs: { cols: "2" } },
-=======
-                { staticClass: "py-1 caption", attrs: { cols: "2" } },
->>>>>>> 6b972a3af834aaf261bfcc5a8a42115e2569e502
                 [_c("strong", [_vm._v("Qty")])]
               ),
               _vm._v(" "),
               _c(
                 "v-col",
-<<<<<<< HEAD
                 { staticClass: "py-1 px-0 caption", attrs: { cols: "2" } },
                 [_c("strong", [_vm._v("Price")])]
               ),
@@ -340,10 +328,6 @@ var render = function() {
                 "v-col",
                 { staticClass: "py-1 px-0 caption", attrs: { cols: "2" } },
                 [_c("strong", [_vm._v("Total")])]
-=======
-                { staticClass: "py-1 caption", attrs: { cols: "3" } },
-                [_c("strong", [_vm._v("Price")])]
->>>>>>> 6b972a3af834aaf261bfcc5a8a42115e2569e502
               )
             ],
             1
