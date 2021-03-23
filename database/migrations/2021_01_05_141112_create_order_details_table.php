@@ -21,6 +21,7 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('price')->nullable()->default(null); 
             $table->string('g_height')->nullable()->default(null);
             $table->string('g_width')->nullable()->default(null);
+            $table->string('g_number')->nullable()->default(null);
             $table->timestamps();
         });
     }

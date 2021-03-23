@@ -15,6 +15,7 @@ class products extends Model
         'brand_id',
         'brand',
         'category_id',
+        'type',
         'enable_stock',
         'alert_quantity',
         'sku',

@@ -40,6 +40,7 @@ class ProductListResource extends JsonResource
             'enable_stock' => $this->enable_stock,
             'alert_qty' => $this->alert_quantity,
             'category' => $this->category->name,
+            'type' => $this->type,
             'onhand' => DB::table('product_qty')->select('qty')->where('product_id', '=', $this->id)->first(),
         ];
 

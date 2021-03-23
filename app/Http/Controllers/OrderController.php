@@ -103,7 +103,6 @@ class OrderController extends Controller
             }
 
             if ($order['receivable_amt'] > 0) {
-
                 Receivable::create([
                     'type' => 'invoice',
                     'doc_id' => $neworder->id,
@@ -114,7 +113,6 @@ class OrderController extends Controller
                     'status' => $priceflag == 'Invoice' ? 1 : 0,
                     'user_id' => $user->id
                 ]);
-
             }
 
             if ($order['received_amt'] > 0) {
