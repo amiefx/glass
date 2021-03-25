@@ -44,10 +44,10 @@ class ReceivablesController extends Controller
 
         $imageurl = null;
 
-        if($request->recieveimage)
+        if($request->imageurl)
         {
-            $imageName = time().'.'.$request->recieveimage->extension();
-            $request->image_in->move(public_path('images/payments'), $imageName);
+            $imageName = time().'.'.$request->imageurl->extension();
+            $request->imageurl->move(public_path('images/payments'), $imageName);
 
             $imageurl = '/images/payments/'.$imageName;
         }
@@ -79,10 +79,10 @@ class ReceivablesController extends Controller
 
         $imageurl = null;
 
-        if($request->payimage)
+        if($request->imageurl)
         {
-            $imageName = time().'.'.$request->payimage->extension();
-            $request->image_in->move(public_path('images/payments'), $imageName);
+            $imageName = time().'.'.$request->imageurl->extension();
+            $request->imageurl->move(public_path('images/payments'), $imageName);
 
             $imageurl = '/images/payments/'.$imageName;
         }
@@ -94,7 +94,7 @@ class ReceivablesController extends Controller
         $receivable->credit = ($request->credit) ? $request->credit : 0;
         $receivable->balance = ($request->balance) ? $request->balance : 0;
         $receivable->status = ($request->status) ? $request->status : 1;
-        $receivable->imageurl = $request->imageurl;
+        $receivable->imageurl = $imageurl;
         
 
         if($receivable->save())

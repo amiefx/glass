@@ -45,10 +45,10 @@ class PayablesController extends Controller
 
         $imageurl = null;
 
-        if($request->payimage)
+        if($request->imageurl)
         {
-            $imageName = time().'.'.$request->payimage->extension();
-            $request->image_in->move(public_path('images/payments'), $imageName);
+            $imageName = time().'.'.$request->imageurl->extension();
+            $request->imageurl->move(public_path('images/payments'), $imageName);
 
             $imageurl = '/images/payments/'.$imageName;
         }
@@ -80,10 +80,10 @@ class PayablesController extends Controller
 
         $imageurl = null;
 
-        if($request->payimage)
+        if($request->imageurl)
         {
-            $imageName = time().'.'.$request->payimage->extension();
-            $request->image_in->move(public_path('images/payments'), $imageName);
+            $imageName = time().'.'.$request->imageurl->extension();
+            $request->imageurl->move(public_path('images/payments'), $imageName);
 
             $imageurl = '/images/payments/'.$imageName;
         }
