@@ -42,6 +42,15 @@ class ReceivablesController extends Controller
             return response()->json([$validator->errors()], 422);
         }
 
+        $imageurl = null;
+
+        if($request->recieveimage)
+        {
+            $imageName = time().'.'.$request->recieveimage->extension();
+            $request->image_in->move(public_path('images/payments'), $imageName);
+
+            $imageurl = '/images/payments/'.$imageName;
+        }
 
         $receivable = Receivable::create(array_merge($validator->validated(), [
             "description"=>$request->description,
@@ -49,6 +58,7 @@ class ReceivablesController extends Controller
             "credit"=>($request->credit) ? $request->credit : 0,
             "balance"=>($request->balance) ? $request->balance : 0,
             "status"=>($request->status) ? $request->status : 1,
+            "imageurl"=>$imageurl,
         ]));
         return response()->json(['message' => 'receivable created successfully', 'receivable'=>$receivable]);
     }
@@ -67,6 +77,16 @@ class ReceivablesController extends Controller
             return response()->json([$validator->errors()], 422);
         }
 
+        $imageurl = null;
+
+        if($request->payimage)
+        {
+            $imageName = time().'.'.$request->payimage->extension();
+            $request->image_in->move(public_path('images/payments'), $imageName);
+
+            $imageurl = '/images/payments/'.$imageName;
+        }
+
         $receivable->type = $request->type;
         $receivable->customer_id = $request->customer_id;
         $receivable->description = $request->description;
@@ -74,6 +94,8 @@ class ReceivablesController extends Controller
         $receivable->credit = ($request->credit) ? $request->credit : 0;
         $receivable->balance = ($request->balance) ? $request->balance : 0;
         $receivable->status = ($request->status) ? $request->status : 1;
+        $receivable->imageurl = $request->imageurl;
+        
 
         if($receivable->save())
         {

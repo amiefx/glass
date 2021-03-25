@@ -43,6 +43,15 @@ class PayablesController extends Controller
             return response()->json([$validator->errors()], 422);
         }
 
+        $imageurl = null;
+
+        if($request->payimage)
+        {
+            $imageName = time().'.'.$request->payimage->extension();
+            $request->image_in->move(public_path('images/payments'), $imageName);
+
+            $imageurl = '/images/payments/'.$imageName;
+        }
 
         $payablee = Payable::create(array_merge($validator->validated(), [
             "description"=>$request->description,
@@ -50,6 +59,7 @@ class PayablesController extends Controller
             "credit"=>($request->credit) ? $request->credit : 0,
             "balance"=>($request->balance) ? $request->balance : 0,
             "status"=>($request->status) ? $request->status : 1,
+            "imageurl"=>$imageurl,
         ]));
         return response()->json(['message' => 'payable created successfully', 'payable'=>$payablee]);
     }
@@ -68,6 +78,16 @@ class PayablesController extends Controller
             return response()->json([$validator->errors()], 422);
         }
 
+        $imageurl = null;
+
+        if($request->payimage)
+        {
+            $imageName = time().'.'.$request->payimage->extension();
+            $request->image_in->move(public_path('images/payments'), $imageName);
+
+            $imageurl = '/images/payments/'.$imageName;
+        }
+
         $payable->type = $request->type;
         $payable->supplier_id = $request->supplier_id;
         $payable->description = $request->description;
@@ -75,6 +95,7 @@ class PayablesController extends Controller
         $payable->credit = ($request->credit) ? $request->credit : 0;
         $payable->balance = ($request->balance) ? $request->balance : 0;
         $payable->status = ($request->status) ? $request->status : 1;
+        $payable->imageurl = $imageurl;
 
         if($payable->save())
         {

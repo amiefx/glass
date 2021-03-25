@@ -18,7 +18,8 @@ class Payable extends Model
         'credit',
         'balance',
         'status',
-        'user_id'
+        'user_id',
+        'imageurl'
     ];
 
 
