@@ -37,6 +37,16 @@ class BusinessController extends Controller
      */
     public function store(Request $request)
     {
+        $imageurl = null;
+
+        if($request->logo)
+        {
+            $imageName = time().'.'.$request->logo->extension();
+            $request->logo->move(public_path('images/siteimages'), $imageName);
+
+            $imageurl = '/images/payments/'.$imageName;
+        }
+
         $business = new Business([
             'name' => $request->name,
             'email' => $request->email,
@@ -46,7 +56,7 @@ class BusinessController extends Controller
             'city' => $request->city,
             'zipcode' => $request->zipcode,
             'address' => $request->address,
-            'logo' => $request->logo
+            'logo' => $imageurl
         ]);
         $business->save();
         return response()->json(['business'=> new BusinessResource($business)], 200);
@@ -78,6 +88,16 @@ class BusinessController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $imageurl = null;
+
+        if($request->logo)
+        {
+            $imageName = time().'.'.$request->logo->extension();
+            $request->logo->move(public_path('images/siteimages'), $imageName);
+
+            $imageurl = '/images/payments/'.$imageName;
+        }
+
         $business = Business::find($id);
         $business->name = $request->name;
         $business->email = $request->email;
@@ -87,7 +107,7 @@ class BusinessController extends Controller
         $business->city = $request->city;
         $business->zipcode = $request->zipcode;
         $business->address = $request->address;
-        $business->logo = $request->logo;
+        $business->logo = $imageurl;
         $business->save();
         return response()->json(['business' => new BusinessResource($business)], 200);
     }
