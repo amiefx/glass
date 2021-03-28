@@ -114,6 +114,7 @@ Route::group([
     Route::resource('banks', 'BankController');
 
     // Bank Detail
+    Route::get('bank_detail/all', 'BankDetailController@allBanks');
     Route::resource('bank_detail', 'BankDetailController');
 
     // Payment
@@ -157,6 +158,10 @@ Route::group([
     // category
     Route::get('categories/all', 'CategoryController@allCategories');
     Route::resource('categories', 'CategoryController');
+
+    // panel sizes
+    Route::get('panels/all', 'PanelController@allPanels');
+    Route::resource('panels', 'PanelController');
 
     // business
     Route::get('business/all', 'BusinessController@allBusiness');

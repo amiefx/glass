@@ -29,7 +29,7 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on">New Panel</v-btn>
+            <v-btn color="primary" dark class="mb-2" v-on="on">New Pnel</v-btn>
             <!-- <v-btn color="error" dark class="mb-2 mr-2"  @click="deleteAll">Delete</v-btn> -->
           </template>
           <v-card>
@@ -89,19 +89,6 @@
       <v-btn color="primary" @click="initialize">Reset</v-btn>
     </template>
 
-    <!-- <template v-slot:item.is_active = "{ item }">
-        <v-edit-dialog large block persistent :return-value.sync="item.is_active" @save="updateStatus(item)">
-
-            <v-chip :color="getColor(item.is_active)" dark>
-                <span v-if="item.is_active == 1">Active</span>
-                <span v-else>In Active</span>
-            </v-chip>
-            <template v-slot:input>
-                <v-select v-model="item.is_active" :items="status" :item-text="status.text" :item-value="status.value" label="Select Status"></v-select>
-            </template>
-        </v-edit-dialog>
-    </template> -->
-
   </v-data-table>
 
   <v-snackbar
@@ -133,12 +120,12 @@
       success: '',
       error: '',
       options: {
-          sortBy:['min'],
+          sortBy:['id'],
           sortDesc:[true]
       },
       rules: {
           required: v => !!v || 'This Field is Required',
-          min: v => v.length >=5 || 'Minimum 5 Chracters Required',
+          size: v => v.length >=5 || 'Size 5 Chracters Required',
           validEmail: v => /.+@.+\..+/.test(v) || 'Email must be valid',
       },
       headers: [
@@ -150,24 +137,17 @@
         { text: 'Standard Size', value: 'standard_size' },
         { text: 'Actions', value: 'action', sortable: false },
       ],
-      status: [
-          {text: 'Active', value: true},
-          {text: 'In Active', value: false}
-      ],
-      types: ['slab', 'service provider'],
       panels: [],
       editedIndex: -1,
       editedItem: {
         id: '',
-        min: '',
-        max: '',
-        actual: ''
+        size: '',
+        standard_size: '',
       },
       defaultItem: {
         id: '',
-        min: '',
-        max: '',
-        actual: ''
+        size: '',
+        standard_size: '',
       },
     }),
 
@@ -188,20 +168,6 @@
     },
 
     methods: {
-    //   updateStatus(item) {
-    //       const index = this.panels.data.indexOf(item);
-    //       axios.post('/api/change-status', {'status': item.is_active, 'slab': item.id})
-    //         .then(res => {
-    //            this.text = res.data.slab.name + "'s Status Updated to " + res.data.slab.is_active
-    //            this.snackbar = true
-    //             })
-    //         .catch(error => {
-    //             // this.text = error.response.slab.name + "'s Status Cannot be Updated" + error.response.slab.status
-    //             this.panels.data[index].is_active = error.response.data.slab.is_active
-    //             this.snackbar = true
-    //             console.dir(error.response)
-    //             })
-    //   },
 
       searchIt(e){
           if(e.length > 3){
@@ -215,7 +181,7 @@
             //     .then(res => this.panels = res.data.data.panels)
             //     .catch(err => console.dir(err.response))
 
-            const sortBy = this.options.sortBy.length == 0 ? 'min' : this.options.sortBy[0];
+            const sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
             const orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
                 axios.get(`/api/panels?page=${e.page}`,{params:{'per_page': e.itemsPerPage, 'sort_by': sortBy, 'order_by': orderBy}})
                 .then(res => {
@@ -226,7 +192,7 @@
 
       },
       paginate(e){
-          const sortBy = this.options.sortBy.length == 0 ? 'min' : this.options.sortBy[0];
+          const sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
           const orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
             axios.get(`/api/panels?page=${e.page}`,{params:{'per_page': e.itemsPerPage, 'sort_by': sortBy, 'order_by': orderBy}})
             .then(res => {
@@ -300,7 +266,7 @@
            console.log(res)
              this.text = "Record Updated Successfully!";
              this.snackbar = true;
-             Object.assign(this.panels.data[index], res.data.slab)
+             Object.assign(this.panels.data[index], res.data.panel)
          })
          .catch(err => {
              console.log(err.response)
@@ -313,7 +279,7 @@
             .then(res => {
                 this.text = "Record Added Successfully!";
                 this.snackbar = true;
-                this.panels.data.push(res.data.slab)
+                this.panels.data.push(res.data.panel)
             })
             .catch(err => {
                 console.dir(err)

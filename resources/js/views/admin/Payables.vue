@@ -113,16 +113,41 @@
                               :rules="[rules.required]"
                             ></v-text-field>
                             <div v-if="editedItem.pmt_method == 'Bank' ">
-                                <v-text-field
-                                dense
-                              v-model="editedItem.payee_account"
-                              label="Payee Account#"
-                            ></v-text-field>
-                            <v-text-field
-                              dense
-                              v-model="editedItem.details"
-                              label="Details"
-                            ></v-text-field>
+                                <v-autocomplete
+                              v-model="editedItem.bank_id"
+                              :items="banks"
+                              hide-details
+                              hide-selected
+                              item-text="bank_name"
+                              item-value="id"
+                              label="Select Bank Acc"
+                              class="pb-3 pt-0"
+                            >
+                              <template
+                                v-slot:selection="{ attr, on, item, selected }"
+                              >
+                                <span v-text="item.bank_name"></span>
+                              </template>
+                              <template v-slot:item="{ item }">
+                                <v-list-item-content>
+                                  <v-list-item-title
+                                    v-text="item.bank_name"
+                                  ></v-list-item-title>
+                                  <v-list-item-subtitle>
+                                    {{ item.account_title }} |
+                                    {{ item.account_number }}
+                                  </v-list-item-subtitle>
+                                </v-list-item-content>
+                                <v-list-item-action>
+                                  <span>
+                                    <strong>
+                                      {{ item.id }}
+                                    </strong>
+                                  </span>
+                                </v-list-item-action>
+                              </template>
+                            </v-autocomplete>
+                            <v-file-input dense v-model="editedItem.file" label="File input"></v-file-input>
                             <v-text-field
                               dense
                               v-model="editedItem.notes"
@@ -173,6 +198,7 @@ export default {
       supplier: [],
       supplier_id: null,
       newData: null,
+      banks: [],
 
       rules: {
           required: v => !!v || 'This Field is Required',
@@ -185,6 +211,8 @@ export default {
         amount: "",
         payee_account: "",
         details: "",
+        bank_id: "",
+        file: [],
         notes: ""
       },
     };
@@ -192,6 +220,10 @@ export default {
 
   created() {
     this.getSupplier();
+
+    axios.get("/api/bank_detail/all").then((res) => {
+      this.banks = res.data.data;
+    });
   },
 
   methods: {

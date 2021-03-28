@@ -272,6 +272,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -290,6 +315,7 @@ __webpack_require__.r(__webpack_exports__);
       supplier: [],
       supplier_id: null,
       newData: null,
+      banks: [],
       rules: {
         required: function required(v) {
           return !!v || 'This Field is Required';
@@ -306,12 +332,19 @@ __webpack_require__.r(__webpack_exports__);
         amount: "",
         payee_account: "",
         details: "",
+        bank_id: "",
+        file: [],
         notes: ""
       }
     };
   },
   created: function created() {
+    var _this = this;
+
     this.getSupplier();
+    axios.get("/api/bank_detail/all").then(function (res) {
+      _this.banks = res.data.data;
+    });
   },
   methods: {
     custID: function custID(item) {
@@ -319,21 +352,21 @@ __webpack_require__.r(__webpack_exports__);
       this.supplier_id = item.id;
     },
     getSupplier: function getSupplier() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("/api/suppliers/all").then(function (res) {
-        _this.suppliers = res.data.data;
+        _this2.suppliers = res.data.data;
 
-        if (_this.supplier_id) {
+        if (_this2.supplier_id) {
           var supp = res.data.data.find(function (item) {
-            return item.id === _this.supplier_id;
+            return item.id === _this2.supplier_id;
           });
-          _this.supplier = supp;
+          _this2.supplier = supp;
         }
       });
     },
     savePayment: function savePayment() {
-      var _this2 = this;
+      var _this3 = this;
 
       var paymentData = {
         supplier_id: this.supplier_id,
@@ -345,26 +378,26 @@ __webpack_require__.r(__webpack_exports__);
       }; // Add a request interceptor
 
       axios.interceptors.request.use(function (config) {
-        _this2.loading = true;
+        _this3.loading = true;
         return config;
       }, function (error) {
-        _this2.loading = false;
+        _this3.loading = false;
         return Promise.reject(error);
       }); // Add a response interceptor
 
       axios.interceptors.response.use(function (response) {
-        _this2.loading = false;
+        _this3.loading = false;
         return response;
       }, function (error) {
-        _this2.loading = false;
+        _this3.loading = false;
         return Promise.reject(error);
       });
       axios.post("/api/payments", paymentData).then(function (res) {
-        _this2.editedItem.amount = null, _this2.editedItem.pmt_method = null, _this2.editedItem.payee_account = null, _this2.editedItem.details = null, _this2.editedItem.notes = null;
+        _this3.editedItem.amount = null, _this3.editedItem.pmt_method = null, _this3.editedItem.payee_account = null, _this3.editedItem.details = null, _this3.editedItem.notes = null;
 
-        _this2.getSupplier();
+        _this3.getSupplier();
 
-        _this2.newData = res.data.payments.id;
+        _this3.newData = res.data.payments.id;
       });
     }
   },
@@ -1031,57 +1064,175 @@ var render = function() {
                                                             "div",
                                                             [
                                                               _c(
-                                                                "v-text-field",
+                                                                "v-autocomplete",
                                                                 {
+                                                                  staticClass:
+                                                                    "pb-3 pt-0",
                                                                   attrs: {
-                                                                    dense: "",
+                                                                    items:
+                                                                      _vm.banks,
+                                                                    "hide-details":
+                                                                      "",
+                                                                    "hide-selected":
+                                                                      "",
+                                                                    "item-text":
+                                                                      "bank_name",
+                                                                    "item-value":
+                                                                      "id",
                                                                     label:
-                                                                      "Payee Account#"
+                                                                      "Select Bank Acc"
                                                                   },
+                                                                  scopedSlots: _vm._u(
+                                                                    [
+                                                                      {
+                                                                        key:
+                                                                          "selection",
+                                                                        fn: function(
+                                                                          ref
+                                                                        ) {
+                                                                          var attr =
+                                                                            ref.attr
+                                                                          var on =
+                                                                            ref.on
+                                                                          var item =
+                                                                            ref.item
+                                                                          var selected =
+                                                                            ref.selected
+                                                                          return [
+                                                                            _c(
+                                                                              "span",
+                                                                              {
+                                                                                domProps: {
+                                                                                  textContent: _vm._s(
+                                                                                    item.bank_name
+                                                                                  )
+                                                                                }
+                                                                              }
+                                                                            )
+                                                                          ]
+                                                                        }
+                                                                      },
+                                                                      {
+                                                                        key:
+                                                                          "item",
+                                                                        fn: function(
+                                                                          ref
+                                                                        ) {
+                                                                          var item =
+                                                                            ref.item
+                                                                          return [
+                                                                            _c(
+                                                                              "v-list-item-content",
+                                                                              [
+                                                                                _c(
+                                                                                  "v-list-item-title",
+                                                                                  {
+                                                                                    domProps: {
+                                                                                      textContent: _vm._s(
+                                                                                        item.bank_name
+                                                                                      )
+                                                                                    }
+                                                                                  }
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "v-list-item-subtitle",
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "\n                                  " +
+                                                                                        _vm._s(
+                                                                                          item.account_title
+                                                                                        ) +
+                                                                                        " |\n                                  " +
+                                                                                        _vm._s(
+                                                                                          item.account_number
+                                                                                        ) +
+                                                                                        "\n                                "
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "v-list-item-action",
+                                                                              [
+                                                                                _c(
+                                                                                  "span",
+                                                                                  [
+                                                                                    _c(
+                                                                                      "strong",
+                                                                                      [
+                                                                                        _vm._v(
+                                                                                          "\n                                    " +
+                                                                                            _vm._s(
+                                                                                              item.id
+                                                                                            ) +
+                                                                                            "\n                                  "
+                                                                                        )
+                                                                                      ]
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ]
+                                                                            )
+                                                                          ]
+                                                                        }
+                                                                      }
+                                                                    ],
+                                                                    null,
+                                                                    false,
+                                                                    3962633431
+                                                                  ),
                                                                   model: {
                                                                     value:
                                                                       _vm
                                                                         .editedItem
-                                                                        .payee_account,
+                                                                        .bank_id,
                                                                     callback: function(
                                                                       $$v
                                                                     ) {
                                                                       _vm.$set(
                                                                         _vm.editedItem,
-                                                                        "payee_account",
+                                                                        "bank_id",
                                                                         $$v
                                                                       )
                                                                     },
                                                                     expression:
-                                                                      "editedItem.payee_account"
+                                                                      "editedItem.bank_id"
                                                                   }
                                                                 }
                                                               ),
                                                               _vm._v(" "),
                                                               _c(
-                                                                "v-text-field",
+                                                                "v-file-input",
                                                                 {
                                                                   attrs: {
                                                                     dense: "",
                                                                     label:
-                                                                      "Details"
+                                                                      "File input"
                                                                   },
                                                                   model: {
                                                                     value:
                                                                       _vm
                                                                         .editedItem
-                                                                        .details,
+                                                                        .file,
                                                                     callback: function(
                                                                       $$v
                                                                     ) {
                                                                       _vm.$set(
                                                                         _vm.editedItem,
-                                                                        "details",
+                                                                        "file",
                                                                         $$v
                                                                       )
                                                                     },
                                                                     expression:
-                                                                      "editedItem.details"
+                                                                      "editedItem.file"
                                                                   }
                                                                 }
                                                               ),
@@ -1457,15 +1608,18 @@ __webpack_require__.r(__webpack_exports__);
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/index.js");
-/* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
-/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
-/* harmony import */ var vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VDivider */ "./node_modules/vuetify/lib/components/VDivider/index.js");
-/* harmony import */ var vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VForm */ "./node_modules/vuetify/lib/components/VForm/index.js");
-/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
-/* harmony import */ var vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VRadioGroup */ "./node_modules/vuetify/lib/components/VRadioGroup/index.js");
-/* harmony import */ var vuetify_lib_components_VTabs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VTabs */ "./node_modules/vuetify/lib/components/VTabs/index.js");
-/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+/* harmony import */ var vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VAutocomplete */ "./node_modules/vuetify/lib/components/VAutocomplete/index.js");
+/* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/index.js");
+/* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
+/* harmony import */ var vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VDivider */ "./node_modules/vuetify/lib/components/VDivider/index.js");
+/* harmony import */ var vuetify_lib_components_VFileInput__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VFileInput */ "./node_modules/vuetify/lib/components/VFileInput/index.js");
+/* harmony import */ var vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VForm */ "./node_modules/vuetify/lib/components/VForm/index.js");
+/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
+/* harmony import */ var vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VList */ "./node_modules/vuetify/lib/components/VList/index.js");
+/* harmony import */ var vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VRadioGroup */ "./node_modules/vuetify/lib/components/VRadioGroup/index.js");
+/* harmony import */ var vuetify_lib_components_VTabs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VTabs */ "./node_modules/vuetify/lib/components/VTabs/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
 
 
 
@@ -1502,7 +1656,13 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VCol"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_7__["VDivider"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_8__["VForm"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_9__["VIcon"],VRadio: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_10__["VRadio"],VRadioGroup: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_10__["VRadioGroup"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VRow"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VSpacer"],VTab: vuetify_lib_components_VTabs__WEBPACK_IMPORTED_MODULE_11__["VTab"],VTabItem: vuetify_lib_components_VTabs__WEBPACK_IMPORTED_MODULE_11__["VTabItem"],VTabs: vuetify_lib_components_VTabs__WEBPACK_IMPORTED_MODULE_11__["VTabs"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_12__["VTextField"]})
+
+
+
+
+
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_4__["VAutocomplete"],VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_5__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__["VCardText"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VCol"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_8__["VDivider"],VFileInput: vuetify_lib_components_VFileInput__WEBPACK_IMPORTED_MODULE_9__["VFileInput"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_10__["VForm"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_11__["VIcon"],VListItemAction: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemAction"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemContent"],VListItemSubtitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemSubtitle"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemTitle"],VRadio: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_13__["VRadio"],VRadioGroup: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_13__["VRadioGroup"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VRow"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VSpacer"],VTab: vuetify_lib_components_VTabs__WEBPACK_IMPORTED_MODULE_14__["VTab"],VTabItem: vuetify_lib_components_VTabs__WEBPACK_IMPORTED_MODULE_14__["VTabItem"],VTabs: vuetify_lib_components_VTabs__WEBPACK_IMPORTED_MODULE_14__["VTabs"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_15__["VTextField"]})
 
 
 /* hot reload */

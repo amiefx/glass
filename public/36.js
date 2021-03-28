@@ -118,19 +118,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'admin',
   middleware: ['auth', 'admin'],
@@ -144,15 +131,15 @@ __webpack_require__.r(__webpack_exports__);
       success: '',
       error: '',
       options: {
-        sortBy: ['min'],
+        sortBy: ['id'],
         sortDesc: [true]
       },
       rules: {
         required: function required(v) {
           return !!v || 'This Field is Required';
         },
-        min: function min(v) {
-          return v.length >= 5 || 'Minimum 5 Chracters Required';
+        size: function size(v) {
+          return v.length >= 5 || 'Size 5 Chracters Required';
         },
         validEmail: function validEmail(v) {
           return /.+@.+\..+/.test(v) || 'Email must be valid';
@@ -172,27 +159,17 @@ __webpack_require__.r(__webpack_exports__);
         value: 'action',
         sortable: false
       }],
-      status: [{
-        text: 'Active',
-        value: true
-      }, {
-        text: 'In Active',
-        value: false
-      }],
-      types: ['slab', 'service provider'],
       panels: [],
       editedIndex: -1,
       editedItem: {
         id: '',
-        min: '',
-        max: '',
-        actual: ''
+        size: '',
+        standard_size: ''
       },
       defaultItem: {
         id: '',
-        min: '',
-        max: '',
-        actual: ''
+        size: '',
+        standard_size: ''
       }
     };
   },
@@ -210,20 +187,6 @@ __webpack_require__.r(__webpack_exports__);
     this.initialize();
   },
   methods: {
-    //   updateStatus(item) {
-    //       const index = this.panels.data.indexOf(item);
-    //       axios.post('/api/change-status', {'status': item.is_active, 'slab': item.id})
-    //         .then(res => {
-    //            this.text = res.data.slab.name + "'s Status Updated to " + res.data.slab.is_active
-    //            this.snackbar = true
-    //             })
-    //         .catch(error => {
-    //             // this.text = error.response.slab.name + "'s Status Cannot be Updated" + error.response.slab.status
-    //             this.panels.data[index].is_active = error.response.data.slab.is_active
-    //             this.snackbar = true
-    //             console.dir(error.response)
-    //             })
-    //   },
     searchIt: function searchIt(e) {
       var _this = this;
 
@@ -240,7 +203,7 @@ __webpack_require__.r(__webpack_exports__);
         //   axios.get(`/api/panels`)
         //     .then(res => this.panels = res.data.data.panels)
         //     .catch(err => console.dir(err.response))
-        var sortBy = this.options.sortBy.length == 0 ? 'min' : this.options.sortBy[0];
+        var sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
         var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
         axios.get("/api/panels?page=".concat(e.page), {
           params: {
@@ -258,7 +221,7 @@ __webpack_require__.r(__webpack_exports__);
     paginate: function paginate(e) {
       var _this2 = this;
 
-      var sortBy = this.options.sortBy.length == 0 ? 'min' : this.options.sortBy[0];
+      var sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
       var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
       axios.get("/api/panels?page=".concat(e.page), {
         params: {
@@ -333,7 +296,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(res);
           _this6.text = "Record Updated Successfully!";
           _this6.snackbar = true;
-          Object.assign(_this6.panels.data[index], res.data.slab);
+          Object.assign(_this6.panels.data[index], res.data.panel);
         })["catch"](function (err) {
           console.log(err.response);
           _this6.text = "Error Updating Record";
@@ -344,7 +307,7 @@ __webpack_require__.r(__webpack_exports__);
           _this6.text = "Record Added Successfully!";
           _this6.snackbar = true;
 
-          _this6.panels.data.push(res.data.slab);
+          _this6.panels.data.push(res.data.panel);
         })["catch"](function (err) {
           console.dir(err);
           _this6.text = "Error Inserting Record";
@@ -442,7 +405,7 @@ var render = function() {
                                     },
                                     on
                                   ),
-                                  [_vm._v("New Panel")]
+                                  [_vm._v("New Pnel")]
                                 )
                               ]
                             }
