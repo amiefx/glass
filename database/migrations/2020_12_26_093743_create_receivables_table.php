@@ -23,6 +23,7 @@ class CreateReceivablesTable extends Migration
             $table->integer('credit')->nullable()->default(0);
             $table->integer('balance')->nullable()->default(0);
             $table->boolean('status')->default(false);
+            $table->string('imageurl')->nullable()->default(null);
             $table->integer('user_id');
             $table->timestamps();
         });
