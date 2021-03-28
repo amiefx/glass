@@ -131,6 +131,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'admin',
   middleware: ['auth', 'admin'],
@@ -147,6 +155,7 @@ __webpack_require__.r(__webpack_exports__);
         sortBy: ['name'],
         sortDesc: [true]
       },
+      types: ['Ceiling', 'Panel', 'Glass'],
       rules: {
         required: function required(v) {
           return !!v || 'This Field is Required';
@@ -178,11 +187,13 @@ __webpack_require__.r(__webpack_exports__);
       editedIndex: -1,
       editedItem: {
         id: '',
+        type: '',
         name: '',
         short_code: ''
       },
       defaultItem: {
         id: '',
+        type: '',
         name: '',
         short_code: ''
       }
@@ -196,6 +207,9 @@ __webpack_require__.r(__webpack_exports__);
       return [{
         text: '#',
         value: 'id'
+      }, {
+        text: this.$t('type'),
+        value: 'type'
       }, {
         text: this.$t('name'),
         value: 'name'
@@ -537,6 +551,28 @@ var render = function() {
                                               "v-col",
                                               { attrs: { cols: "12" } },
                                               [
+                                                _c("v-select", {
+                                                  attrs: {
+                                                    items: _vm.types,
+                                                    "item-text": "name",
+                                                    "item-value": "id",
+                                                    label: "Item Type",
+                                                    rules: [_vm.rules.required]
+                                                  },
+                                                  model: {
+                                                    value: _vm.editedItem.type,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "type",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedItem.type"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
                                                 _c("v-text-field", {
                                                   attrs: {
                                                     label: _vm.$t("name"),

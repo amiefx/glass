@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryListResource extends JsonResource
+class PanelResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,8 @@ class CategoryListResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'type' => $this->type,
-            'name' => $this->name,
-            'short_code' => $this->short_code
+            'size' => $this->size,
+            'standard_size' => $this->standard_size,
         ];
     }
 }

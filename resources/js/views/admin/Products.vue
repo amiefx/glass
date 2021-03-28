@@ -42,16 +42,22 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" md="6" lg="6" >
-                    <v-text-field v-model="editedItem.sku" label="SKU" :rules="[rules.required]" ></v-text-field>
-                    <v-text-field v-model="editedItem.urdusku" label="URDU SKU" :rules="[rules.required]"></v-text-field>
-                    <v-select
+                      <v-select
+                       :items="types"
+                       item-text="name"
+                       item-value="id"
+                       label="Item Type"
+                       v-model="editedItem.type"
+                       :rules="[rules.required]"
+                     ></v-select>
+                    <v-autocomplete
                        :items="categories"
                        item-text="name"
                        item-value="id"
                        label="Category"
                        v-model="editedItem.category_id"
                        :rules="[rules.required]"
-                     ></v-select>
+                     ></v-autocomplete>
                      <v-select
                        :items="brands"
                        item-text="name"
@@ -66,6 +72,8 @@
                      <v-text-field v-model="editedItem.name" label="Name" :rules="[rules.required]"></v-text-field>
 
                       <v-text-field v-model="editedItem.color" label="Color" ></v-text-field>
+                    <v-text-field v-model="editedItem.sku" label="SKU" :rules="[rules.required]" ></v-text-field>
+                    <v-text-field v-model="editedItem.urdusku" label="URDU SKU" :rules="[rules.required]"></v-text-field>
 
                      </v-col>
 
@@ -210,7 +218,9 @@
           text: '#',
           value: 'id',
         },
+        { text: 'Type', value: 'type' },
         { text: 'SKU', value: 'sku' },
+        { text: 'Urdu SKU', value: 'urdu_sku' },
         { text: 'Name', value: 'name' },
         { text: 'Category', value: 'category' },
         { text: 'Brand', value: 'brand_name' },
@@ -231,9 +241,10 @@
           {text: 'Active', value: true},
           {text: 'In Active', value: false}
       ],
-      types: ['product', 'service provider'],
+      types: ['Ceiling', 'Panel', 'Glass'],
       products: [],
       categories: [],
+      categoriesAll: [],
       brands: [],
       units: [],
       slabs: [],
@@ -242,6 +253,7 @@
         id: '',
         sku: '',
         urdusku: '',
+        type: '',
         name: '',
         category_id: '',
         brand_id: '',
@@ -264,6 +276,7 @@
         id: '',
         sku: '',
         urdusku: '',
+        type: '',
         name: '',
         category_id: '',
         brand_id: '',
@@ -289,6 +302,10 @@
         return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
       },
 
+    //   categories () {
+    //       let item = this.products.filter((item) => item.id == this.scannedBarcode);
+    //   }
+
     },
 
     watch: {
@@ -307,7 +324,7 @@
       this.initialize()
 
       axios.get("/api/categories/all").then(res => {
-        this.categories = res.data.data;
+        this.categoriesAll = res.data.data;
         });
 
       axios.get("/api/units/all").then(res => {
@@ -350,6 +367,14 @@
         let color =  this.editedItem.color ? this.editedItem.color.slice(0, 3) : '';
         this.editedItem.sku = (brand + ' ' + name + ' ' + color ).toUpperCase();
         this.editedItem.brand_id = this.editedItem.brand.id
+
+        if (this.editedItem.type == 'Ceiling') {
+            this.categories = this.categoriesAll.filter((item) => item.type == 'Ceiling');
+        } else if (this.editedItem.type == 'Panel') {
+            this.categories = this.categoriesAll.filter((item) => item.type == 'Panel');
+        } else {
+            this.categories = this.categoriesAll.filter((item) => item.type == 'Glass');
+        }
       },
 
     //   itemChanged(item) {

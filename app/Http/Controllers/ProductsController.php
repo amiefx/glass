@@ -108,6 +108,7 @@ class ProductsController extends Controller
         $product->enable_stock = $request->enable_stock;
         $product->alert_quantity = $request->alert_quantity;
         $product->sku = $request->sku;
+        $product->type = $request->type;
         $product->urdu_sku = $request->urdusku;
         $product->selling_price = $request->selling_price;
         $product->color = $request->color;

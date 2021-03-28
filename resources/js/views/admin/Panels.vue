@@ -3,14 +3,14 @@
 
   <v-data-table
     :headers="headers"
-    :items="categories.data"
+    :items="panels.data"
     :items-per-page=5
     class="elevation-1"
     item-key="id"
     :loading="loading"
     @pagination="paginate"
     :options.sync="options"
-    :server-items-length="categories.total"
+    :server-items-length="panels.total"
     loading-text="Loading.. Please Wait!"
     :footer-props="{
         itemsPerPageOptions: [5,10,15],
@@ -20,7 +20,7 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="">
-        <v-toolbar-title class="text-primary"> {{ $t('category management') }}</v-toolbar-title>
+        <v-toolbar-title class="text-primary">Panel Management</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -29,7 +29,7 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('new category') }}</v-btn>
+            <v-btn color="primary" dark class="mb-2" v-on="on">New Panel</v-btn>
             <!-- <v-btn color="error" dark class="mb-2 mr-2"  @click="deleteAll">Delete</v-btn> -->
           </template>
           <v-card>
@@ -42,16 +42,8 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" >
-                      <v-select
-                       :items="types"
-                       item-text="name"
-                       item-value="id"
-                       label="Item Type"
-                       v-model="editedItem.type"
-                       :rules="[rules.required]"
-                     ></v-select>
-                    <v-text-field v-model="editedItem.name" :label= "$t('name')"  :rules="[rules.required]"></v-text-field>
-                    <v-text-field v-model="editedItem.short_code" :label= "$t('short code')"></v-text-field>
+                    <v-text-field v-model="editedItem.size" label="Size" :rules="[rules.required]"></v-text-field>
+                    <v-text-field v-model="editedItem.standard_size" label="Standard Size" :rules="[rules.required]"></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -59,9 +51,9 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" text @click="close">{{ $t('cancel')}}</v-btn>
+              <v-btn color="primary" text @click="close">Cancel</v-btn>
               <!-- <v-btn color="blue darken-1" type="submit" :disabled="!valid" @click.prevent="save" text @click="save">Save</v-btn> -->
-              <v-btn color="primary" type="submit" :disabled="!valid" @click.prevent="save" >{{ $t('save')}}</v-btn>
+              <v-btn color="primary" type="submit" :disabled="!valid" @click.prevent="save" >Save</v-btn>
             </v-card-actions>
             </v-form>
           </v-card>
@@ -97,7 +89,7 @@
       <v-btn color="primary" @click="initialize">Reset</v-btn>
     </template>
 
-    <template v-slot:item.is_active = "{ item }">
+    <!-- <template v-slot:item.is_active = "{ item }">
         <v-edit-dialog large block persistent :return-value.sync="item.is_active" @save="updateStatus(item)">
 
             <v-chip :color="getColor(item.is_active)" dark>
@@ -108,7 +100,7 @@
                 <v-select v-model="item.is_active" :items="status" :item-text="status.text" :item-value="status.value" label="Select Status"></v-select>
             </template>
         </v-edit-dialog>
-    </template>
+    </template> -->
 
   </v-data-table>
 
@@ -141,61 +133,48 @@
       success: '',
       error: '',
       options: {
-          sortBy:['name'],
+          sortBy:['min'],
           sortDesc:[true]
       },
-      types: ['Ceiling', 'Panel', 'Glass'],
       rules: {
           required: v => !!v || 'This Field is Required',
           min: v => v.length >=5 || 'Minimum 5 Chracters Required',
           validEmail: v => /.+@.+\..+/.test(v) || 'Email must be valid',
       },
-    //   headers: [
-    //     {
-    //       text: '#',
-    //       value: 'id',
-    //     },
-    //     { text: 'Name', value: 'name' },
-    //     { text: 'Short Code', value: 'short_code' },
-    //     { text: 'Actions', value: 'action', sortable: false },
-    //   ],
+      headers: [
+        {
+          text: '#',
+          value: 'id',
+        },
+        { text: 'Size', value: 'size' },
+        { text: 'Standard Size', value: 'standard_size' },
+        { text: 'Actions', value: 'action', sortable: false },
+      ],
       status: [
           {text: 'Active', value: true},
           {text: 'In Active', value: false}
       ],
-      categories: [],
+      types: ['slab', 'service provider'],
+      panels: [],
       editedIndex: -1,
       editedItem: {
         id: '',
-        type: '',
-        name: '',
-        short_code: ''
+        min: '',
+        max: '',
+        actual: ''
       },
       defaultItem: {
         id: '',
-        type: '',
-        name: '',
-        short_code: ''
+        min: '',
+        max: '',
+        actual: ''
       },
     }),
 
     computed: {
       formTitle () {
-        return this.editedIndex === -1 ? this.$t('new item') : this.$t('edit item')
+        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
       },
-
-      headers(){
-      return [
-        {
-          text: '#',
-          value: 'id',
-        },
-        { text: this.$t('type'), value: 'type' },
-        { text: this.$t('name'), value: 'name' },
-        { text: this.$t('short code'), value: 'short_code' },
-        { text: this.$t('action'), value: 'action', sortable: false },
-      ]
-    }
     },
 
     watch: {
@@ -209,75 +188,49 @@
     },
 
     methods: {
-      updateStatus(item) {
-          const index = this.categories.data.indexOf(item);
-          axios.post('/api/change-status', {'status': item.is_active, 'category': item.id})
-            .then(res => {
-               this.text = res.data.category.name + "'s Status Updated to " + res.data.category.is_active
-               this.snackbar = true
-                })
-            .catch(error => {
-                // this.text = error.response.category.name + "'s Status Cannot be Updated" + error.response.category.status
-                this.categories.data[index].is_active = error.response.data.category.is_active
-                this.snackbar = true
-                console.dir(error.response)
-                })
-      },
+    //   updateStatus(item) {
+    //       const index = this.panels.data.indexOf(item);
+    //       axios.post('/api/change-status', {'status': item.is_active, 'slab': item.id})
+    //         .then(res => {
+    //            this.text = res.data.slab.name + "'s Status Updated to " + res.data.slab.is_active
+    //            this.snackbar = true
+    //             })
+    //         .catch(error => {
+    //             // this.text = error.response.slab.name + "'s Status Cannot be Updated" + error.response.slab.status
+    //             this.panels.data[index].is_active = error.response.data.slab.is_active
+    //             this.snackbar = true
+    //             console.dir(error.response)
+    //             })
+    //   },
 
-      // selectAll(e){
-      //     this.selected = [];
-      //     if(e.length > 0){
-      //         this.selected = e.map(val => val.id)
-      //     }
-      //     console.dir(this.selected)
-      // },
-      // deleteAll(){
-      //     let decide = confirm('Are you sure you want to delete these items?')
-      //       if(decide){
-      //           axios.post('/api/categories/delete', {'categories': this.selected})
-      //           .then(res => {
-      //               this.text = "Rcords Deleted Successfully!";
-      //               this.selected.map(val =>{
-      //                   const index = this.categories.data.indexOf(val)
-      //                   this.categories.data.splice(index, 1)
-      //               })
-      //               this.snackbar = true
-      //           })
-      //           .catch(err => {
-      //               console.log(err.response)
-      //               this.text = "Error Deleting Record"
-      //               this.snackbar = true
-      //           })
-      //       }
-      // },
       searchIt(e){
           if(e.length > 3){
-              axios.get(`/api/categories/${e}`)
-                .then(res => this.categories = res.data.categories)
+              axios.get(`/api/panels/${e}`)
+                .then(res => this.panels = res.data.panels)
                 .catch(err => console.dir(err.response))
           }
           if(e.length <= 0){
-             // axios.get(`/api/categories?page=${e.page}`,{params:{'per_page': e.itemsPerPage}})
-            //   axios.get(`/api/categories`)
-            //     .then(res => this.categories = res.data.data.categories)
+             // axios.get(`/api/panels?page=${e.page}`,{params:{'per_page': e.itemsPerPage}})
+            //   axios.get(`/api/panels`)
+            //     .then(res => this.panels = res.data.data.panels)
             //     .catch(err => console.dir(err.response))
 
-            const sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
+            const sortBy = this.options.sortBy.length == 0 ? 'min' : this.options.sortBy[0];
             const orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
-                axios.get(`/api/categories?page=${e.page}`,{params:{'per_page': e.itemsPerPage, 'sort_by': sortBy, 'order_by': orderBy}})
+                axios.get(`/api/panels?page=${e.page}`,{params:{'per_page': e.itemsPerPage, 'sort_by': sortBy, 'order_by': orderBy}})
                 .then(res => {
-                    this.categories = res.data.categories
+                    this.panels = res.data.panels
                 })
                 .catch(err => console.dir(err.response))
           }
 
       },
       paginate(e){
-          const sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
+          const sortBy = this.options.sortBy.length == 0 ? 'min' : this.options.sortBy[0];
           const orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
-            axios.get(`/api/categories?page=${e.page}`,{params:{'per_page': e.itemsPerPage, 'sort_by': sortBy, 'order_by': orderBy}})
+            axios.get(`/api/panels?page=${e.page}`,{params:{'per_page': e.itemsPerPage, 'sort_by': sortBy, 'order_by': orderBy}})
             .then(res => {
-                this.categories = res.data.categories
+                this.panels = res.data.panels
             })
             .catch(err => {
                 //----
@@ -307,19 +260,19 @@
       },
 
       editItem (item) {
-        this.editedIndex = this.categories.data.indexOf(item)
+        this.editedIndex = this.panels.data.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
       deleteItem (item) {
-        const index = this.categories.data.indexOf(item)
+        const index = this.panels.data.indexOf(item)
         let decide = confirm('Are you sure you want to delete this item?')
         if(decide){
-            axios.delete('/api/categories/'+item.id)
+            axios.delete('/api/panels/'+item.id)
             .then(res => {
                 this.snackbar = true
-                this.categories.data.splice(index, 1)
+                this.panels.data.splice(index, 1)
             })
             .catch(err => {
                 console.log(err.response)
@@ -341,26 +294,26 @@
       save () {
         if (this.editedIndex > -1) {
           const index = this.editedIndex
-          axios.put('/api/categories/'+this.editedItem.id, this.editedItem)
-        //  .then(res => Object.assign(this.categories[this.editedIndex], this.editedItem))
+          axios.put('/api/panels/'+this.editedItem.id, this.editedItem)
+        //  .then(res => Object.assign(this.panels[this.editedIndex], this.editedItem))
          .then(res => {
            console.log(res)
              this.text = "Record Updated Successfully!";
              this.snackbar = true;
-             Object.assign(this.categories.data[index], res.data.category)
+             Object.assign(this.panels.data[index], res.data.slab)
          })
          .catch(err => {
              console.log(err.response)
              this.text = "Error Updating Record"
              this.snackbar=true
          })
-        //  Object.assign(this.categories.data[this.editedIndex], this.editedItem)
+        //  Object.assign(this.panels.data[this.editedIndex], this.editedItem)
         } else {
-            axios.post('/api/categories', this.editedItem)
+            axios.post('/api/panels', this.editedItem)
             .then(res => {
                 this.text = "Record Added Successfully!";
                 this.snackbar = true;
-                this.categories.data.push(res.data.category)
+                this.panels.data.push(res.data.slab)
             })
             .catch(err => {
                 console.dir(err)

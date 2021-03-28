@@ -16,7 +16,7 @@ class BankDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
         $sortBy = $request->sort_by ? $request->sort_by : 'created_at';
@@ -98,7 +98,7 @@ class BankDetailController extends Controller
      * @param  \App\Models\BankDetail  $bankDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BankDetail $bankDetail)
+    public function update(Request $request, $id)
     {
         $user = auth()->user();
 
@@ -115,8 +115,8 @@ class BankDetailController extends Controller
      $bank_detail->kin = $request->kin;
      $bank_detail->cnic = $request->cnic;
      $bank_detail->status = $request->status;
-     $bank_detail->user_id = $user->id;
-            
+    // $bank_detail->user_id = $user->id;
+
         $bank_detail->save();
         return response()->json(['bank' => new BankDetailResource($bank_detail)], 200);
     }

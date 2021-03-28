@@ -295,6 +295,11 @@ export default {
         },
         {
           icon: "mdi-pound-box-outline",
+          title: "Panel Size",
+          to: "/admin/panelsize",
+        },
+        {
+          icon: "mdi-pound-box-outline",
           title: "Units",
           to: "/admin/units",
         },
@@ -337,6 +342,11 @@ export default {
       ],
 
       accounts: [
+          {
+          icon: "mdi-bank",
+          title: "Bank Accounts",
+          to: "/admin/bankdetails",
+        },
         {
           icon: "mdi-cash",
           title: "Cash Register",
@@ -344,7 +354,7 @@ export default {
         },
         {
           icon: "mdi-bank",
-          title: "Bank",
+          title: "Bank Transactions",
           to: "/admin/bank",
         },
         {

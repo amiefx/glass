@@ -325,6 +325,17 @@ const routes = [
             ]
         }
     },
+    {
+        path: '/admin/panelsize',
+        name: 'panels',
+        component: () => import('../views/admin/Panels.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
     // {
     //     path: '/admin/products/:slug',
     //     name: 'admin-products-edit',
@@ -472,6 +483,17 @@ const routes = [
         path: '/admin/salaries',
         name: 'admin-order',
         component: () => import('../views/admin/Salaries.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
+        path: '/admin/bankdetails',
+        name: 'admin-order',
+        component: () => import('../views/admin/BankDetails.vue'),
         meta: {
             layout: 'admin',
             middleware: [

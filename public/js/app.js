@@ -2538,6 +2538,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         to: "/admin/slabs"
       }, {
         icon: "mdi-pound-box-outline",
+        title: "Panel Size",
+        to: "/admin/panelsize"
+      }, {
+        icon: "mdi-pound-box-outline",
         title: "Units",
         to: "/admin/units"
       }, {
@@ -2568,12 +2572,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         to: "/admin/payables"
       }],
       accounts: [{
+        icon: "mdi-bank",
+        title: "Bank Accounts",
+        to: "/admin/bankdetails"
+      }, {
         icon: "mdi-cash",
         title: "Cash Register",
         to: "/admin/cash"
       }, {
         icon: "mdi-bank",
-        title: "Bank",
+        title: "Bank Transactions",
         to: "/admin/bank"
       }, {
         icon: "mdi-bank-transfer",
@@ -86846,6 +86854,16 @@ var routes = [// {
     layout: 'admin',
     middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"]]
   }
+}, {
+  path: '/admin/panelsize',
+  name: 'panels',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ../views/admin/Panels.vue */ "./resources/js/views/admin/Panels.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"]]
+  }
 }, // {
 //     path: '/admin/products/:slug',
 //     name: 'admin-products-edit',
@@ -86984,6 +87002,16 @@ var routes = [// {
   name: 'admin-order',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../views/admin/Salaries.vue */ "./resources/js/views/admin/Salaries.vue"));
+  },
+  meta: {
+    layout: 'admin',
+    middleware: [_middleware_auth__WEBPACK_IMPORTED_MODULE_2__["default"]]
+  }
+}, {
+  path: '/admin/bankdetails',
+  name: 'admin-order',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ../views/admin/BankDetails.vue */ "./resources/js/views/admin/BankDetails.vue"));
   },
   meta: {
     layout: 'admin',

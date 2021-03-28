@@ -71,7 +71,8 @@
                 <td>
                   {{ item.product.sku }}
                   <span v-if="item.g_height"
-                    >({{ item.g_height }} X {{ item.g_width }} )</span
+                    >({{ item.g_height }} X {{ item.g_width }} X
+                    {{ item.g_number }} )</span
                   >
                 </td>
                 <td>
@@ -200,41 +201,159 @@
                                     :key="item.index"
                                   >
                                     <td>
-                                      <v-autocomplete
+                                      <!-- <v-autocomplete
                                         v-if="index == 0"
                                         v-model="ceiling[0].id"
                                         :items="angle"
                                         item-text="name"
                                         item-value="id"
                                         label="Select Angle"
-                                      ></v-autocomplete>
+                                      ></v-autocomplete> -->
 
                                       <v-autocomplete
-                                        v-if="index == 1"
+                                       v-if="index == 0"
+                                        v-model="ceiling[0].id"
+                                        :items="angle"
+                                        hide-details
+                                        hide-selected
+                                        item-text="sku"
+                                        item-value="id"
+                                        label="Select Angle"
+                                      >
+                                        <template
+                                          v-slot:selection="{
+                                            attr,
+                                            on,
+                                            item,
+                                            selected,
+                                          }"
+                                        >
+                                          <span v-text="item.sku"></span>
+                                        </template>
+                                        <template v-slot:item="{ item }">
+                                          <v-list-item-content>
+                                            <v-list-item-title
+                                              v-text="item.sku"
+                                            ></v-list-item-title>
+                                          </v-list-item-content>
+                                          <v-list-item-action>
+                                            <span>
+                                              <strong>
+                                                {{ item.onhand }}
+                                              </strong>
+                                            </span>
+                                          </v-list-item-action>
+                                        </template>
+                                      </v-autocomplete>
+
+                                      <v-autocomplete
+                                       v-if="index == 1"
                                         v-model="ceiling[1].id"
                                         :items="mainT"
-                                        item-text="name"
+                                        hide-details
+                                        hide-selected
+                                        item-text="sku"
                                         item-value="id"
                                         label="Select Main T"
-                                      ></v-autocomplete>
+                                      >
+                                        <template
+                                          v-slot:selection="{
+                                            attr,
+                                            on,
+                                            item,
+                                            selected,
+                                          }"
+                                        >
+                                          <span v-text="item.sku"></span>
+                                        </template>
+                                        <template v-slot:item="{ item }">
+                                          <v-list-item-content>
+                                            <v-list-item-title
+                                              v-text="item.sku"
+                                            ></v-list-item-title>
+                                          </v-list-item-content>
+                                          <v-list-item-action>
+                                            <span>
+                                              <strong>
+                                                {{ item.onhand }}
+                                              </strong>
+                                            </span>
+                                          </v-list-item-action>
+                                        </template>
+                                      </v-autocomplete>
 
                                       <v-autocomplete
-                                        v-if="index == 2"
+                                       v-if="index == 2"
                                         v-model="ceiling[2].id"
                                         :items="crossT"
-                                        item-text="name"
+                                        hide-details
+                                        hide-selected
+                                        item-text="sku"
                                         item-value="id"
                                         label="Select Cross T"
-                                      ></v-autocomplete>
+                                      >
+                                        <template
+                                          v-slot:selection="{
+                                            attr,
+                                            on,
+                                            item,
+                                            selected,
+                                          }"
+                                        >
+                                          <span v-text="item.sku"></span>
+                                        </template>
+                                        <template v-slot:item="{ item }">
+                                          <v-list-item-content>
+                                            <v-list-item-title
+                                              v-text="item.sku"
+                                            ></v-list-item-title>
+                                          </v-list-item-content>
+                                          <v-list-item-action>
+                                            <span>
+                                              <strong>
+                                                {{ item.onhand }}
+                                              </strong>
+                                            </span>
+                                          </v-list-item-action>
+                                        </template>
+                                      </v-autocomplete>
 
                                       <v-autocomplete
-                                        v-if="index == 3"
+                                       v-if="index == 3"
                                         v-model="ceiling[3].id"
                                         :items="sheets"
-                                        item-text="name"
+                                        hide-details
+                                        hide-selected
+                                        item-text="sku"
                                         item-value="id"
                                         label="Select Sheet"
-                                      ></v-autocomplete>
+                                      >
+                                        <template
+                                          v-slot:selection="{
+                                            attr,
+                                            on,
+                                            item,
+                                            selected,
+                                          }"
+                                        >
+                                          <span v-text="item.sku"></span>
+                                        </template>
+                                        <template v-slot:item="{ item }">
+                                          <v-list-item-content>
+                                            <v-list-item-title
+                                              v-text="item.sku"
+                                            ></v-list-item-title>
+                                          </v-list-item-content>
+                                          <v-list-item-action>
+                                            <span>
+                                              <strong>
+                                                {{ item.onhand }}
+                                              </strong>
+                                            </span>
+                                          </v-list-item-action>
+                                        </template>
+                                      </v-autocomplete>
+
                                     </td>
                                     <td>
                                       <v-text-field
@@ -359,22 +478,77 @@
                                   >
                                     <td>
                                       <v-autocomplete
-                                        v-if="index == 0"
+                                       v-if="index == 0"
                                         v-model="peneling[0].id"
                                         :items="panelSheets"
-                                        item-text="name"
+                                        hide-details
+                                        hide-selected
+                                        item-text="sku"
                                         item-value="id"
                                         label="Select Sheet"
-                                      ></v-autocomplete>
+                                      >
+                                        <template
+                                          v-slot:selection="{
+                                            attr,
+                                            on,
+                                            item,
+                                            selected,
+                                          }"
+                                        >
+                                          <span v-text="item.sku"></span>
+                                        </template>
+                                        <template v-slot:item="{ item }">
+                                          <v-list-item-content>
+                                            <v-list-item-title
+                                              v-text="item.sku"
+                                            ></v-list-item-title>
+                                          </v-list-item-content>
+                                          <v-list-item-action>
+                                            <span>
+                                              <strong>
+                                                {{ item.onhand }}
+                                              </strong>
+                                            </span>
+                                          </v-list-item-action>
+                                        </template>
+                                      </v-autocomplete>
 
                                       <v-autocomplete
-                                        v-if="index == 1"
+                                       v-if="index == 1"
                                         v-model="peneling[1].id"
                                         :items="golas"
-                                        item-text="name"
+                                        hide-details
+                                        hide-selected
+                                        item-text="sku"
                                         item-value="id"
                                         label="Select Gola"
-                                      ></v-autocomplete>
+                                      >
+                                        <template
+                                          v-slot:selection="{
+                                            attr,
+                                            on,
+                                            item,
+                                            selected,
+                                          }"
+                                        >
+                                          <span v-text="item.sku"></span>
+                                        </template>
+                                        <template v-slot:item="{ item }">
+                                          <v-list-item-content>
+                                            <v-list-item-title
+                                              v-text="item.sku"
+                                            ></v-list-item-title>
+                                          </v-list-item-content>
+                                          <v-list-item-action>
+                                            <span>
+                                              <strong>
+                                                {{ item.onhand }}
+                                              </strong>
+                                            </span>
+                                          </v-list-item-action>
+                                        </template>
+                                      </v-autocomplete>
+
                                     </td>
                                     <td>
                                       <v-text-field
@@ -524,13 +698,40 @@
                                   >
                                     <td>
                                       <v-autocomplete
-                                        v-if="index == 0"
+                                       v-if="index == 0"
                                         v-model="glassItem[0].id"
                                         :items="glassProducts"
-                                        item-text="name"
+                                        hide-details
+                                        hide-selected
+                                        item-text="sku"
                                         item-value="id"
                                         label="Select Glass"
-                                      ></v-autocomplete>
+                                      >
+                                        <template
+                                          v-slot:selection="{
+                                            attr,
+                                            on,
+                                            item,
+                                            selected,
+                                          }"
+                                        >
+                                          <span v-text="item.sku"></span>
+                                        </template>
+                                        <template v-slot:item="{ item }">
+                                          <v-list-item-content>
+                                            <v-list-item-title
+                                              v-text="item.sku"
+                                            ></v-list-item-title>
+                                          </v-list-item-content>
+                                          <v-list-item-action>
+                                            <span>
+                                              <strong>
+                                                {{ item.onhand }}
+                                              </strong>
+                                            </span>
+                                          </v-list-item-action>
+                                        </template>
+                                      </v-autocomplete>
                                     </td>
                                     <td>
                                       <v-text-field
@@ -1422,7 +1623,7 @@ export default {
     },
 
     activePrice() {
-        this.priceStatus = false;
+      this.priceStatus = false;
       if (!admin) {
         this.priceChange = true;
       }
@@ -1493,31 +1694,45 @@ export default {
     },
 
     sheets() {
-      return this.products.filter((item) => item.category == "Sheet");
+      return this.products.filter(
+        (item) => item.category == "Sheet" && item.type == "Ceiling"
+      );
     },
 
     mainT() {
-      return this.products.filter((item) => item.category == "Main T");
+      return this.products.filter(
+        (item) => item.category == "Main T" && item.type == "Ceiling"
+      );
     },
 
     crossT() {
-      return this.products.filter((item) => item.category == "Cross T");
+      return this.products.filter(
+        (item) => item.category == "Cross T" && item.type == "Ceiling"
+      );
     },
 
     angle() {
-      return this.products.filter((item) => item.category == "Angle");
+      return this.products.filter(
+        (item) => item.category == "Angle" && item.type == "Ceiling"
+      );
     },
 
     golas() {
-      return this.products.filter((item) => item.category == "Panel Gola");
+      return this.products.filter(
+        (item) => item.category == "Panel Gola" && item.type == "Panel"
+      );
     },
 
     glassProducts() {
-      return this.products.filter((item) => item.category == "Glass");
+      return this.products.filter(
+        (item) => item.category == "Glass" && item.type == "Glass"
+      );
     },
 
     panelSheets() {
-      return this.products.filter((item) => item.category == "Panel Sheet");
+      return this.products.filter(
+        (item) => item.category == "Panel Sheet" && item.type == "Panel"
+      );
     },
 
     drivers() {

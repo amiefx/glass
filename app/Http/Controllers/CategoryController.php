@@ -46,6 +46,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $category = new Category([
+            'type' => $request->type,
             'name' => $request->name,
             'short_code' => $request->short_code
         ]);
@@ -80,6 +81,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $category = Category::find($id);
+        $category->type = $request->type;
         $category->name = $request->name;
         $category->short_code = $request->short_code;
         $category->save();

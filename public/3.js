@@ -1087,6 +1087,207 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1684,37 +1885,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     sheets: function sheets() {
       return this.products.filter(function (item) {
-        return item.category == "Sheet";
+        return item.category == "Sheet" && item.type == "Ceiling";
       });
     },
     mainT: function mainT() {
       return this.products.filter(function (item) {
-        return item.category == "Main T";
+        return item.category == "Main T" && item.type == "Ceiling";
       });
     },
     crossT: function crossT() {
       return this.products.filter(function (item) {
-        return item.category == "Cross T";
+        return item.category == "Cross T" && item.type == "Ceiling";
       });
     },
     angle: function angle() {
       return this.products.filter(function (item) {
-        return item.category == "Angle";
+        return item.category == "Angle" && item.type == "Ceiling";
       });
     },
     golas: function golas() {
       return this.products.filter(function (item) {
-        return item.category == "Panel Gola";
+        return item.category == "Panel Gola" && item.type == "Panel";
       });
     },
     glassProducts: function glassProducts() {
       return this.products.filter(function (item) {
-        return item.category == "Glass";
+        return item.category == "Glass" && item.type == "Glass";
       });
     },
     panelSheets: function panelSheets() {
       return this.products.filter(function (item) {
-        return item.category == "Panel Sheet";
+        return item.category == "Panel Sheet" && item.type == "Panel";
       });
     },
     drivers: function drivers() {
@@ -2467,6 +2668,8 @@ var render = function() {
                                             _vm._s(item.g_height) +
                                             " X " +
                                             _vm._s(item.g_width) +
+                                            " X\n                  " +
+                                            _vm._s(item.g_number) +
                                             " )"
                                         )
                                       ])
@@ -2954,13 +3157,104 @@ var render = function() {
                                                                                       attrs: {
                                                                                         items:
                                                                                           _vm.angle,
+                                                                                        "hide-details":
+                                                                                          "",
+                                                                                        "hide-selected":
+                                                                                          "",
                                                                                         "item-text":
-                                                                                          "name",
+                                                                                          "sku",
                                                                                         "item-value":
                                                                                           "id",
                                                                                         label:
                                                                                           "Select Angle"
                                                                                       },
+                                                                                      scopedSlots: _vm._u(
+                                                                                        [
+                                                                                          {
+                                                                                            key:
+                                                                                              "selection",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var attr =
+                                                                                                ref.attr
+                                                                                              var on =
+                                                                                                ref.on
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              var selected =
+                                                                                                ref.selected
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "span",
+                                                                                                  {
+                                                                                                    domProps: {
+                                                                                                      textContent: _vm._s(
+                                                                                                        item.sku
+                                                                                                      )
+                                                                                                    }
+                                                                                                  }
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          },
+                                                                                          {
+                                                                                            key:
+                                                                                              "item",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "v-list-item-content",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "v-list-item-title",
+                                                                                                      {
+                                                                                                        domProps: {
+                                                                                                          textContent: _vm._s(
+                                                                                                            item.sku
+                                                                                                          )
+                                                                                                        }
+                                                                                                      }
+                                                                                                    )
+                                                                                                  ],
+                                                                                                  1
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "v-list-item-action",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "span",
+                                                                                                      [
+                                                                                                        _c(
+                                                                                                          "strong",
+                                                                                                          [
+                                                                                                            _vm._v(
+                                                                                                              "\n                                              " +
+                                                                                                                _vm._s(
+                                                                                                                  item.onhand
+                                                                                                                ) +
+                                                                                                                "\n                                            "
+                                                                                                            )
+                                                                                                          ]
+                                                                                                        )
+                                                                                                      ]
+                                                                                                    )
+                                                                                                  ]
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          }
+                                                                                        ],
+                                                                                        null,
+                                                                                        true
+                                                                                      ),
                                                                                       model: {
                                                                                         value:
                                                                                           _vm
@@ -2993,13 +3287,104 @@ var render = function() {
                                                                                       attrs: {
                                                                                         items:
                                                                                           _vm.mainT,
+                                                                                        "hide-details":
+                                                                                          "",
+                                                                                        "hide-selected":
+                                                                                          "",
                                                                                         "item-text":
-                                                                                          "name",
+                                                                                          "sku",
                                                                                         "item-value":
                                                                                           "id",
                                                                                         label:
                                                                                           "Select Main T"
                                                                                       },
+                                                                                      scopedSlots: _vm._u(
+                                                                                        [
+                                                                                          {
+                                                                                            key:
+                                                                                              "selection",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var attr =
+                                                                                                ref.attr
+                                                                                              var on =
+                                                                                                ref.on
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              var selected =
+                                                                                                ref.selected
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "span",
+                                                                                                  {
+                                                                                                    domProps: {
+                                                                                                      textContent: _vm._s(
+                                                                                                        item.sku
+                                                                                                      )
+                                                                                                    }
+                                                                                                  }
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          },
+                                                                                          {
+                                                                                            key:
+                                                                                              "item",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "v-list-item-content",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "v-list-item-title",
+                                                                                                      {
+                                                                                                        domProps: {
+                                                                                                          textContent: _vm._s(
+                                                                                                            item.sku
+                                                                                                          )
+                                                                                                        }
+                                                                                                      }
+                                                                                                    )
+                                                                                                  ],
+                                                                                                  1
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "v-list-item-action",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "span",
+                                                                                                      [
+                                                                                                        _c(
+                                                                                                          "strong",
+                                                                                                          [
+                                                                                                            _vm._v(
+                                                                                                              "\n                                              " +
+                                                                                                                _vm._s(
+                                                                                                                  item.onhand
+                                                                                                                ) +
+                                                                                                                "\n                                            "
+                                                                                                            )
+                                                                                                          ]
+                                                                                                        )
+                                                                                                      ]
+                                                                                                    )
+                                                                                                  ]
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          }
+                                                                                        ],
+                                                                                        null,
+                                                                                        true
+                                                                                      ),
                                                                                       model: {
                                                                                         value:
                                                                                           _vm
@@ -3032,13 +3417,104 @@ var render = function() {
                                                                                       attrs: {
                                                                                         items:
                                                                                           _vm.crossT,
+                                                                                        "hide-details":
+                                                                                          "",
+                                                                                        "hide-selected":
+                                                                                          "",
                                                                                         "item-text":
-                                                                                          "name",
+                                                                                          "sku",
                                                                                         "item-value":
                                                                                           "id",
                                                                                         label:
                                                                                           "Select Cross T"
                                                                                       },
+                                                                                      scopedSlots: _vm._u(
+                                                                                        [
+                                                                                          {
+                                                                                            key:
+                                                                                              "selection",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var attr =
+                                                                                                ref.attr
+                                                                                              var on =
+                                                                                                ref.on
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              var selected =
+                                                                                                ref.selected
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "span",
+                                                                                                  {
+                                                                                                    domProps: {
+                                                                                                      textContent: _vm._s(
+                                                                                                        item.sku
+                                                                                                      )
+                                                                                                    }
+                                                                                                  }
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          },
+                                                                                          {
+                                                                                            key:
+                                                                                              "item",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "v-list-item-content",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "v-list-item-title",
+                                                                                                      {
+                                                                                                        domProps: {
+                                                                                                          textContent: _vm._s(
+                                                                                                            item.sku
+                                                                                                          )
+                                                                                                        }
+                                                                                                      }
+                                                                                                    )
+                                                                                                  ],
+                                                                                                  1
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "v-list-item-action",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "span",
+                                                                                                      [
+                                                                                                        _c(
+                                                                                                          "strong",
+                                                                                                          [
+                                                                                                            _vm._v(
+                                                                                                              "\n                                              " +
+                                                                                                                _vm._s(
+                                                                                                                  item.onhand
+                                                                                                                ) +
+                                                                                                                "\n                                            "
+                                                                                                            )
+                                                                                                          ]
+                                                                                                        )
+                                                                                                      ]
+                                                                                                    )
+                                                                                                  ]
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          }
+                                                                                        ],
+                                                                                        null,
+                                                                                        true
+                                                                                      ),
                                                                                       model: {
                                                                                         value:
                                                                                           _vm
@@ -3071,13 +3547,104 @@ var render = function() {
                                                                                       attrs: {
                                                                                         items:
                                                                                           _vm.sheets,
+                                                                                        "hide-details":
+                                                                                          "",
+                                                                                        "hide-selected":
+                                                                                          "",
                                                                                         "item-text":
-                                                                                          "name",
+                                                                                          "sku",
                                                                                         "item-value":
                                                                                           "id",
                                                                                         label:
                                                                                           "Select Sheet"
                                                                                       },
+                                                                                      scopedSlots: _vm._u(
+                                                                                        [
+                                                                                          {
+                                                                                            key:
+                                                                                              "selection",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var attr =
+                                                                                                ref.attr
+                                                                                              var on =
+                                                                                                ref.on
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              var selected =
+                                                                                                ref.selected
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "span",
+                                                                                                  {
+                                                                                                    domProps: {
+                                                                                                      textContent: _vm._s(
+                                                                                                        item.sku
+                                                                                                      )
+                                                                                                    }
+                                                                                                  }
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          },
+                                                                                          {
+                                                                                            key:
+                                                                                              "item",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "v-list-item-content",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "v-list-item-title",
+                                                                                                      {
+                                                                                                        domProps: {
+                                                                                                          textContent: _vm._s(
+                                                                                                            item.sku
+                                                                                                          )
+                                                                                                        }
+                                                                                                      }
+                                                                                                    )
+                                                                                                  ],
+                                                                                                  1
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "v-list-item-action",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "span",
+                                                                                                      [
+                                                                                                        _c(
+                                                                                                          "strong",
+                                                                                                          [
+                                                                                                            _vm._v(
+                                                                                                              "\n                                              " +
+                                                                                                                _vm._s(
+                                                                                                                  item.onhand
+                                                                                                                ) +
+                                                                                                                "\n                                            "
+                                                                                                            )
+                                                                                                          ]
+                                                                                                        )
+                                                                                                      ]
+                                                                                                    )
+                                                                                                  ]
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          }
+                                                                                        ],
+                                                                                        null,
+                                                                                        true
+                                                                                      ),
                                                                                       model: {
                                                                                         value:
                                                                                           _vm
@@ -3495,13 +4062,104 @@ var render = function() {
                                                                                       attrs: {
                                                                                         items:
                                                                                           _vm.panelSheets,
+                                                                                        "hide-details":
+                                                                                          "",
+                                                                                        "hide-selected":
+                                                                                          "",
                                                                                         "item-text":
-                                                                                          "name",
+                                                                                          "sku",
                                                                                         "item-value":
                                                                                           "id",
                                                                                         label:
                                                                                           "Select Sheet"
                                                                                       },
+                                                                                      scopedSlots: _vm._u(
+                                                                                        [
+                                                                                          {
+                                                                                            key:
+                                                                                              "selection",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var attr =
+                                                                                                ref.attr
+                                                                                              var on =
+                                                                                                ref.on
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              var selected =
+                                                                                                ref.selected
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "span",
+                                                                                                  {
+                                                                                                    domProps: {
+                                                                                                      textContent: _vm._s(
+                                                                                                        item.sku
+                                                                                                      )
+                                                                                                    }
+                                                                                                  }
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          },
+                                                                                          {
+                                                                                            key:
+                                                                                              "item",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "v-list-item-content",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "v-list-item-title",
+                                                                                                      {
+                                                                                                        domProps: {
+                                                                                                          textContent: _vm._s(
+                                                                                                            item.sku
+                                                                                                          )
+                                                                                                        }
+                                                                                                      }
+                                                                                                    )
+                                                                                                  ],
+                                                                                                  1
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "v-list-item-action",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "span",
+                                                                                                      [
+                                                                                                        _c(
+                                                                                                          "strong",
+                                                                                                          [
+                                                                                                            _vm._v(
+                                                                                                              "\n                                              " +
+                                                                                                                _vm._s(
+                                                                                                                  item.onhand
+                                                                                                                ) +
+                                                                                                                "\n                                            "
+                                                                                                            )
+                                                                                                          ]
+                                                                                                        )
+                                                                                                      ]
+                                                                                                    )
+                                                                                                  ]
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          }
+                                                                                        ],
+                                                                                        null,
+                                                                                        true
+                                                                                      ),
                                                                                       model: {
                                                                                         value:
                                                                                           _vm
@@ -3534,13 +4192,104 @@ var render = function() {
                                                                                       attrs: {
                                                                                         items:
                                                                                           _vm.golas,
+                                                                                        "hide-details":
+                                                                                          "",
+                                                                                        "hide-selected":
+                                                                                          "",
                                                                                         "item-text":
-                                                                                          "name",
+                                                                                          "sku",
                                                                                         "item-value":
                                                                                           "id",
                                                                                         label:
                                                                                           "Select Gola"
                                                                                       },
+                                                                                      scopedSlots: _vm._u(
+                                                                                        [
+                                                                                          {
+                                                                                            key:
+                                                                                              "selection",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var attr =
+                                                                                                ref.attr
+                                                                                              var on =
+                                                                                                ref.on
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              var selected =
+                                                                                                ref.selected
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "span",
+                                                                                                  {
+                                                                                                    domProps: {
+                                                                                                      textContent: _vm._s(
+                                                                                                        item.sku
+                                                                                                      )
+                                                                                                    }
+                                                                                                  }
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          },
+                                                                                          {
+                                                                                            key:
+                                                                                              "item",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "v-list-item-content",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "v-list-item-title",
+                                                                                                      {
+                                                                                                        domProps: {
+                                                                                                          textContent: _vm._s(
+                                                                                                            item.sku
+                                                                                                          )
+                                                                                                        }
+                                                                                                      }
+                                                                                                    )
+                                                                                                  ],
+                                                                                                  1
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "v-list-item-action",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "span",
+                                                                                                      [
+                                                                                                        _c(
+                                                                                                          "strong",
+                                                                                                          [
+                                                                                                            _vm._v(
+                                                                                                              "\n                                              " +
+                                                                                                                _vm._s(
+                                                                                                                  item.onhand
+                                                                                                                ) +
+                                                                                                                "\n                                            "
+                                                                                                            )
+                                                                                                          ]
+                                                                                                        )
+                                                                                                      ]
+                                                                                                    )
+                                                                                                  ]
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          }
+                                                                                        ],
+                                                                                        null,
+                                                                                        true
+                                                                                      ),
                                                                                       model: {
                                                                                         value:
                                                                                           _vm
@@ -4069,13 +4818,104 @@ var render = function() {
                                                                                       attrs: {
                                                                                         items:
                                                                                           _vm.glassProducts,
+                                                                                        "hide-details":
+                                                                                          "",
+                                                                                        "hide-selected":
+                                                                                          "",
                                                                                         "item-text":
-                                                                                          "name",
+                                                                                          "sku",
                                                                                         "item-value":
                                                                                           "id",
                                                                                         label:
                                                                                           "Select Glass"
                                                                                       },
+                                                                                      scopedSlots: _vm._u(
+                                                                                        [
+                                                                                          {
+                                                                                            key:
+                                                                                              "selection",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var attr =
+                                                                                                ref.attr
+                                                                                              var on =
+                                                                                                ref.on
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              var selected =
+                                                                                                ref.selected
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "span",
+                                                                                                  {
+                                                                                                    domProps: {
+                                                                                                      textContent: _vm._s(
+                                                                                                        item.sku
+                                                                                                      )
+                                                                                                    }
+                                                                                                  }
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          },
+                                                                                          {
+                                                                                            key:
+                                                                                              "item",
+                                                                                            fn: function(
+                                                                                              ref
+                                                                                            ) {
+                                                                                              var item =
+                                                                                                ref.item
+                                                                                              return [
+                                                                                                _c(
+                                                                                                  "v-list-item-content",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "v-list-item-title",
+                                                                                                      {
+                                                                                                        domProps: {
+                                                                                                          textContent: _vm._s(
+                                                                                                            item.sku
+                                                                                                          )
+                                                                                                        }
+                                                                                                      }
+                                                                                                    )
+                                                                                                  ],
+                                                                                                  1
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "v-list-item-action",
+                                                                                                  [
+                                                                                                    _c(
+                                                                                                      "span",
+                                                                                                      [
+                                                                                                        _c(
+                                                                                                          "strong",
+                                                                                                          [
+                                                                                                            _vm._v(
+                                                                                                              "\n                                              " +
+                                                                                                                _vm._s(
+                                                                                                                  item.onhand
+                                                                                                                ) +
+                                                                                                                "\n                                            "
+                                                                                                            )
+                                                                                                          ]
+                                                                                                        )
+                                                                                                      ]
+                                                                                                    )
+                                                                                                  ]
+                                                                                                )
+                                                                                              ]
+                                                                                            }
+                                                                                          }
+                                                                                        ],
+                                                                                        null,
+                                                                                        true
+                                                                                      ),
                                                                                       model: {
                                                                                         value:
                                                                                           _vm
