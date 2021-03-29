@@ -1081,7 +1081,7 @@ export default {
       paneling_input: [],
 
       panelSheetHight: ["full", "half", "third"],
-      panelSheetWidth: [8, 10, 16, 19],
+      panelSheetWidth: [],
       panelWallLength: null,
       panelWallNumber: null,
 
@@ -1645,6 +1645,10 @@ export default {
 
     axios.get("/api/slabs/all").then((res) => {
       this.slabs = res.data.data;
+    });
+
+    axios.get("/api/panels/all").then((res) => {
+      this.panelSheetWidth = res.data.data;
     });
 
     axios.get("/api/employees/all").then((res) => {

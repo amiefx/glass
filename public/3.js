@@ -1350,7 +1350,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }],
       paneling_input: [],
       panelSheetHight: ["full", "half", "third"],
-      panelSheetWidth: [8, 10, 16, 19],
+      panelSheetWidth: [],
       panelWallLength: null,
       panelWallNumber: null,
       perFeet: {
@@ -1846,6 +1846,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.initialize();
     axios.get("/api/slabs/all").then(function (res) {
       _this11.slabs = res.data.data;
+    });
+    axios.get("/api/panels/all").then(function (res) {
+      _this11.panelSheetWidth = res.data.data;
     });
     axios.get("/api/employees/all").then(function (res) {
       _this11.employees = res.data.data;

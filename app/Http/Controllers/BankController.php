@@ -56,12 +56,14 @@ class BankController extends Controller
         $bank = new Bank([
             'doc_type' => $request->doc_type,
             'doc_id' => $request->doc_id,
+            'bank_id' => $request->bank_id,
             'customer_id' => $request->customer_id,
             'supplier_id' => $request->supplier_id,
             'employee_id' => $request->employee_id,
             'credit' => $request->credit,
             'debit' => $request->debit,
             'balance' => $request->balance,
+            'attachment' => $request->attachment,
             'user_id' => $user->id
         ]);
         $bank->save();
@@ -103,7 +105,7 @@ class BankController extends Controller
      * @param  \App\Models\Bank  $bank
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bank $bank)
+    public function update(Request $request, $id)
     {
         $user = auth()->user();
 
@@ -111,12 +113,14 @@ class BankController extends Controller
 
         $bank->doc_type = $request->doc_type;
         $bank->doc_id = $request->doc_id;
+        $bank->bank_id = $request->bank_id;
         $bank->supplier_id = $request->supplier_id;
         $bank->customer_id = $request->customer_id;
         $bank->employee_id = $request->employee_id;
         $bank->credit = $request->credit;
         $bank->debit = $request->debit;
         $bank->balance = $request->balance;
+        $bank->attachment = $request->attachment;
         $bank->user_id = $user->id;
         $bank->save();
         return response()->json(['bank' => new BankResource($bank)], 200);

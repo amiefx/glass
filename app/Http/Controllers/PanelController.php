@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class PanelController extends Controller
 {
-    public function allSlabs()
+    public function allPanels()
     {
         return PanelResource::collection(
             Panels::get()
@@ -24,7 +24,7 @@ class PanelController extends Controller
     public function index(Request $request)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
-        $sortBy = $request->sort_by ? $request->sort_by : 'min';
+        $sortBy = $request->sort_by ? $request->sort_by : 'id';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
         return response()->json([
             'panels' => new PanelCollection(Panels::orderBy($sortBy, $orderBy)->paginate($per_page)) ,
@@ -40,9 +40,8 @@ class PanelController extends Controller
     public function store(Request $request)
     {
         $panel = new Panels([
-            'min' => $request->min,
-            'max' => $request->max,
-            'actual' => $request->actual,
+            'size' => $request->size,
+            'standard_size' => $request->standard_size,
         ]);
 
         $panel->save();
@@ -58,7 +57,7 @@ class PanelController extends Controller
     public function show(Request $request, $id)
     {
         $per_page = $request->per_page ? $request->per_page : 5;
-        $sortBy = $request->sort_by ? $request->sort_by : 'min';
+        $sortBy = $request->sort_by ? $request->sort_by : 'id';
         $orderBy = $request->order_by ? $request->order_by : 'asc';
         $panels = Panels::where('actual', 'LIKE', "%$id%");
         return response()->json([
@@ -77,9 +76,8 @@ class PanelController extends Controller
     {
         $panel = Panels::find($id);
 
-        $panel->min = $request->min;
-        $panel->max = $request->max;
-        $panel->actual = $request->actual;
+        $panel->size = $request->size;
+        $panel->standard_size = $request->standard_size;
 
         $panel->save();
         return response()->json(['panel' => new PanelResource($panel)], 200);

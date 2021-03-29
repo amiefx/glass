@@ -12,12 +12,14 @@ class Bank extends Model
     protected $fillable = [
         'doc_type',
         'doc_id',
+        'bank_id',
         'supplier_id',
         'customer_id',
         'employee_id',
         'credit',
         'debit',
         'balance',
+        'attachment',
         'user_id'
     ];
 

@@ -116,10 +116,12 @@ class PurchaseOrderController extends Controller
                     Bank::create([
                         'doc_type' => 'purchase order',
                         'doc_id' => $purchaseorder->id,
+                        'bank_id' => $order['bank_id'],
                         'supplier_id' => $order['supplier_id'],
                         'debit' => 0,
                         'credit' => $order['paid_amt'],
                         'balance' => $order['paid_amt'] * (-1),
+                        'attachment' => $order['attachment'],
                         'user_id' => $user->id
                     ]);
                 }
@@ -241,7 +243,7 @@ class PurchaseOrderController extends Controller
     {
         $purchase_order= PurchaseOrder::where('status', '=', 'Pendding')->get();
 
-        for ($i=0; $i < count($purchase_order); $i++) { 
+        for ($i=0; $i < count($purchase_order); $i++) {
             $purchase_order[$i] = new PurchaseOrderResource($purchase_order[$i]);
         }
 

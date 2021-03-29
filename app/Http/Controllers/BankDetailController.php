@@ -11,6 +11,13 @@ use App\Http\Resources\BankDetailResource;
 
 class BankDetailController extends Controller
 {
+    public function allBanks()
+    {
+        return BankDetailResource::collection(
+            BankDetail::get()
+         );
+    }
+
     /**
      * Display a listing of the resource.
      *

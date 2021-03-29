@@ -1,65 +1,68 @@
 <template>
   <v-row>
-      <v-col cols="5" >
-         <customer-list :customers="customers" @getCust="custID($event)" />
-      </v-col>
-      <v-col cols="7" >
-          <v-card>
-              <v-card-text>
-                  <h3 class="text-center" v-if="!customer.name">
-                      Please select a Customer from Customer list
-                  </h3>
-              <v-row v-else>
-              <v-col cols="6">
-                  <table>
-                  <tbody>
-                      <tr>
-                          <td width="150px"> <strong>Company</strong> </td>
-                          <td>{{customer.company_name}}</td>
-                      </tr>
-                      <tr>
-                          <td><strong>Name</strong></td>
-                          <td>{{customer.name}}</td>
-                      </tr>
-                      <tr>
-                          <td><strong>Email</strong></td>
-                          <td>{{customer.email}}</td>
-                      </tr>
-                      <tr>
-                          <td><strong>Address</strong></td>
-                          <td>{{customer.address}}</td>
-                      </tr>
-                  </tbody>
+    <v-col cols="5">
+      <customer-list :customers="customers" @getCust="custID($event)" />
+    </v-col>
+    <v-col cols="7">
+      <v-card>
+        <v-card-text>
+          <h3 class="text-center" v-if="!customer.name">
+            Please select a Customer from Customer list
+          </h3>
+          <v-row v-else>
+            <v-col cols="6">
+              <table>
+                <tbody>
+                  <tr>
+                    <td width="150px"><strong>Company</strong></td>
+                    <td>{{ customer.company_name }}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Name</strong></td>
+                    <td>{{ customer.name }}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Email</strong></td>
+                    <td>{{ customer.email }}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Address</strong></td>
+                    <td>{{ customer.address }}</td>
+                  </tr>
+                </tbody>
               </table>
-              </v-col>
-              <v-col cols="6" >
-                  <table class="float-right">
-                  <tbody>
-                      <tr>
-                          <td width="150px"><strong>Phone</strong></td>
-                          <td>{{customer.work_number}}</td>
-                      </tr>
-                      <tr>
-                          <td><strong>Type</strong></td>
-                          <td>{{customer.type}}</td>
-                      </tr>
-                      <tr>
-                          <td><strong>Credit Limit</strong></td>
-                          <td>{{customer.credit_limit}}</td>
-                      </tr>
-                      <tr>
-                          <td><strong>Balance</strong></td>
-                          <td><strong class="red--text">{{customer.receivable}}</strong></td>
-                      </tr>
-                  </tbody>
+            </v-col>
+            <v-col cols="6">
+              <table class="float-right">
+                <tbody>
+                  <tr>
+                    <td width="150px"><strong>Phone</strong></td>
+                    <td>{{ customer.work_number }}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Type</strong></td>
+                    <td>{{ customer.type }}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Credit Limit</strong></td>
+                    <td>{{ customer.credit_limit }}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Balance</strong></td>
+                    <td>
+                      <strong class="red--text">{{
+                        customer.receivable
+                      }}</strong>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
-              </v-col>
+            </v-col>
           </v-row>
-
-          </v-card-text>
-          <v-divider class="mb-0"></v-divider>
-         <v-card-text class="mt-0 pt-0">
-              <v-row v-if="this.customer_id">
+        </v-card-text>
+        <v-divider class="mb-0"></v-divider>
+        <v-card-text class="mt-0 pt-0">
+          <v-row v-if="this.customer_id">
             <v-tabs>
               <v-tab>
                 <v-icon left> mdi-file-document-outline </v-icon>
@@ -88,54 +91,74 @@
                 <receipt :customer_id="customer_id" />
               </v-tab-item>
               <v-tab-item>
-                <v-card
-                flat
-                >
-
+                <v-card flat>
                   <v-form
                     v-model="valid"
                     method="post"
                     v-on:submit.stop.prevent="save"
                   >
                     <v-card-text>
-                        <v-row>
-                          <v-col cols="12" class="py-0">
-                            <v-radio-group dense v-model="editedItem.pmt_method" row>
-                              <v-radio
-                                label="Cash"
-                                value="Cash"
-                              ></v-radio>
-                              <v-radio
-                                label="Bank"
-                                value="Bank"
-                              ></v-radio>
-                            </v-radio-group>
-                            <v-text-field
-                              dense
-                              type="number"
-                              v-model="editedItem.amount"
-                              label="Amount"
-                              :rules="[rules.required]"
-                            ></v-text-field>
-                            <div v-if="editedItem.pmt_method == 'Bank' ">
-                                <v-text-field
-                                dense
-                              v-model="editedItem.payer_account"
-                              label="Payer Account#"
-                            ></v-text-field>
-                            <v-text-field
-                              dense
-                              v-model="editedItem.details"
-                              label="Details"
-                            ></v-text-field>
+                      <v-row>
+                        <v-col cols="12" class="py-0">
+                          <v-radio-group
+                            dense
+                            v-model="editedItem.pmt_method"
+                            row
+                          >
+                            <v-radio label="Cash" value="Cash"></v-radio>
+                            <v-radio label="Bank" value="Bank"></v-radio>
+                          </v-radio-group>
+                          <v-text-field
+                            dense
+                            type="number"
+                            v-model="editedItem.amount"
+                            label="Amount"
+                            :rules="[rules.required]"
+                          ></v-text-field>
+                          <div v-if="editedItem.pmt_method == 'Bank'">
+                            <v-autocomplete
+                              v-model="editedItem.bank_id"
+                              :items="banks"
+                              hide-details
+                              hide-selected
+                              item-text="bank_name"
+                              item-value="id"
+                              label="Select Bank Acc"
+                              class="pb-3 pt-0"
+                            >
+                              <template
+                                v-slot:selection="{ attr, on, item, selected }"
+                              >
+                                <span v-text="item.bank_name"></span>
+                              </template>
+                              <template v-slot:item="{ item }">
+                                <v-list-item-content>
+                                  <v-list-item-title
+                                    v-text="item.bank_name"
+                                  ></v-list-item-title>
+                                  <v-list-item-subtitle>
+                                    {{ item.account_title }} |
+                                    {{ item.account_number }}
+                                  </v-list-item-subtitle>
+                                </v-list-item-content>
+                                <v-list-item-action>
+                                  <span>
+                                    <strong>
+                                      {{ item.id }}
+                                    </strong>
+                                  </span>
+                                </v-list-item-action>
+                              </template>
+                            </v-autocomplete>
+                            <v-file-input dense v-model="editedItem.file" label="File input"></v-file-input>
                             <v-text-field
                               dense
                               v-model="editedItem.notes"
                               label="Notes"
                             ></v-text-field>
-                            </div>
-                          </v-col>
-                        </v-row>
+                          </div>
+                        </v-col>
+                      </v-row>
                     </v-card-text>
 
                     <v-card-actions>
@@ -153,38 +176,39 @@
               </v-tab-item>
             </v-tabs>
           </v-row>
-          </v-card-text>
-          </v-card>
-      </v-col>
+        </v-card-text>
+      </v-card>
+    </v-col>
   </v-row>
 </template>
 
 <script>
-import CustomerList from '../../components/CustomerList.vue'
-import Quotation from '../../components/Quotation.vue'
-import SalesInvoice from '../../components/SalesInvoice.vue'
-import Receipt from './Receipt.vue'
+import CustomerList from "../../components/CustomerList.vue";
+import Quotation from "../../components/Quotation.vue";
+import SalesInvoice from "../../components/SalesInvoice.vue";
+import Receipt from "./Receipt.vue";
 export default {
-    components: {
-      CustomerList,
-      SalesInvoice,
-        Quotation,
-        Receipt
-   },
-   data: () => {
+  components: {
+    CustomerList,
+    SalesInvoice,
+    Quotation,
+    Receipt,
+  },
+  data: () => {
     return {
       snackbar: false,
-      text:'',
+      text: "",
       valid: true,
       customers: [],
       customer: [],
       customer_id: null,
       invoices: [],
+      banks: [],
 
       rules: {
-          required: v => !!v || 'This Field is Required',
-          min: v => v.length >=5 || 'Minimum 5 Chracters Required',
-          validEmail: v => /.+@.+\..+/.test(v) || 'Email must be valid',
+        required: (v) => !!v || "This Field is Required",
+        min: (v) => v.length >= 5 || "Minimum 5 Chracters Required",
+        validEmail: (v) => /.+@.+\..+/.test(v) || "Email must be valid",
       },
 
       editedItem: {
@@ -192,34 +216,38 @@ export default {
         amount: "",
         payer_account: "",
         details: "",
-        notes: ""
+        notes: "",
+        bank_id: "",
+        file: [],
       },
-
-    }
+    };
   },
 
   created() {
-     this.getCustomer()
+    this.getCustomer();
+
+    axios.get("/api/bank_detail/all").then((res) => {
+      this.banks = res.data.data;
+    });
   },
 
   methods: {
-      custID(item) {
-         this.customer = item;
-         this.customer_id = item.id;
-      },
+    custID(item) {
+      this.customer = item;
+      this.customer_id = item.id;
+    },
 
-      getCustomer() {
-        axios.get("/api/customers/all").then(res => {
+    getCustomer() {
+      axios.get("/api/customers/all").then((res) => {
         this.customers = res.data.data;
 
         if (this.customer_id) {
-            let cust = res.data.data.find(item => {
-               return item.id === this.customer_id;
-            });
+          let cust = res.data.data.find((item) => {
+            return item.id === this.customer_id;
+          });
 
-           this.customer = cust;
+          this.customer = cust;
         }
-
       });
     },
 
@@ -230,7 +258,7 @@ export default {
         pmt_method: this.editedItem.pmt_method,
         payer_account: this.editedItem.payer_account,
         details: this.editedItem.details,
-        notes: this.editedItem.notes
+        notes: this.editedItem.notes,
       };
 
       // Add a request interceptor
@@ -257,26 +285,22 @@ export default {
         }
       );
 
-        axios.post("/api/receipts", paymentData).then((res) => {
-          this.editedItem.amount = null,
-          this.editedItem.pmt_method = null,
-          this.editedItem.payer_account = null,
-          this.editedItem.details = null,
-          this.editedItem.notes = null
-          this.getCustomer();
+      axios.post("/api/receipts", paymentData).then((res) => {
+          console.log(paymentData)
+        (this.editedItem.amount = null),
+          (this.editedItem.pmt_method = null),
+          (this.editedItem.payer_account = null),
+          (this.editedItem.details = null),
+          (this.editedItem.notes = null);
+        this.getCustomer();
         //  this.newData = res.data.payments.id
-        });
+      });
     },
-
   },
 
-  watch: {
-
-  }
-
-}
+  watch: {},
+};
 </script>
 
 <style>
-
 </style>
