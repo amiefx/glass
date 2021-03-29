@@ -368,6 +368,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -402,6 +410,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         payable_amt: "",
         pmt_method: "",
         bank_id: "",
+        POnumber: "",
         file: []
       }
     };
@@ -435,6 +444,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           payable_amt: this.amtDue,
           pmt_method: this.purchaseData.pmt_method,
           bank_id: this.purchaseData.id,
+          POnumber: this.purchaseData.POnumber,
           file: this.purchaseData.file,
           note: ""
         },
@@ -786,167 +796,211 @@ var render = function() {
             "v-col",
             { attrs: { cols: "7" } },
             [
-              _c("v-autocomplete", {
-                attrs: {
-                  items: _vm.items,
-                  loading: _vm.isLoading,
-                  "search-input": _vm.search,
-                  chips: "",
-                  clearable: "",
-                  "hide-details": "",
-                  "hide-selected": "",
-                  "item-text": "name",
-                  "item-value": "id",
-                  label: "Search for a supplier...",
-                  solo: ""
-                },
-                on: {
-                  "update:searchInput": function($event) {
-                    _vm.search = $event
-                  },
-                  "update:search-input": function($event) {
-                    _vm.search = $event
-                  }
-                },
-                scopedSlots: _vm._u([
-                  {
-                    key: "no-data",
-                    fn: function() {
-                      return [
-                        _c(
-                          "v-list-item",
-                          [
-                            _c("v-list-item-title", [
-                              _vm._v(
-                                "\n              Search for a\n              "
-                              ),
-                              _c("strong", [_vm._v("Supplier")])
-                            ])
-                          ],
-                          1
-                        )
-                      ]
-                    },
-                    proxy: true
-                  },
-                  {
-                    key: "selection",
-                    fn: function(ref) {
-                      var attr = ref.attr
-                      var on = ref.on
-                      var item = ref.item
-                      var selected = ref.selected
-                      return [
-                        _c(
-                          "v-chip",
-                          _vm._g(
-                            _vm._b(
-                              {
-                                staticClass: "white--text",
-                                attrs: {
-                                  "input-value": selected,
-                                  color: "blue-grey"
-                                }
-                              },
-                              "v-chip",
-                              attr,
-                              false
-                            ),
-                            on
-                          ),
-                          [
-                            _c("v-icon", { attrs: { left: "" } }, [
-                              _vm._v(" mdi-account ")
-                            ]),
-                            _vm._v(" "),
-                            _c("span", {
-                              domProps: { textContent: _vm._s(item.name) }
-                            })
-                          ],
-                          1
-                        )
-                      ]
-                    }
-                  },
-                  {
-                    key: "item",
-                    fn: function(ref) {
-                      var item = ref.item
-                      return [
-                        _c(
-                          "v-list-item-avatar",
-                          {
-                            staticClass:
-                              "headline font-weight-light white--text",
-                            attrs: { color: "indigo" }
+              _c(
+                "v-row",
+                [
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "8" } },
+                    [
+                      _c("v-autocomplete", {
+                        attrs: {
+                          items: _vm.items,
+                          loading: _vm.isLoading,
+                          "search-input": _vm.search,
+                          chips: "",
+                          clearable: "",
+                          "hide-details": "",
+                          "hide-selected": "",
+                          "item-text": "name",
+                          "item-value": "id",
+                          label: "Search for a supplier...",
+                          solo: "",
+                          dense: ""
+                        },
+                        on: {
+                          "update:searchInput": function($event) {
+                            _vm.search = $event
                           },
-                          [
-                            _c("v-icon", { staticClass: "white--text" }, [
-                              _vm._v("mdi-account")
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-list-item-content",
-                          [
-                            _c("v-list-item-title", {
-                              domProps: { textContent: _vm._s(item.name) }
-                            }),
-                            _vm._v(" "),
-                            _c("v-list-item-subtitle", [
-                              _vm._v(
-                                "\n              " +
-                                  _vm._s(item.company_name) +
-                                  " | " +
-                                  _vm._s(item.work_number) +
-                                  "\n            "
-                              )
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("v-list-item-action", [
-                          item.credit_limit > 0
-                            ? _c("span", [
-                                _vm._v(
-                                  "\n              Credit limit:\n              "
+                          "update:search-input": function($event) {
+                            _vm.search = $event
+                          }
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "no-data",
+                            fn: function() {
+                              return [
+                                _c(
+                                  "v-list-item",
+                                  [
+                                    _c("v-list-item-title", [
+                                      _vm._v(
+                                        "\n              Search for a\n              "
+                                      ),
+                                      _c("strong", [_vm._v("Supplier")])
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "selection",
+                            fn: function(ref) {
+                              var attr = ref.attr
+                              var on = ref.on
+                              var item = ref.item
+                              var selected = ref.selected
+                              return [
+                                _c(
+                                  "v-chip",
+                                  _vm._g(
+                                    _vm._b(
+                                      {
+                                        staticClass: "white--text",
+                                        attrs: {
+                                          "input-value": selected,
+                                          color: "blue-grey"
+                                        }
+                                      },
+                                      "v-chip",
+                                      attr,
+                                      false
+                                    ),
+                                    on
+                                  ),
+                                  [
+                                    _c("v-icon", { attrs: { left: "" } }, [
+                                      _vm._v(" mdi-account ")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(item.name)
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          },
+                          {
+                            key: "item",
+                            fn: function(ref) {
+                              var item = ref.item
+                              return [
+                                _c(
+                                  "v-list-item-avatar",
+                                  {
+                                    staticClass:
+                                      "headline font-weight-light white--text",
+                                    attrs: { color: "indigo" }
+                                  },
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      { staticClass: "white--text" },
+                                      [_vm._v("mdi-account")]
+                                    )
+                                  ],
+                                  1
                                 ),
-                                _c("strong", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.credit_limit) +
-                                      "\n              "
-                                  )
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-item-content",
+                                  [
+                                    _c("v-list-item-title", {
+                                      domProps: {
+                                        textContent: _vm._s(item.name)
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("v-list-item-subtitle", [
+                                      _vm._v(
+                                        "\n              " +
+                                          _vm._s(item.company_name) +
+                                          " | " +
+                                          _vm._s(item.work_number) +
+                                          "\n            "
+                                      )
+                                    ])
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("v-list-item-action", [
+                                  item.credit_limit > 0
+                                    ? _c("span", [
+                                        _vm._v(
+                                          "\n              Credit limit:\n              "
+                                        ),
+                                        _c("strong", [
+                                          _vm._v(
+                                            "\n                " +
+                                              _vm._s(item.credit_limit) +
+                                              "\n              "
+                                          )
+                                        ])
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c("span", [
+                                    _vm._v(
+                                      "\n              Payable:\n              "
+                                    ),
+                                    _c("strong", [
+                                      _vm._v(
+                                        "\n                " +
+                                          _vm._s(item.payables) +
+                                          "\n              "
+                                      )
+                                    ])
+                                  ])
                                 ])
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v("\n              Payable:\n              "),
-                            _c("strong", [
-                              _vm._v(
-                                "\n                " +
-                                  _vm._s(item.payables) +
-                                  "\n              "
-                              )
-                            ])
-                          ])
-                        ])
-                      ]
-                    }
-                  }
-                ]),
-                model: {
-                  value: _vm.model,
-                  callback: function($$v) {
-                    _vm.model = $$v
-                  },
-                  expression: "model"
-                }
-              }),
+                              ]
+                            }
+                          }
+                        ]),
+                        model: {
+                          value: _vm.model,
+                          callback: function($$v) {
+                            _vm.model = $$v
+                          },
+                          expression: "model"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "4" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          solo: "",
+                          dense: "",
+                          label: "Purchase Order No"
+                        },
+                        model: {
+                          value: _vm.purchaseData.POnumber,
+                          callback: function($$v) {
+                            _vm.$set(_vm.purchaseData, "POnumber", $$v)
+                          },
+                          expression: "purchaseData.POnumber"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("v-divider"),
               _vm._v(" "),
@@ -1655,6 +1709,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
 /* harmony import */ var vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VList */ "./node_modules/vuetify/lib/components/VList/index.js");
 /* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
 
 
 
@@ -1691,7 +1746,8 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_5__["VAutocomplete"],VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_6__["VBtn"],VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_7__["VChip"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VCol"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__["VDivider"],VFileInput: vuetify_lib_components_VFileInput__WEBPACK_IMPORTED_MODULE_10__["VFileInput"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_11__["VIcon"],VListItem: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItem"],VListItemAction: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemAction"],VListItemAvatar: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemAvatar"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemContent"],VListItemSubtitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemSubtitle"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemTitle"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VRow"],VSimpleTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_13__["VSimpleTable"]})
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_5__["VAutocomplete"],VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_6__["VBtn"],VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_7__["VChip"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VCol"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__["VDivider"],VFileInput: vuetify_lib_components_VFileInput__WEBPACK_IMPORTED_MODULE_10__["VFileInput"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_11__["VIcon"],VListItem: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItem"],VListItemAction: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemAction"],VListItemAvatar: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemAvatar"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemContent"],VListItemSubtitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemSubtitle"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemTitle"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VRow"],VSimpleTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_13__["VSimpleTable"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_14__["VTextField"]})
 
 
 /* hot reload */

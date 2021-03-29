@@ -14,6 +14,7 @@ class PurchaseOrder extends Model
         'sub_total',
         'total',
         'amount_paid',
+        'POnumber',
         'discount',
         'note',
         'status',

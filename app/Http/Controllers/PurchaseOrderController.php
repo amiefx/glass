@@ -78,6 +78,7 @@ class PurchaseOrderController extends Controller
                 "amount_paid" => $order['paid_amt'],
                 "note" => $order['note'],
                 "status" => $order['pmt_method'],
+                "POnumber" => $order['POnumber'],
                 "user_id" => $user->id,
             ]);
             $purchaseorder->save();

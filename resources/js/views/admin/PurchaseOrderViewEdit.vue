@@ -3,75 +3,80 @@
     <v-row>
       <v-col cols="7">
         <v-row>
-            <v-col cols="8">
-               <v-autocomplete
-          v-model="model"
-          :items="items"
-          :loading="isLoading"
-          :search-input.sync="search"
-          chips
-          clearable
-          hide-details
-          hide-selected
-          item-text="name"
-          item-value="id"
-          label="Search for a supplier..."
-          solo
-          dense
-        >
-          <template v-slot:no-data>
-            <v-list-item>
-              <v-list-item-title>
-                Search for a
-                <strong>Supplier</strong>
-              </v-list-item-title>
-            </v-list-item>
-          </template>
-          <template v-slot:selection="{ attr, on, item, selected }">
-            <v-chip
-              v-bind="attr"
-              :input-value="selected"
-              color="blue-grey"
-              class="white--text"
-              v-on="on"
+          <v-col cols="8">
+            <v-autocomplete
+              v-model="model"
+              :items="items"
+              :loading="isLoading"
+              :search-input.sync="search"
+              chips
+              clearable
+              hide-details
+              hide-selected
+              item-text="name"
+              item-value="id"
+              label="Search for a supplier..."
+              solo
+              dense
             >
-              <v-icon left> mdi-account </v-icon>
-              <span v-text="item.name"></span>
-            </v-chip>
-          </template>
-          <template v-slot:item="{ item }">
-            <v-list-item-avatar
-              color="indigo"
-              class="headline font-weight-light white--text"
-            >
-              <v-icon class="white--text">mdi-account</v-icon>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.name"></v-list-item-title>
-              <v-list-item-subtitle>
-                {{ item.company_name }} | {{ item.work_number }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
-            <v-list-item-action>
-              <span v-if="item.credit_limit > 0">
-                Credit limit:
-                <strong>
-                  {{ item.credit_limit }}
-                </strong>
-              </span>
-              <span>
-                Payable:
-                <strong>
-                  {{ item.payables }}
-                </strong>
-              </span>
-            </v-list-item-action>
-          </template>
-        </v-autocomplete>
-            </v-col>
-            <v-col cols="4">
-              <v-text-field solo dense v-model="purchaseData.POnumber" label="Purchase Order No"></v-text-field>
-            </v-col>
+              <template v-slot:no-data>
+                <v-list-item>
+                  <v-list-item-title>
+                    Search for a
+                    <strong>Supplier</strong>
+                  </v-list-item-title>
+                </v-list-item>
+              </template>
+              <template v-slot:selection="{ attr, on, item, selected }">
+                <v-chip
+                  v-bind="attr"
+                  :input-value="selected"
+                  color="blue-grey"
+                  class="white--text"
+                  v-on="on"
+                >
+                  <v-icon left> mdi-account </v-icon>
+                  <span v-text="item.name"></span>
+                </v-chip>
+              </template>
+              <template v-slot:item="{ item }">
+                <v-list-item-avatar
+                  color="indigo"
+                  class="headline font-weight-light white--text"
+                >
+                  <v-icon class="white--text">mdi-account</v-icon>
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.name"></v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ item.company_name }} | {{ item.work_number }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-action>
+                  <span v-if="item.credit_limit > 0">
+                    Credit limit:
+                    <strong>
+                      {{ item.credit_limit }}
+                    </strong>
+                  </span>
+                  <span>
+                    Payable:
+                    <strong>
+                      {{ item.payables }}
+                    </strong>
+                  </span>
+                </v-list-item-action>
+              </template>
+            </v-autocomplete>
+          </v-col>
+          <v-col cols="4">
+            <v-text-field
+              solo
+              dense
+              v-model="purchaseData.POnumber"
+              label="Purchase Order No"
+            ></v-text-field>
+          </v-col>
         </v-row>
 
         <v-divider></v-divider>
@@ -249,8 +254,12 @@
               </template>
             </v-autocomplete>
           </v-col>
-          <v-col cols="3" >
-            <v-file-input dense v-model="purchaseData.file" label="File input"></v-file-input>
+          <v-col cols="3">
+            <v-file-input
+              dense
+              v-model="purchaseData.file"
+              label="File input"
+            ></v-file-input>
           </v-col>
           <v-col cols="4">
             <v-btn
@@ -313,7 +322,7 @@ export default {
         pmt_method: "",
         bank_id: "",
         POnumber: "",
-        file: []
+        file: [],
       },
     };
   },

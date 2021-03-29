@@ -71,23 +71,11 @@
                      </v-select>
                      <v-text-field v-model="editedItem.name" label="Name" :rules="[rules.required]"></v-text-field>
 
-                      <v-text-field v-model="editedItem.color" label="Color" ></v-text-field>
+                      <v-text-field v-model="editedItem.color" label="Color / Design" ></v-text-field>
                     <v-text-field v-model="editedItem.sku" label="SKU" :rules="[rules.required]" ></v-text-field>
                     <v-text-field v-model="editedItem.urdusku" label="URDU SKU" :rules="[rules.required]"></v-text-field>
 
                      </v-col>
-
-                  <!-- <v-col cols="12" md="4" lg="4" >
-
-                     <v-text-field type="number" v-model.number="editedItem.height" label="Height" ></v-text-field>
-                     <v-text-field type="number" v-model.number="editedItem.width" label="Width" ></v-text-field>
-                     <v-text-field type="number" v-model.number="editedItem.thickness" label="Thinkness" ></v-text-field>
-                     <v-text-field type="number" v-model.number="editedItem.length" label="Length" ></v-text-field>
-                     <v-text-field type="number" v-model="editedItem.weight" label="Weight" ></v-text-field>
-                     <v-text-field v-model="editedItem.size" label="Size" ></v-text-field>
-                     <v-text-field v-model="editedItem.color" label="Color" ></v-text-field>
-
-                  </v-col> -->
 
                   <v-col cols="12" md="6" lg="6" >
                       <v-select

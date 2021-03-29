@@ -86638,7 +86638,7 @@ var routes = [// {
   path: '/admin/dashboard',
   name: 'dashboard',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ../views/admin/Dashboard.vue */ "./resources/js/views/admin/Dashboard.vue"));
+    return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ../views/admin/Dashboard.vue */ "./resources/js/views/admin/Dashboard.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86648,7 +86648,7 @@ var routes = [// {
   path: '/admin/customers',
   name: 'customers',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ../views/admin/Customers.vue */ "./resources/js/views/admin/Customers.vue"));
+    return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ../views/admin/Customers.vue */ "./resources/js/views/admin/Customers.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86658,7 +86658,7 @@ var routes = [// {
   path: '/admin/suppliers',
   name: 'customers',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ../views/admin/Suppliers.vue */ "./resources/js/views/admin/Suppliers.vue"));
+    return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ../views/admin/Suppliers.vue */ "./resources/js/views/admin/Suppliers.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86678,7 +86678,7 @@ var routes = [// {
   path: '/admin/company',
   name: 'company',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ../views/admin/Company.vue */ "./resources/js/views/admin/Company.vue"));
+    return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ../views/admin/Company.vue */ "./resources/js/views/admin/Company.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86688,7 +86688,7 @@ var routes = [// {
   path: '/admin/brands',
   name: 'brands',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ../views/admin/Brands.vue */ "./resources/js/views/admin/Brands.vue"));
+    return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ../views/admin/Brands.vue */ "./resources/js/views/admin/Brands.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86698,7 +86698,7 @@ var routes = [// {
   path: '/admin/slabs',
   name: 'slabs',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ../views/admin/Slab.vue */ "./resources/js/views/admin/Slab.vue"));
+    return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ../views/admin/Slab.vue */ "./resources/js/views/admin/Slab.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86718,7 +86718,7 @@ var routes = [// {
   path: '/admin/cash',
   name: 'cash',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ../views/admin/Cash.vue */ "./resources/js/views/admin/Cash.vue"));
+    return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ../views/admin/Cash.vue */ "./resources/js/views/admin/Cash.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86758,7 +86758,7 @@ var routes = [// {
   path: '/admin/employees',
   name: 'employees',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ../views/admin/Employee.vue */ "./resources/js/views/admin/Employee.vue"));
+    return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ../views/admin/Employee.vue */ "./resources/js/views/admin/Employee.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86768,7 +86768,7 @@ var routes = [// {
   path: '/admin/categories',
   name: 'categories',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ../views/admin/Categories.vue */ "./resources/js/views/admin/Categories.vue"));
+    return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ../views/admin/Categories.vue */ "./resources/js/views/admin/Categories.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86778,7 +86778,7 @@ var routes = [// {
   path: '/admin/units',
   name: 'units',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ../views/admin/Units.vue */ "./resources/js/views/admin/Units.vue"));
+    return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ../views/admin/Units.vue */ "./resources/js/views/admin/Units.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86808,7 +86808,7 @@ var routes = [// {
   path: '/admin/expenseitems',
   name: 'expenseitems',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! ../views/admin/ExpenseItem.vue */ "./resources/js/views/admin/ExpenseItem.vue"));
+    return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! ../views/admin/ExpenseItem.vue */ "./resources/js/views/admin/ExpenseItem.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86818,7 +86818,7 @@ var routes = [// {
   path: '/admin/expenses',
   name: 'expenses',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ../views/admin/Expense.vue */ "./resources/js/views/admin/Expense.vue"));
+    return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! ../views/admin/Expense.vue */ "./resources/js/views/admin/Expense.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86838,7 +86838,7 @@ var routes = [// {
   path: '/admin/users',
   name: 'users',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ../views/admin/Users.vue */ "./resources/js/views/admin/Users.vue"));
+    return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ../views/admin/Users.vue */ "./resources/js/views/admin/Users.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86848,7 +86848,7 @@ var routes = [// {
   path: '/admin/products',
   name: 'products',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! ../views/admin/Products.vue */ "./resources/js/views/admin/Products.vue"));
+    return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ../views/admin/Products.vue */ "./resources/js/views/admin/Products.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86858,7 +86858,7 @@ var routes = [// {
   path: '/admin/panelsize',
   name: 'panels',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ../views/admin/Panels.vue */ "./resources/js/views/admin/Panels.vue"));
+    return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ../views/admin/Panels.vue */ "./resources/js/views/admin/Panels.vue"));
   },
   meta: {
     layout: 'admin',
@@ -86971,7 +86971,7 @@ var routes = [// {
   path: '/admin/invoice/approvals',
   name: 'order-approve',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! ../views/admin/InvoiceApprovals.vue */ "./resources/js/views/admin/InvoiceApprovals.vue"));
+    return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! ../views/admin/InvoiceApprovals.vue */ "./resources/js/views/admin/InvoiceApprovals.vue"));
   },
   meta: {
     layout: 'admin',
@@ -87011,7 +87011,7 @@ var routes = [// {
   path: '/admin/bankdetails',
   name: 'admin-order',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ../views/admin/BankDetails.vue */ "./resources/js/views/admin/BankDetails.vue"));
+    return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ../views/admin/BankDetails.vue */ "./resources/js/views/admin/BankDetails.vue"));
   },
   meta: {
     layout: 'admin',

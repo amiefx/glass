@@ -444,6 +444,8 @@
                                 <v-select
                                   :items="panelSheetWidth"
                                   v-model="panel.sheet_width"
+                                  item-text="size"
+                                  item-value="standard_size"
                                   dense
                                   outlined
                                   @change="getPanel"
@@ -1464,15 +1466,15 @@ export default {
         sheet_height = 3.16;
       }
 
-      if (sheet_width == 8) {
-        sheet_width = 6.35;
-      } else if (sheet_width == 10) {
-        sheet_width = 7.92;
-      } else if (sheet_width == 16) {
-        sheet_width = 12.66;
-      } else {
-        sheet_width = 19.0;
-      }
+    //   if (sheet_width == 8) {
+    //     sheet_width = 6.35;
+    //   } else if (sheet_width == 10) {
+    //     sheet_width = 7.92;
+    //   } else if (sheet_width == 16) {
+    //     sheet_width = 12.66;
+    //   } else {
+    //     sheet_width = 19.0;
+    //   }
 
       //number of sheets
       var num_of_sheets = Math.ceil(
