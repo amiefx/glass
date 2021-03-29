@@ -191,6 +191,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'admin',
   middleware: ['auth', 'admin'],
@@ -242,6 +257,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Enable Stock',
         value: 'stock'
+<<<<<<< HEAD
       }, {
         text: 'Alert Qty',
         value: 'alert_quantity'
@@ -258,6 +274,24 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Color',
         value: 'color'
       }, {
+=======
+      }, {
+        text: 'Alert Qty',
+        value: 'alert_quantity'
+      }, {
+        text: 'Price',
+        value: 'selling_price'
+      }, // { text: 'Height', value: 'height' },
+      // { text: 'Width', value: 'width' },
+      // { text: 'Thickness', value: 'thickness' },
+      // { text: 'Length', value: 'length' },
+      // { text: 'Weight', value: 'weight' },
+      // { text: 'Size', value: 'size' },
+      {
+        text: 'Color',
+        value: 'color'
+      }, {
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
         text: 'Active',
         value: 'active'
       }, {
@@ -807,9 +841,13 @@ var render = function() {
                                                 }),
                                                 _vm._v(" "),
                                                 _c("v-text-field", {
+<<<<<<< HEAD
                                                   attrs: {
                                                     label: "Color / Design"
                                                   },
+=======
+                                                  attrs: { label: "Color" },
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
                                                   model: {
                                                     value: _vm.editedItem.color,
                                                     callback: function($$v) {
@@ -821,6 +859,8 @@ var render = function() {
                                                     },
                                                     expression:
                                                       "editedItem.color"
+<<<<<<< HEAD
+=======
                                                   }
                                                 }),
                                                 _vm._v(" "),
@@ -839,11 +879,33 @@ var render = function() {
                                                       )
                                                     },
                                                     expression: "editedItem.sku"
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
                                                   }
                                                 }),
                                                 _vm._v(" "),
                                                 _c("v-text-field", {
                                                   attrs: {
+<<<<<<< HEAD
+                                                    label: "SKU",
+                                                    rules: [_vm.rules.required]
+                                                  },
+                                                  model: {
+                                                    value: _vm.editedItem.sku,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem,
+                                                        "sku",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression: "editedItem.sku"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-text-field", {
+                                                  attrs: {
+=======
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
                                                     label: "URDU SKU",
                                                     rules: [_vm.rules.required]
                                                   },

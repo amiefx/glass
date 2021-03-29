@@ -118,6 +118,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
 //
 //
 //
@@ -153,6 +157,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'admin',
   middleware: ['auth', 'admin'],
@@ -167,7 +176,15 @@ __webpack_require__.r(__webpack_exports__);
       success: '',
       error: '',
       options: {
+<<<<<<< HEAD
         sortBy: ['name'],
+=======
+<<<<<<< HEAD
+        sortBy: ['name'],
+=======
+        sortBy: ['id'],
+>>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
         sortDesc: [true]
       },
       rules: {
@@ -187,10 +204,17 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Name',
         value: 'name'
+<<<<<<< HEAD
       }, {
         text: 'Email',
         value: 'email'
       }, {
+=======
+      }, {
+        text: 'Email',
+        value: 'email'
+      }, {
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
         text: 'Contact',
         value: 'contact_no'
       }, {
@@ -204,6 +228,10 @@ __webpack_require__.r(__webpack_exports__);
         value: 'action',
         sortable: false
       }],
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
       status: [{
         text: 'Active',
         value: true
@@ -212,6 +240,8 @@ __webpack_require__.r(__webpack_exports__);
         value: false
       }],
       users: [],
+<<<<<<< HEAD
+=======
       editedIndex: -1,
       editedItem: {
         id: '',
@@ -232,6 +262,35 @@ __webpack_require__.r(__webpack_exports__);
         password: '',
         rpassword: '',
         created_at: ''
+=======
+      panels: [],
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
+      editedIndex: -1,
+      editedItem: {
+        id: '',
+        name: '',
+        email: '',
+        contact_no: '',
+        type: '',
+        is_active: '',
+        created_at: ''
+      },
+      defaultItem: {
+        id: '',
+<<<<<<< HEAD
+        name: '',
+        email: '',
+        contact_no: '',
+        type: '',
+        is_active: '',
+        password: '',
+        rpassword: '',
+        created_at: ''
+=======
+        size: '',
+        standard_size: ''
+>>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
       }
     };
   },
@@ -252,7 +311,15 @@ __webpack_require__.r(__webpack_exports__);
     this.initialize();
   },
   methods: {
+<<<<<<< HEAD
     updateRole: function updateRole(item) {
+=======
+<<<<<<< HEAD
+    updateRole: function updateRole(item) {
+=======
+    searchIt: function searchIt(e) {
+>>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
       var _this = this;
 
       var index = this.users.data.indexOf(item);
@@ -355,7 +422,15 @@ __webpack_require__.r(__webpack_exports__);
         //   axios.get(`/api/users`)
         //     .then(res => this.users = res.data.data.users)
         //     .catch(err => console.dir(err.response))
+<<<<<<< HEAD
         var sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
+=======
+<<<<<<< HEAD
+        var sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
+=======
+        var sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
+>>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
         var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
         axios.get("/api/users?page=".concat(e.page), {
           params: {
@@ -373,7 +448,15 @@ __webpack_require__.r(__webpack_exports__);
     paginate: function paginate(e) {
       var _this6 = this;
 
+<<<<<<< HEAD
       var sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
+=======
+<<<<<<< HEAD
+      var sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
+=======
+      var sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
+>>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
       var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
       axios.get("/api/users?page=".concat(e.page), {
         params: {
@@ -445,9 +528,22 @@ __webpack_require__.r(__webpack_exports__);
         var index = this.editedIndex;
         axios.put('/api/users/' + this.editedItem.id, this.editedItem) //  .then(res => Object.assign(this.users[this.editedIndex], this.editedItem))
         .then(function (res) {
+<<<<<<< HEAD
           _this10.text = "Record Updated Successfully!";
           _this10.snackbar = true;
           Object.assign(_this10.users.data[index], res.data.user);
+=======
+<<<<<<< HEAD
+          _this10.text = "Record Updated Successfully!";
+          _this10.snackbar = true;
+          Object.assign(_this10.users.data[index], res.data.user);
+=======
+          console.log(res);
+          _this6.text = "Record Updated Successfully!";
+          _this6.snackbar = true;
+          Object.assign(_this6.panels.data[index], res.data.panel);
+>>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
         })["catch"](function (err) {
           console.log(err.response);
           _this10.text = "Error Updating Record";
@@ -458,7 +554,15 @@ __webpack_require__.r(__webpack_exports__);
           _this10.text = "Record Added Successfully!";
           _this10.snackbar = true;
 
+<<<<<<< HEAD
           _this10.users.data.push(res.data.user);
+=======
+<<<<<<< HEAD
+          _this10.users.data.push(res.data.user);
+=======
+          _this6.panels.data.push(res.data.panel);
+>>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
         })["catch"](function (err) {
           console.dir(err);
           _this10.text = "Error Inserting Record";
@@ -555,7 +659,15 @@ var render = function() {
                                     },
                                     on
                                   ),
+<<<<<<< HEAD
                                   [_vm._v("New User")]
+=======
+<<<<<<< HEAD
+                                  [_vm._v("New User")]
+=======
+                                  [_vm._v("New Pnel")]
+>>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
+>>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
                                 )
                               ]
                             }
