@@ -18,6 +18,7 @@ class PurchaseInvoiceResource extends JsonResource
             'id' => $this->id,
             'supplier_name' => $this->supplier->name,
             'supplier_id' => $this->supplier_id,
+            'POnumber' => $this->POnumber,
             'sub_total' => $this->sub_total,
             'discount' => $this->discount,
             'total' => $this->total,

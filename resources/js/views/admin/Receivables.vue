@@ -277,6 +277,8 @@ export default {
         pmt_method: this.editedItem.pmt_method,
         payer_account: this.editedItem.payer_account,
         details: this.editedItem.details,
+        bank_id: this.editedItem.bank_id,
+        file: this.editedItem.file,
         notes: this.editedItem.notes,
       };
 
@@ -305,7 +307,7 @@ export default {
       );
 
       axios.post("/api/receipts", paymentData).then((res) => {
-          console.log(res)
+          console.log(paymentData)
           (this.editedItem.amount = null),
           (this.editedItem.pmt_method = null),
           (this.editedItem.bank_id = null),

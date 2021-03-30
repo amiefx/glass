@@ -393,6 +393,8 @@ __webpack_require__.r(__webpack_exports__);
         amount: this.editedItem.amount,
         pmt_method: this.editedItem.pmt_method,
         payee_account: this.editedItem.payee_account,
+        bank_id: this.editedItem.bank_id,
+        file: this.editedItem.file,
         details: this.editedItem.details,
         notes: this.editedItem.notes
       }; // Add a request interceptor
@@ -413,7 +415,7 @@ __webpack_require__.r(__webpack_exports__);
         return Promise.reject(error);
       });
       axios.post("/api/payments", paymentData).then(function (res) {
-        _this4.editedItem.amount = null, _this4.editedItem.pmt_method = null, _this4.editedItem.payee_account = null, _this4.editedItem.details = null, _this4.editedItem.notes = null;
+        _this4.editedItem.amount = null, _this4.editedItem.pmt_method = null, _this4.editedItem.payee_account = null, _this4.editedItem.details = null, _this4.editedItem.bank_id = null, _this4.editedItem.file = null, _this4.editedItem.notes = null;
 
         _this4.getSupplier();
 

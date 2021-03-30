@@ -271,6 +271,8 @@ export default {
         amount: this.editedItem.amount,
         pmt_method: this.editedItem.pmt_method,
         payee_account: this.editedItem.payee_account,
+        bank_id: this.editedItem.bank_id,
+        file: this.editedItem.file,
         details: this.editedItem.details,
         notes: this.editedItem.notes
       };
@@ -304,6 +306,8 @@ export default {
           this.editedItem.pmt_method = null,
           this.editedItem.payee_account = null,
           this.editedItem.details = null,
+          this.editedItem.bank_id = null,
+          this.editedItem.file = null,
           this.editedItem.notes = null
           this.getSupplier();
           this.newData = res.data.payments.id
