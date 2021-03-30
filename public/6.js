@@ -376,6 +376,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -399,6 +411,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       search: null,
       tab: null,
       balance: null,
+      fileInput: [],
       pmt_methods: ["Cash", "Bank"],
       supplier_id: "",
       purchaseData: {
@@ -411,7 +424,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         pmt_method: "",
         bank_id: "",
         POnumber: "",
-        file: []
+        file: ""
       }
     };
   },
@@ -431,8 +444,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     increaseProductQty: function increaseProductQty(product) {
       this.$store.dispatch("purchase/increaseProductQty", product);
     },
-    saveOrder: function saveOrder() {
+    uploadPhoto: function uploadPhoto() {
       var _this = this;
+
+      if (this.fileInput != null) {
+        var file = this.fileInput;
+        var reader = new FileReader();
+
+        reader.onloadend = function (file) {
+          _this.purchaseData.file = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+      }
+    },
+    saveOrder: function saveOrder() {
+      var _this2 = this;
 
       var orderData = {
         orderDetails: {
@@ -452,39 +479,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }; // Add a request interceptor
 
       axios.interceptors.request.use(function (config) {
-        _this.loading = true;
-        return config;
-      }, function (error) {
-        _this.loading = false;
-        return Promise.reject(error);
-      }); // Add a response interceptor
-
-      axios.interceptors.response.use(function (response) {
-        _this.loading = false;
-        return response;
-      }, function (error) {
-        _this.loading = false;
-        return Promise.reject(error);
-      });
-      console.log(orderData);
-      axios.post("/api/purchaseorder", orderData).then(function (res) {
-        //    this.$router.push(`/checkout/${res.data.id}`)
-        _this.clearPurchaseItems();
-
-        console.log(orderData);
-        _this.model = null;
-        _this.purchaseData.discount = null;
-        _this.purchaseData.paid_amt = null;
-        _this.purchaseData.pmt_method = null;
-
-        _this.initialize();
-      });
-    },
-    initialize: function initialize() {
-      var _this2 = this;
-
-      // Add a request interceptor
-      axios.interceptors.request.use(function (config) {
         _this2.loading = true;
         return config;
       }, function (error) {
@@ -499,11 +493,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.loading = false;
         return Promise.reject(error);
       });
+      console.log(orderData);
+      axios.post("/api/purchaseorder", orderData).then(function (res) {
+        //    this.$router.push(`/checkout/${res.data.id}`)
+        _this2.clearPurchaseItems();
+
+        console.log(orderData);
+        _this2.model = null;
+        _this2.purchaseData.discount = null;
+        _this2.purchaseData.paid_amt = null;
+        _this2.purchaseData.pmt_method = null;
+
+        _this2.initialize();
+      });
+    },
+    initialize: function initialize() {
+      var _this3 = this;
+
+      // Add a request interceptor
+      axios.interceptors.request.use(function (config) {
+        _this3.loading = true;
+        return config;
+      }, function (error) {
+        _this3.loading = false;
+        return Promise.reject(error);
+      }); // Add a response interceptor
+
+      axios.interceptors.response.use(function (response) {
+        _this3.loading = false;
+        return response;
+      }, function (error) {
+        _this3.loading = false;
+        return Promise.reject(error);
+      });
       axios.get("/api/products/all").then(function (res) {
-        _this2.products = res.data.data;
+        _this3.products = res.data.data;
       });
       axios.get("/api/bank_detail/all").then(function (res) {
-        _this2.banks = res.data.data;
+        _this3.banks = res.data.data;
       });
     }
   },
@@ -527,27 +554,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   watch: {
     model: function model(val) {
-      var _this3 = this;
+      var _this4 = this;
 
       this.items.forEach(function (item) {
         if (val == item.id) {
-          _this3.balance = item.payables;
+          _this4.balance = item.payables;
         }
       });
     },
     search: function search(val) {
-      var _this4 = this;
+      var _this5 = this;
 
       // Items have already been loaded
       if (this.items.length > 0) return;
       this.isLoading = true; // axios method
 
       axios.get("/api/suppliers/all").then(function (res) {
-        _this4.items = res.data.data;
-        _this4.isLoading = false;
+        _this5.items = res.data.data;
+        _this5.isLoading = false;
       })["catch"](function (err) {
         console.log(err);
-        _this4.isLoading = false;
+        _this5.isLoading = false;
       });
     }
   }
@@ -801,9 +828,10 @@ var render = function() {
                 [
                   _c(
                     "v-col",
-                    { attrs: { cols: "8" } },
+                    { staticClass: "pb-0", attrs: { cols: "8" } },
                     [
                       _c("v-autocomplete", {
+                        staticClass: "pb-0",
                         attrs: {
                           items: _vm.items,
                           loading: _vm.isLoading,
@@ -836,7 +864,7 @@ var render = function() {
                                   [
                                     _c("v-list-item-title", [
                                       _vm._v(
-                                        "\n              Search for a\n              "
+                                        "\n                  Search for a\n                  "
                                       ),
                                       _c("strong", [_vm._v("Supplier")])
                                     ])
@@ -921,11 +949,11 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("v-list-item-subtitle", [
                                       _vm._v(
-                                        "\n              " +
+                                        "\n                  " +
                                           _vm._s(item.company_name) +
                                           " | " +
                                           _vm._s(item.work_number) +
-                                          "\n            "
+                                          "\n                "
                                       )
                                     ])
                                   ],
@@ -936,13 +964,13 @@ var render = function() {
                                   item.credit_limit > 0
                                     ? _c("span", [
                                         _vm._v(
-                                          "\n              Credit limit:\n              "
+                                          "\n                  Credit limit:\n                  "
                                         ),
                                         _c("strong", [
                                           _vm._v(
-                                            "\n                " +
+                                            "\n                    " +
                                               _vm._s(item.credit_limit) +
-                                              "\n              "
+                                              "\n                  "
                                           )
                                         ])
                                       ])
@@ -950,13 +978,13 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("span", [
                                     _vm._v(
-                                      "\n              Payable:\n              "
+                                      "\n                  Payable:\n                  "
                                     ),
                                     _c("strong", [
                                       _vm._v(
-                                        "\n                " +
+                                        "\n                    " +
                                           _vm._s(item.payables) +
-                                          "\n              "
+                                          "\n                  "
                                       )
                                     ])
                                   ])
@@ -979,7 +1007,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-col",
-                    { attrs: { cols: "4" } },
+                    { staticClass: "pb-0", attrs: { cols: "4" } },
                     [
                       _c("v-text-field", {
                         attrs: {
@@ -1002,7 +1030,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-divider"),
+              _c("v-divider", { staticClass: "mt-0" }),
               _vm._v(" "),
               _c("v-simple-table", {
                 attrs: { height: "" },
@@ -1514,16 +1542,19 @@ var render = function() {
                     "v-col",
                     { attrs: { cols: "3" } },
                     [
-                      _c("v-file-input", {
-                        attrs: { dense: "", label: "File input" },
-                        model: {
-                          value: _vm.purchaseData.file,
-                          callback: function($$v) {
-                            _vm.$set(_vm.purchaseData, "file", $$v)
-                          },
-                          expression: "purchaseData.file"
-                        }
-                      })
+                      _vm.purchaseData.pmt_method == "Bank"
+                        ? _c("v-file-input", {
+                            attrs: { dense: "", label: "File input" },
+                            on: { change: _vm.uploadPhoto },
+                            model: {
+                              value: _vm.fileInput,
+                              callback: function($$v) {
+                                _vm.fileInput = $$v
+                              },
+                              expression: "fileInput"
+                            }
+                          })
+                        : _vm._e()
                     ],
                     1
                   ),

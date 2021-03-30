@@ -1089,15 +1089,15 @@ export default {
         sheet_height = 3.16;
       }
 
-      if (sheet_width == 8) {
-        sheet_width = 6.35;
-      } else if (sheet_width == 10) {
-        sheet_width = 7.92;
-      } else if (sheet_width == 16) {
-        sheet_width = 12.66;
-      } else {
-        sheet_width = 19.0;
-      }
+    //   if (sheet_width == 8) {
+    //     sheet_width = 6.35;
+    //   } else if (sheet_width == 10) {
+    //     sheet_width = 7.92;
+    //   } else if (sheet_width == 16) {
+    //     sheet_width = 12.66;
+    //   } else {
+    //     sheet_width = 19.0;
+    //   }
 
       //number of sheets
         var num_of_sheets = Math.ceil(((length * number * sheet_height) - (removals)) / sheet_width);
@@ -1193,6 +1193,10 @@ export default {
 
     axios.get("/api/slabs/all").then((res) => {
       this.slabs = res.data.data;
+    });
+
+    axios.get("/api/panels/all").then((res) => {
+      this.panelSheetWidth = res.data.data;
     });
 
     axios.get("/api/employees/all").then((res) => {

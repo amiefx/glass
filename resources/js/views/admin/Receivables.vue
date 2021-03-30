@@ -150,7 +150,13 @@
                                 </v-list-item-action>
                               </template>
                             </v-autocomplete>
-                            <v-file-input dense v-model="editedItem.file" label="File input"></v-file-input>
+                            <v-file-input
+                              dense
+                              v-model="fileInput"
+                              label="File input"
+                              @change="uploadPhoto"
+                            ></v-file-input>
+                            <!-- <input type="file" label="File input" @change="uploadPhoto" /> -->
                             <v-text-field
                               dense
                               v-model="editedItem.notes"
@@ -204,6 +210,7 @@ export default {
       customer_id: null,
       invoices: [],
       banks: [],
+      fileInput: [],
 
       rules: {
         required: (v) => !!v || "This Field is Required",
@@ -218,7 +225,7 @@ export default {
         details: "",
         notes: "",
         bank_id: "",
-        file: [],
+        file: "",
       },
     };
   },
@@ -235,6 +242,18 @@ export default {
     custID(item) {
       this.customer = item;
       this.customer_id = item.id;
+    },
+
+    uploadPhoto() {
+      if (this.fileInput != null) {
+        let file = this.fileInput;
+
+        let reader = new FileReader();
+        reader.onloadend = (file) => {
+          this.editedItem.file = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
     },
 
     getCustomer() {
@@ -286,11 +305,11 @@ export default {
       );
 
       axios.post("/api/receipts", paymentData).then((res) => {
-          console.log(paymentData)
-        (this.editedItem.amount = null),
+          console.log(res)
+          (this.editedItem.amount = null),
           (this.editedItem.pmt_method = null),
-          (this.editedItem.payer_account = null),
-          (this.editedItem.details = null),
+          (this.editedItem.bank_id = null),
+          (this.editedItem.file = null),
           (this.editedItem.notes = null);
         this.getCustomer();
         //  this.newData = res.data.payments.id

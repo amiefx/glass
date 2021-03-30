@@ -86,7 +86,7 @@ export default {
       { text: "Discount", value: "discount" },
       { text: "Sub Total", value: "sub_total" },
       { text: "Amount Received", value: "amount_recieved" },
-      { text: "User", value: "user_id" },
+      { text: "User", value: "user_name" },
     ],
     orders: [],
     invoices: [],

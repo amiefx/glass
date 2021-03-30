@@ -297,6 +297,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -316,6 +321,7 @@ __webpack_require__.r(__webpack_exports__);
       supplier_id: null,
       newData: null,
       banks: [],
+      fileInput: [],
       rules: {
         required: function required(v) {
           return !!v || 'This Field is Required';
@@ -333,7 +339,7 @@ __webpack_require__.r(__webpack_exports__);
         payee_account: "",
         details: "",
         bank_id: "",
-        file: [],
+        file: "",
         notes: ""
       }
     };
@@ -351,22 +357,36 @@ __webpack_require__.r(__webpack_exports__);
       this.supplier = item;
       this.supplier_id = item.id;
     },
-    getSupplier: function getSupplier() {
+    uploadPhoto: function uploadPhoto() {
       var _this2 = this;
 
-      axios.get("/api/suppliers/all").then(function (res) {
-        _this2.suppliers = res.data.data;
+      if (this.fileInput != null) {
+        var file = this.fileInput;
+        var reader = new FileReader();
 
-        if (_this2.supplier_id) {
+        reader.onloadend = function (file) {
+          _this2.editedItem.file = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+      }
+    },
+    getSupplier: function getSupplier() {
+      var _this3 = this;
+
+      axios.get("/api/suppliers/all").then(function (res) {
+        _this3.suppliers = res.data.data;
+
+        if (_this3.supplier_id) {
           var supp = res.data.data.find(function (item) {
-            return item.id === _this2.supplier_id;
+            return item.id === _this3.supplier_id;
           });
-          _this2.supplier = supp;
+          _this3.supplier = supp;
         }
       });
     },
     savePayment: function savePayment() {
-      var _this3 = this;
+      var _this4 = this;
 
       var paymentData = {
         supplier_id: this.supplier_id,
@@ -378,26 +398,26 @@ __webpack_require__.r(__webpack_exports__);
       }; // Add a request interceptor
 
       axios.interceptors.request.use(function (config) {
-        _this3.loading = true;
+        _this4.loading = true;
         return config;
       }, function (error) {
-        _this3.loading = false;
+        _this4.loading = false;
         return Promise.reject(error);
       }); // Add a response interceptor
 
       axios.interceptors.response.use(function (response) {
-        _this3.loading = false;
+        _this4.loading = false;
         return response;
       }, function (error) {
-        _this3.loading = false;
+        _this4.loading = false;
         return Promise.reject(error);
       });
       axios.post("/api/payments", paymentData).then(function (res) {
-        _this3.editedItem.amount = null, _this3.editedItem.pmt_method = null, _this3.editedItem.payee_account = null, _this3.editedItem.details = null, _this3.editedItem.notes = null;
+        _this4.editedItem.amount = null, _this4.editedItem.pmt_method = null, _this4.editedItem.payee_account = null, _this4.editedItem.details = null, _this4.editedItem.notes = null;
 
-        _this3.getSupplier();
+        _this4.getSupplier();
 
-        _this3.newData = res.data.payments.id;
+        _this4.newData = res.data.payments.id;
       });
     }
   },
@@ -1217,22 +1237,20 @@ var render = function() {
                                                                     label:
                                                                       "File input"
                                                                   },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.uploadPhoto
+                                                                  },
                                                                   model: {
                                                                     value:
-                                                                      _vm
-                                                                        .editedItem
-                                                                        .file,
+                                                                      _vm.fileInput,
                                                                     callback: function(
                                                                       $$v
                                                                     ) {
-                                                                      _vm.$set(
-                                                                        _vm.editedItem,
-                                                                        "file",
-                                                                        $$v
-                                                                      )
+                                                                      _vm.fileInput = $$v
                                                                     },
                                                                     expression:
-                                                                      "editedItem.file"
+                                                                      "fileInput"
                                                                   }
                                                                 }
                                                               ),

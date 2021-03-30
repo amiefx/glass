@@ -424,7 +424,7 @@ __webpack_require__.r(__webpack_exports__);
         value: "amount_recieved"
       }, {
         text: "User",
-        value: "user_id"
+        value: "user_name"
       }],
       orders: [],
       invoices: [],
@@ -943,6 +943,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -964,6 +970,7 @@ __webpack_require__.r(__webpack_exports__);
       customer_id: null,
       invoices: [],
       banks: [],
+      fileInput: [],
       rules: {
         required: function required(v) {
           return !!v || "This Field is Required";
@@ -982,7 +989,7 @@ __webpack_require__.r(__webpack_exports__);
         details: "",
         notes: "",
         bank_id: "",
-        file: []
+        file: ""
       }
     };
   },
@@ -999,22 +1006,36 @@ __webpack_require__.r(__webpack_exports__);
       this.customer = item;
       this.customer_id = item.id;
     },
-    getCustomer: function getCustomer() {
+    uploadPhoto: function uploadPhoto() {
       var _this2 = this;
 
-      axios.get("/api/customers/all").then(function (res) {
-        _this2.customers = res.data.data;
+      if (this.fileInput != null) {
+        var file = this.fileInput;
+        var reader = new FileReader();
 
-        if (_this2.customer_id) {
+        reader.onloadend = function (file) {
+          _this2.editedItem.file = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+      }
+    },
+    getCustomer: function getCustomer() {
+      var _this3 = this;
+
+      axios.get("/api/customers/all").then(function (res) {
+        _this3.customers = res.data.data;
+
+        if (_this3.customer_id) {
           var cust = res.data.data.find(function (item) {
-            return item.id === _this2.customer_id;
+            return item.id === _this3.customer_id;
           });
-          _this2.customer = cust;
+          _this3.customer = cust;
         }
       });
     },
     savePayment: function savePayment() {
-      var _this3 = this;
+      var _this4 = this;
 
       var paymentData = {
         customer_id: this.customer_id,
@@ -1026,24 +1047,24 @@ __webpack_require__.r(__webpack_exports__);
       }; // Add a request interceptor
 
       axios.interceptors.request.use(function (config) {
-        _this3.loading = true;
+        _this4.loading = true;
         return config;
       }, function (error) {
-        _this3.loading = false;
+        _this4.loading = false;
         return Promise.reject(error);
       }); // Add a response interceptor
 
       axios.interceptors.response.use(function (response) {
-        _this3.loading = false;
+        _this4.loading = false;
         return response;
       }, function (error) {
-        _this3.loading = false;
+        _this4.loading = false;
         return Promise.reject(error);
       });
       axios.post("/api/receipts", paymentData).then(function (res) {
-        console.log(paymentData)(_this3.editedItem.amount = null), _this3.editedItem.pmt_method = null, _this3.editedItem.payer_account = null, _this3.editedItem.details = null, _this3.editedItem.notes = null;
+        console.log(res)(_this4.editedItem.amount = null), _this4.editedItem.pmt_method = null, _this4.editedItem.bank_id = null, _this4.editedItem.file = null, _this4.editedItem.notes = null;
 
-        _this3.getCustomer(); //  this.newData = res.data.payments.id
+        _this4.getCustomer(); //  this.newData = res.data.payments.id
 
       });
     }
@@ -2168,22 +2189,20 @@ var render = function() {
                                                                     label:
                                                                       "File input"
                                                                   },
+                                                                  on: {
+                                                                    change:
+                                                                      _vm.uploadPhoto
+                                                                  },
                                                                   model: {
                                                                     value:
-                                                                      _vm
-                                                                        .editedItem
-                                                                        .file,
+                                                                      _vm.fileInput,
                                                                     callback: function(
                                                                       $$v
                                                                     ) {
-                                                                      _vm.$set(
-                                                                        _vm.editedItem,
-                                                                        "file",
-                                                                        $$v
-                                                                      )
+                                                                      _vm.fileInput = $$v
                                                                     },
                                                                     expression:
-                                                                      "editedItem.file"
+                                                                      "fileInput"
                                                                   }
                                                                 }
                                                               ),

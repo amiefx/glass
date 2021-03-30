@@ -147,7 +147,12 @@
                                 </v-list-item-action>
                               </template>
                             </v-autocomplete>
-                            <v-file-input dense v-model="editedItem.file" label="File input"></v-file-input>
+                            <v-file-input
+                              dense
+                              v-model="fileInput"
+                              label="File input"
+                              @change="uploadPhoto"
+                            ></v-file-input>
                             <v-text-field
                               dense
                               v-model="editedItem.notes"
@@ -199,6 +204,7 @@ export default {
       supplier_id: null,
       newData: null,
       banks: [],
+      fileInput: [],
 
       rules: {
           required: v => !!v || 'This Field is Required',
@@ -212,7 +218,7 @@ export default {
         payee_account: "",
         details: "",
         bank_id: "",
-        file: [],
+        file: "",
         notes: ""
       },
     };
@@ -230,6 +236,18 @@ export default {
     custID(item) {
       this.supplier = item;
       this.supplier_id = item.id;
+    },
+
+    uploadPhoto() {
+      if (this.fileInput != null) {
+        let file = this.fileInput;
+
+        let reader = new FileReader();
+        reader.onloadend = (file) => {
+          this.editedItem.file = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
     },
 
     getSupplier() {

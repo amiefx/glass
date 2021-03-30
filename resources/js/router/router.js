@@ -480,6 +480,17 @@ const routes = [
         }
     },
     {
+        path: '/admin/purchase-order/edit/:id',
+        name: 'po-view',
+        component: () => import('../views/admin/PurchaseOrderEdit.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
         path: '/admin/salaries',
         name: 'admin-order',
         component: () => import('../views/admin/Salaries.vue'),

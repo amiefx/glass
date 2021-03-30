@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="7">
         <v-row>
-          <v-col cols="8">
+          <v-col cols="8" class="pb-0">
             <v-autocomplete
               v-model="model"
               :items="items"
@@ -18,6 +18,7 @@
               label="Search for a supplier..."
               solo
               dense
+              class="pb-0"
             >
               <template v-slot:no-data>
                 <v-list-item>
@@ -69,7 +70,7 @@
               </template>
             </v-autocomplete>
           </v-col>
-          <v-col cols="4">
+          <v-col cols="4" class="pb-0">
             <v-text-field
               solo
               dense
@@ -79,7 +80,7 @@
           </v-col>
         </v-row>
 
-        <v-divider></v-divider>
+        <v-divider class="mt-0"></v-divider>
         <v-simple-table height>
           <template v-slot:default>
             <thead>
@@ -256,9 +257,11 @@
           </v-col>
           <v-col cols="3">
             <v-file-input
+             v-if="purchaseData.pmt_method == 'Bank'"
               dense
-              v-model="purchaseData.file"
+              v-model="fileInput"
               label="File input"
+              @change="uploadPhoto"
             ></v-file-input>
           </v-col>
           <v-col cols="4">
@@ -309,6 +312,7 @@ export default {
       search: null,
       tab: null,
       balance: null,
+      fileInput: [],
 
       pmt_methods: ["Cash", "Bank"],
       supplier_id: "",
@@ -322,13 +326,24 @@ export default {
         pmt_method: "",
         bank_id: "",
         POnumber: "",
-        file: [],
+        file: "",
       },
     };
   },
 
   created() {
     this.initialize();
+
+    axios
+        .get("/api/suppliers/all")
+        .then((res) => {
+          this.items = res.data.data;
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.isLoading = false;
+        });
   },
 
   methods: {
@@ -346,6 +361,18 @@ export default {
 
     increaseProductQty(product) {
       this.$store.dispatch("purchase/increaseProductQty", product);
+    },
+
+    uploadPhoto() {
+      if (this.fileInput != null) {
+        let file = this.fileInput;
+
+        let reader = new FileReader();
+        reader.onloadend = (file) => {
+          this.purchaseData.file = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
     },
 
     saveOrder() {
@@ -436,6 +463,16 @@ export default {
       axios.get("/api/bank_detail/all").then((res) => {
         this.banks = res.data.data;
       });
+
+      axios
+      .get(`/api/purchaseinvoicedetail/${this.$route.params.id}`)
+      .then((res) => {
+        this.order = res.data;
+        this.model = res.data.order.supplier_id;
+        console.log(res.data.order.supplier_id);
+      })
+      .catch((err) => {});
+
     },
   },
 
