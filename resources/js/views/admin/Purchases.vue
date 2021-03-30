@@ -374,7 +374,7 @@ export default {
           paid_amt: this.purchaseData.paid_amt,
           payable_amt: this.amtDue,
           pmt_method: this.purchaseData.pmt_method,
-          bank_id: this.purchaseData.id,
+          bank_id: this.purchaseData.bank_id,
           POnumber: this.purchaseData.POnumber,
           file: this.purchaseData.file,
           note: "",

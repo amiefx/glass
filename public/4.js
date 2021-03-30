@@ -415,6 +415,7 @@ __webpack_require__.r(__webpack_exports__);
         return Promise.reject(error);
       });
       axios.post("/api/payments", paymentData).then(function (res) {
+        console.log(paymentData);
         _this4.editedItem.amount = null, _this4.editedItem.pmt_method = null, _this4.editedItem.payee_account = null, _this4.editedItem.details = null, _this4.editedItem.bank_id = null, _this4.editedItem.file = null, _this4.editedItem.notes = null;
 
         _this4.getSupplier();

@@ -23,6 +23,8 @@ class PurchaseOrderResource extends JsonResource
             'amount_paid' => $this->amount_paid,
             'discount' => $this->discount,
             'POnumber' => $this->POnumber,
+            'bank_id' => $this->bank_id,
+            'imageurl' => $this->imageurl,
             'note' => $this->note,
             'status' => $this->status,
             'user_id' => $this->user_id,

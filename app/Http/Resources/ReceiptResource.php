@@ -17,10 +17,12 @@ class ReceiptResource extends JsonResource
         return [
             'id' => $this->id,
             'pmt_method' => $this->pmt_method,
+            'bank_id' => $this->bank_id,
             'amount' => $this->amount,
             'payer_account' => $this->payee_account,
             'details' => $this->details,
             'notes' => $this->notes,
+            'imageurl' => $this->imageurl,
             'user' => $this->user_id,
             'created_at' => $this->created_at->format('d M, Y')
         ];

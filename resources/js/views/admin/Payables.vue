@@ -302,6 +302,7 @@ export default {
       );
 
         axios.post("/api/payments", paymentData).then((res) => {
+          console.log(paymentData)
           this.editedItem.amount = null,
           this.editedItem.pmt_method = null,
           this.editedItem.payee_account = null,

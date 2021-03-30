@@ -12,6 +12,8 @@ class Receipt extends Model
     protected $fillable = [
         'amount',
         'pmt_method',
+        'bank_id',
+        'imageurl',
         'payer_account',
         'details',
         'notes',

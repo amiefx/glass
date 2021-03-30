@@ -12,6 +12,8 @@ class Payment extends Model
     protected $fillable = [
         'amount',
         'pmt_method',
+        'bank_id',
+        'imageurl',
         'payee_account',
         'details',
         'notes',

@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[36],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Users.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Units.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/Users.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/Units.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -118,10 +118,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
 //
 //
 //
@@ -135,33 +131,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'admin',
   middleware: ['auth', 'admin'],
@@ -172,19 +141,10 @@ __webpack_require__.r(__webpack_exports__);
       loading: false,
       snackbar: false,
       text: '',
-      roles: ['Admin', 'Accountant'],
       success: '',
       error: '',
       options: {
-<<<<<<< HEAD
-        sortBy: ['name'],
-=======
-<<<<<<< HEAD
-        sortBy: ['name'],
-=======
-        sortBy: ['id'],
->>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
+        sortBy: ['actual_name'],
         sortDesc: [true]
       },
       rules: {
@@ -203,35 +163,15 @@ __webpack_require__.r(__webpack_exports__);
         value: 'id'
       }, {
         text: 'Name',
-        value: 'name'
-<<<<<<< HEAD
+        value: 'actual_name'
       }, {
-        text: 'Email',
-        value: 'email'
-      }, {
-=======
-      }, {
-        text: 'Email',
-        value: 'email'
-      }, {
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
-        text: 'Contact',
-        value: 'contact_no'
-      }, {
-        text: 'Role',
-        value: 'type'
-      }, {
-        text: 'Status',
-        value: 'is_active'
+        text: 'Short Name',
+        value: 'short_name'
       }, {
         text: 'Actions',
         value: 'action',
         sortable: false
       }],
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
       status: [{
         text: 'Active',
         value: true
@@ -239,67 +179,25 @@ __webpack_require__.r(__webpack_exports__);
         text: 'In Active',
         value: false
       }],
-      users: [],
-<<<<<<< HEAD
-=======
+      types: ['unit', 'service provider'],
+      units: [],
       editedIndex: -1,
       editedItem: {
         id: '',
-        name: '',
-        email: '',
-        contact_no: '',
-        type: '',
-        is_active: '',
-        created_at: ''
+        actual_name: '',
+        short_name: ''
       },
       defaultItem: {
         id: '',
         name: '',
-        email: '',
-        contact_no: '',
-        type: '',
-        is_active: '',
-        password: '',
-        rpassword: '',
-        created_at: ''
-=======
-      panels: [],
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
-      editedIndex: -1,
-      editedItem: {
-        id: '',
-        name: '',
-        email: '',
-        contact_no: '',
-        type: '',
-        is_active: '',
-        created_at: ''
-      },
-      defaultItem: {
-        id: '',
-<<<<<<< HEAD
-        name: '',
-        email: '',
-        contact_no: '',
-        type: '',
-        is_active: '',
-        password: '',
-        rpassword: '',
-        created_at: ''
-=======
-        size: '',
-        standard_size: ''
->>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
+        actual_name: '',
+        short_name: ''
       }
     };
   },
   computed: {
     formTitle: function formTitle() {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
-    },
-    passwordMatch: function passwordMatch() {
-      return this.editedItem.password != this.editedItem.rpassword ? 'Password does Not Match' : true;
     }
   },
   watch: {
@@ -311,94 +209,103 @@ __webpack_require__.r(__webpack_exports__);
     this.initialize();
   },
   methods: {
-<<<<<<< HEAD
-    updateRole: function updateRole(item) {
-=======
-<<<<<<< HEAD
-    updateRole: function updateRole(item) {
-=======
+    //   updateStatus(item) {
+    //       const index = this.units.data.indexOf(item);
+    //       axios.post('/api/change-status', {'status': item.is_active, 'unit': item.id})
+    //         .then(res => {
+    //            this.text = res.data.unit.name + "'s Status Updated to " + res.data.unit.is_active
+    //            this.snackbar = true
+    //             })
+    //         .catch(error => {
+    //             // this.text = error.response.unit.name + "'s Status Cannot be Updated" + error.response.unit.status
+    //             this.units.data[index].is_active = error.response.data.unit.is_active
+    //             this.snackbar = true
+    //             console.dir(error.response)
+    //             })
+    //   },
     searchIt: function searchIt(e) {
->>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
       var _this = this;
 
-      var index = this.users.data.indexOf(item);
-      axios.post('/api/change-role', {
-        'role': item.type,
-        'user': item.id
-      }).then(function (res) {
-        // this.users.data[index].role = res.data.data.user.role
-        _this.text = res.data.user.name + "'s Role Updated to " + res.data.user.type;
-        _this.snackbar = true;
-      })["catch"](function (error) {
-        // this.text = error.response.data.user.name + "'s Role Cannot be Updated" + error.response.data.user.role
-        _this.users[index].type = error.response.user.type;
-        _this.snackbar = true;
-        console.dir(error.response);
-      });
+      if (e.length > 3) {
+        axios.get("/api/units/".concat(e)).then(function (res) {
+          return _this.units = res.data.units;
+        })["catch"](function (err) {
+          return console.dir(err.response);
+        });
+      }
+
+      if (e.length <= 0) {
+        // axios.get(`/api/units?page=${e.page}`,{params:{'per_page': e.itemsPerPage}})
+        //   axios.get(`/api/units`)
+        //     .then(res => this.units = res.data.data.units)
+        //     .catch(err => console.dir(err.response))
+        var sortBy = this.options.sortBy.length == 0 ? 'actual_name' : this.options.sortBy[0];
+        var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
+        axios.get("/api/units?page=".concat(e.page), {
+          params: {
+            'per_page': e.itemsPerPage,
+            'sort_by': sortBy,
+            'order_by': orderBy
+          }
+        }).then(function (res) {
+          _this.units = res.data.units;
+        })["catch"](function (err) {
+          return console.dir(err.response);
+        });
+      }
     },
-    updateStatus: function updateStatus(item) {
+    paginate: function paginate(e) {
       var _this2 = this;
 
-      var index = this.users.data.indexOf(item);
-      axios.post('/api/change-status', {
-        'status': item.is_active,
-        'user': item.id
+      var sortBy = this.options.sortBy.length == 0 ? 'actual_name' : this.options.sortBy[0];
+      var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
+      axios.get("/api/units?page=".concat(e.page), {
+        params: {
+          'per_page': e.itemsPerPage,
+          'sort_by': sortBy,
+          'order_by': orderBy
+        }
       }).then(function (res) {
-        // this.users.data[index].role = res.data.data.user.role
-        _this2.text = res.data.user.name + "'s Status Updated to " + res.data.user.is_active;
-        _this2.snackbar = true;
-      })["catch"](function (error) {
-        // this.text = error.response.user.name + "'s Status Cannot be Updated" + error.response.user.status
-        _this2.users.data[index].type = error.response.data.user.type;
-        _this2.snackbar = true;
-        console.dir(error.response);
+        _this2.units = res.data.units;
+      })["catch"](function (err) {//----
       });
     },
-    checkEmail: function checkEmail() {
+    initialize: function initialize() {
       var _this3 = this;
 
-      if (/.+@.+\..+/.test(this.editedItem.email)) {
-        axios.post('/api/email/verify', {
-          email: this.editedItem.email
-        }).then(function (res) {
-          _this3.success = res.data.message;
-          _this3.error = '';
-        })["catch"](function (err) {
-          ;
-          _this3.success = '', _this3.error = 'Email Already Exists';
-        });
-      }
-    },
-    selectAll: function selectAll(e) {
-      this.selected = [];
+      // Add a request interceptor
+      axios.interceptors.request.use(function (config) {
+        _this3.loading = true;
+        return config;
+      }, function (error) {
+        _this3.loading = false;
+        return Promise.reject(error);
+      }); // Add a response interceptor
 
-      if (e.length > 0) {
-        this.selected = e.map(function (val) {
-          return val.id;
-        });
-      }
-
-      console.dir(this.selected);
+      axios.interceptors.response.use(function (response) {
+        _this3.loading = false;
+        return response;
+      }, function (error) {
+        _this3.loading = false;
+        return Promise.reject(error);
+      });
     },
-    deleteAll: function deleteAll() {
+    editItem: function editItem(item) {
+      this.editedIndex = this.units.data.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    deleteItem: function deleteItem(item) {
       var _this4 = this;
 
-      var decide = confirm('Are you sure you want to delete these items?');
+      var index = this.units.data.indexOf(item);
+      var decide = confirm('Are you sure you want to delete this item?');
 
       if (decide) {
-        axios.post('/api/users/delete', {
-          'users': this.selected
-        }).then(function (res) {
-          _this4.text = "Rcords Deleted Successfully!";
-
-          _this4.selected.map(function (val) {
-            var index = _this4.users.data.indexOf(val);
-
-            _this4.users.data.splice(index, 1);
-          });
-
+        axios["delete"]('/api/units/' + item.id).then(function (res) {
           _this4.snackbar = true;
+
+          _this4.units.data.splice(index, 1);
         })["catch"](function (err) {
           console.log(err.response);
           _this4.text = "Error Deleting Record";
@@ -406,167 +313,41 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    searchIt: function searchIt(e) {
-      var _this5 = this;
-
-      if (e.length > 3) {
-        axios.get("/api/users/".concat(e)).then(function (res) {
-          return _this5.users = res.data.users;
-        })["catch"](function (err) {
-          return console.dir(err.response);
-        });
-      }
-
-      if (e.length <= 0) {
-        // axios.get(`/api/users?page=${e.page}`,{params:{'per_page': e.itemsPerPage}})
-        //   axios.get(`/api/users`)
-        //     .then(res => this.users = res.data.data.users)
-        //     .catch(err => console.dir(err.response))
-<<<<<<< HEAD
-        var sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
-=======
-<<<<<<< HEAD
-        var sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
-=======
-        var sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
->>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
-        var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
-        axios.get("/api/users?page=".concat(e.page), {
-          params: {
-            'per_page': e.itemsPerPage,
-            'sort_by': sortBy,
-            'order_by': orderBy
-          }
-        }).then(function (res) {
-          _this5.users = res.data.users;
-        })["catch"](function (err) {
-          return console.dir(err.response);
-        });
-      }
-    },
-    paginate: function paginate(e) {
-      var _this6 = this;
-
-<<<<<<< HEAD
-      var sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
-=======
-<<<<<<< HEAD
-      var sortBy = this.options.sortBy.length == 0 ? 'name' : this.options.sortBy[0];
-=======
-      var sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
->>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
-      var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
-      axios.get("/api/users?page=".concat(e.page), {
-        params: {
-          'per_page': e.itemsPerPage,
-          'sort_by': sortBy,
-          'order_by': orderBy
-        }
-      }).then(function (res) {
-        _this6.users = res.data.users;
-      })["catch"](function (err) {//----
-      });
-    },
-    initialize: function initialize() {
-      var _this7 = this;
-
-      // Add a request interceptor
-      axios.interceptors.request.use(function (config) {
-        _this7.loading = true;
-        return config;
-      }, function (error) {
-        _this7.loading = false;
-        return Promise.reject(error);
-      }); // Add a response interceptor
-
-      axios.interceptors.response.use(function (response) {
-        _this7.loading = false;
-        return response;
-      }, function (error) {
-        _this7.loading = false;
-        return Promise.reject(error);
-      });
-    },
-    editItem: function editItem(item) {
-      this.editedIndex = this.users.data.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
-    },
-    deleteItem: function deleteItem(item) {
-      var _this8 = this;
-
-      var index = this.users.data.indexOf(item);
-      var decide = confirm('Are you sure you want to delete this item?');
-
-      if (decide) {
-        axios["delete"]('/api/users/' + item.id).then(function (res) {
-          _this8.snackbar = true;
-
-          _this8.users.data.splice(index, 1);
-        })["catch"](function (err) {
-          console.log(err.response);
-          _this8.text = "Error Deleting Record";
-          _this8.snackbar = true;
-        });
-      }
-    },
     close: function close() {
-      var _this9 = this;
+      var _this5 = this;
 
       this.dialog = false;
       setTimeout(function () {
-        _this9.editedItem = Object.assign({}, _this9.defaultItem);
-        _this9.editedIndex = -1;
+        _this5.editedItem = Object.assign({}, _this5.defaultItem);
+        _this5.editedIndex = -1;
       }, 300);
     },
     save: function save() {
-      var _this10 = this;
+      var _this6 = this;
 
       if (this.editedIndex > -1) {
         var index = this.editedIndex;
-        axios.put('/api/users/' + this.editedItem.id, this.editedItem) //  .then(res => Object.assign(this.users[this.editedIndex], this.editedItem))
+        axios.put('/api/units/' + this.editedItem.id, this.editedItem) //  .then(res => Object.assign(this.units[this.editedIndex], this.editedItem))
         .then(function (res) {
-<<<<<<< HEAD
-          _this10.text = "Record Updated Successfully!";
-          _this10.snackbar = true;
-          Object.assign(_this10.users.data[index], res.data.user);
-=======
-<<<<<<< HEAD
-          _this10.text = "Record Updated Successfully!";
-          _this10.snackbar = true;
-          Object.assign(_this10.users.data[index], res.data.user);
-=======
           console.log(res);
           _this6.text = "Record Updated Successfully!";
           _this6.snackbar = true;
-          Object.assign(_this6.panels.data[index], res.data.panel);
->>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
+          Object.assign(_this6.units.data[index], res.data.unit);
         })["catch"](function (err) {
           console.log(err.response);
-          _this10.text = "Error Updating Record";
-          _this10.snackbar = true;
-        }); //  Object.assign(this.users.data[this.editedIndex], this.editedItem)
+          _this6.text = "Error Updating Record";
+          _this6.snackbar = true;
+        }); //  Object.assign(this.units.data[this.editedIndex], this.editedItem)
       } else {
-        axios.post('/api/users', this.editedItem).then(function (res) {
-          _this10.text = "Record Added Successfully!";
-          _this10.snackbar = true;
+        axios.post('/api/units', this.editedItem).then(function (res) {
+          _this6.text = "Record Added Successfully!";
+          _this6.snackbar = true;
 
-<<<<<<< HEAD
-          _this10.users.data.push(res.data.user);
-=======
-<<<<<<< HEAD
-          _this10.users.data.push(res.data.user);
-=======
-          _this6.panels.data.push(res.data.panel);
->>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
+          _this6.units.data.push(res.data.unit);
         })["catch"](function (err) {
           console.dir(err);
-          _this10.text = "Error Inserting Record";
-          _this10.snackbar = true;
+          _this6.text = "Error Inserting Record";
+          _this6.snackbar = true;
         });
       }
 
@@ -580,9 +361,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Users.vue?vue&type=template&id=358a02f9&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Units.vue?vue&type=template&id=0526c0e0&":
 /*!****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/Users.vue?vue&type=template&id=358a02f9& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/Units.vue?vue&type=template&id=0526c0e0& ***!
   \****************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -602,12 +383,12 @@ var render = function() {
         staticClass: "elevation-1",
         attrs: {
           headers: _vm.headers,
-          items: _vm.users.data,
+          items: _vm.units.data,
           "items-per-page": 5,
           "item-key": "id",
           loading: _vm.loading,
           options: _vm.options,
-          "server-items-length": _vm.users.total,
+          "server-items-length": _vm.units.total,
           "loading-text": "Loading.. Please Wait!",
           "footer-props": {
             itemsPerPageOptions: [5, 10, 15],
@@ -619,8 +400,7 @@ var render = function() {
           pagination: _vm.paginate,
           "update:options": function($event) {
             _vm.options = $event
-          },
-          input: _vm.selectAll
+          }
         },
         scopedSlots: _vm._u([
           {
@@ -631,7 +411,9 @@ var render = function() {
                   "v-toolbar",
                   { attrs: { flat: "", color: "" } },
                   [
-                    _c("v-toolbar-title", [_vm._v("user Management")]),
+                    _c("v-toolbar-title", { staticClass: "text-primary" }, [
+                      _vm._v("Unit Management")
+                    ]),
                     _vm._v(" "),
                     _c("v-divider", {
                       staticClass: "mx-4",
@@ -659,15 +441,7 @@ var render = function() {
                                     },
                                     on
                                   ),
-<<<<<<< HEAD
-                                  [_vm._v("New User")]
-=======
-<<<<<<< HEAD
-                                  [_vm._v("New User")]
-=======
-                                  [_vm._v("New Pnel")]
->>>>>>> 93a774a06fbe34e962871cd81e589e9d675fff1b
->>>>>>> 93162f28da1aa6b09531fad3eb3cfe43bcd8ecb9
+                                  [_vm._v("New Unit")]
                                 )
                               ]
                             }
@@ -727,155 +501,42 @@ var render = function() {
                                               [
                                                 _c("v-text-field", {
                                                   attrs: {
-                                                    label: "User Name",
-                                                    rules: [
-                                                      _vm.rules.required,
-                                                      _vm.rules.min
-                                                    ]
-                                                  },
-                                                  model: {
-                                                    value: _vm.editedItem.name,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "name",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.name"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _vm.editedIndex == -1
-                                                  ? _c("v-text-field", {
-                                                      attrs: {
-                                                        label: "Email",
-                                                        rules: [
-                                                          _vm.rules.required,
-                                                          _vm.rules.validEmail
-                                                        ],
-                                                        "success-message":
-                                                          _vm.success,
-                                                        "error-messages":
-                                                          _vm.error
-                                                      },
-                                                      on: {
-                                                        blur: _vm.checkEmail
-                                                      },
-                                                      model: {
-                                                        value:
-                                                          _vm.editedItem.email,
-                                                        callback: function(
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.editedItem,
-                                                            "email",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "editedItem.email"
-                                                      }
-                                                    })
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                _vm.editedIndex == -1
-                                                  ? _c("v-text-field", {
-                                                      attrs: {
-                                                        type: "password",
-                                                        label: "Password",
-                                                        rules: [
-                                                          _vm.rules.required
-                                                        ]
-                                                      },
-                                                      model: {
-                                                        value:
-                                                          _vm.editedItem
-                                                            .password,
-                                                        callback: function(
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.editedItem,
-                                                            "password",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "editedItem.password"
-                                                      }
-                                                    })
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                _vm.editedIndex == -1
-                                                  ? _c("v-text-field", {
-                                                      attrs: {
-                                                        type: "password",
-                                                        label:
-                                                          "ReType Password",
-                                                        rules: [
-                                                          _vm.rules.required,
-                                                          _vm.passwordMatch
-                                                        ]
-                                                      },
-                                                      model: {
-                                                        value:
-                                                          _vm.editedItem
-                                                            .rpassword,
-                                                        callback: function(
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.editedItem,
-                                                            "rpassword",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "editedItem.rpassword"
-                                                      }
-                                                    })
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    label: "Contact No",
+                                                    label: "Name",
                                                     rules: [_vm.rules.required]
                                                   },
                                                   model: {
                                                     value:
-                                                      _vm.editedItem.contact_no,
+                                                      _vm.editedItem
+                                                        .actual_name,
                                                     callback: function($$v) {
                                                       _vm.$set(
                                                         _vm.editedItem,
-                                                        "contact_no",
+                                                        "actual_name",
                                                         $$v
                                                       )
                                                     },
                                                     expression:
-                                                      "editedItem.contact_no"
+                                                      "editedItem.actual_name"
                                                   }
                                                 }),
                                                 _vm._v(" "),
-                                                _c("v-select", {
+                                                _c("v-text-field", {
                                                   attrs: {
-                                                    items: _vm.roles,
-                                                    label: "Select Role",
+                                                    label: "Short name",
                                                     rules: [_vm.rules.required]
                                                   },
                                                   model: {
-                                                    value: _vm.editedItem.type,
+                                                    value:
+                                                      _vm.editedItem.short_name,
                                                     callback: function($$v) {
                                                       _vm.$set(
                                                         _vm.editedItem,
-                                                        "type",
+                                                        "short_name",
                                                         $$v
                                                       )
                                                     },
                                                     expression:
-                                                      "editedItem.type"
+                                                      "editedItem.short_name"
                                                   }
                                                 })
                                               ],
@@ -1003,69 +664,6 @@ var render = function() {
             proxy: true
           },
           {
-            key: "item.type",
-            fn: function(ref) {
-              var item = ref.item
-              return [
-                _c(
-                  "v-edit-dialog",
-                  {
-                    attrs: {
-                      large: "",
-                      block: "",
-                      persistent: "",
-                      "return-value": item.type
-                    },
-                    on: {
-                      "update:returnValue": function($event) {
-                        return _vm.$set(item, "type", $event)
-                      },
-                      "update:return-value": function($event) {
-                        return _vm.$set(item, "type", $event)
-                      },
-                      save: function($event) {
-                        return _vm.updateRole(item)
-                      }
-                    },
-                    scopedSlots: _vm._u(
-                      [
-                        {
-                          key: "input",
-                          fn: function() {
-                            return [
-                              _c("v-select", {
-                                attrs: {
-                                  items: _vm.roles,
-                                  label: "Select Role",
-                                  rules: [_vm.rules.required]
-                                },
-                                model: {
-                                  value: item.type,
-                                  callback: function($$v) {
-                                    _vm.$set(item, "type", $$v)
-                                  },
-                                  expression: "item.type"
-                                }
-                              })
-                            ]
-                          },
-                          proxy: true
-                        }
-                      ],
-                      null,
-                      true
-                    )
-                  },
-                  [
-                    _vm._v(
-                      "\n            " + _vm._s(item.type) + "\n            "
-                    )
-                  ]
-                )
-              ]
-            }
-          },
-          {
             key: "item.is_active",
             fn: function(ref) {
               var item = ref.item
@@ -1180,17 +778,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/Users.vue":
+/***/ "./resources/js/views/admin/Units.vue":
 /*!********************************************!*\
-  !*** ./resources/js/views/admin/Users.vue ***!
+  !*** ./resources/js/views/admin/Units.vue ***!
   \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Users_vue_vue_type_template_id_358a02f9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Users.vue?vue&type=template&id=358a02f9& */ "./resources/js/views/admin/Users.vue?vue&type=template&id=358a02f9&");
-/* harmony import */ var _Users_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Users.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/Users.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Units_vue_vue_type_template_id_0526c0e0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Units.vue?vue&type=template&id=0526c0e0& */ "./resources/js/views/admin/Units.vue?vue&type=template&id=0526c0e0&");
+/* harmony import */ var _Units_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Units.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/Units.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
@@ -1215,9 +813,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Users_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Users_vue_vue_type_template_id_358a02f9___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Users_vue_vue_type_template_id_358a02f9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Units_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Units_vue_vue_type_template_id_0526c0e0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Units_vue_vue_type_template_id_0526c0e0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1253,38 +851,38 @@ _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/admin/Users.vue"
+component.options.__file = "resources/js/views/admin/Units.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/Users.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/views/admin/Units.vue?vue&type=script&lang=js&":
 /*!*********************************************************************!*\
-  !*** ./resources/js/views/admin/Users.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/views/admin/Units.vue?vue&type=script&lang=js& ***!
   \*********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Users_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Users.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Users.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Users_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Units_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Units.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Units.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Units_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/Users.vue?vue&type=template&id=358a02f9&":
+/***/ "./resources/js/views/admin/Units.vue?vue&type=template&id=0526c0e0&":
 /*!***************************************************************************!*\
-  !*** ./resources/js/views/admin/Users.vue?vue&type=template&id=358a02f9& ***!
+  !*** ./resources/js/views/admin/Units.vue?vue&type=template&id=0526c0e0& ***!
   \***************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Users_vue_vue_type_template_id_358a02f9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Users.vue?vue&type=template&id=358a02f9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Users.vue?vue&type=template&id=358a02f9&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Users_vue_vue_type_template_id_358a02f9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Units_vue_vue_type_template_id_0526c0e0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Units.vue?vue&type=template&id=0526c0e0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Units.vue?vue&type=template&id=0526c0e0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Units_vue_vue_type_template_id_0526c0e0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Users_vue_vue_type_template_id_358a02f9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Units_vue_vue_type_template_id_0526c0e0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
