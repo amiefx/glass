@@ -84,7 +84,11 @@ export default {
              return;
          }
 
-       }
+       },
+
+       ADD_PRODUCTS_TO_CART (state, product) {
+        state.purchase = product.product;
+       },
     },
 
     actions: {
@@ -107,7 +111,11 @@ export default {
 
         increaseProductQty ({ commit }, product) {
         commit('INCREASE_QTY', product)
-        }
+        },
+
+        addProductsToPurchase({ commit }, { product }) {
+            commit('ADD_PRODUCTS_TO_CART', { product});
+        },
 
     }
 

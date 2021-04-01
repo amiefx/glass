@@ -3,9 +3,11 @@
     <v-row>
       <div class="customer px-5">
         <strong class="">
-          Invoice No# {{ order.order.id }} <br />
+          Purchase Order No# {{ order.order.id }} <br />
+          Supplier Invoice No# {{ order.order.POnumber }} <br />
           Supplier: {{ order.order.supplier_name }} <br />
           Date: {{ order.order.created_at }}
+
         </strong>
       </div>
     </v-row>
@@ -65,7 +67,8 @@
           </v-simple-table>
         </div>
 
-        <v-btn color="primary" class="float-right" @click="printme">Print</v-btn>
+        <v-btn color="green" dark class="float-right" @click="printme">Print</v-btn>
+        <v-btn color="primary" class="float-right mr-2" @click="editme">Edit</v-btn>
       </v-col>
     </v-row>
   </div>
@@ -127,6 +130,10 @@ export default {
       // document.body.innerHTML = restorepage;
       let routeData = this.$router.resolve(`/admin/purchase-order/print/${this.order.order.id}`);
             window.open(routeData.href, '_blank');
+    },
+
+    editme() {
+      this.$router.push(`/admin/purchase-order/edit/${this.order.order.id}`);
     },
   },
 

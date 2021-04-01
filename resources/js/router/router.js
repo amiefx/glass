@@ -381,6 +381,17 @@ const routes = [
         }
     },
     {
+        path: '/admin/receipt/print/:id',
+        name: 'admin-order',
+        component: () => import('../views/admin/ReceiptPrint.vue'),
+        meta: {
+            layout: '',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
         path: '/admin/invoice/print/a4/:id',
         name: 'admin-order',
         component: () => import('../views/admin/orders/print/A4Id.vue'),

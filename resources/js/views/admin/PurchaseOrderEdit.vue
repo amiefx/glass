@@ -306,6 +306,7 @@ export default {
       products: [],
       banks: [],
       isLoading: false,
+      order: [],
 
       items: [],
       model: null,
@@ -313,6 +314,7 @@ export default {
       tab: null,
       balance: null,
       fileInput: [],
+      obj: [],
 
       pmt_methods: ["Cash", "Bank"],
       supplier_id: "",
@@ -419,8 +421,8 @@ export default {
 
       console.log(orderData);
 
-      axios.post("/api/purchaseorder", orderData).then((res) => {
-        //    this.$router.push(`/checkout/${res.data.id}`)
+      axios.put('/api/purchaseorder'+this.purchaseData.id, orderData).then((res) => {
+
         this.clearPurchaseItems();
         console.log(orderData);
         this.model = null;
@@ -469,11 +471,21 @@ export default {
       .then((res) => {
         this.order = res.data;
         this.model = res.data.order.supplier_id;
-        console.log(res.data.order.supplier_id);
+        this.purchaseData.POnumber = res.data.order.POnumber;
+        this.purchaseData.paid_amt = res.data.order.amount_paid;
+        this.purchaseData.discount = res.data.order.discount;
+        this.purchaseData.pmt_method = res.data.order.status;
       })
       .catch((err) => {});
 
     },
+
+    productsEditted() {
+
+        const  xyz =  this.order.purchaseorderdetails.map(item => ({ quantity: item.quantity, product:{ id: item.product_id, sku: item.product_name, purchase_price: item.price}}));
+        this.obj = xyz;
+
+    }
   },
 
   computed: {
@@ -525,6 +537,16 @@ export default {
           this.isLoading = false;
         });
     },
+
+    order() {
+
+        this.productsEditted()
+        console.log(this.obj)
+        this.$store.dispatch("purchase/addProductsToPurchase", {
+        product: this.obj
+      });
+    }
+
   },
 };
 </script>

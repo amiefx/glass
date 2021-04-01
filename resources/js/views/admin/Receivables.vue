@@ -308,12 +308,11 @@ export default {
 
       axios.post("/api/receipts", paymentData).then((res) => {
           console.log(paymentData)
-          (this.editedItem.amount = null),
-          (this.editedItem.pmt_method = null),
-          (this.editedItem.bank_id = null),
-          (this.editedItem.file = null),
-          (this.editedItem.notes = null);
-        this.getCustomer();
+          this.editedItem.amount = null;
+          this.editedItem.bank_id = "";
+          this.editedItem.file = "";
+          this.editedItem.notes = "";
+          this.getCustomer();
         //  this.newData = res.data.payments.id
       });
     },

@@ -1064,7 +1064,11 @@ __webpack_require__.r(__webpack_exports__);
         return Promise.reject(error);
       });
       axios.post("/api/receipts", paymentData).then(function (res) {
-        console.log(paymentData)(_this4.editedItem.amount = null), _this4.editedItem.pmt_method = null, _this4.editedItem.bank_id = null, _this4.editedItem.file = null, _this4.editedItem.notes = null;
+        console.log(paymentData);
+        _this4.editedItem.amount = null;
+        _this4.editedItem.bank_id = "";
+        _this4.editedItem.file = "";
+        _this4.editedItem.notes = "";
 
         _this4.getCustomer(); //  this.newData = res.data.payments.id
 

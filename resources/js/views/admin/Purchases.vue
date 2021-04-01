@@ -266,13 +266,14 @@
           </v-col>
           <v-col cols="4">
             <v-btn
+              small
               class="float-right ml-2"
               color="primary"
               :loading="loading"
               @click="saveOrder"
               >Save</v-btn
             >
-            <v-btn class="float-right" color="error" @click="clearPurchaseItems"
+            <v-btn small class="float-right" color="error" @click="clearPurchaseItems"
               >Clear all</v-btn
             >
           </v-col>
@@ -374,7 +375,7 @@ export default {
           paid_amt: this.purchaseData.paid_amt,
           payable_amt: this.amtDue,
           pmt_method: this.purchaseData.pmt_method,
-          bank_id: this.purchaseData.id,
+          bank_id: this.purchaseData.bank_id,
           POnumber: this.purchaseData.POnumber,
           file: this.purchaseData.file,
           note: "",
