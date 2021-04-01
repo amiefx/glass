@@ -388,7 +388,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+<<<<<<< HEAD
 //
+=======
+>>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1568,11 +1571,15 @@ var render = function() {
                         "v-btn",
                         {
                           staticClass: "float-right ml-2",
+<<<<<<< HEAD
                           attrs: {
                             small: "",
                             color: "primary",
                             loading: _vm.loading
                           },
+=======
+                          attrs: { color: "primary", loading: _vm.loading },
+>>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
                           on: { click: _vm.saveOrder }
                         },
                         [_vm._v("Save")]
@@ -1582,7 +1589,11 @@ var render = function() {
                         "v-btn",
                         {
                           staticClass: "float-right",
+<<<<<<< HEAD
                           attrs: { small: "", color: "error" },
+=======
+                          attrs: { color: "error" },
+>>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
                           on: { click: _vm.clearPurchaseItems }
                         },
                         [_vm._v("Clear all")]

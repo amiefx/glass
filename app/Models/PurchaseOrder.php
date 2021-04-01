@@ -15,6 +15,8 @@ class PurchaseOrder extends Model
         'total',
         'amount_paid',
         'POnumber',
+        'bank_id',
+        'imageurl',
         'discount',
         'note',
         'status',

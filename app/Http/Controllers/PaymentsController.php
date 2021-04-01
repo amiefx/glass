@@ -60,7 +60,20 @@ class PaymentsController extends Controller
     {
         $user = auth()->user();
         $postData = $request->all();
-        // dd($postData);
+        
+        
+        $png_url = "rec-".time().".jpg";
+        $subpath = "/images/payments/" . $png_url;
+        $path = public_path() . $subpath;
+        $img = $request->file;
+        $img = substr($img, strpos($img, ",")+1);
+        $data = base64_decode($img);
+        $success = file_put_contents($path, $data);
+
+
+        if ($success) {
+
+
         try {
             DB::beginTransaction();
 
@@ -70,6 +83,8 @@ class PaymentsController extends Controller
                 "supplier_id" => $order['supplier_id'],
                 "amount" => $order['amount'],
                 "pmt_method" => $order['pmt_method'],
+                "bank_id" => $order['bank_id'],
+                "imageurl" => $subpath,
                 "payee_account" => $order['payee_account'],
                 "details" => $order['details'],
                 "notes" => $order['notes'],
@@ -115,6 +130,7 @@ class PaymentsController extends Controller
                     'credit' => 0,
                     'balance' => $order['amount'] * (-1),
                     'status' => 1,
+                    "imageurl" => $subpath,
                     'user_id' => $user->id
                 ]);
 
@@ -123,13 +139,17 @@ class PaymentsController extends Controller
 
 
             DB::commit();
+            return response()->json(['receipts'=> $order], 200);
+
         } catch (\Throwable $th) {
             DB::rollback();
 
             return response()->json(['error'=> $th->getMessage()], 500);
         }
 
-    return response()->json(['payments'=> $payments], 200);
+    }else {
+            return response()->json(['error'=> "something went wrong!"], 500);
+        }
 
     }
 

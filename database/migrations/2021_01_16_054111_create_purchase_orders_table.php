@@ -22,6 +22,9 @@ class CreatePurchaseOrdersTable extends Migration
             $table->integer('amount_paid')->nullable()->default(null);
             $table->integer('note')->nullable()->default(null);
             $table->string('status')->nullable()->default(null);
+            $table->string('POnumber')->nullable()->default(null);
+            $table->integer('bank_id')->nullable()->default(0);
+            $table->string('imageurl')->nullable()->default(null);
             $table->integer('user_id');
             $table->timestamps();
         });

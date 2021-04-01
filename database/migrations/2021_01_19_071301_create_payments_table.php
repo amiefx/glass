@@ -17,6 +17,8 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->integer('amount');
             $table->text('pmt_method');
+            $table->integer('bank_id')->nullable()->default(0);
+            $table->string('imageurl')->nullable()->default(null);
             $table->text('payee_account')->nullable();
             $table->text('details')->nullable();
             $table->text('notes')->nullable();

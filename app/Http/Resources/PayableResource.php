@@ -21,6 +21,7 @@ class PayableResource extends JsonResource
             'debit' => $this->debit,
             'credit' => $this->credit,
             'balance' => $this->balance,
+            'imageurl' => $this->imageurl,
             'status' => $this->status,
         ];
     }

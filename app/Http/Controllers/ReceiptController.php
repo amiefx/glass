@@ -40,10 +40,7 @@ class ReceiptController extends Controller
         $sortBy = $request->sort_by ? $request->sort_by : 'created_at';
         $orderBy = $request->order_by ? $request->order_by : 'desc';
         $customer_id = $request->customer_id;
-        $receipts = Receipt::where([
-            ['id', $id],
-
-        ]);
+        $receipts = Receipt::where([['id', $id],]);
         return response()->json([
             'receipts' => new ReceiptCollection($receipts->orderBy($sortBy, $orderBy)->paginate($per_page)),
         ], 200);
@@ -59,6 +56,18 @@ class ReceiptController extends Controller
     {
         $user = auth()->user();
         $postData = $request->all();
+
+        $png_url = "rec-".time().".jpg";
+        $subpath = "/images/payments/" . $png_url;
+        $path = public_path() . $subpath;
+        $img = $request->file;
+        $img = substr($img, strpos($img, ",")+1);
+        $data = base64_decode($img);
+        $success = file_put_contents($path, $data);
+
+
+        if ($success) {
+        
         // dd($postData);
         try {
             DB::beginTransaction();
@@ -69,9 +78,11 @@ class ReceiptController extends Controller
                 "customer_id" => $order['customer_id'],
                 "amount" => $order['amount'],
                 "pmt_method" => $order['pmt_method'],
+                "bank_id" => $order['bank_id'],
                 "payer_account" => $order['payer_account'],
                 "details" => $order['details'],
                 "notes" => $order['notes'],
+                "imageurl" => $subpath,
                 "user_id" => $user->id,
             ]);
             $receipts->save();
@@ -114,6 +125,7 @@ class ReceiptController extends Controller
                     'credit' => $order['amount'],
                     'balance' => $order['amount'] * (-1),
                     'status' => 1,
+                    "imageurl" => $subpath,
                     'user_id' => $user->id
                 ]);
 
@@ -122,13 +134,17 @@ class ReceiptController extends Controller
 
 
             DB::commit();
+            return response()->json(['receipts'=> $order], 200);
+
         } catch (\Throwable $th) {
             DB::rollback();
 
             return response()->json(['error'=> $th->getMessage()], 500);
         }
 
-    return response()->json(['receipts'=> $receipts], 200);
+        }else {
+            return response()->json(['error'=> "something went wrong!"], 500);
+        }
 
     }
 }

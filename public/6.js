@@ -505,7 +505,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return Promise.reject(error);
       });
       console.log(orderData);
+<<<<<<< HEAD
       axios.put('/api/purchaseorder' + this.purchaseData.id, orderData).then(function (res) {
+=======
+      axios.post("/api/purchaseorder", orderData).then(function (res) {
+        //    this.$router.push(`/checkout/${res.data.id}`)
+>>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
         _this3.clearPurchaseItems();
 
         console.log(orderData);
@@ -541,6 +546,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
       axios.get("/api/bank_detail/all").then(function (res) {
         _this4.banks = res.data.data;
+<<<<<<< HEAD
       });
       axios.get("/api/purchaseinvoicedetail/".concat(this.$route.params.id)).then(function (res) {
         _this4.order = res.data;
@@ -563,6 +569,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         };
       });
       this.obj = xyz;
+=======
+      });
+      axios.get("/api/purchaseinvoicedetail/".concat(this.$route.params.id)).then(function (res) {
+        _this4.order = res.data;
+        _this4.model = res.data.order.supplier_id;
+        console.log(res.data.order.supplier_id);
+      })["catch"](function (err) {});
+>>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
     }
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -606,6 +620,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function (err) {
         console.log(err);
         _this6.isLoading = false;
+<<<<<<< HEAD
       });
     },
     order: function order() {
@@ -613,6 +628,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log(this.obj);
       this.$store.dispatch("purchase/addProductsToPurchase", {
         product: this.obj
+=======
+>>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
       });
     }
   }

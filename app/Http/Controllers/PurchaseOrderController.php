@@ -65,6 +65,17 @@ class PurchaseOrderController extends Controller
         $user = auth()->user();
         $postData = $request->all();
 
+        $png_url = "rec-".time().".jpg";
+        $subpath = "/images/payments/" . $png_url;
+        $path = public_path() . $subpath;
+        $img = $postData['orderDetails']['file'];
+        $img = substr($img, strpos($img, ",")+1);
+        $data = base64_decode($img);
+        $success = file_put_contents($path, $data);
+
+
+        if ($success) {
+
         try {
             DB::beginTransaction();
 
@@ -79,6 +90,8 @@ class PurchaseOrderController extends Controller
                 "note" => $order['note'],
                 "status" => $order['pmt_method'],
                 "POnumber" => $order['POnumber'],
+                'bank_id' => $order['bank_id'],
+                'imageurl' => $subpath,
                 "user_id" => $user->id,
             ]);
             $purchaseorder->save();
@@ -117,12 +130,14 @@ class PurchaseOrderController extends Controller
                     Bank::create([
                         'doc_type' => 'purchase order',
                         'doc_id' => $purchaseorder->id,
-                        'bank_id' => $order['bank_id'],
                         'supplier_id' => $order['supplier_id'],
                         'debit' => 0,
                         'credit' => $order['paid_amt'],
                         'balance' => $order['paid_amt'] * (-1),
+<<<<<<< HEAD
                         'attachment' => $order['file'],
+=======
+>>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
                         'user_id' => $user->id
                     ]);
                 }
@@ -146,13 +161,21 @@ class PurchaseOrderController extends Controller
 
 
             DB::commit();
+
+            return response()->json(['purchase_order'=> $purchaseorder, 'purchase_order_items' => $items], 200);
+
+
         } catch (\Throwable $th) {
             DB::rollback();
 
             return response()->json(['error'=> $th->getMessage()], 500);
         }
 
-    return response()->json(['purchase_order'=> $purchaseorder, 'purchase_order_items' => $items], 200);
+    }else {
+        return response()->json(['error'=> "something went wrong!"], 500);
+    }
+
+    // return response()->json(['purchase_order'=> $purchaseorder, 'purchase_order_items' => $items], 200);
 
     }
 

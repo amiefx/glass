@@ -17,6 +17,8 @@ class PaymentResource extends JsonResource
         return [
             'id' => $this->id,
             'pmt_method' => $this->pmt_method,
+            'bank_id' => $this->bank_id,
+            'imageurl' => $this->imageurl,
             'amount' => $this->amount,
             'payee_account' => $this->payee_account,
             'details' => $this->details,
