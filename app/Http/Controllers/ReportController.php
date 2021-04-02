@@ -2,14 +2,164 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BankResource;
+use App\Http\Resources\CashResource;
+use App\Http\Resources\OrderResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\PurchaseOrderResource;
+use App\Http\Resources\PurchaseResource;
+use App\Models\Bank;
+use App\Models\Cash;
+use App\Models\Order;
+use App\Models\Payable;
+use App\Models\Purchase;
+use App\Models\PurchaseOrder;
+use App\Models\Receivable;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
+    public function salesreport(Request $request)
+    {
+        $now = date('Y-m-d');
+        $to = $request[1];
+        $from = $request[0];
+
+        if( isset($to) ){
+            $to = Carbon::parse($to)->format('Y-m-d') .' 23:59:59' ;
+        } else {
+            $to = $now;
+        }
+
+        if( isset($from) ){
+            $from = Carbon::parse($from)->format('Y-m-d') .' 00:00:00' ;
+        } else {
+            $from = date("Y-01-01");
+        }
+
+        // Cards
+        $orders = OrderResource::collection(Order::where('created_at', '>=', $from)->where('created_at', '<=', $to)->get());
+        $sales = $orders->sum('total');
+        $discount = $orders->sum('discount');
+
+
+        return response()->json([
+            'orders' => $orders,
+            'sales' => $sales,
+            'discount' => $discount,
+        ], 200);
+    }
+
+    public function purchasesreport(Request $request)
+    {
+        $now = date('Y-m-d');
+        $to = $request[1];
+        $from = $request[0];
+
+        if( isset($to) ){
+            $to = Carbon::parse($to)->format('Y-m-d') .' 23:59:59' ;
+        } else {
+            $to = $now;
+        }
+
+        if( isset($from) ){
+            $from = Carbon::parse($from)->format('Y-m-d') .' 00:00:00' ;
+        } else {
+            $from = date("Y-01-01");
+        }
+
+        // Cards
+        $orders = PurchaseOrderResource::collection(PurchaseOrder::where('created_at', '>=', $from)->where('created_at', '<=', $to)->get());
+        $purchases = $orders->sum('total');
+        $discount = $orders->sum('discount');
+
+
+        return response()->json([
+            'orders' => $orders,
+            'purchases' => $purchases,
+            'discount' => $discount,
+        ], 200);
+    }
+
+    public function cashreport(Request $request)
+    {
+        $now = date('Y-m-d');
+        $to = $request[1];
+        $from = $request[0];
+
+        if( isset($to) ){
+            $to = Carbon::parse($to)->format('Y-m-d') .' 23:59:59' ;
+        } else {
+            $to = $now;
+        }
+
+        if( isset($from) ){
+            $from = Carbon::parse($from)->format('Y-m-d') .' 00:00:00' ;
+        } else {
+            $from = date("Y-01-01");
+        }
+
+        // Cards
+        $orders = CashResource::collection(Cash::where('created_at', '>=', $from)->where('created_at', '<=', $to)->get());
+        $debit = $orders->sum('debit');
+        $credit = $orders->sum('credit');
+        $balance = $orders->sum('balance');
+
+
+        return response()->json([
+            'orders' => $orders,
+            'debit' => $debit,
+            'credit' => $credit,
+            'balance' => $balance,
+        ], 200);
+    }
+
+    public function bankreport(Request $request)
+    {
+        $now = date('Y-m-d');
+        $to = $request[1];
+        $from = $request[0];
+
+        if( isset($to) ){
+            $to = Carbon::parse($to)->format('Y-m-d') .' 23:59:59' ;
+        } else {
+            $to = $now;
+        }
+
+        if( isset($from) ){
+            $from = Carbon::parse($from)->format('Y-m-d') .' 00:00:00' ;
+        } else {
+            $from = date("Y-01-01");
+        }
+
+        // Cards
+        $orders = BankResource::collection(Bank::where('created_at', '>=', $from)->where('created_at', '<=', $to)->get());
+        $debit = $orders->sum('debit');
+        $credit = $orders->sum('credit');
+        $balance = $orders->sum('balance');
+
+
+        return response()->json([
+            'orders' => $orders,
+            'debit' => $debit,
+            'credit' => $credit,
+            'balance' => $balance,
+        ], 200);
+    }
+
+    public function dashboardKpis()
+    {
+      $cash = Cash::all()->sum('balance');
+      $bank = Bank::all()->sum('balance');
+      $receivables = Receivable::all()->sum('balance');
+      $payables = Payable::all()->sum('balance');
+      return response()->json(['cash' => $cash, 'bank' => $bank, 'receivables' => $receivables, 'payables' => $payables ], 200);
+    }
+
     public function totalNumberProducts()
     {
         $products = DB::table('products')->count();
@@ -141,7 +291,7 @@ class ReportController extends Controller
 
         return response()->json(['count' => $count, 'orders' => $orders], 200);
     }
-    
+
     public function totalNumberOrderItemsByOrderId($id)
     {
         $count = DB::table('order_details')->where('order_id', '=', $id)->count();
@@ -198,7 +348,7 @@ class ReportController extends Controller
 
         return response()->json(['count' => $count, 'recievables' => $recievables], 200);
     }
-    
+
     public function totalNumberRecievablesByDocId($id)
     {
         $count = DB::table('recievables')->where('doc_id', '=', $id)->count();
@@ -208,7 +358,7 @@ class ReportController extends Controller
     }
 
 
-    
+
 
     public function totalNumberPayables()
     {
@@ -255,7 +405,7 @@ class ReportController extends Controller
 
         return response()->json(['count' => $count, 'payables' => $payables], 200);
     }
-    
+
     public function totalNumberPayablesByDocId($id)
     {
         $count = DB::table('payables')->where('doc_id', '=', $id)->count();
@@ -316,7 +466,7 @@ class ReportController extends Controller
 
         return response()->json(['count' => $count, 'banks' => $banks], 200);
     }
-    
+
     public function totalNumberBankByDocId($id)
     {
         $count = DB::table('banks')->where('doc_id', '=', $id)->count();
@@ -376,7 +526,7 @@ class ReportController extends Controller
 
         return response()->json(['count' => $count, 'cashes' => $cashes], 200);
     }
-    
+
     public function totalNumberCashByDocId($id)
     {
         $count = DB::table('cashes')->where('doc_id', '=', $id)->count();
@@ -402,7 +552,7 @@ class ReportController extends Controller
 
         return response()->json(['count' => $count, 'expenses' => $expenses], 200);
     }
-    
+
     public function totalNumberExpenseItemsById($id)
     {
         $count = DB::table('expense_items')->where('id', '=', $id)->count();

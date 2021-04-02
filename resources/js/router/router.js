@@ -336,17 +336,72 @@ const routes = [
             ]
         }
     },
-    // {
-    //     path: '/admin/products/:slug',
-    //     name: 'admin-products-edit',
-    //     component: () => import('../views/admin/products/Slug.vue'),
-    //     meta: {
-    //         layout: 'admin',
-    //         middleware: [
-    //             auth
-    //         ]
-    //     }
-    // },
+    {
+        path: '/admin/report/cashreport',
+        name: 'cash-report',
+        component: () => import('../views/admin/report/Cash.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
+        path: '/admin/report/bankreport',
+        name: 'bank-report',
+        component: () => import('../views/admin/report/Bank.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
+        path: '/admin/report/salesreport',
+        name: 'sales-report',
+        component: () => import('../views/admin/report/Sales.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
+        path: '/admin/report/purchasesreport',
+        name: 'purchases-report',
+        component: () => import('../views/admin/report/Purchases.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
+        path: '/admin/report/expensesreport',
+        name: 'expense-report',
+        component: () => import('../views/admin/report/Expenses.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
+    {
+        path: '/admin/report/inventoryreport',
+        name: 'inventory-report',
+        component: () => import('../views/admin/report/Inventory.vue'),
+        meta: {
+            layout: 'admin',
+            middleware: [
+                auth
+            ]
+        }
+    },
     // {
     //     path: '/admin/orders',
     //     name: 'admin-orders',

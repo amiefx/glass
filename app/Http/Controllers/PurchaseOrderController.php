@@ -134,10 +134,7 @@ class PurchaseOrderController extends Controller
                         'debit' => 0,
                         'credit' => $order['paid_amt'],
                         'balance' => $order['paid_amt'] * (-1),
-<<<<<<< HEAD
-                        'attachment' => $order['file'],
-=======
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
+                       // 'attachment' => $order['file'],
                         'user_id' => $user->id
                     ]);
                 }

@@ -129,7 +129,7 @@ export default {
       // window.print();
       // document.body.innerHTML = restorepage;
       let routeData = this.$router.resolve(
-        `/admin/invoice/print/${this.order.order.id}`
+        `/admin/invoice/print/a4/${this.order.order.id}`
       );
       window.open(routeData.href, "_blank");
     },

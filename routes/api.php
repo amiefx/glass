@@ -203,6 +203,12 @@ Route::group([
 
 
     //reports
+    Route::post('report/bankreport', 'ReportController@bankreport');
+    Route::post('report/cashreport', 'ReportController@cashreport');
+    Route::post('report/salesreport', 'ReportController@salesreport');
+    Route::post('report/purchasesreport', 'ReportController@purchasesreport');
+    Route::get('report/dashboardkpis', 'ReportController@dashboardKpis');
+
     Route::get('report/totalproducts', 'ReportController@totalNumberProducts');
     Route::get('report/totalusers', 'ReportController@totalNumberUsers');
     Route::get('report/totalsuppliers', 'ReportController@totalNumberSuppliers');

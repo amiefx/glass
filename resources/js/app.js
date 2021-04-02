@@ -21,8 +21,12 @@ Vue.component('admin-layout', Admin)
 import VueMeta from 'vue-meta';
 Vue.use(VueMeta);
 
-// import VMdDateRangePicker from "v-md-date-range-picker";
-// Vue.use(VMdDateRangePicker);
+import VMdDateRangePicker from "v-md-date-range-picker";
+Vue.use(VMdDateRangePicker);
+
+import Chartkick from 'vue-chartkick'
+import Chart from 'chart.js'
+Vue.use(Chartkick.use(Chart))
 
 import App from './components/AppComponent';
 

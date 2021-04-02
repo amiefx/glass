@@ -40,7 +40,7 @@
 
       <v-row>
           <v-col cols="6">
-             <div class="caption" v-if="order.order.note.ceiling_input.length > 0">
+             <div class="caption" v-if="order.order.note.ceiling_input">
           <strong>Ceiling:</strong>
           <ul class="mb-0">
               <li v-for="(item, index) in order.order.note.ceiling_input" :key="item.index">
@@ -48,7 +48,7 @@
               </li>
           </ul>
       </div>
-      <div class="caption" v-if="order.order.note.panel_input.length > 0">
+      <div class="caption" v-if="order.order.note.panel_input">
           <strong>Panels:</strong>
           <ul class="mb-0">
               <li v-for="(item, index) in order.order.note.panel_input" :key="item.index">
@@ -56,7 +56,7 @@
               </li>
           </ul>
       </div>
-      <div class="caption" v-if="order.order.note.glass_input.length > 0">
+      <div class="caption" v-if="order.order.note.glass_input">
           <strong>Glass:</strong>
           <ul class="mb-0">
               <li v-for="(item, index) in order.order.note.glass_input" :key="item.index">

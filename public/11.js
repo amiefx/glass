@@ -82,12 +82,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
 //
 //
 //
-=======
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
 //var moment = require('moment');
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: "print",
@@ -132,7 +129,6 @@ __webpack_require__.r(__webpack_exports__);
       // document.body.innerHTML = restorepage;
       var routeData = this.$router.resolve("/admin/purchase-order/print/".concat(this.order.order.id));
       window.open(routeData.href, '_blank');
-<<<<<<< HEAD
     },
     editme: function editme() {
       this.$router.push("/admin/purchase-order/edit/".concat(this.order.order.id));
@@ -143,15 +139,6 @@ __webpack_require__.r(__webpack_exports__);
       return moment(value).format("MMMM D, YYYY");
     }
   },
-=======
-    }
-  },
-  filters: {
-    formatDate: function formatDate(value) {
-      return moment(value).format("MMMM D, YYYY");
-    }
-  },
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
   computed: {}
 });
 
@@ -227,7 +214,6 @@ var render = function() {
       _c("v-row", [
         _c("div", { staticClass: "customer px-5" }, [
           _c("strong", {}, [
-<<<<<<< HEAD
             _vm._v(
               "\n        Purchase Order No# " + _vm._s(_vm.order.order.id) + " "
             ),
@@ -237,9 +223,6 @@ var render = function() {
                 _vm._s(_vm.order.order.POnumber) +
                 " "
             ),
-=======
-            _vm._v("\n        Invoice No# " + _vm._s(_vm.order.order.id) + " "),
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
             _c("br"),
             _vm._v(
               "\n        Supplier: " +
@@ -250,11 +233,7 @@ var render = function() {
             _vm._v(
               "\n        Date: " +
                 _vm._s(_vm.order.order.created_at) +
-<<<<<<< HEAD
                 "\n\n      "
-=======
-                "\n      "
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
             )
           ])
         ])
@@ -378,7 +357,6 @@ var render = function() {
                   ])
                 ],
                 1
-<<<<<<< HEAD
               ),
               _vm._v(" "),
               _c(
@@ -389,26 +367,16 @@ var render = function() {
                   on: { click: _vm.printme }
                 },
                 [_vm._v("Print")]
-=======
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
               ),
               _vm._v(" "),
               _c(
                 "v-btn",
                 {
-<<<<<<< HEAD
                   staticClass: "float-right mr-2",
                   attrs: { color: "primary" },
                   on: { click: _vm.editme }
                 },
                 [_vm._v("Edit")]
-=======
-                  staticClass: "float-right",
-                  attrs: { color: "primary" },
-                  on: { click: _vm.printme }
-                },
-                [_vm._v("Print")]
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
               )
             ],
             1

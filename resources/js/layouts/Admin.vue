@@ -166,6 +166,30 @@
           </v-list-item>
         </v-list-group>
 
+        <!-- reports -->
+        <v-list-group
+          :value="false"
+          prepend-icon="mdi-chart-tree"
+          v-if="admin"
+        >
+          <template v-slot:activator>
+            <v-list-item-title>Reports</v-list-item-title>
+          </template>
+
+          <v-list-item
+            v-for="(item, i) in reports"
+            :key="i"
+            link
+            dense
+            :to="item.to"
+          >
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+
         <!-- company info -->
         <v-list-item
           v-for="item in company"
@@ -361,6 +385,39 @@ export default {
           icon: "mdi-bank-transfer",
           title: "Transaction",
           to: "/admin/transaction",
+        },
+      ],
+
+      reports: [
+          {
+          icon: "mdi-bank",
+          title: "Bank Transactions",
+          to: "/admin/report/bankreport",
+        },
+        {
+          icon: "mdi-cash",
+          title: "Cash Transactions",
+          to: "/admin/report/cashreport",
+        },
+        {
+          icon: "mdi-cart-arrow-up",
+          title: "Sales",
+          to: "/admin/report/salesreport",
+        },
+        {
+          icon: "mdi-cart-arrow-down",
+          title: "Purchaes",
+          to: "/admin/report/purchasesreport",
+        },
+        {
+          icon: "mdi-barcode",
+          title: "Inventory",
+          to: "/admin/report/inventoryreport",
+        },
+        {
+          icon: "mdi-cash-remove",
+          title: "Expenses",
+          to: "/admin/report/expensesreport",
         },
       ],
 

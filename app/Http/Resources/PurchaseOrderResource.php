@@ -28,6 +28,7 @@ class PurchaseOrderResource extends JsonResource
             'note' => $this->note,
             'status' => $this->status,
             'user_id' => $this->user_id,
+            'user_name' => $this->user->name,
         ];
     }
 }

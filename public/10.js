@@ -131,7 +131,7 @@ __webpack_require__.r(__webpack_exports__);
       // document.body.innerHTML = restorepage;
       // window.print();
       // document.body.innerHTML = restorepage;
-      var routeData = this.$router.resolve("/admin/invoice/print/".concat(this.order.order.id));
+      var routeData = this.$router.resolve("/admin/invoice/print/a4/".concat(this.order.order.id));
       window.open(routeData.href, "_blank");
     }
   },

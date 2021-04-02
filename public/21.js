@@ -1,16 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[21],{
 
-<<<<<<< HEAD
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Bank.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/Bank.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************************************************************************/
-=======
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/BankDetails.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/BankDetails.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************************************************/
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -140,19 +133,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
-=======
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'admin',
   middleware: ['auth', 'admin'],
@@ -184,7 +164,6 @@ __webpack_require__.r(__webpack_exports__);
         text: '#',
         value: 'id'
       }, {
-<<<<<<< HEAD
         text: 'Doc Type',
         value: 'doc_type'
       }, {
@@ -213,51 +192,10 @@ __webpack_require__.r(__webpack_exports__);
         value: 'user_id'
       }],
       banks: [],
-=======
-        text: 'Bank Name',
-        value: 'bank_name'
-      }, {
-        text: 'Short Name',
-        value: 'bank_short_name'
-      }, {
-        text: 'Branch',
-        value: 'Branch'
-      }, {
-        text: 'Branch Code',
-        value: 'Branch_code'
-      }, {
-        text: 'Address',
-        value: 'bank_address'
-      }, {
-        text: 'Acc No',
-        value: 'account_number'
-      }, {
-        text: 'Acc Title',
-        value: 'account_title'
-      }, {
-        text: 'Acc Type',
-        value: 'account_type'
-      }, {
-        text: 'KIN',
-        value: 'kin'
-      }, {
-        text: 'CNIC',
-        value: 'cnic'
-      }, {
-        text: 'Status',
-        value: 'status'
-      }, {
-        text: 'Actions',
-        value: 'action',
-        sortable: false
-      }],
-      bank_detail: [],
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
       balance: '',
       editedIndex: -1,
       editedItem: {
         id: '',
-<<<<<<< HEAD
         name: '',
         short_code: ''
       },
@@ -265,40 +203,12 @@ __webpack_require__.r(__webpack_exports__);
         id: '',
         name: '',
         short_code: ''
-=======
-        bank_name: '',
-        bank_short_name: '',
-        Branch: '',
-        Branch_code: '',
-        bank_address: '',
-        account_number: '',
-        account_title: '',
-        account_type: '',
-        kin: '',
-        cnic: '',
-        status: ''
-      },
-      defaultItem: {
-        id: '',
-        bank_name: '',
-        bank_short_name: '',
-        Branch: '',
-        Branch_code: '',
-        bank_address: '',
-        account_number: '',
-        account_title: '',
-        account_type: '',
-        kin: '',
-        cnic: '',
-        status: ''
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
       }
     };
   },
   computed: {
     formTitle: function formTitle() {
       return this.editedIndex === -1 ? this.$t('new item') : this.$t('edit item');
-<<<<<<< HEAD
     } //   headers(){
     //   return [
     //     {
@@ -311,9 +221,6 @@ __webpack_require__.r(__webpack_exports__);
     //   ]
     // }
 
-=======
-    }
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
   },
   watch: {
     dialog: function dialog(val) {
@@ -324,11 +231,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.initialize();
-<<<<<<< HEAD
     axios.get("/api/banks/balance").then(function (res) {
-=======
-    axios.get("/api/bank_detail/balance").then(function (res) {
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
       _this.balance = res.data.balance;
     });
   },
@@ -336,11 +239,7 @@ __webpack_require__.r(__webpack_exports__);
     updateStatus: function updateStatus(item) {
       var _this2 = this;
 
-<<<<<<< HEAD
       var index = this.banks.data.indexOf(item);
-=======
-      var index = this.bank_detail.data.indexOf(item);
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
       axios.post('/api/change-status', {
         'status': item.is_active,
         'bank': item.id
@@ -349,16 +248,11 @@ __webpack_require__.r(__webpack_exports__);
         _this2.snackbar = true;
       })["catch"](function (error) {
         // this.text = error.response.bank.name + "'s Status Cannot be Updated" + error.response.bank.status
-<<<<<<< HEAD
         _this2.banks.data[index].is_active = error.response.data.bank.is_active;
-=======
-        _this2.bank_detail.data[index].is_active = error.response.data.bank.is_active;
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
         _this2.snackbar = true;
         console.dir(error.response);
       });
     },
-<<<<<<< HEAD
     // selectAll(e){
     //     this.selected = [];
     //     if(e.length > 0){
@@ -385,26 +279,18 @@ __webpack_require__.r(__webpack_exports__);
     //           })
     //       }
     // },
-=======
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
     searchIt: function searchIt(e) {
       var _this3 = this;
 
       if (e.length > 0) {
-<<<<<<< HEAD
         axios.get("/api/banks/".concat(e)).then(function (res) {
           return _this3.banks = res.data.banks;
-=======
-        axios.get("/api/bank_detail/".concat(e)).then(function (res) {
-          return _this3.bank_detail = res.data.bank_detail;
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
         })["catch"](function (err) {
           return console.dir(err.response);
         });
       }
 
       if (e.length <= 0) {
-<<<<<<< HEAD
         // axios.get(`/api/banks?page=${e.page}`,{params:{'per_page': e.itemsPerPage}})
         //   axios.get(`/api/banks`)
         //     .then(res => this.banks = res.data.data.banks)
@@ -412,26 +298,13 @@ __webpack_require__.r(__webpack_exports__);
         var sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
         var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
         axios.get("/api/banks?page=".concat(e.page), {
-=======
-        // axios.get(`/api/bank_detail?page=${e.page}`,{params:{'per_page': e.itemsPerPage}})
-        //   axios.get(`/api/bank_detail`)
-        //     .then(res => this.bank_detail = res.data.data.bank_detail)
-        //     .catch(err => console.dir(err.response))
-        var sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
-        var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
-        axios.get("/api/bank_detail?page=".concat(e.page), {
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
           params: {
             'per_page': e.itemsPerPage,
             'sort_by': sortBy,
             'order_by': orderBy
           }
         }).then(function (res) {
-<<<<<<< HEAD
           _this3.banks = res.data.banks;
-=======
-          _this3.bank_detail = res.data.bank_detail;
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
         })["catch"](function (err) {
           return console.dir(err.response);
         });
@@ -442,22 +315,14 @@ __webpack_require__.r(__webpack_exports__);
 
       var sortBy = this.options.sortBy.length == 0 ? 'id' : this.options.sortBy[0];
       var orderBy = this.options.sortDesc.length > 0 || this.options.sortDesc[0] ? 'asc' : 'desc';
-<<<<<<< HEAD
       axios.get("/api/banks?page=".concat(e.page), {
-=======
-      axios.get("/api/bank_detail?page=".concat(e.page), {
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
         params: {
           'per_page': e.itemsPerPage,
           'sort_by': sortBy,
           'order_by': orderBy
         }
       }).then(function (res) {
-<<<<<<< HEAD
         _this4.banks = res.data.banks;
-=======
-        _this4.bank_detail = res.data.bank_detail;
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
       })["catch"](function (err) {//----
       });
     },
@@ -482,18 +347,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     editItem: function editItem(item) {
-<<<<<<< HEAD
       this.editedIndex = this.banks.data.indexOf(item);
-=======
-      this.editedIndex = this.bank_detail.data.indexOf(item);
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
     deleteItem: function deleteItem(item) {
       var _this6 = this;
 
-<<<<<<< HEAD
       var index = this.banks.data.indexOf(item);
       var decide = confirm('Are you sure you want to delete this item?');
 
@@ -502,16 +362,6 @@ __webpack_require__.r(__webpack_exports__);
           _this6.snackbar = true;
 
           _this6.banks.data.splice(index, 1);
-=======
-      var index = this.bank_detail.data.indexOf(item);
-      var decide = confirm('Are you sure you want to delete this item?');
-
-      if (decide) {
-        axios["delete"]('/api/bank_detail/' + item.id).then(function (res) {
-          _this6.snackbar = true;
-
-          _this6.bank_detail.data.splice(index, 1);
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
         })["catch"](function (err) {
           console.log(err.response);
           _this6.text = "Error Deleting Record";
@@ -533,25 +383,16 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.editedIndex > -1) {
         var index = this.editedIndex;
-<<<<<<< HEAD
         axios.put('/api/banks/' + this.editedItem.id, this.editedItem) //  .then(res => Object.assign(this.banks[this.editedIndex], this.editedItem))
-=======
-        axios.put('/api/bank_detail/' + this.editedItem.id, this.editedItem) //  .then(res => Object.assign(this.bank_detail[this.editedIndex], this.editedItem))
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
         .then(function (res) {
           console.log(res);
           _this8.text = "Record Updated Successfully!";
           _this8.snackbar = true;
-<<<<<<< HEAD
           Object.assign(_this8.banks.data[index], res.data.bank);
-=======
-          Object.assign(_this8.bank_detail.data[index], res.data.bank);
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
         })["catch"](function (err) {
           console.log(err.response);
           _this8.text = "Error Updating Record";
           _this8.snackbar = true;
-<<<<<<< HEAD
         }); //  Object.assign(this.banks.data[this.editedIndex], this.editedItem)
       } else {
         axios.post('/api/banks', this.editedItem).then(function (res) {
@@ -559,15 +400,6 @@ __webpack_require__.r(__webpack_exports__);
           _this8.snackbar = true;
 
           _this8.banks.data.push(res.data.bank);
-=======
-        }); //  Object.assign(this.bank_detail.data[this.editedIndex], this.editedItem)
-      } else {
-        axios.post('/api/bank_detail', this.editedItem).then(function (res) {
-          _this8.text = "Record Added Successfully!";
-          _this8.snackbar = true;
-
-          _this8.bank_detail.data.push(res.data.bank_detail);
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
         })["catch"](function (err) {
           console.dir(err);
           _this8.text = "Error Inserting Record";
@@ -585,17 +417,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Bank.vue?vue&type=template&id=3f95855b&":
 /*!***************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/Bank.vue?vue&type=template&id=3f95855b& ***!
   \***************************************************************************************************************************************************************************************************************************************************************/
-=======
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/BankDetails.vue?vue&type=template&id=8f6f10d2&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vuetify-loader/lib/loader.js??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/admin/BankDetails.vue?vue&type=template&id=8f6f10d2& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************/
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -615,20 +440,12 @@ var render = function() {
         attrs: {
           dense: "",
           headers: _vm.headers,
-<<<<<<< HEAD
           items: _vm.banks.data,
-=======
-          items: _vm.bank_detail.data,
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
           "items-per-page": 15,
           "item-key": "id",
           loading: _vm.loading,
           options: _vm.options,
-<<<<<<< HEAD
           "server-items-length": _vm.banks.total,
-=======
-          "server-items-length": _vm.bank_detail.total,
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
           "loading-text": "Loading.. Please Wait!",
           "footer-props": {
             itemsPerPageOptions: [5, 10, 15],
@@ -652,11 +469,7 @@ var render = function() {
                   { attrs: { flat: "", color: "" } },
                   [
                     _c("v-toolbar-title", { staticClass: "text-primary" }, [
-<<<<<<< HEAD
                       _vm._v(" " + _vm._s(_vm.$t("bank Account")))
-=======
-                      _vm._v(" " + _vm._s(_vm.$t("bank Accounts")))
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
                     ]),
                     _vm._v(" "),
                     _c("v-divider", {
@@ -679,23 +492,7 @@ var render = function() {
                             key: "activator",
                             fn: function(ref) {
                               var on = ref.on
-<<<<<<< HEAD
                               return undefined
-=======
-                              return [
-                                _c(
-                                  "v-btn",
-                                  _vm._g(
-                                    {
-                                      staticClass: "mb-2",
-                                      attrs: { color: "primary", dark: "" }
-                                    },
-                                    on
-                                  ),
-                                  [_vm._v(_vm._s(_vm.$t("new bank")))]
-                                )
-                              ]
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
                             }
                           }
                         ]),
@@ -749,161 +546,29 @@ var render = function() {
                                           [
                                             _c(
                                               "v-col",
-                                              { attrs: { cols: "6" } },
+                                              { attrs: { cols: "12" } },
                                               [
                                                 _c("v-text-field", {
                                                   attrs: {
-<<<<<<< HEAD
                                                     label: _vm.$t("name"),
-=======
-                                                    label: _vm.$t("Name"),
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
                                                     rules: [_vm.rules.required]
                                                   },
                                                   model: {
-                                                    value:
-                                                      _vm.editedItem.bank_name,
+                                                    value: _vm.editedItem.name,
                                                     callback: function($$v) {
                                                       _vm.$set(
                                                         _vm.editedItem,
-                                                        "bank_name",
+                                                        "name",
                                                         $$v
                                                       )
                                                     },
                                                     expression:
-                                                      "editedItem.bank_name"
+                                                      "editedItem.name"
                                                   }
                                                 }),
                                                 _vm._v(" "),
                                                 _c("v-text-field", {
                                                   attrs: {
-                                                    label: _vm.$t("Short Name")
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedItem
-                                                        .bank_short_name,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "bank_short_name",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.bank_short_name"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    label: _vm.$t("Branch")
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedItem.Branch,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "Branch",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.Branch"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    label: _vm.$t("Branch Code")
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedItem
-                                                        .Branch_code,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "Branch_code",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.Branch_code"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    label: _vm.$t("Address")
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedItem
-                                                        .bank_address,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "bank_address",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.bank_address"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    label: _vm.$t("Acc No")
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedItem
-                                                        .account_number,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "account_number",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.account_number"
-                                                  }
-                                                })
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-col",
-                                              { attrs: { cols: "6" } },
-                                              [
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    label: _vm.$t("Acc Title")
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedItem
-                                                        .account_title,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "account_title",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.account_title"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-<<<<<<< HEAD
                                                     label: _vm.$t("short code")
                                                   },
                                                   model: {
@@ -913,81 +578,11 @@ var render = function() {
                                                       _vm.$set(
                                                         _vm.editedItem,
                                                         "short_code",
-=======
-                                                    label: _vm.$t("Acc Type")
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedItem
-                                                        .account_type,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "account_type",
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
                                                         $$v
                                                       )
                                                     },
                                                     expression:
-<<<<<<< HEAD
                                                       "editedItem.short_code"
-=======
-                                                      "editedItem.account_type"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    label: _vm.$t("KIN")
-                                                  },
-                                                  model: {
-                                                    value: _vm.editedItem.kin,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "kin",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression: "editedItem.kin"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    label: _vm.$t("CNIC")
-                                                  },
-                                                  model: {
-                                                    value: _vm.editedItem.cnic,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "cnic",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.cnic"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    label: _vm.$t("Status")
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedItem.status,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedItem,
-                                                        "status",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedItem.status"
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
                                                   }
                                                 })
                                               ],
@@ -1229,29 +824,17 @@ render._withStripped = true
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./resources/js/views/admin/Bank.vue":
 /*!*******************************************!*\
   !*** ./resources/js/views/admin/Bank.vue ***!
   \*******************************************/
-=======
-/***/ "./resources/js/views/admin/BankDetails.vue":
-/*!**************************************************!*\
-  !*** ./resources/js/views/admin/BankDetails.vue ***!
-  \**************************************************/
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-<<<<<<< HEAD
 /* harmony import */ var _Bank_vue_vue_type_template_id_3f95855b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Bank.vue?vue&type=template&id=3f95855b& */ "./resources/js/views/admin/Bank.vue?vue&type=template&id=3f95855b&");
 /* harmony import */ var _Bank_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Bank.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/Bank.vue?vue&type=script&lang=js&");
-=======
-/* harmony import */ var _BankDetails_vue_vue_type_template_id_8f6f10d2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BankDetails.vue?vue&type=template&id=8f6f10d2& */ "./resources/js/views/admin/BankDetails.vue?vue&type=template&id=8f6f10d2&");
-/* harmony import */ var _BankDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BankDetails.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/BankDetails.vue?vue&type=script&lang=js&");
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
@@ -1276,15 +859,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-<<<<<<< HEAD
   _Bank_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Bank_vue_vue_type_template_id_3f95855b___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Bank_vue_vue_type_template_id_3f95855b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-=======
-  _BankDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _BankDetails_vue_vue_type_template_id_8f6f10d2___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BankDetails_vue_vue_type_template_id_8f6f10d2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
   false,
   null,
   null,
@@ -1320,32 +897,20 @@ _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_
 
 /* hot reload */
 if (false) { var api; }
-<<<<<<< HEAD
 component.options.__file = "resources/js/views/admin/Bank.vue"
-=======
-component.options.__file = "resources/js/views/admin/BankDetails.vue"
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./resources/js/views/admin/Bank.vue?vue&type=script&lang=js&":
 /*!********************************************************************!*\
   !*** ./resources/js/views/admin/Bank.vue?vue&type=script&lang=js& ***!
   \********************************************************************/
-=======
-/***/ "./resources/js/views/admin/BankDetails.vue?vue&type=script&lang=js&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/views/admin/BankDetails.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************/
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-<<<<<<< HEAD
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bank_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Bank.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Bank.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bank_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
@@ -1355,33 +920,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************************************!*\
   !*** ./resources/js/views/admin/Bank.vue?vue&type=template&id=3f95855b& ***!
   \**************************************************************************/
-=======
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BankDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BankDetails.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/BankDetails.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BankDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/views/admin/BankDetails.vue?vue&type=template&id=8f6f10d2&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/views/admin/BankDetails.vue?vue&type=template&id=8f6f10d2& ***!
-  \*********************************************************************************/
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-<<<<<<< HEAD
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bank_vue_vue_type_template_id_3f95855b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Bank.vue?vue&type=template&id=3f95855b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/Bank.vue?vue&type=template&id=3f95855b&");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bank_vue_vue_type_template_id_3f95855b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bank_vue_vue_type_template_id_3f95855b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-=======
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BankDetails_vue_vue_type_template_id_8f6f10d2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vuetify-loader/lib/loader.js??ref--11-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BankDetails.vue?vue&type=template&id=8f6f10d2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/admin/BankDetails.vue?vue&type=template&id=8f6f10d2&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BankDetails_vue_vue_type_template_id_8f6f10d2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vuetify_loader_lib_loader_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BankDetails_vue_vue_type_template_id_8f6f10d2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
->>>>>>> 3037ab0c41de01835fe07f3d4bdc1e752e6e73c7
 
 
 
