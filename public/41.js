@@ -95,9 +95,12 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         text: "Total",
         value: "total"
       }, {
+<<<<<<< HEAD
         text: "Date",
         value: "created_at"
       }, {
+=======
+>>>>>>> 5d8417fcec7dd303ca256466519e90806ec57a10
         text: "User",
         value: "user_name"
       }],
