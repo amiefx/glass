@@ -24,6 +24,7 @@ class PaymentResource extends JsonResource
             'details' => $this->details,
             'notes' => $this->notes,
             'user' => $this->user_id,
+            'user_name' => $this->user->name,
             'created_at' => $this->created_at->format('d M, Y')
         ];
     }

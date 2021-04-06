@@ -21,8 +21,64 @@ use App\Models\PurchaseOrder;
 use App\Models\Receivable;
 use Carbon\Carbon;
 
+use App\Http\Resources\InvPurReportResource;
+use App\Http\Resources\InvSalReportResource;
+use App\Http\Resources\InvReportResource;
+
 class ReportController extends Controller
 {
+
+    public function inventory_report(Request $request)
+    {
+        $now = date('Y-m-d');
+        $to = $request->to;
+        $from = $request->from;
+
+        $report = DB::select('SELECT pro.id AS id, pro.name, pro.sku, pro.unit_id, pro.alert_quantity AS alert_quantity, SUM(proqty.qty) AS remaining_qty, SUM(proqty.qty)*pro.selling_price AS stock_value
+        FROM products AS pro
+        LEFT JOIN product_qty_calc AS proqty
+        ON pro.id = proqty.product_id
+        GROUP BY product_id');
+
+
+        return response()->json(['report' => InvReportResource::collection($report)], 200);
+    }
+
+    public function inventory_sale_report(Request $request)
+    {
+        $now = date('Y-m-d');
+        $to = $request->to;
+        $from = $request->from;
+
+        $report = DB::select('SELECT pro.id AS id, pro.name, pro.sku, pro.unit_id, pro.selling_price, pro.alert_quantity AS alert_quantity, SUM(qtysold.totalsold) AS sold_qty, SUM(qtysold.totalsold)*pro.selling_price AS cogs, SUM(pur.quantity) AS purchased_qty, SUM(pur.quantity)*pur.price AS sales_value, SUM(pur.quantity)*pur.price - SUM(qtysold.totalsold)*pro.selling_price AS profit
+        FROM products AS pro
+        LEFT JOIN total_sold AS qtysold
+        ON pro.id = qtysold.product_id
+        LEFT JOIN purchases as pur
+        ON pur.product_id = pro.id
+        GROUP BY pro.id');
+
+
+        return response()->json(['report' => InvSalReportResource::collection($report)], 200);
+    }
+    public function inventory_purchase_report(Request $request)
+    {
+        $now = date('Y-m-d');
+        $to = $request->to;
+        $from = $request->from;
+
+        $report = DB::select('SELECT pro.id AS id, pro.name, pro.sku, pro.unit_id, pro.selling_price, pro.alert_quantity AS alert_quantity, SUM(pur.quantity) AS purchased_qty, SUM(pur.quantity*pur.price) AS purchase_value
+        FROM products AS pro
+        LEFT JOIN purchases as pur
+        ON pur.product_id = pro.id
+        WHERE pur.created_at BETWEEN ? AND ?
+        GROUP BY pro.id', [$to, $from]);
+
+        return response()->json(['report' => InvPurReportResource::collection($report)], 200);
+    }
+
+    
+
     public function salesreport(Request $request)
     {
         $now = date('Y-m-d');

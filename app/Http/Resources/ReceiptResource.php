@@ -24,6 +24,7 @@ class ReceiptResource extends JsonResource
             'notes' => $this->notes,
             'imageurl' => $this->imageurl,
             'user' => $this->user_id,
+            'user_name' => $this->user->name,
             'created_at' => $this->created_at->format('d M, Y')
         ];
     }

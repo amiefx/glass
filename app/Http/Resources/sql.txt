@@ -43,3 +43,37 @@ COALESCE(a.totaladjusted,0) AS totaladjusted, COALESCE(totalpurchased - (totalso
 FROM total_purchases AS p
 LEFT JOIN total_sold AS s ON s.product_id=p.product_id
 LEFT JOIN total_adjustment AS a ON s.product_id=a.product_id
+
+
+
+//inventory report
+
+CREATE VIEW inventory_report AS
+SELECT pro.id AS id, pro.name, pro.sku, pro.unit_id, pro.alert_quantity AS alert_quantity, SUM(proqty.qty) AS remaining_qty, SUM(proqty.qty)*pro.selling_price AS stock_value
+FROM products AS pro
+LEFT JOIN product_qty_calc AS proqty
+ON pro.id = proqty.product_id
+GROUP BY product_id
+
+
+//inventory sales report
+
+CREATE VIEW inventory_sales_report AS
+SELECT pro.id AS id, pro.name, pro.sku, pro.unit_id, pro.selling_price, pro.alert_quantity AS alert_quantity, SUM(qtysold.totalsold) AS sold_qty, SUM(qtysold.totalsold)*pro.selling_price AS cogs, SUM(pur.quantity) AS purchased_qty, SUM(pur.quantity)*pur.price AS sales_value, SUM(pur.quantity)*pur.price - SUM(qtysold.totalsold)*pro.selling_price AS profit
+FROM products AS pro
+LEFT JOIN total_sold AS qtysold
+ON pro.id = qtysold.product_id
+LEFT JOIN purchases as pur
+ON pur.product_id = pro.id
+GROUP BY pro.id
+
+
+//inventory purchase report
+
+CREATE VIEW inventory_purchase_report AS
+SELECT pro.id AS id, pro.name, pro.sku, pro.unit_id, pro.selling_price, pro.alert_quantity AS alert_quantity, SUM(pur.quantity) AS purchased_qty, SUM(pur.quantity*pur.price) AS purchase_value
+FROM products AS pro
+LEFT JOIN purchases as pur
+ON pur.product_id = pro.id
+WHERE pur.created_at BETWEEN '2021-02-12 13:08:43' AND '2021-02-13 10:36:25'
+GROUP BY pro.id

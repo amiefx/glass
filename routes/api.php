@@ -203,6 +203,13 @@ Route::group([
 
 
     //reports
+
+    Route::post('report/inventory_report', 'ReportController@inventory_report');
+    Route::post('report/inventory_sale_report', 'ReportController@inventory_sale_report');
+    Route::post('report/inventory_purchase_report', 'ReportController@inventory_purchase_report');
+
+
+
     Route::post('report/bankreport', 'ReportController@bankreport');
     Route::post('report/cashreport', 'ReportController@cashreport');
     Route::post('report/salesreport', 'ReportController@salesreport');
