@@ -389,6 +389,43 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1441,110 +1478,163 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c(
-                "v-row",
-                {},
-                [
-                  _c(
-                    "v-col",
-                    { attrs: { cols: "5" } },
+              _vm.purchaseData.pmt_method == "Bank"
+                ? _c(
+                    "v-row",
+                    {},
                     [
-                      _vm.purchaseData.pmt_method == "Bank"
-                        ? _c("v-autocomplete", {
-                            attrs: {
-                              items: _vm.banks,
-                              "hide-details": "",
-                              "hide-selected": "",
-                              "item-text": "bank_name",
-                              "item-value": "id",
-                              label: "Select Bank Acc",
-                              dense: ""
-                            },
-                            scopedSlots: _vm._u(
-                              [
-                                {
-                                  key: "selection",
-                                  fn: function(ref) {
-                                    var attr = ref.attr
-                                    var on = ref.on
-                                    var item = ref.item
-                                    var selected = ref.selected
-                                    return [
-                                      _c("span", {
-                                        domProps: {
-                                          textContent: _vm._s(item.bank_name)
-                                        }
-                                      })
-                                    ]
-                                  }
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "6" } },
+                        [
+                          _vm.purchaseData.pmt_method == "Bank"
+                            ? _c("v-autocomplete", {
+                                attrs: {
+                                  items: _vm.banks,
+                                  "hide-details": "",
+                                  "hide-selected": "",
+                                  "item-text": "bank_name",
+                                  "item-value": "id",
+                                  label: "Select Bank Acc",
+                                  dense: ""
                                 },
-                                {
-                                  key: "item",
-                                  fn: function(ref) {
-                                    var item = ref.item
-                                    return [
-                                      _c(
-                                        "v-list-item-content",
-                                        [
-                                          _c("v-list-item-title", {
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "selection",
+                                      fn: function(ref) {
+                                        var attr = ref.attr
+                                        var on = ref.on
+                                        var item = ref.item
+                                        var selected = ref.selected
+                                        return [
+                                          _c("span", {
                                             domProps: {
                                               textContent: _vm._s(
                                                 item.bank_name
                                               )
                                             }
-                                          }),
+                                          })
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      key: "item",
+                                      fn: function(ref) {
+                                        var item = ref.item
+                                        return [
+                                          _c(
+                                            "v-list-item-content",
+                                            [
+                                              _c("v-list-item-title", {
+                                                domProps: {
+                                                  textContent: _vm._s(
+                                                    item.bank_name
+                                                  )
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("v-list-item-subtitle", [
+                                                _vm._v(
+                                                  "\n                  " +
+                                                    _vm._s(item.account_title) +
+                                                    " | " +
+                                                    _vm._s(
+                                                      item.account_number
+                                                    ) +
+                                                    "\n                "
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          ),
                                           _vm._v(" "),
-                                          _c("v-list-item-subtitle", [
-                                            _vm._v(
-                                              "\n                  " +
-                                                _vm._s(item.account_title) +
-                                                " | " +
-                                                _vm._s(item.account_number) +
-                                                "\n                "
-                                            )
+                                          _c("v-list-item-action", [
+                                            _c("span", [
+                                              _c("strong", [
+                                                _vm._v(
+                                                  "\n                    " +
+                                                    _vm._s(item.id) +
+                                                    "\n                  "
+                                                )
+                                              ])
+                                            ])
                                           ])
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c("v-list-item-action", [
-                                        _c("span", [
-                                          _c("strong", [
-                                            _vm._v(
-                                              "\n                    " +
-                                                _vm._s(item.id) +
-                                                "\n                  "
-                                            )
-                                          ])
-                                        ])
-                                      ])
-                                    ]
-                                  }
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  null,
+                                  false,
+                                  2492326341
+                                ),
+                                model: {
+                                  value: _vm.purchaseData.bank_id,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.purchaseData, "bank_id", $$v)
+                                  },
+                                  expression: "purchaseData.bank_id"
                                 }
-                              ],
-                              null,
-                              false,
-                              2492326341
-                            ),
-                            model: {
-                              value: _vm.purchaseData.bank_id,
-                              callback: function($$v) {
-                                _vm.$set(_vm.purchaseData, "bank_id", $$v)
-                              },
-                              expression: "purchaseData.bank_id"
-                            }
-                          })
-                        : _vm._e()
+                              })
+                            : _vm._e()
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "6" } },
+                        [
+                          _vm.purchaseData.pmt_method == "Bank"
+                            ? _c("v-file-input", {
+                                attrs: { dense: "", label: "File input" },
+                                on: { change: _vm.uploadPhoto },
+                                model: {
+                                  value: _vm.fileInput,
+                                  callback: function($$v) {
+                                    _vm.fileInput = $$v
+                                  },
+                                  expression: "fileInput"
+                                }
+                              })
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "v-row",
+                [
+                  _c(
+                    "v-col",
+                    { staticClass: "pt-0", attrs: { cols: "8" } },
+                    [
+                      _c("v-textarea", {
+                        attrs: {
+                          outlined: "",
+                          name: "input-7-4",
+                          label: "Outlined textarea",
+                          value:
+                            "The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+                        }
+                      })
                     ],
                     1
                   ),
                   _vm._v(" "),
                   _c(
                     "v-col",
-                    { attrs: { cols: "3" } },
+                    { attrs: { cols: "4" } },
                     [
-                      _vm.purchaseData.pmt_method == "Bank"
-                        ? _c("v-file-input", {
+                      _c(
+                        "v-row",
+                        [
+                          _c("v-file-input", {
+                            staticClass: "pr-2",
                             attrs: { dense: "", label: "File input" },
                             on: { change: _vm.uploadPhoto },
                             model: {
@@ -1555,37 +1645,44 @@ var render = function() {
                               expression: "fileInput"
                             }
                           })
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    { attrs: { cols: "4" } },
-                    [
-                      _c(
-                        "v-btn",
-                        {
-                          staticClass: "float-right ml-2",
-                          attrs: {
-                            small: "",
-                            color: "primary",
-                            loading: _vm.loading
-                          },
-                          on: { click: _vm.saveOrder }
-                        },
-                        [_vm._v("Save")]
+                        ],
+                        1
                       ),
                       _vm._v(" "),
                       _c(
-                        "v-btn",
-                        {
-                          staticClass: "float-right",
-                          attrs: { small: "", color: "error" },
-                          on: { click: _vm.clearPurchaseItems }
-                        },
-                        [_vm._v("Clear all")]
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  staticClass: " float-right ml-2",
+                                  attrs: {
+                                    small: "",
+                                    color: "primary",
+                                    loading: _vm.loading
+                                  },
+                                  on: { click: _vm.saveOrder }
+                                },
+                                [_vm._v("Save")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-btn",
+                                {
+                                  staticClass: "float-right",
+                                  attrs: { small: "", color: "error" },
+                                  on: { click: _vm.clearPurchaseItems }
+                                },
+                                [_vm._v("Clear all")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
                       )
                     ],
                     1
@@ -1746,6 +1843,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VList */ "./node_modules/vuetify/lib/components/VList/index.js");
 /* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
 /* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+/* harmony import */ var vuetify_lib_components_VTextarea__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuetify/lib/components/VTextarea */ "./node_modules/vuetify/lib/components/VTextarea/index.js");
 
 
 
@@ -1783,7 +1881,8 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_5__["VAutocomplete"],VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_6__["VBtn"],VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_7__["VChip"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VCol"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__["VDivider"],VFileInput: vuetify_lib_components_VFileInput__WEBPACK_IMPORTED_MODULE_10__["VFileInput"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_11__["VIcon"],VListItem: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItem"],VListItemAction: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemAction"],VListItemAvatar: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemAvatar"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemContent"],VListItemSubtitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemSubtitle"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemTitle"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VRow"],VSimpleTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_13__["VSimpleTable"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_14__["VTextField"]})
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default()(component, {VAutocomplete: vuetify_lib_components_VAutocomplete__WEBPACK_IMPORTED_MODULE_5__["VAutocomplete"],VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_6__["VBtn"],VChip: vuetify_lib_components_VChip__WEBPACK_IMPORTED_MODULE_7__["VChip"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VCol"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__["VDivider"],VFileInput: vuetify_lib_components_VFileInput__WEBPACK_IMPORTED_MODULE_10__["VFileInput"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_11__["VIcon"],VListItem: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItem"],VListItemAction: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemAction"],VListItemAvatar: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemAvatar"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemContent"],VListItemSubtitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemSubtitle"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__["VListItemTitle"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["VRow"],VSimpleTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_13__["VSimpleTable"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_14__["VTextField"],VTextarea: vuetify_lib_components_VTextarea__WEBPACK_IMPORTED_MODULE_15__["VTextarea"]})
 
 
 /* hot reload */

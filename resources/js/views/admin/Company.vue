@@ -1,5 +1,93 @@
 <template>
   <div>
+
+<v-card>
+              <v-card-title>
+                <span class="headline">Company Information</span>
+              </v-card-title>
+
+              <v-form
+                v-model="valid"
+                method="post"
+                v-on:submit.stop.prevent="save"
+              >
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12" md="6" lg="6">
+                          <v-img width="300px" :src="editedItem.image"></v-img>
+                          <v-file-input v-model="fileInput" label="Upload Logo" @change="uploadPhoto"></v-file-input>
+                        <v-text-field
+                          v-model="editedItem.name"
+                          label="Business Name"
+                          :rules="[rules.required, rules.min]"
+                        ></v-text-field>
+
+                        <!-- <v-text-field
+                          v-model="editedItem.logo"
+                          label="Logo"
+                        ></v-text-field> -->
+                      </v-col>
+                      <v-col cols="12" md="6" lg="6">
+                          <v-text-field
+                          dense
+                          v-model="editedItem.email"
+                          label="Email"
+                        ></v-text-field>
+                        <v-text-field
+                         dense
+                          v-model="editedItem.phone"
+                          label="Phone"
+                        ></v-text-field>
+                        <v-text-field
+                          dense
+                          v-model="editedItem.whatsapp"
+                          label="Whatsapp"
+                        ></v-text-field>
+                        <v-text-field
+                          dense
+                          v-model="editedItem.address"
+                          label="Address"
+                          :rules="[rules.required]"
+                        ></v-text-field>
+                        <v-text-field
+                          dense
+                          v-model="editedItem.city"
+                          label="City"
+                          :rules="[rules.required]"
+                        ></v-text-field>
+                        <v-text-field
+                          dense
+                          v-model="editedItem.country"
+                          label="Country"
+                          :rules="[rules.required]"
+                        ></v-text-field>
+                        <v-text-field
+                          dense
+                          v-model="editedItem.zipcode"
+                          label="Zip Code"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="primary" text @click="close">Cancel</v-btn>
+                  <!-- <v-btn color="blue darken-1" type="submit" :disabled="!valid" @click.prevent="save" text @click="save">Save</v-btn> -->
+                  <v-btn
+                    color="primary"
+                    type="submit"
+                    :disabled="!valid"
+                    @click.prevent="save"
+                    >Save</v-btn
+                  >
+                </v-card-actions>
+              </v-form>
+            </v-card>
+
+
     <v-data-table
       :headers="headers"
       :items="business.data"
@@ -189,7 +277,7 @@ export default {
       { text: "Active", value: true },
       { text: "In Active", value: false },
     ],
-    types: ["business", "service provider"],
+    fileInput: [],
     business: [],
     editedIndex: -1,
     editedItem: {
@@ -203,6 +291,7 @@ export default {
       city: "",
       zipcode: "",
       logo: "",
+      image: ""
     },
     defaultItem: {
       id: "",
@@ -215,6 +304,7 @@ export default {
       city: "",
       zipcode: "",
       logo: "",
+      image: ""
     },
     companyCount: false
   }),
@@ -244,6 +334,17 @@ export default {
   },
 
   methods: {
+      uploadPhoto() {
+      if (this.fileInput != null) {
+        let file = this.fileInput;
+
+        let reader = new FileReader();
+        reader.onloadend = (file) => {
+          this.editedItem.image = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
 
     searchIt(e) {
       if (e.length > 3) {

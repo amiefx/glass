@@ -25,7 +25,7 @@ class ReportController extends Controller
 {
     public function salesreport(Request $request)
     {
-        $now = date('Y-m-d');
+        $now = date('Y-m-d') .' 23:59:59';
         $to = $request[1];
         $from = $request[0];
 
@@ -56,7 +56,7 @@ class ReportController extends Controller
 
     public function purchasesreport(Request $request)
     {
-        $now = date('Y-m-d');
+        $now = date('Y-m-d') .' 23:59:59';
         $to = $request[1];
         $from = $request[0];
 
@@ -87,7 +87,7 @@ class ReportController extends Controller
 
     public function cashreport(Request $request)
     {
-        $now = date('Y-m-d');
+        $now = date('Y-m-d') .' 23:59:59';
         $to = $request[1];
         $from = $request[0];
 
@@ -120,7 +120,7 @@ class ReportController extends Controller
 
     public function bankreport(Request $request)
     {
-        $now = date('Y-m-d');
+        $now = date('Y-m-d') .' 23:59:59';
         $to = $request[1];
         $from = $request[0];
 

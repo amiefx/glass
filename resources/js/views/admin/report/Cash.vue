@@ -86,6 +86,7 @@ export default {
       { text: "Employee", value: "employee_id" },
       { text: "Debit", value: "debit" },
       { text: "Credit", value: "credit" },
+      { text: "Date", value: "created_at" },
       { text: "User", value: "user_id" },
     ],
     presets: [

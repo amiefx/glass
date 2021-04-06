@@ -30,6 +30,7 @@ class OrderResource extends JsonResource
             'walkin_phone' => $this->walkin_phone,
             'user_id' => $this->user_id,
             'user_name' => $this->user->name,
+            'created_at' => $this->created_at->format('d M, Y')
         ];
     }
 }

@@ -25,7 +25,7 @@ class BankResource extends JsonResource
             'credit' => $this->credit,
             'debit' => $this->debit,
             'balance' => $this->balance,
-            'attachment' => $this->attachment,
+            'attachment' => $this->attachment ? asset('storage/images/' . $this->attachment) : null,
             'user_id' => $this->user_id ? $this->user->name : '' ,
             'created_at' => $this->created_at->format('d M, Y')
           ];
