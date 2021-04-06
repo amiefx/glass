@@ -57,6 +57,16 @@
             <span>Click to View</span>
           </v-tooltip>
         </template>
+
+        <template v-slot:item.attachment="{ item }">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon v-if="item.attachment" @click="viewImage(item)" v-bind="attrs" v-on="on">mdi-attachment</v-icon>
+            </template>
+            <span>Click to View Image</span>
+          </v-tooltip>
+        </template>
+
       </v-data-table>
     </v-card>
   </div>
@@ -86,6 +96,8 @@ export default {
       { text: "Employee", value: "employee_id" },
       { text: "Debit", value: "debit" },
       { text: "Credit", value: "credit" },
+      { text: "Image", value: "attachment" },
+      { text: "Date", value: "created_at" },
       { text: "User", value: "user_id" },
     ],
     presets: [
@@ -153,8 +165,18 @@ export default {
     },
 
     viewInvoice(item) {
-      this.$router.push(`/admin/invoice/view/${item.id}`);
+      if (item.doc_type == "invoice") {
+            this.$router.push(`/admin/invoice/view/${item.doc_id}`);
+        } else if (item.doc_type == "purchase order") {
+            this.$router.push(`/admin/purchase-order/view/${item.doc_id}`);
+        } else if (item.doc_type == "receipt") {
+            this.$router.push(`/admin/receipt/print/${item.doc_id}`);
+        }
     },
+
+    viewImage(item) {
+        window.open(item.attachment, "_blank");
+    }
   },
 };
 </script>

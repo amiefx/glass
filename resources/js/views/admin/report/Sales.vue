@@ -76,6 +76,7 @@ export default {
       { text: "Discount", value: "discount" },
       { text: "Total", value: "total" },
       { text: "Status", value: "status" },
+      { text: "Date", value: "created_at" },
       { text: "User", value: "user_name" },
     ],
     presets: [

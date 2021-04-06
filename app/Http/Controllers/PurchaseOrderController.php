@@ -66,8 +66,8 @@ class PurchaseOrderController extends Controller
         $postData = $request->all();
 
         $png_url = "rec-".time().".jpg";
-        $subpath = "/images/payments/" . $png_url;
-        $path = public_path() . $subpath;
+        $subpath = "payments/" . $png_url;
+        $path = public_path('storage/images/') . $subpath;
         $img = $postData['orderDetails']['file'];
         $img = substr($img, strpos($img, ",")+1);
         $data = base64_decode($img);
@@ -134,7 +134,7 @@ class PurchaseOrderController extends Controller
                         'debit' => 0,
                         'credit' => $order['paid_amt'],
                         'balance' => $order['paid_amt'] * (-1),
-                       // 'attachment' => $order['file'],
+                        'attachment' => $subpath,
                         'user_id' => $user->id
                     ]);
                 }

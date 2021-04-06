@@ -220,8 +220,8 @@
             </tr>
           </tbody>
         </v-simple-table>
-        <v-row class="">
-          <v-col cols="5">
+        <v-row class="" v-if="purchaseData.pmt_method == 'Bank'">
+          <v-col cols="6">
             <v-autocomplete
               v-if="purchaseData.pmt_method == 'Bank'"
               v-model="purchaseData.bank_id"
@@ -255,16 +255,16 @@
               </template>
             </v-autocomplete>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="6">
             <v-file-input
-             v-if="purchaseData.pmt_method == 'Bank'"
+              v-if="purchaseData.pmt_method == 'Bank'"
               dense
               v-model="fileInput"
               label="File input"
               @change="uploadPhoto"
             ></v-file-input>
           </v-col>
-          <v-col cols="4">
+          <!-- <v-col cols="3">
             <v-btn
               small
               class="float-right ml-2"
@@ -276,6 +276,43 @@
             <v-btn small class="float-right" color="error" @click="clearPurchaseItems"
               >Clear all</v-btn
             >
+          </v-col> -->
+        </v-row>
+        <v-row>
+          <v-col cols="8" class="pt-0">
+            <v-textarea
+              outlined
+              name="input-7-4"
+              label="Outlined textarea"
+              value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+            ></v-textarea>
+          </v-col>
+          <v-col cols="4">
+            <v-row>
+              <v-file-input
+              class="pr-2"
+                dense
+                v-model="fileInput"
+                label="File input"
+                @change="uploadPhoto"
+              ></v-file-input>
+            </v-row>
+            <v-row>
+              <v-col>
+
+                <v-btn
+                  small
+                  class=" float-right ml-2"
+                  color="primary"
+                  :loading="loading"
+                  @click="saveOrder"
+                  >Save</v-btn
+                >
+                <v-btn small class="float-right" color="error" @click="clearPurchaseItems"
+                  >Clear all</v-btn
+                >
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
       </v-col>

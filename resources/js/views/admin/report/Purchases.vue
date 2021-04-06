@@ -74,6 +74,7 @@ export default {
       { text: "Sub Total", value: "sub_total" },
       { text: "Discount", value: "discount" },
       { text: "Total", value: "total" },
+      { text: "Date", value: "created_at" },
       { text: "User", value: "user_name" },
     ],
     presets: [

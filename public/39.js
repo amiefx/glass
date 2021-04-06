@@ -73,6 +73,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -110,6 +120,12 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       }, {
         text: "Credit",
         value: "credit"
+      }, {
+        text: "Image",
+        value: "attachment"
+      }, {
+        text: "Date",
+        value: "created_at"
       }, {
         text: "User",
         value: "user_id"
@@ -162,7 +178,16 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       });
     },
     viewInvoice: function viewInvoice(item) {
-      this.$router.push("/admin/invoice/view/".concat(item.id));
+      if (item.doc_type == "invoice") {
+        this.$router.push("/admin/invoice/view/".concat(item.doc_id));
+      } else if (item.doc_type == "purchase order") {
+        this.$router.push("/admin/purchase-order/view/".concat(item.doc_id));
+      } else if (item.doc_type == "receipt") {
+        this.$router.push("/admin/receipt/print/".concat(item.doc_id));
+      }
+    },
+    viewImage: function viewImage(item) {
+      window.open(item.attachment, "_blank");
     }
   }
 });
@@ -355,6 +380,57 @@ var render = function() {
                     )
                   ]
                 }
+              },
+              {
+                key: "item.attachment",
+                fn: function(ref) {
+                  var item = ref.item
+                  return [
+                    _c(
+                      "v-tooltip",
+                      {
+                        attrs: { bottom: "" },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "activator",
+                              fn: function(ref) {
+                                var on = ref.on
+                                var attrs = ref.attrs
+                                return [
+                                  item.attachment
+                                    ? _c(
+                                        "v-icon",
+                                        _vm._g(
+                                          _vm._b(
+                                            {
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.viewImage(item)
+                                                }
+                                              }
+                                            },
+                                            "v-icon",
+                                            attrs,
+                                            false
+                                          ),
+                                          on
+                                        ),
+                                        [_vm._v("mdi-attachment")]
+                                      )
+                                    : _vm._e()
+                                ]
+                              }
+                            }
+                          ],
+                          null,
+                          true
+                        )
+                      },
+                      [_vm._v(" "), _c("span", [_vm._v("Click to View Image")])]
+                    )
+                  ]
+                }
               }
             ])
           })
@@ -390,8 +466,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
 /* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
 /* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
-/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
-/* harmony import */ var vuetify_lib_components_VTooltip__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VTooltip */ "./node_modules/vuetify/lib/components/VTooltip/index.js");
+/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+/* harmony import */ var vuetify_lib_components_VTooltip__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VTooltip */ "./node_modules/vuetify/lib/components/VTooltip/index.js");
 
 
 
@@ -420,7 +497,8 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VAlert: vuetify_lib_components_VAlert__WEBPACK_IMPORTED_MODULE_4__["VAlert"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VCol"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_7__["VDataTable"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VRow"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__["VTextField"],VTooltip: vuetify_lib_components_VTooltip__WEBPACK_IMPORTED_MODULE_9__["VTooltip"]})
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VAlert: vuetify_lib_components_VAlert__WEBPACK_IMPORTED_MODULE_4__["VAlert"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VCol"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_7__["VDataTable"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_8__["VIcon"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VRow"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_9__["VTextField"],VTooltip: vuetify_lib_components_VTooltip__WEBPACK_IMPORTED_MODULE_10__["VTooltip"]})
 
 
 /* hot reload */

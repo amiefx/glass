@@ -111,6 +111,9 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         text: "Credit",
         value: "credit"
       }, {
+        text: "Date",
+        value: "created_at"
+      }, {
         text: "User",
         value: "user_id"
       }],
